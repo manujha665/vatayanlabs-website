@@ -7,251 +7,252 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2685.4">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;title&gt;Vatayan Labs | Data Intelligence for Finance&lt;/title&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">*{</p>
-<p class="p1">margin:0;</p>
-<p class="p1">padding:0;</p>
-<p class="p1">box-sizing:border-box;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">body{</p>
-<p class="p1">font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;</p>
-<p class="p1">background:#07111f;</p>
-<p class="p1">color:white;</p>
-<p class="p1">line-height:1.6;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">header{</p>
-<p class="p1">padding:80px 10%;</p>
-<p class="p1">background:linear-gradient(135deg,#07111f,#0b2d45);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">h1{</p>
-<p class="p1">font-size:60px;</p>
-<p class="p1">margin-bottom:15px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">h2{</p>
-<p class="p1">font-weight:400;</p>
-<p class="p1">color:#8fd3ff;</p>
-<p class="p1">margin-bottom:35px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">p{</p>
-<p class="p1">font-size:20px;</p>
-<p class="p1">max-width:750px;</p>
-<p class="p1">color:#d7e6f5;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.button{</p>
-<p class="p1">display:inline-block;</p>
-<p class="p1">margin-top:40px;</p>
-<p class="p1">padding:15px 32px;</p>
-<p class="p1">background:#27c0ff;</p>
-<p class="p1">color:#07111f;</p>
-<p class="p1">font-weight:bold;</p>
-<p class="p1">text-decoration:none;</p>
-<p class="p1">border-radius:8px;</p>
-<p class="p1">transition:.25s;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.button:hover{</p>
-<p class="p1">background:white;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">section{</p>
-<p class="p1">padding:70px 10%;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.cards{</p>
-<p class="p1">display:grid;</p>
-<p class="p1">grid-template-columns:repeat(auto-fit,minmax(250px,1fr));</p>
-<p class="p1">gap:25px;</p>
-<p class="p1">margin-top:35px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.card{</p>
-<p class="p1">background:#122437;</p>
-<p class="p1">padding:28px;</p>
-<p class="p1">border-radius:14px;</p>
-<p class="p1">border:1px solid rgba(255,255,255,.08);</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.card h3{</p>
-<p class="p1">margin-bottom:12px;</p>
-<p class="p1">color:#6ed4ff;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.card p{</p>
-<p class="p1">font-size:16px;</p>
-<p class="p1">color:#c8d7e4;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.metrics{</p>
-<p class="p1">display:grid;</p>
-<p class="p1">grid-template-columns:repeat(auto-fit,minmax(180px,1fr));</p>
-<p class="p1">gap:20px;</p>
-<p class="p1">margin-top:40px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.metric{</p>
-<p class="p1">background:#102030;</p>
-<p class="p1">padding:30px;</p>
-<p class="p1">border-radius:12px;</p>
-<p class="p1">text-align:center;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.metric h2{</p>
-<p class="p1">font-size:42px;</p>
-<p class="p1">margin-bottom:8px;</p>
-<p class="p1">color:#27c0ff;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.metric span{</p>
-<p class="p1">color:#cfd8e2;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">footer{</p>
-<p class="p1">padding:50px;</p>
-<p class="p1">text-align:center;</p>
-<p class="p1">background:#04101b;</p>
-<p class="p1">color:#98a8b8;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.badge{</p>
-<p class="p1">display:inline-block;</p>
-<p class="p1">background:#0d8f53;</p>
-<p class="p1">padding:10px 20px;</p>
-<p class="p1">border-radius:999px;</p>
-<p class="p1">margin-top:25px;</p>
-<p class="p1">font-weight:600;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;h1&gt;Vatayan Labs&lt;/h1&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;h2&gt;Data • Finance • AI • Analytics&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">Building a modern research platform for banking, financial services, capital markets and AI-powered analytical storytelling.</p>
-<p class="p2"><br></p>
-<p class="p1">Interactive dashboards, financial intelligence, industry insights and data-driven decision support — all in one place.</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="badge"&gt;</p>
-<p class="p1">🚀 Website Successfully Deployed</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;a href="#" class="button"&gt;Research Platform Coming Soon&lt;/a&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;h2&gt;What We Are Building&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="cards"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p1">&lt;h3&gt;📊 Interactive Dashboards&lt;/h3&gt;</p>
-<p class="p1">&lt;p&gt;Financial storytelling through interactive visual analytics and deep-dive dashboards.&lt;/p&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p1">&lt;h3&gt;🏦 Banking Intelligence&lt;/h3&gt;</p>
-<p class="p1">&lt;p&gt;Research covering banks, NBFCs, credit bureaus, lending and financial institutions.&lt;/p&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p1">&lt;h3&gt;🤖 AI for Finance&lt;/h3&gt;</p>
-<p class="p1">&lt;p&gt;Practical applications of Artificial Intelligence in risk, analytics and decision-making.&lt;/p&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="card"&gt;</p>
-<p class="p1">&lt;h3&gt;📈 Market Research&lt;/h3&gt;</p>
-<p class="p1">&lt;p&gt;Investment insights, valuation frameworks and data-backed market intelligence.&lt;/p&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;h2&gt;Our Vision&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">Vatayan Labs aims to become a trusted destination for finance professionals seeking high-quality research, interactive analytics, and AI-enabled insights.</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="metrics"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="metric"&gt;</p>
-<p class="p1">&lt;h2&gt;AI&lt;/h2&gt;</p>
-<p class="p1">&lt;span&gt;Research&lt;/span&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="metric"&gt;</p>
-<p class="p1">&lt;h2&gt;Data&lt;/h2&gt;</p>
-<p class="p1">&lt;span&gt;Analytics&lt;/span&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="metric"&gt;</p>
-<p class="p1">&lt;h2&gt;BFSI&lt;/h2&gt;</p>
-<p class="p1">&lt;span&gt;Domain Expertise&lt;/span&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="metric"&gt;</p>
-<p class="p1">&lt;h2&gt;24×7&lt;/h2&gt;</p>
-<p class="p1">&lt;span&gt;Learning&lt;/span&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">© 2026 Vatayan Labs</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;p style="margin-top:12px;"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">Website under active development.</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;title&gt;Vatayan Labs | Data Intelligence for Finance&lt;/title&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;style&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">*{</span></p>
+<p class="p1"><span class="s1">margin:0;</span></p>
+<p class="p1"><span class="s1">padding:0;</span></p>
+<p class="p1"><span class="s1">box-sizing:border-box;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">body{</span></p>
+<p class="p1"><span class="s1">font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;</span></p>
+<p class="p1"><span class="s1">background:#07111f;</span></p>
+<p class="p1"><span class="s1">color:white;</span></p>
+<p class="p1"><span class="s1">line-height:1.6;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">header{</span></p>
+<p class="p1"><span class="s1">padding:80px 10%;</span></p>
+<p class="p1"><span class="s1">background:linear-gradient(135deg,#07111f,#0b2d45);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">h1{</span></p>
+<p class="p1"><span class="s1">font-size:60px;</span></p>
+<p class="p1"><span class="s1">margin-bottom:15px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">h2{</span></p>
+<p class="p1"><span class="s1">font-weight:400;</span></p>
+<p class="p1"><span class="s1">color:#8fd3ff;</span></p>
+<p class="p1"><span class="s1">margin-bottom:35px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">p{</span></p>
+<p class="p1"><span class="s1">font-size:20px;</span></p>
+<p class="p1"><span class="s1">max-width:750px;</span></p>
+<p class="p1"><span class="s1">color:#d7e6f5;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.button{</span></p>
+<p class="p1"><span class="s1">display:inline-block;</span></p>
+<p class="p1"><span class="s1">margin-top:40px;</span></p>
+<p class="p1"><span class="s1">padding:15px 32px;</span></p>
+<p class="p1"><span class="s1">background:#27c0ff;</span></p>
+<p class="p1"><span class="s1">color:#07111f;</span></p>
+<p class="p1"><span class="s1">font-weight:bold;</span></p>
+<p class="p1"><span class="s1">text-decoration:none;</span></p>
+<p class="p1"><span class="s1">border-radius:8px;</span></p>
+<p class="p1"><span class="s1">transition:.25s;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.button:hover{</span></p>
+<p class="p1"><span class="s1">background:white;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">section{</span></p>
+<p class="p1"><span class="s1">padding:70px 10%;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.cards{</span></p>
+<p class="p1"><span class="s1">display:grid;</span></p>
+<p class="p1"><span class="s1">grid-template-columns:repeat(auto-fit,minmax(250px,1fr));</span></p>
+<p class="p1"><span class="s1">gap:25px;</span></p>
+<p class="p1"><span class="s1">margin-top:35px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.card{</span></p>
+<p class="p1"><span class="s1">background:#122437;</span></p>
+<p class="p1"><span class="s1">padding:28px;</span></p>
+<p class="p1"><span class="s1">border-radius:14px;</span></p>
+<p class="p1"><span class="s1">border:1px solid rgba(255,255,255,.08);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.card h3{</span></p>
+<p class="p1"><span class="s1">margin-bottom:12px;</span></p>
+<p class="p1"><span class="s1">color:#6ed4ff;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.card p{</span></p>
+<p class="p1"><span class="s1">font-size:16px;</span></p>
+<p class="p1"><span class="s1">color:#c8d7e4;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.metrics{</span></p>
+<p class="p1"><span class="s1">display:grid;</span></p>
+<p class="p1"><span class="s1">grid-template-columns:repeat(auto-fit,minmax(180px,1fr));</span></p>
+<p class="p1"><span class="s1">gap:20px;</span></p>
+<p class="p1"><span class="s1">margin-top:40px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.metric{</span></p>
+<p class="p1"><span class="s1">background:#102030;</span></p>
+<p class="p1"><span class="s1">padding:30px;</span></p>
+<p class="p1"><span class="s1">border-radius:12px;</span></p>
+<p class="p1"><span class="s1">text-align:center;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.metric h2{</span></p>
+<p class="p1"><span class="s1">font-size:42px;</span></p>
+<p class="p1"><span class="s1">margin-bottom:8px;</span></p>
+<p class="p1"><span class="s1">color:#27c0ff;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.metric span{</span></p>
+<p class="p1"><span class="s1">color:#cfd8e2;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">footer{</span></p>
+<p class="p1"><span class="s1">padding:50px;</span></p>
+<p class="p1"><span class="s1">text-align:center;</span></p>
+<p class="p1"><span class="s1">background:#04101b;</span></p>
+<p class="p1"><span class="s1">color:#98a8b8;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">.badge{</span></p>
+<p class="p1"><span class="s1">display:inline-block;</span></p>
+<p class="p1"><span class="s1">background:#0d8f53;</span></p>
+<p class="p1"><span class="s1">padding:10px 20px;</span></p>
+<p class="p1"><span class="s1">border-radius:999px;</span></p>
+<p class="p1"><span class="s1">margin-top:25px;</span></p>
+<p class="p1"><span class="s1">font-weight:600;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;header&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;h1&gt;Vatayan Labs&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;h2&gt;Data • Finance • AI • Analytics&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Building a modern research platform for banking, financial services, capital markets and AI-powered analytical storytelling.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Interactive dashboards, financial intelligence, industry insights and data-driven decision support — all in one place.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="badge"&gt;</span></p>
+<p class="p1"><span class="s1">🚀 Website Successfully Deployed</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;a href="#" class="button"&gt;Research Platform Coming Soon&lt;/a&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/header&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;h2&gt;What We Are Building&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="cards"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h3&gt;📊 Interactive Dashboards&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1">&lt;p&gt;Financial storytelling through interactive visual analytics and deep-dive dashboards.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h3&gt;🏦 Banking Intelligence&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1">&lt;p&gt;Research covering banks, NBFCs, credit bureaus, lending and financial institutions.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h3&gt;🤖 AI for Finance&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1">&lt;p&gt;Practical applications of Artificial Intelligence in risk, analytics and decision-making.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h3&gt;📈 Market Research&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1">&lt;p&gt;Investment insights, valuation frameworks and data-backed market intelligence.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;h2&gt;Our Vision&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Vatayan Labs aims to become a trusted destination for finance professionals seeking high-quality research, interactive analytics, and AI-enabled insights.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="metrics"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="metric"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h2&gt;AI&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">&lt;span&gt;Research&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="metric"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h2&gt;Data&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">&lt;span&gt;Analytics&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="metric"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h2&gt;BFSI&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">&lt;span&gt;Domain Expertise&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="metric"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h2&gt;24×7&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">&lt;span&gt;Learning&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;footer&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">© 2026 Vatayan Labs</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;p style="margin-top:12px;"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Website under active development.</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/footer&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
