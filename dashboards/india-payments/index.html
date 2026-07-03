@@ -47,15 +47,6 @@
     --danger: #c81e1e; --purple: #7e3af2;
     --radius: 12px; --radius-sm: 8px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1117; --surface: #1a1d27; --surface2: #252836;
-      --text: #f0f2f8; --text2: #b0b8cc; --text3: #6b7694;
-      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
-      --accent: #4d8cf5; --accent2: #34d399; --accent3: #fbbf24;
-      --danger: #f87171; --purple: #a78bfa;
-    }
-  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.6; }
   a { color: var(--accent); }
@@ -998,7 +989,7 @@ function showSection(id) {
 }
 
 const periods = ['Mar 2025', 'Sep 2025', 'Mar 2026'];
-const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isDark = false; // dashboard is always light mode
 const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)';
 const tickColor = isDark ? '#6b7694' : '#9ca3af';
 const labelColor = isDark ? '#b0b8cc' : '#374151';
