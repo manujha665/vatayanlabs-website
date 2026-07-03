@@ -1,0 +1,18 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/about.html", "destination": "/about/", "permanent": true },
+    { "source": "/contact.html", "destination": "/about/", "permanent": true },
+    { "source": "/research", "destination": "/sectors/", "permanent": true },
+    { "source": "/research/", "destination": "/sectors/", "permanent": true },
+    { "source": "/research/:path*", "destination": "/sectors/:path*", "permanent": true },
+    { "source": "/substack", "destination": "/newsletter/", "permanent": true },
+    { "source": "/substack/", "destination": "/newsletter/", "permanent": true },
+    { "source": "/reports/2026/rbi-annual-report-2025-26.html", "destination": "/dashboards/rbi-annual-report-2025-26/", "permanent": true },
+    { "source": "/reports/2026/india-payments-fy26-dashboard.html", "destination": "/dashboards/india-payments/", "permanent": true },
+    { "source": "/mutual-funds", "destination": "/dashboards/", "permanent": true },
+    { "source": "/mutual-funds/", "destination": "/dashboards/", "permanent": true },
+    { "source": "/indian-banks", "destination": "/dashboards/", "permanent": true },
+    { "source": "/indian-banks/", "destination": "/dashboards/", "permanent": true }
+  ]
+}

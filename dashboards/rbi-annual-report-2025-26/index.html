@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/assets/logo-badge.png" type="image/png">
+<title>RBI Annual Report 2025-26 Dashboard — India Credit & Payments | Vatayan Labs</title>
+<meta name="description" content="Interactive dashboard of RBI Annual Report 2025-26 data: credit growth, deposits, UPI, cards and ATM trends across Indian banking and payments.">
+<link rel="canonical" href="https://vatayanlabs.com/dashboards/rbi-annual-report-2025-26/">
+<meta property="og:title" content="RBI Annual Report 2025-26 — India Credit & Payments Dashboard">
+<meta property="og:description" content="Interactive dashboard of RBI Annual Report 2025-26 data: credit growth, deposits, UPI, cards and ATM trends across Indian banking and payments.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatayanlabs.com/dashboards/rbi-annual-report-2025-26/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "RBI Annual Report 2025-26 — India Credit & Payments Dashboard",
+      "url": "https://vatayanlabs.com/dashboards/rbi-annual-report-2025-26/",
+      "description": "Interactive dashboard of RBI Annual Report 2025-26 data: credit growth, deposits, UPI, cards and ATM trends across Indian banking and payments.",
+      "dateModified": "2026-06-17",
+      "publisher": { "@type": "Organization", "name": "Vatayan Labs", "url": "https://vatayanlabs.com/" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vatayanlabs.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Dashboards", "item": "https://vatayanlabs.com/dashboards/" },
+        { "@type": "ListItem", "position": 3, "name": "RBI Annual Report 2025-26 — India Credit & Payments Dashboard", "item": "https://vatayanlabs.com/dashboards/rbi-annual-report-2025-26/" }
+      ]
+    }
+  ]
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f172a;
+    --navy-mid: #1e3a5f;
+    --blue: #1d4ed8;
+    --blue-light: #3b82f6;
+    --teal: #0891b2;
+    --green: #059669;
+    --amber: #d97706;
+    --red: #dc2626;
+    --purple: #7c3aed;
+    --pink: #db2777;
+    --orange: #ea580c;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --text-mid: #334155;
+    --text-muted: #64748b;
+    --text-faint: #94a3b8;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+    color: white;
+    padding: 28px 32px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,.25);
+  }
+  .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .header-brand { display: flex; align-items: center; gap: 12px; }
+  .header-logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: white; letter-spacing: -1px;
+  }
+  .header-title { font-size: 20px; font-weight: 700; letter-spacing: -.3px; }
+  .header-sub { font-size: 12px; color: #93c5fd; margin-top: 2px; }
+  .header-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500;
+    border: 1px solid rgba(255,255,255,.15); color: #e0f2fe;
+    background: rgba(255,255,255,.07);
+  }
+  .badge.live { background: rgba(16,185,129,.2); border-color: rgba(16,185,129,.4); color: #6ee7b7; }
+
+  /* ── KPI STRIP ── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: #0f172a;
+    border-bottom: 2px solid var(--border);
+  }
+  .kpi-card {
+    background: var(--card);
+    padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .kpi-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); }
+  .kpi-value { font-size: 22px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+  .kpi-delta {
+    font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 4px;
+  }
+  .kpi-delta.up { color: var(--green); }
+  .kpi-delta.down { color: var(--red); }
+  .kpi-delta.neutral { color: var(--text-muted); }
+  .kpi-delta span { font-size: 13px; }
+
+  /* ── TABS ── */
+  .tabs-wrapper {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 98px;
+    z-index: 90;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 24px;
+    gap: 0;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 14px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all .2s ease;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .tab-btn:hover { color: var(--blue); }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
+  .tab-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: currentColor; opacity: .5;
+  }
+  .tab-btn.active .tab-dot { opacity: 1; }
+
+  /* ── MAIN CONTENT ── */
+  .main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── MODULE HEADER ── */
+  .module-header {
+    margin-bottom: 24px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .module-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -.3px; }
+  .module-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; max-width: 600px; }
+  .module-source {
+    font-size: 11px; color: var(--text-faint); padding: 4px 10px;
+    background: var(--bg); border-radius: 6px; white-space: nowrap;
+    align-self: flex-start; margin-top: 4px;
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .grid-1 { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; }
+  .col-span-2 { grid-column: span 2; }
+
+  /* ── CHART CARD ── */
+  .chart-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+  }
+  .chart-card-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 16px; gap: 12px;
+  }
+  .chart-card-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .chart-card-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  .chart-tag {
+    font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 5px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .chart-container { position: relative; }
+  .chart-container canvas { max-height: 260px; }
+
+  /* ── INSIGHT CARD ── */
+  .insight-strip {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .insight-strip.amber {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-color: #fcd34d; border-left-color: var(--amber);
+  }
+  .insight-strip.red {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border-color: #fca5a5; border-left-color: var(--red);
+  }
+  .insight-strip.green {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #86efac; border-left-color: var(--green);
+  }
+  .insight-strip.purple {
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    border-color: #c4b5fd; border-left-color: var(--purple);
+  }
+  .insight-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--blue); margin-bottom: 6px;
+  }
+  .insight-strip.amber .insight-label { color: var(--amber); }
+  .insight-strip.red .insight-label { color: var(--red); }
+  .insight-strip.green .insight-label { color: var(--green); }
+  .insight-strip.purple .insight-label { color: var(--purple); }
+  .insight-text { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+  .insight-text strong { color: var(--text); }
+
+  /* ── STAT GRID ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-box {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; text-align: center; box-shadow: var(--shadow);
+  }
+  .stat-box-val { font-size: 26px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+  .stat-box-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+  .stat-box-delta { font-size: 11px; margin-top: 4px; font-weight: 600; }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+
+  /* ── REGULATORY TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 100px 24px 1fr;
+    gap: 0 16px; align-items: start; padding-bottom: 24px; position: relative;
+  }
+  .timeline-date { font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: right; padding-top: 4px; }
+  .timeline-spine { display: flex; flex-direction: column; align-items: center; }
+  .timeline-dot {
+    width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: white; z-index: 1;
+  }
+  .timeline-line { width: 2px; background: var(--border); flex: 1; margin-top: 2px; }
+  .timeline-item:last-child .timeline-line { display: none; }
+  .timeline-content {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .timeline-content h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .timeline-content p { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+  .timeline-tag {
+    display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px;
+    border-radius: 4px; margin-bottom: 6px;
+  }
+
+  /* ── TABLE ── */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .data-table thead th {
+    background: #f8fafc; padding: 10px 14px; text-align: left;
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: .5px;
+    border-bottom: 2px solid var(--border);
+  }
+  .data-table tbody td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: var(--text-mid); }
+  .data-table tbody tr:hover { background: #f8fafc; }
+  .data-table .num { text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .data-table .positive { color: var(--green); font-weight: 600; }
+  .data-table .negative { color: var(--red); font-weight: 600; }
+
+  /* ── TAGS ── */
+  .tag-blue { background: #dbeafe; color: #1d4ed8; }
+  .tag-green { background: #d1fae5; color: #059669; }
+  .tag-amber { background: #fef3c7; color: #d97706; }
+  .tag-red { background: #fee2e2; color: #dc2626; }
+  .tag-purple { background: #ede9fe; color: #7c3aed; }
+  .tag-teal { background: #cffafe; color: #0891b2; }
+  .tag-pink { background: #fce7f3; color: #db2777; }
+  .tag-orange { background: #ffedd5; color: #ea580c; }
+
+  /* ── GLOSSARY ── */
+  .glossary-section {
+    margin-top: 24px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .glossary-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; background: #f8fafc; cursor: pointer;
+    user-select: none; list-style: none; gap: 12px;
+    border-bottom: 1px solid transparent; transition: background .15s;
+  }
+  .glossary-header::-webkit-details-marker { display: none; }
+  .glossary-header:hover { background: #f1f5f9; }
+  details[open] > .glossary-header { border-bottom-color: var(--border); background: #eef2f7; }
+  .glossary-title {
+    font-size: 12px; font-weight: 700; color: var(--text-mid);
+    text-transform: uppercase; letter-spacing: .7px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .glossary-count {
+    font-size: 10px; background: #dbeafe; color: #1d4ed8;
+    padding: 2px 8px; border-radius: 10px; font-weight: 600;
+    text-transform: none; letter-spacing: 0;
+  }
+  .glossary-chevron { font-size: 13px; color: var(--text-muted); transition: transform .2s; margin-left: auto; }
+  details[open] .glossary-chevron { transform: rotate(180deg); }
+  .glossary-body { padding: 20px; }
+  .glossary-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .glossary-term {
+    background: #f8fafc; border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .glossary-term-name {
+    font-size: 12px; font-weight: 700; color: var(--text);
+    margin-bottom: 5px; display: flex; align-items: flex-start; gap: 6px; flex-wrap: wrap;
+  }
+  .g-tag {
+    font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 4px;
+    background: #dbeafe; color: #1d4ed8; white-space: nowrap; flex-shrink: 0; margin-top: 1px;
+  }
+  .g-tag.g-green { background: #d1fae5; color: #065f46; }
+  .g-tag.g-amber { background: #fef3c7; color: #92400e; }
+  .g-tag.g-purple { background: #ede9fe; color: #5b21b6; }
+  .g-tag.g-red { background: #fee2e2; color: #991b1b; }
+  .g-tag.g-teal { background: #cffafe; color: #0e7490; }
+  .glossary-term-def {
+    font-size: 11.5px; color: var(--text-mid); line-height: 1.7;
+  }
+  .glossary-term-calc {
+    margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);
+    font-size: 10.5px; color: var(--text-muted); font-style: italic; line-height: 1.6;
+  }
+  @media (max-width: 900px) { .glossary-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .glossary-grid { grid-template-columns: 1fr; } }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; padding: 32px; color: var(--text-faint);
+    font-size: 11px; border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .footer a { color: var(--blue); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .col-span-2 { grid-column: span 1; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .main { padding: 20px 16px; }
+    .header { padding: 20px 16px; }
+    .timeline-item { grid-template-columns: 80px 20px 1fr; }
+  }
+  @media (max-width: 600px) {
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<!-- Vatayan Labs site bar -->
+<div style="background:#0b1120;color:#cbd5e1;font-family:'Inter',-apple-system,sans-serif;padding:9px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:white;font-weight:700;">
+    <img src="/assets/logo-badge.png" alt="" width="26" height="26" style="display:block;border-radius:7px;">
+    Vatayan Labs
+  </a>
+  <span style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/sectors/" style="color:#cbd5e1;text-decoration:none;">Sectors</a>
+    <a href="/dashboards/" style="color:white;text-decoration:none;font-weight:600;">Dashboards</a>
+    <a href="/newsletter/" style="color:#cbd5e1;text-decoration:none;">Newsletter</a>
+    <a href="/about/" style="color:#cbd5e1;text-decoration:none;">About</a>
+  </span>
+</div>
+
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div class="header-logo" style="background:none;"><img src="/assets/logo-badge.png" alt="" width="40" height="40" style="display:block;border-radius:10px;"></div>
+      <div>
+        <div class="header-title">Vatayan Labs</div>
+        <div class="header-sub">RBI Annual Report 2025-26 · India Credit, Payments & Financial Systems</div>
+      </div>
+    </div>
+    <div class="header-badges">
+      <span class="badge live">● Live Data</span>
+      <span class="badge">FY 2025-26</span>
+      <span class="badge">Source: RBI</span>
+      <span class="badge">8 Modules</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ KPI STRIP ══════════════════ -->
+<div class="kpi-strip">
+  <div class="kpi-card">
+    <div class="kpi-label">Bank Credit Growth</div>
+    <div class="kpi-value" style="color:var(--blue)">15.9%</div>
+    <div class="kpi-delta up"><span>↑</span> vs 11.0% in FY25</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">UPI Share (Retail Vol)</div>
+    <div class="kpi-value" style="color:var(--teal)">86%</div>
+    <div class="kpi-delta up"><span>↑</span> 30% txn volume growth</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">FI-Index (Mar 2025)</div>
+    <div class="kpi-value" style="color:var(--green)">67.0</div>
+    <div class="kpi-delta up"><span>↑</span> from 64.2 (Mar 2024)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Credit-GDP Ratio</div>
+    <div class="kpi-value" style="color:var(--purple)">61.8%</div>
+    <div class="kpi-delta up"><span>↑</span> All-time high (FY18: 50.5%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">M3 Money Supply</div>
+    <div class="kpi-value" style="color:var(--amber)">15.3%</div>
+    <div class="kpi-delta up"><span>↑</span> 9-year high (FY25: 9.4%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Advance Frauds Value</div>
+    <div class="kpi-value" style="color:var(--red)">₹40.8K Cr</div>
+    <div class="kpi-delta down"><span>↑</span> +34% (FY25: ₹30.4K Cr)</div>
+  </div>
+</div>
+
+<!-- ══════════════════ TABS ══════════════════ -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('credit', this)">
+      <span class="tab-dot" style="background:var(--blue)"></span>Credit Pulse
+    </button>
+    <button class="tab-btn" onclick="switchTab('payments', this)">
+      <span class="tab-dot" style="background:var(--teal)"></span>Digital Payments
+    </button>
+    <button class="tab-btn" onclick="switchTab('resources', this)">
+      <span class="tab-dot" style="background:var(--purple)"></span>Resource Flow
+    </button>
+    <button class="tab-btn" onclick="switchTab('msme', this)">
+      <span class="tab-dot" style="background:var(--orange)"></span>MSME & Priority
+    </button>
+    <button class="tab-btn" onclick="switchTab('inclusion', this)">
+      <span class="tab-dot" style="background:var(--green)"></span>Financial Inclusion
+    </button>
+    <button class="tab-btn" onclick="switchTab('macro', this)">
+      <span class="tab-dot" style="background:var(--amber)"></span>Macro Context
+    </button>
+    <button class="tab-btn" onclick="switchTab('fraud', this)">
+      <span class="tab-dot" style="background:var(--red)"></span>Fraud Radar
+    </button>
+    <button class="tab-btn" onclick="switchTab('regulatory', this)">
+      <span class="tab-dot" style="background:var(--pink)"></span>Regulatory Pulse
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+<div class="main">
+
+  <!-- ───────────────── TAB 1: CREDIT PULSE ───────────────── -->
+  <div id="tab-credit" class="tab-panel active">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Credit Pulse — Scheduled Commercial Banks</div>
+        <div class="module-desc">Bank credit growth trends, sectoral breakdown, credit-deposit dynamics, and credit penetration ratios</div>
+      </div>
+      <div class="module-source">Source: RBI Appendix Table 4 · Table II.4.1</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">17.1%</div>
+        <div class="stat-box-label">Bank Credit Growth (FY26)</div>
+        <div class="stat-box-delta up">↑ vs 11.0% in FY25</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--teal)">81.4%</div>
+        <div class="stat-box-label">Credit-Deposit Ratio</div>
+        <div class="stat-box-delta down">↑ New high (FY19: 76.4%)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--purple)">61.8%</div>
+        <div class="stat-box-label">Credit-GDP Ratio</div>
+        <div class="stat-box-delta up">↑ From 57.4% in FY25</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">33.1%</div>
+        <div class="stat-box-label">Micro & Small Credit Growth</div>
+        <div class="stat-box-delta up">↑ Mar 2026 Y-o-Y</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Bank Credit vs Deposit Growth</div>
+            <div class="chart-card-sub">Year-on-year % change · FY18 to FY26</div>
+          </div>
+          <span class="chart-tag tag-blue">Historical</span>
+        </div>
+        <div class="chart-container"><canvas id="chartCreditDeposit"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Credit-Deposit & Credit-GDP Ratios</div>
+            <div class="chart-card-sub">Structural penetration trends · FY18 to FY26</div>
+          </div>
+          <span class="chart-tag tag-purple">Ratios</span>
+        </div>
+        <div class="chart-container"><canvas id="chartCDRatio"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:20px">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Sectoral Credit Growth — FY 2025-26 Monthly Trajectory</div>
+          <div class="chart-card-sub">Y-o-Y % change by month · Non-food credit, Agriculture, Industry, Micro & Small</div>
+        </div>
+        <span class="chart-tag tag-teal">Monthly Series</span>
+      </div>
+      <div class="chart-container" style="height:280px"><canvas id="chartSectoral"></canvas></div>
+    </div>
+
+    <div class="insight-strip">
+      <div class="insight-label">Analyst Take — Credit</div>
+      <div class="insight-text">
+        <strong>Acceleration in H2 FY26 is the story.</strong> After a subdued H1 (credit stuck at 9-10% y-o-y), momentum surged to 15.9% by March 2026 — driven by a sharp revival in NBFC borrowing from October onwards and sustained buoyancy in personal loans and services. <strong>PSBs outgrew PVBs for the second consecutive year</strong>, reversing the post-COVID private bank dominance narrative. The credit-GDP ratio at 61.8% is a 9-year high — India is deepening credit intermediation, but a C/D ratio of 81.4% means <strong>deposit mobilisation remains the systemic constraint banks must solve for in FY27.</strong>
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">7 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">Bank Credit Growth <span class="g-tag">Core Metric</span></div>
+            <div class="glossary-term-def">Year-on-year % change in total outstanding loans and advances by all Scheduled Commercial Banks (SCBs) — food and non-food combined.</div>
+            <div class="glossary-term-calc">= (Credit outstanding now − Credit one year ago) ÷ Credit one year ago × 100. Published monthly by RBI in Table II.4.1 of the Annual Report.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Non-Food Credit <span class="g-tag">Core Metric</span></div>
+            <div class="glossary-term-def">Bank credit to all sectors excluding loans to the Food Corporation of India (FCI) and state food-procurement agencies. The headline gauge of productive lending — typically ~98–99% of total bank credit.</div>
+            <div class="glossary-term-calc">= Total Bank Credit minus food credit. Agriculture, industry, services, and personal loans all sit inside non-food credit. The key indicator for economic credit demand.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Credit-Deposit (C/D) Ratio <span class="g-tag g-amber">Structural</span></div>
+            <div class="glossary-term-def">Proportion of aggregate deposits deployed as loans. A C/D of 81.4% means ₹81.40 lent per ₹100 of deposits. Above 80% signals deposit-mobilisation stress — banks have limited room to grow loans without raising fresh deposits.</div>
+            <div class="glossary-term-calc">= (Outstanding bank credit ÷ Aggregate deposits) × 100. Computed at system level using end-period balances. No regulatory ceiling, but RBI may issue guidance to banks with high C/D ratios.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Credit-GDP Ratio <span class="g-tag g-purple">Penetration</span></div>
+            <div class="glossary-term-def">How deeply credit has penetrated the economy. India at 61.8% is well below China (~185%) and USA (~200%) — significant room for credit deepening as formalisation of the economy increases.</div>
+            <div class="glossary-term-calc">= (Outstanding bank credit at year-end ÷ Nominal GDP at current prices) × 100. Uses RBI credit data and NSO GDP estimates. An all-time high for India in FY26.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Scheduled Commercial Banks (SCBs) <span class="g-tag g-teal">Entity</span></div>
+            <div class="glossary-term-def">Banks listed in the Second Schedule of the RBI Act, 1934. Covers: Public Sector Banks (12), Private Sector Banks (22), Foreign Banks (45), Small Finance Banks (12), and Regional Rural Banks (43). Payment Banks are excluded from SCB credit aggregates.</div>
+            <div class="glossary-term-calc">SCBs maintain CRR balances with RBI. Their combined data forms India's banking system aggregate, published weekly in the RBI's Weekly Statistical Supplement (WSS).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Micro &amp; Small Credit <span class="g-tag g-green">Segment</span></div>
+            <div class="glossary-term-def">Credit to Micro (investment ≤₹1 Cr, turnover ≤₹5 Cr) and Small (investment ≤₹10 Cr, turnover ≤₹50 Cr) enterprises per the MSMED Act 2020 classification. At 33.1% YoY growth, this was the fastest-growing credit segment in FY26.</div>
+            <div class="glossary-term-calc">Data from RBI's BSR-1 return (Basic Statistical Return on credit by SCBs), collected at account level every March and September from all SCBs. See Table IV.3.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PSBs vs PVBs <span class="g-tag">Trend</span></div>
+            <div class="glossary-term-def">Public Sector Banks (government-owned: SBI + 11 nationalised banks) vs Private Sector Banks (HDFC Bank, ICICI, Axis, Kotak, IndusInd, etc.). PSBs held ~59% of total SCB credit in FY26 and outgrew PVBs for the second straight year — reversing the FY20–FY23 private-bank dominance cycle.</div>
+            <div class="glossary-term-calc">Derived from bank-group-wise BSR data. PSB credit share = PSB outstanding ÷ Total SCB credit × 100. The reversal reflects successful PSB NPA resolution and capital recapitalisation by GoI.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 2: DIGITAL PAYMENTS ───────────────── -->
+  <div id="tab-payments" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Digital Payments — Ecosystem Overview</div>
+        <div class="module-desc">Payment instrument volumes, value flows, and three-year trend across all major rails</div>
+      </div>
+      <div class="module-source">Source: RBI Table IX.1 · Payment System Indicators</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--teal)">2,416 Cr</div>
+        <div class="stat-box-label">UPI Transactions FY26</div>
+        <div class="stat-box-delta up">↑ 30% volume growth</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">₹314 L Cr</div>
+        <div class="stat-box-label">UPI Value FY26</div>
+        <div class="stat-box-delta up">↑ 20.6% value growth</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">60,238 L</div>
+        <div class="stat-box-label">Credit Card Txns FY26</div>
+        <div class="stat-box-delta up">↑ 26.2% Y-o-Y</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--red)">12,802 L</div>
+        <div class="stat-box-label">Debit Card Txns FY26</div>
+        <div class="stat-box-delta down">↓ 20.6% Y-o-Y</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Retail Payment Volume Share — FY26</div>
+            <div class="chart-card-sub">UPI dominance in transaction count (in lakh)</div>
+          </div>
+          <span class="chart-tag tag-teal">FY26 Mix</span>
+        </div>
+        <div class="chart-container"><canvas id="chartPaymentMix"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Key Payment Rails — 3-Year Value Trend</div>
+            <div class="chart-card-sub">₹ Lakh crore · FY24, FY25, FY26</div>
+          </div>
+          <span class="chart-tag tag-blue">3-Year</span>
+        </div>
+        <div class="chart-container"><canvas id="chartRailsValue"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:20px">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Cards — Credit vs Debit Volume Divergence</div>
+          <div class="chart-card-sub">Transaction volumes in lakh · FY24, FY25, FY26</div>
+        </div>
+        <span class="chart-tag tag-pink">Cards</span>
+      </div>
+      <div class="chart-container"><canvas id="chartCards"></canvas></div>
+    </div>
+
+    <div class="insight-strip" style="border-left-color:var(--teal); background: linear-gradient(135deg,#ecfeff,#cffafe)">
+      <div class="insight-label" style="color:var(--teal)">Analyst Take — Payments</div>
+      <div class="insight-text">
+        <strong>UPI is no longer a payment product — it is Indian financial infrastructure.</strong> At 86% of all retail transactions and ₹314 lakh crore in FY26 value, it has structurally displaced debit cards (down 21% in volume). <strong>Credit cards are the next battleground</strong> — 26% volume growth signals consumers using credit for everyday spend, not just big tickets. For fintechs: the PPIs surge to 98,699 lakh transactions (up 40%) after two years of decline is worth watching. <strong>NACH (direct debit)</strong> growing at 9% volume and 22% value tells you EMI-based lending is expanding — a leading indicator for NBFC and BNPL growth.
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">9 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">UPI (Unified Payments Interface) <span class="g-tag g-teal">Rail</span></div>
+            <div class="glossary-term-def">NPCI's real-time interbank payment system operating 24×7 via Virtual Payment Addresses (VPAs like abc@bank). A single UPI ID links to one or more bank accounts. Enables P2P and P2M transfers instantly with no transaction fees for users.</div>
+            <div class="glossary-term-calc">Volume = total number of individual UPI transactions processed. Value = aggregate ₹ amount transferred. Settlement happens in real time via IMPS rails, with NPCI acting as the clearing switch. FY26: 2,416 crore transactions, ₹314 lakh crore.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">RTGS (Real Time Gross Settlement) <span class="g-tag">Rail</span></div>
+            <div class="glossary-term-def">RBI-operated system for high-value interbank fund transfers (minimum ₹2 lakh). Each transaction is settled individually, immediately, and irrevocably in central bank money (RBI reserves). No netting — every transfer is gross. Available 24×7 since December 2020.</div>
+            <div class="glossary-term-calc">At ₹2,273 lakh crore in FY26, RTGS carries the bulk of India's financial-system value (wholesale payments, government, capital markets). High per-transaction value (~₹65 Cr average) vs UPI (~₹1,300 average).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">NEFT (National Electronic Funds Transfer) <span class="g-tag">Rail</span></div>
+            <div class="glossary-term-def">RBI-operated batch-based fund transfer system with no minimum or maximum limit. Transactions settle in half-hourly batches, 24×7 (since December 2019). While UPI dominates for retail, NEFT handles a large share of mid-value bill payments, payroll, and vendor payments.</div>
+            <div class="glossary-term-calc">FY26: 100,996 lakh transactions at ₹502 lakh crore. Unlike RTGS (gross settlement), NEFT nets positions and settles in batches — lower RBI reserve usage per transaction.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">IMPS (Immediate Payment Service) <span class="g-tag">Rail</span></div>
+            <div class="glossary-term-def">NPCI's 24×7 instant interbank transfer service (since 2010), capped at ₹5 lakh per transaction. Accessible via mobile banking and internet banking. UPI is built on IMPS rails — most UPI transactions settle via IMPS under the hood.</div>
+            <div class="glossary-term-calc">FY26: 49,431 lakh transactions (declining as UPI absorbs P2P flows). IMPS volume decline doesn't indicate system weakness — it reflects UPI cannibalisation of the same use case through a simpler interface.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">NACH (National Automated Clearing House) <span class="g-tag g-purple">Rail</span></div>
+            <div class="glossary-term-def">NPCI's bulk/batch payment system for recurring transactions. <strong>NACH Credit</strong> = outward credits (salary disbursals, dividends, govt benefits). <strong>NACH Debit</strong> = inward debits (EMI collections, insurance premiums, utility bills via standing instructions/mandates).</div>
+            <div class="glossary-term-calc">NACH Debit growing at 22% value tells you the EMI-based lending economy is expanding — every NACH Debit mandate represents a loan EMI being collected. A leading indicator for NBFC/bank loan book growth. FY26: 21,614 lakh debit transactions, ₹26.9 lakh crore.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PPIs (Prepaid Payment Instruments) <span class="g-tag g-amber">Instrument</span></div>
+            <div class="glossary-term-def">Stored-value wallets and cards — mobile wallets (Paytm, PhonePe wallet), prepaid cards, gift cards, meal vouchers (Sodexo). Issued by RBI-authorised PPI issuers (both banks and non-banks). PPIs are interoperable with UPI since 2023, boosting their volume.</div>
+            <div class="glossary-term-calc">FY26: 98,699 lakh transactions (up 40% after two years of decline). The surge follows UPI-PPI interoperability — wallet holders can now send/receive via UPI. Maximum load limit: ₹2 lakh (full KYC PPI), ₹10,000 (minimum-detail PPI).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Credit Cards vs Debit Cards <span class="g-tag g-red">Divergence</span></div>
+            <div class="glossary-term-def">Credit cards (post-paid, ~₹3,925 cards in circulation FY26) are growing at 26% volume — driven by rewards programs, EMI offers, and UPI-credit card linkage. Debit cards (prepaid, ~1 billion cards) are declining 21% — UPI has absorbed virtually all debit-card use cases.</div>
+            <div class="glossary-term-calc">Transaction volumes in lakh. Credit card value (₹23.6 L Cr FY26) reflects spend on large-ticket items and revolving credit. Debit card decline is structural, not cyclical — this shift will not reverse.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">APBS (Aadhaar Payment Bridge System) <span class="g-tag g-green">DBT Rail</span></div>
+            <div class="glossary-term-def">Government's Direct Benefit Transfer (DBT) backbone — routes subsidy/welfare payments using the recipient's Aadhaar number as the payment address, mapped to their bank account via NPCI's Aadhaar Mapper. Used for PM-KISAN, MGNREGS, scholarships, LPG subsidies.</div>
+            <div class="glossary-term-calc">A credit-only system (outgoing from government, incoming to citizen). NPCI maintains the Aadhaar–Account mapper. Payments route via banks and reach accounts directly, eliminating middlemen in govt disbursals.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">AePS (Aadhaar-enabled Payment System) <span class="g-tag g-green">Inclusion Rail</span></div>
+            <div class="glossary-term-def">Allows banking transactions (cash withdrawal, balance inquiry, mini-statement, Aadhaar-to-Aadhaar transfers) using only Aadhaar number + fingerprint/iris biometric at Business Correspondent micro-ATMs. Primary banking channel for rural India with no smartphone needed.</div>
+            <div class="glossary-term-calc">Serves unbanked/low-literacy populations at BC points. Transaction authenticated via UIDAI biometric match in real time. RBI tightened AePS fraud controls in FY26 by mandating daily transaction limits and introducing additional authentication layers.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 3: RESOURCE FLOW ───────────────── -->
+  <div id="tab-resources" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Flow of Financial Resources to Commercial Sector</div>
+        <div class="module-desc">Bank vs non-bank credit, NBFC flows, HFC, AIFIs, equity markets, and foreign capital</div>
+      </div>
+      <div class="module-source">Source: RBI Appendix Table 5</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">₹47.0 L Cr</div>
+        <div class="stat-box-label">Total Resource Flow FY26P</div>
+        <div class="stat-box-delta up">↑ 30% (FY25: ₹36.2 L Cr)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--purple)">₹4.43 L Cr</div>
+        <div class="stat-box-label">NBFC Net Credit FY26P</div>
+        <div class="stat-box-delta down">↓ from ₹6.34 L Cr in FY25</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">₹3.22 L Cr</div>
+        <div class="stat-box-label">Corporate Bond Issuances</div>
+        <div class="stat-box-delta up">↑ 63% (FY25: ₹1.98 L Cr)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--orange)">₹5.19 L Cr</div>
+        <div class="stat-box-label">Foreign Capital Flows</div>
+        <div class="stat-box-delta up">↑ 60% (FY25: ₹3.25 L Cr)</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Financial Resource Flow — Stacked by Source</div>
+            <div class="chart-card-sub">₹ Lakh crore · FY24, FY25, FY26 (Provisional)</div>
+          </div>
+          <span class="chart-tag tag-purple">Stacked</span>
+        </div>
+        <div class="chart-container"><canvas id="chartResourceFlow"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Outstanding Credit — Bank vs Non-Bank</div>
+            <div class="chart-card-sub">₹ Lakh crore · End of year outstanding</div>
+          </div>
+          <span class="chart-tag tag-blue">Outstanding</span>
+        </div>
+        <div class="chart-container"><canvas id="chartOutstanding"></canvas></div>
+      </div>
+    </div>
+
+    <div class="insight-strip amber">
+      <div class="insight-label">Analyst Take — NBFC & Resource Flow</div>
+      <div class="insight-text">
+        <strong>NBFC deleveraging is the clearest risk signal in this report.</strong> NBFC net credit contracted from ₹6.34L Cr (FY25) to ₹4.43L Cr (FY26) — a 30% decline — as banks tightened wholesale lending to NBFCs through FY25-26 H1, forcing a credit consolidation. <strong>Banks backfilled directly</strong> (₹29.2L Cr in FY26 vs ₹18.1L Cr in FY25). HFCs have almost disappeared as a standalone credit channel (₹13K Cr vs ₹1.42L Cr two years ago — largely the HDFC Bank merger effect). The upside: <strong>corporate bond markets grew 63%</strong>, signalling deepening capital markets as an alternative to bank/NBFC credit for larger corporates.
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">8 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">Flow of Financial Resources <span class="g-tag">Framework</span></div>
+            <div class="glossary-term-def">RBI's annual compilation of total financial resources channelled to the commercial sector from all sources — banks, NBFCs, HFCs, capital markets, and foreign capital. Provides a comprehensive picture of how the real economy is funded beyond just bank credit.</div>
+            <div class="glossary-term-calc">Presented on a net basis = fresh disbursements minus repayments during the year. A declining NBFC flow (₹6.34L Cr → ₹4.43L Cr) means repayments exceeded fresh lending. Source: RBI Appendix Table 5, compiled annually as a provisional estimate (P).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">NBFCs (Non-Banking Financial Companies) <span class="g-tag g-purple">Entity</span></div>
+            <div class="glossary-term-def">Financial institutions registered with RBI that provide credit but cannot accept demand deposits (savings/current accounts). Key types: NBFC-ICC (Investment & Credit), NBFC-MFI (Microfinance), NBFC-P2P (Peer to Peer), NBFC-Factors. Includes large lenders like Bajaj Finance, Muthoot, Shriram, Tata Capital.</div>
+            <div class="glossary-term-calc">NBFC credit flows tracked via RBI's supervisory returns (DNBS returns). The FY26 contraction (−30%) reflects banks pulling wholesale lines to NBFCs through H1 FY26, forcing deleveraging. NBFCs with ≥₹500 Cr asset size are supervised directly by RBI.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">HFCs (Housing Finance Companies) <span class="g-tag">Entity</span></div>
+            <div class="glossary-term-def">NBFCs specialising in home loans, registered with the National Housing Bank (NHB) until 2021, now regulated by RBI. Includes LIC HFL, PNB Housing, Can Fin Homes, Aavas, Home First, etc. HFC credit flows collapsed in FY26 (₹0.13L Cr vs ₹1.42L Cr in FY24) due to HDFC Ltd's merger into HDFC Bank in July 2023.</div>
+            <div class="glossary-term-calc">The HDFC Bank-HDFC Ltd merger converted India's largest HFC (₹7 lakh crore loan book) into bank credit — mechanically removing it from the HFC flow category. The data shift is accounting, not a collapse in housing credit.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">AIFIs (All-India Financial Institutions) <span class="g-tag g-green">Entity</span></div>
+            <div class="glossary-term-def">Apex development finance institutions mandated to funnel credit into specific sectors: NABARD (agriculture, rural infrastructure, cooperative banks), NHB (housing, HFCs), SIDBI (MSMEs, MFIs), EXIM Bank (trade finance), NaBFID (infrastructure). They borrow from markets and on-lend to banks/NBFCs.</div>
+            <div class="glossary-term-calc">AIFI credit flows in FY26: ₹0.88L Cr (disbursements net of repayments to commercial sector). NABARD's refinance to banks supports Priority Sector Lending. SIDBI's lines support MFIs and MSME-focused NBFCs. Tracked in RBI's Appendix Table 5.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Corporate Bonds <span class="g-tag g-amber">Capital Market</span></div>
+            <div class="glossary-term-def">Debt securities issued by Indian companies to raise funds directly from markets, bypassing banks. Includes debentures (NCD/OCD), commercial paper (CP), and bonds. The 63% surge in FY26 (₹1.98L Cr → ₹3.22L Cr) reflects corporate India's increasing use of capital markets as bank credit tightened in H1 FY26.</div>
+            <div class="glossary-term-calc">Data sourced from SEBI's corporate bond issuance records and RBI's financial flows compilation. Captures new issuances (primary market). Does not include secondary market trades. Major issuers: large corporates, infrastructure companies, financial intermediaries.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">ECBs (External Commercial Borrowings) <span class="g-tag">Foreign Capital</span></div>
+            <div class="glossary-term-def">Loans raised by Indian entities from foreign lenders (international banks, foreign bondholders, NRI deposits, export credit agencies). Governed by RBI's ECB Policy with end-use restrictions (cannot be used for real estate or stock market investment). Includes Rupee-denominated bonds (Masala Bonds).</div>
+            <div class="glossary-term-calc">RBI approves ECBs under Automatic Route (below specified limits) or Approval Route (above limits). Data tracked via Form ECB returns filed with RBI's DSIM. FY26 foreign capital flows totalled ₹5.19L Cr (+60%), driven by FDI and ECB surge.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Equity Flows (Primary Market) <span class="g-tag g-teal">Capital Market</span></div>
+            <div class="glossary-term-def">Funds raised by Indian companies through equity issuances: IPOs, FPOs (Follow-on Public Offers), Rights Issues, and Qualified Institutional Placements (QIPs). FY26: ₹3.62L Cr, a slight moderation from FY25's ₹3.81L Cr despite a record IPO pipeline.</div>
+            <div class="glossary-term-calc">Tracked by SEBI. Primary market equity flows represent fresh capital raised (dilution of existing shareholders or new shares). Does not include secondary market trades. Includes PE/VC investments to extent captured in SEBI/DPIIT data.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Outstanding Credit (Stock vs Flow) <span class="g-tag g-red">Concept</span></div>
+            <div class="glossary-term-def"><strong>Flow</strong> = new lending net of repayments during the year (what Appendix Table 5 measures). <strong>Stock/Outstanding</strong> = cumulative loans outstanding at year-end (what the chart shows: bank ₹212.9L Cr, non-bank ₹101.1L Cr). A falling flow can coexist with rising stock if old loans are still outstanding.</div>
+            <div class="glossary-term-calc">NBFC net flow was negative in H1 FY26 (repayments > fresh lending) but the outstanding stock still rose modestly because multi-year loans from prior years remained on books. The distinction is critical for interpreting NBFC stress correctly.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 4: MSME & PRIORITY ───────────────── -->
+  <div id="tab-msme" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">MSME & Priority Sector Credit</div>
+        <div class="module-desc">MSME lending by enterprise tier, PSL achievement by bank group, KCC scheme</div>
+      </div>
+      <div class="module-source">Source: RBI Priority Sector Returns · Tables IV.1, IV.3</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--orange)">₹36.8 L Cr</div>
+        <div class="stat-box-label">Total MSME Credit (Dec 25)</div>
+        <div class="stat-box-delta up">↑ 23% vs Dec 2024</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">45.0%</div>
+        <div class="stat-box-label">PSL as % of ANBC (FY26)</div>
+        <div class="stat-box-delta up">↑ All bank groups met 40% target</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--purple)">₹75.7 L Cr</div>
+        <div class="stat-box-label">Total PSL Outstanding FY26P</div>
+        <div class="stat-box-delta up">↑ from ₹67.3 L Cr in FY25</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--red)">-8.6%</div>
+        <div class="stat-box-label">KCC Operative Accounts</div>
+        <div class="stat-box-delta down">↓ 11.7% count decline YoY</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">MSME Credit — Amount Outstanding by Segment</div>
+            <div class="chart-card-sub">₹ Lakh crore · FY24, FY25, Dec FY26</div>
+          </div>
+          <span class="chart-tag tag-orange">MSME</span>
+        </div>
+        <div class="chart-container"><canvas id="chartMSMECredit"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">PSL Achievement by Bank Group — FY26</div>
+            <div class="chart-card-sub">% of ANBC / CEOBSE · Target: 40%</div>
+          </div>
+          <span class="chart-tag tag-green">PSL</span>
+        </div>
+        <div class="chart-container"><canvas id="chartPSL"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:20px">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">MSME Account Count vs Credit Outstanding Divergence</div>
+          <div class="chart-card-sub">Number of accounts (lakh, left) vs Amount (₹ L Cr, right) · Shows consolidation trend</div>
+        </div>
+        <span class="chart-tag tag-amber">Consolidation</span>
+      </div>
+      <div class="chart-container"><canvas id="chartMSMEDivergence"></canvas></div>
+    </div>
+
+    <div class="insight-strip" style="border-left-color:var(--orange); background:linear-gradient(135deg,#fff7ed,#ffedd5)">
+      <div class="insight-label" style="color:var(--orange)">Analyst Take — MSME & Priority Sector</div>
+      <div class="insight-text">
+        <strong>Consolidation, not contraction, is the MSME credit story.</strong> Total account count is down 9% (257L to 234L) while credit outstanding is up 35% (₹27.3L Cr to ₹36.8L Cr) — average ticket size per account is rising sharply. This suggests <strong>formalisation of credit</strong> (smaller, informal borrowers exiting) and surviving enterprises borrowing more. The <strong>Micro & Small industry credit grew 33.1% y-o-y</strong> in March 2026 — the fastest growing segment in all of bank credit. SFBs, surprisingly, achieved 78.8% PSL ratio against a 40% target, indicating their core franchise remains deep in priority segments.
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">7 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">MSME Classification (2020) <span class="g-tag g-amber">Definition</span></div>
+            <div class="glossary-term-def">India revised MSME definitions under the MSMED Amendment 2020, switching to a dual criteria of <em>investment in plant &amp; machinery</em> AND <em>annual turnover</em>: <strong>Micro</strong> ≤₹1 Cr investment + ≤₹5 Cr turnover; <strong>Small</strong> ≤₹10 Cr + ≤₹50 Cr; <strong>Medium</strong> ≤₹50 Cr + ≤₹250 Cr. Previously only investment criteria applied.</div>
+            <div class="glossary-term-calc">The 2020 reclassification significantly expanded the MSME universe — many enterprises that were previously 'medium' or 'small' moved up, and the turnover criterion brought in more service-sector businesses. The classification determines PSL eligibility and subsidy access.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PSL (Priority Sector Lending) <span class="g-tag g-green">Mandate</span></div>
+            <div class="glossary-term-def">RBI's directed lending mandate requiring banks to deploy a specified percentage of credit to priority sectors: agriculture, MSMEs, education, housing (affordable), social infrastructure, renewable energy, weaker sections, and export credit. Overall PSL target: 40% of ANBC for Domestic SCBs; 75% for SFBs; 40% for Foreign Banks (≥20 branches).</div>
+            <div class="glossary-term-calc">Achievement measured as of March 31 every year. Shortfall is parked in RIDF (Rural Infrastructure Development Fund) with NABARD, SIDBI, or NHB at below-market rates — effectively a penalty. Surplus can be on-lent to deficit banks via the PSL trading platform (PSL Certificates/PSLCs).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">ANBC (Adjusted Net Bank Credit) <span class="g-tag">PSL Base</span></div>
+            <div class="glossary-term-def">The denominator for calculating PSL targets. Starts with Net Bank Credit (gross credit minus bills rediscounted) and adjusts for off-balance sheet items. PSL targets are expressed as % of ANBC or CEOBSE (Credit Equivalent of Off-Balance Sheet Exposure), whichever is higher.</div>
+            <div class="glossary-term-calc">ANBC = Outstanding credit − Bills rediscounted with RBI/SIDBI/EXIM Bank + bonds/debentures in lieu of advances for FIs. CEOBSE = sum of credit-equivalent exposures for funded and non-funded contingent items (L/Cs, guarantees etc). Formula set in RBI's Master Direction on PSL.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PSL Sub-Targets <span class="g-tag g-purple">Detail</span></div>
+            <div class="glossary-term-def">Within the 40% overall PSL target, banks must also meet specific sub-targets: <strong>Agriculture</strong> — 18% of ANBC (of which 10% for Small &amp; Marginal Farmers); <strong>Micro Enterprises</strong> — 7.5%; <strong>Weaker Sections</strong> — 12%; <strong>SFB-specific</strong>: 75% overall, with dedicated weaker-section and agriculture sub-targets.</div>
+            <div class="glossary-term-calc">Sub-target shortfalls are treated the same as overall shortfall — parked in RIDF. Banks can buy PSLCs to cover specific sub-target shortfalls: four certificate types exist (PSLC-Agriculture, PSLC-Small &amp; Marginal Farmers, PSLC-Micro Enterprises, PSLC-General).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">KCC (Kisan Credit Card) <span class="g-tag g-green">Product</span></div>
+            <div class="glossary-term-def">Single-window revolving credit facility for farmers covering: crop cultivation expenses, post-harvest requirements, farm maintenance, allied activities (animal husbandry, fisheries), and farmer family consumption needs. No collateral for loans up to ₹1.6 lakh (covered under CGTMSE/KCC guarantee). Interest subvention available: 3% p.a. on timely repayment, capped at 7% p.a. effective.</div>
+            <div class="glossary-term-calc">Credit limit based on land holding, crop, and income. Sanctioned as a working capital limit — farmer draws and repays in line with seasonal cash flows. FY26 saw a −8.6% decline in operative accounts (11.7% count fall) vs +9.4% rise in outstanding amount — same consolidation trend as MSMEs.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">SFBs (Small Finance Banks) <span class="g-tag g-teal">Bank Type</span></div>
+            <div class="glossary-term-def">RBI-licensed niche banks (12 in FY26) designed to serve unbanked and underbanked segments — microfinance customers, small farmers, unorganised sector workers. Higher PSL target of 75% vs 40% for regular SCBs. Examples: AU SFB, Equitas SFB, Jana SFB, ESAF SFB, Ujjivan SFB.</div>
+            <div class="glossary-term-calc">SFBs achieved 78.8% PSL ratio in FY26 (vs 40% target), indicating their core franchise is deeply embedded in priority segments. Required to deploy 75% of ANBC to PSL, with sub-targets for agriculture and microenterprises. Originated from MFIs converting to banks post-2015 RBI licensing.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PSLCs (Priority Sector Lending Certificates) <span class="g-tag">Trading</span></div>
+            <div class="glossary-term-def">Tradeable certificates that allow PSL surplus banks to sell their excess PSL achievement to deficit banks. The buyer counts the purchased PSLC toward its own PSL target without the underlying loans transferring. Traded on RBI's e-Kuber platform. Creates a market mechanism for PSL compliance.</div>
+            <div class="glossary-term-calc">PSLC price = market-determined premium (positive when demand for PSL compliance exceeds supply of surplus banks). Four categories: PSLC-Agriculture, PSLC-SF&amp;MF, PSLC-Micro Enterprises, PSLC-General. Foreign banks and urban cooperative banks are active buyers; SFBs and RRBs are active sellers.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 5: FINANCIAL INCLUSION ───────────────── -->
+  <div id="tab-inclusion" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Financial Inclusion — Access, Usage & Quality</div>
+        <div class="module-desc">FI-Index trends, banking infrastructure expansion, BSBDA accounts, and BC network</div>
+      </div>
+      <div class="module-source">Source: RBI FI-Index · MPFI Return · Table IV.4</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">67.0</div>
+        <div class="stat-box-label">FI-Index (Mar 2025)</div>
+        <div class="stat-box-delta up">↑ All-time high (Mar 2024: 64.2)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">11.75 L</div>
+        <div class="stat-box-label">BC Outlets (Dec 2025)</div>
+        <div class="stat-box-delta up">↑ 7× bank branch count</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--teal)">7.30 Cr</div>
+        <div class="stat-box-label">BSBDA Accounts</div>
+        <div class="stat-box-delta up">↑ from 7.20 Cr (Dec 2024)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--purple)">₹11.9 L Cr</div>
+        <div class="stat-box-label">BC Transaction Value FY26</div>
+        <div class="stat-box-delta up">↑ Core rural transaction engine</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Financial Inclusion Index — 9-Year Trend</div>
+            <div class="chart-card-sub">Composite FI-Index (access + usage + quality) · 2017 to 2025</div>
+          </div>
+          <span class="chart-tag tag-green">FI-Index</span>
+        </div>
+        <div class="chart-container"><canvas id="chartFIIndex"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Banking Infrastructure — Branches vs BC Outlets</div>
+            <div class="chart-card-sub">Count as of December 2025 · Rural vs Urban split</div>
+          </div>
+          <span class="chart-tag tag-teal">Infrastructure</span>
+        </div>
+        <div class="chart-container"><canvas id="chartInfra"></canvas></div>
+      </div>
+    </div>
+
+    <div class="insight-strip green">
+      <div class="insight-label">Analyst Take — Financial Inclusion</div>
+      <div class="insight-text">
+        <strong>India's inclusion journey is quietly one of the world's most impressive.</strong> The FI-Index at 67.0 — up from 43.4 in 2017 — represents a 54% structural improvement in 8 years, driven by JAM trinity, UPI, and the BC network. The <strong>11.75 lakh BC outlets outNumber bank branches 6.9 to 1</strong>, making BCs India's true last-mile banking layer. For fintechs and banks: the <strong>BSBDA base of 7.3 crore accounts is the upgrade opportunity</strong> — converting zero-balance accounts into active, product-holding customers is the next frontier. The RBI's NSFI 2025-30 now focuses on usage and quality dimensions over mere account opening.
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">7 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">FI-Index (Financial Inclusion Index) <span class="g-tag g-green">Key Metric</span></div>
+            <div class="glossary-term-def">RBI's composite index measuring the extent of financial inclusion in India on a scale of 0 (total exclusion) to 100 (full inclusion). Published annually as of March. At 67.0 in March 2025, up from 43.4 in 2017, it reflects 54% structural improvement in 8 years.</div>
+            <div class="glossary-term-calc">Three dimensions, each comprising multiple parameters: <strong>Access (35% weight)</strong> — banking penetration, ATMs, branches, BC outlets; <strong>Usage (45% weight)</strong> — deposit accounts, credit uptake, insurance, pension enrolment; <strong>Quality (20% weight)</strong> — financial literacy, consumer protection, ease of account access. FI-Index = √(F_access² + F_usage² + F_quality²) normalised to 0–100 scale.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">BSBDA (Basic Savings Bank Deposit Account) <span class="g-tag">Product</span></div>
+            <div class="glossary-term-def">Zero-balance accounts with no minimum balance requirement and basic banking services (4 cash withdrawals/month free, ATM card, online access). Introduced by RBI in 2012 to extend formal banking access. A bank holder can have only one BSBDA per bank. The Jan Dhan accounts (PMJDY) are a special variant of BSBDA with additional features (overdraft, insurance, RuPay card).</div>
+            <div class="glossary-term-calc">As of December 2025: 7.30 crore active BSBDAs with deposits. PMJDY accounts (government's version): 53.1 crore accounts (as of Feb 2025). Zero-balance accounts are a concern — PMJDY had ~8–9% zero-balance rate in FY26 vs ~25% three years ago. The next challenge is converting accounts to active use.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">BC (Business Correspondent) <span class="g-tag g-teal">Channel</span></div>
+            <div class="glossary-term-def">Bank-appointed agents authorised to deliver banking services at the last mile — in villages, small towns, and underserved areas where branches don't exist. BCs can: open accounts, accept deposits/withdrawals, collect loan repayments, conduct Aadhaar-based KYC, facilitate govt benefit disbursals. As of December 2025: 11.75 lakh BC outlets — 7× the bank branch count.</div>
+            <div class="glossary-term-calc">Fixed-point BCs are permanent service points; Mobile BCs travel to villages. BC transactions: 155 crore in FY26 (count), ₹11.9 lakh crore (value). Average transaction: ~₹770. BCs are compensated by banks via revenue-sharing on transactions. Supervised under RBI's Master Direction on BC Framework (2023).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">JAM Trinity <span class="g-tag g-purple">Framework</span></div>
+            <div class="glossary-term-def">The three-pillar digital public infrastructure enabling financial inclusion at scale: <strong>J</strong>an Dhan (bank accounts for the unbanked); <strong>A</strong>adhaar (biometric digital ID, 1.4 billion enrollments); <strong>M</strong>obile (ubiquitous cheap smartphone/feature phone + Jio-driven data access). Together they enable account opening, KYC, authentication, and digital payments for even the poorest citizen.</div>
+            <div class="glossary-term-calc">Impact: DBT via JAM has saved ~₹2.73 lakh crore in subsidy leakage since 2013 (GoI estimate). PMJDY opened 53+ crore accounts in 10 years; Aadhaar enables instant e-KYC in seconds; Mobile penetration ~85% (1.15 billion subscribers). The three together are the backbone of India's DPI advantage.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">NSFI 2025-30 (National Strategy for Financial Inclusion) <span class="g-tag">Policy</span></div>
+            <div class="glossary-term-def">RBI's 5-year roadmap for financial inclusion (2025–2030) jointly with GoI and financial regulators. Key pivot: shifts focus from <em>access</em> (account opening) — already largely achieved — to <em>usage</em> and <em>quality</em> dimensions. Priorities: making inactive accounts active, credit for agriculture/MSMEs, insurance penetration, and digital literacy.</div>
+            <div class="glossary-term-calc">Progress tracked via FI-Index annual readings. The Index is now calibrated to reward usage and quality improvements, not just access metrics. Baseline: FI-Index 64.2 (March 2024); Target trajectory to be set in upcoming NSFI progress reports.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">ICT-BC Transactions <span class="g-tag g-amber">Metric</span></div>
+            <div class="glossary-term-def">Banking transactions conducted through Information &amp; Communication Technology-enabled Business Correspondent agents using micro-ATMs, handheld devices, or mobile phones — as opposed to physical branch transactions. Captures the volume and value of banking activity happening at the last-mile agent layer.</div>
+            <div class="glossary-term-calc">Reported by banks in the MPFI (Monthly Progress Financial Inclusion) return to RBI. Key metric: transactions per BC outlet per month (a low number signals inactive BCs; RBI targets viability threshold of ~4–5 transactions/day per BC). AePS-based withdrawals form the bulk of ICT-BC transaction volume.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Credit-to-GDP Deepening (Rural) <span class="g-tag">Concept</span></div>
+            <div class="glossary-term-def">Unlike aggregate credit-GDP, this measures formal credit penetration specifically for rural/agriculture households. India's rural formal credit as % of agricultural GDP remains low (~40%) compared to formal sector credit. SHG-Bank linkage programme, KCC, and PM Mudra Yojana are the primary channels for rural credit access.</div>
+            <div class="glossary-term-calc">Tracked via RBI's MPFI and NABARD data. The FI-Index's usage sub-index captures this — credit penetration in underserved segments is a key differentiator between a 64 and 80 score on the FI-Index. Increasing this metric is the central challenge for India's financial inclusion agenda to FY30.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 6: MACRO CONTEXT ───────────────── -->
+  <div id="tab-macro" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Macro Context — Economy, Money & Markets</div>
+        <div class="module-desc">GDP, inflation, money supply, interest rates, and credit penetration in one frame</div>
+      </div>
+      <div class="module-source">Source: RBI Appendix Tables 1, 4 · NSO</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">7.6%</div>
+        <div class="stat-box-label">Real GDP Growth FY26</div>
+        <div class="stat-box-delta up">↑ from 7.1% in FY25</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">2.1%</div>
+        <div class="stat-box-label">CPI Inflation FY26</div>
+        <div class="stat-box-delta down">↓ Multi-decade low (FY25: 4.6%)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--amber)">6.5%</div>
+        <div class="stat-box-label">10-Year G-Sec Yield</div>
+        <div class="stat-box-delta down">↓ from 6.9% in FY25</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--purple)">5.4%</div>
+        <div class="stat-box-label">Call Money Rate (avg)</div>
+        <div class="stat-box-delta down">↓ from 6.5% in FY25</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">M3 Money Supply vs Bank Credit Growth</div>
+            <div class="chart-card-sub">Y-o-Y % change · FY18 to FY26</div>
+          </div>
+          <span class="chart-tag tag-amber">Money</span>
+        </div>
+        <div class="chart-container"><canvas id="chartM3Credit"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Interest Rate Landscape</div>
+            <div class="chart-card-sub">Key benchmark rates (%) · FY24, FY25, FY26</div>
+          </div>
+          <span class="chart-tag tag-purple">Rates</span>
+        </div>
+        <div class="chart-container"><canvas id="chartRates"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:20px">
+      <div class="chart-card-header">
+        <div>
+          <div class="chart-card-title">Reserve Money Growth & Money Multiplier</div>
+          <div class="chart-card-sub">Reserve money growth (%) and money multiplier ratio · FY18 to FY26</div>
+        </div>
+        <span class="chart-tag tag-blue">Reserve Money</span>
+      </div>
+      <div class="chart-container"><canvas id="chartRM"></canvas></div>
+    </div>
+
+    <div class="insight-strip" style="border-left-color:var(--amber); background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+      <div class="insight-label" style="color:var(--amber)">Analyst Take — Macro</div>
+      <div class="insight-text">
+        <strong>FY26 delivered the rare combination of high growth and low inflation.</strong> GDP at 7.6% with CPI at 2.1% is a macro sweet spot India hasn't seen in decades — driven by food deflation and softening global commodities. The <strong>M3 surge to 15.3%</strong> (from 9.4% in FY25) is notable: this reflects both credit expansion and RBI's liquidity injection via OMOs. The money multiplier rising to 6.1 from 5.7 signals improving credit transmission. <strong>Rates are in a clear softening cycle</strong> — 10yr G-sec down 40bps, call money down 110bps. For banks and NBFCs, this means NIM pressure but also cost-of-funds relief and improved borrower affordability heading into FY27.
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">9 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">Broad Money (M3) <span class="g-tag g-amber">Key Metric</span></div>
+            <div class="glossary-term-def">The most commonly used measure of money supply in India — captures both liquid money and term deposits. An M3 growth of 15.3% in FY26 (from 9.4% in FY25) reflects both the credit expansion and RBI's liquidity injection. M3 is the closest proxy for "money in the economy."</div>
+            <div class="glossary-term-calc">M3 = Currency with Public + Demand Deposits with Banks + Time Deposits with Banks + Other Deposits with RBI. Equivalently: M3 = M1 + Time Deposits. Published weekly in RBI's Monetary & Credit Aggregates release. Base date: last Friday of each fortnight.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Narrow Money (M1) <span class="g-tag">Money Supply</span></div>
+            <div class="glossary-term-def">The most liquid form of money — cash in hand and instantly accessible deposits. M1 growth tracks actual spending power in the economy more directly than M3. A large M1-M3 gap indicates high time-deposit accumulation (households saving more, or corporate treasury build-up).</div>
+            <div class="glossary-term-calc">M1 = Currency with Public + Demand Deposits with Banks + Other Deposits with RBI. M2 = M1 + Savings Deposits of Post Office Savings Banks. M3 = M1 + Time Deposits (fixed deposits &amp; recurring deposits). M4 = M3 + All Deposits with Post Office Savings Banks.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Reserve Money (M0) <span class="g-tag">Monetary Base</span></div>
+            <div class="glossary-term-def">The "high-powered money" or monetary base — the foundation from which the banking system creates credit. Also called Currency in Circulation + Bankers' Deposits with RBI. RBI controls Reserve Money through Open Market Operations (OMOs), repo/reverse-repo, CRR, SLR, and forex operations. FY26 RM growth: 6.0% (from 4.3% in FY25).</div>
+            <div class="glossary-term-calc">Reserve Money = Net RBI Credit to GoI + RBI Credit to Banks + RBI's Claims on Commercial Sector + Net Foreign Assets − Non-monetary Liabilities. Or: Currency in Circulation + Bankers' Deposits with RBI + Other Deposits with RBI. Tracked weekly in RBI's monetary statement.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Money Multiplier <span class="g-tag g-purple">Concept</span></div>
+            <div class="glossary-term-def">Shows how much broad money (M3) the banking system creates per unit of Reserve Money (M0). A multiplier of 6.1 in FY26 (up from 5.7 in FY25) means every ₹1 of RBI-created base money supports ₹6.10 of M3. A rising multiplier indicates improving credit transmission — banks are deploying more credit per unit of reserves.</div>
+            <div class="glossary-term-calc">Money Multiplier = M3 ÷ Reserve Money (M0). In a simple model: Multiplier = 1 ÷ (CRR + (1 − CRR) × cash-drain ratio). In practice, it depends on the CRR ratio (currently 4%), excess reserves held by banks, and the public's currency-to-deposit ratio.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Repo Rate &amp; Monetary Policy <span class="g-tag g-red">Policy Rate</span></div>
+            <div class="glossary-term-def">The rate at which RBI lends money to commercial banks overnight against government securities collateral. It is the MPC's primary policy instrument — raising the repo rate tightens monetary conditions; cutting it eases them. FY26 saw the MPC cut rates twice (total 50bps), moving from 6.5% to 6.0%, signalling a rate-easing cycle.</div>
+            <div class="glossary-term-calc">The repo rate anchors the interest rate corridor: MSF Rate (Marginal Standing Facility) = Repo + 25bps (ceiling); SDF Rate (Standing Deposit Facility) = Repo − 25bps (floor). The WACR (Weighted Average Call Rate) — RBI's operating target — is guided to stay within this corridor.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">10-Year G-Sec Yield <span class="g-tag g-amber">Benchmark Rate</span></div>
+            <div class="glossary-term-def">Yield on the benchmark 10-year Government of India bond — India's risk-free rate. All other borrowing costs (corporate bonds, housing loans, MCLR) are priced as a spread over this. At 6.5% in FY26 (down 40bps from FY25), it signals lower government borrowing costs and a broadly benign rate environment for corporates and households.</div>
+            <div class="glossary-term-calc">G-Sec yields move inversely to bond prices. Yield = (Annual coupon payment ÷ Current market price) × 100, adjusted for time to maturity. Influenced by: inflation expectations, RBI's repo rate, government fiscal deficit and borrowing program, and global rates (US Fed, DXY).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">WACR (Weighted Average Call Rate) <span class="g-tag g-teal">Operating Target</span></div>
+            <div class="glossary-term-def">The overnight interbank lending rate — the rate at which banks lend surplus funds to each other overnight (unsecured). RBI's primary operating target for monetary policy: it aims to keep WACR within the interest rate corridor (SDF rate to MSF rate). WACR declined from avg 6.5% (FY25) to 5.4% (FY26) — a 110bps drop reflecting RBI's liquidity injections.</div>
+            <div class="glossary-term-calc">= Weighted average of all call money (overnight interbank) lending transactions for the day. Published by RBI's CCIL daily. A WACR at the lower end of the corridor = system liquidity surplus; at the upper end = liquidity deficit. FY26 shift from deficit to surplus mode is reflected in the sharp WACR decline.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">CPI (Consumer Price Index) Inflation <span class="g-tag">Inflation Gauge</span></div>
+            <div class="glossary-term-def">India's headline retail inflation measure — tracks price changes in a representative basket of goods and services consumed by urban and rural households. RBI's MPC has a legal mandate to maintain CPI inflation at 4% (±2% band). CPI at 2.1% in FY26 is a multi-decade low, driven by vegetable/food deflation and softer global commodity prices.</div>
+            <div class="glossary-term-calc">= (Current period CPI index value ÷ Same period last year index value − 1) × 100. Base year: 2024=100 (revised from 2012=100 from January 2026 per CSO). Compiled by MoSPI monthly. Food &amp; Beverages = 45.86% weight; Fuel &amp; Light = 6.84%; Miscellaneous = 28.32%; Housing = 10.07%.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">OMOs (Open Market Operations) <span class="g-tag g-purple">RBI Tool</span></div>
+            <div class="glossary-term-def">RBI's purchase or sale of government securities from/to banks to manage system liquidity and money supply. OMO purchases inject liquidity (RBI buys bonds, gives cash to banks → M0 rises). OMO sales absorb liquidity. In FY26, RBI conducted large-scale OMO purchases to ease the system from liquidity deficit, contributing to the M3 surge to 15.3%.</div>
+            <div class="glossary-term-calc">OMO auctions conducted via RBI's e-Kuber platform. Participation: SCBs, primary dealers (PDs). Each OMO purchase = RBI's balance sheet expands (assets: G-Sec; liabilities: bank reserves). Impact cascades: higher bank reserves → banks lend more → M3 multiplies. RBI also conducts Variable Rate Repo (VRR) for shorter-term liquidity management.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 7: FRAUD RADAR ───────────────── -->
+  <div id="tab-fraud" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Fraud Radar — Banking Sector Risk</div>
+        <div class="module-desc">Fraud incidence and value by category; the structural shift from digital to advances fraud</div>
+      </div>
+      <div class="module-source">Source: RBI Table VI.3 · Department of Supervision</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--red)">9,371</div>
+        <div class="stat-box-label">Total Fraud Cases FY26</div>
+        <div class="stat-box-delta down">↓ 58% from FY24's 35K cases</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--orange)">₹41.8K Cr</div>
+        <div class="stat-box-label">Total Fraud Value FY26</div>
+        <div class="stat-box-delta down">↑ Despite fewer cases</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--red)">85.5%</div>
+        <div class="stat-box-label">Fraud Cases in Advances</div>
+        <div class="stat-box-delta down">↑ From 11.5% in FY24</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">293</div>
+        <div class="stat-box-label">Digital/Card Fraud Cases</div>
+        <div class="stat-box-delta up">↓ From 28,836 in FY24</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Fraud Cases by Category — 3-Year Shift</div>
+            <div class="chart-card-sub">Number of cases · FY24, FY25, FY26</div>
+          </div>
+          <span class="chart-tag tag-red">Volume</span>
+        </div>
+        <div class="chart-container"><canvas id="chartFraudCases"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">Fraud Value by Category — Where the Money Is</div>
+            <div class="chart-card-sub">₹ Crore involved · FY24, FY25, FY26</div>
+          </div>
+          <span class="chart-tag tag-orange">Value</span>
+        </div>
+        <div class="chart-container"><canvas id="chartFraudValue"></canvas></div>
+      </div>
+    </div>
+
+    <div class="insight-strip red">
+      <div class="insight-label">Analyst Take — Fraud</div>
+      <div class="insight-text">
+        <strong>The fraud risk locus has completely inverted in two years.</strong> In FY24, card/internet/digital frauds accounted for 80% of cases (28,836 incidents); by FY26, that has crashed to 293 cases — a 99% reduction. Credit where due: RBI's AFA mandates, tokenisation, and payment friction measures are working. <strong>But advance-related fraud has exploded</strong> — from ₹8,917 Cr (FY24) to ₹40,774 Cr (FY26), representing 85% of all fraud value. This is the high-stakes loan fraud / evergreening risk at the top of the system. For bank risk officers: <strong>loan approval, monitoring, and recovery processes — not cybersecurity — are now the primary fraud vector.</strong>
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">7 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">Advance Fraud <span class="g-tag g-red">Fraud Category</span></div>
+            <div class="glossary-term-def">Fraud committed in the context of loans and advances — where the fraud involves manipulation of the credit process. Includes: loan diversion (funds borrowed for one purpose used for another), fictitious borrowers/guarantors, false financials to obtain credit, round-tripping of funds, and evergreening of NPAs. These are the high-value frauds: ₹40,774 Cr in FY26 (85.5% of all fraud value).</div>
+            <div class="glossary-term-calc">Reported by banks to RBI via XBRL-based fraud reporting system (within 7 days of classification as fraud). A "fraud" in advances is declared when the bank suspects misrepresentation, willful deceit, or criminal breach of trust — not just default. Advance frauds are RBI-flagged to CBI/Enforcement Directorate automatically above ₹3 Cr (FY26 threshold).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Digital / Card / Internet Fraud <span class="g-tag g-amber">Fraud Category</span></div>
+            <div class="glossary-term-def">Unauthorised transactions via digital channels: card skimming, phishing, SIM swap, OTP fraud, account takeover, vishing (voice phishing), and online banking fraud. This category collapsed from 28,836 cases (FY24) to just 293 cases (FY26) — a 99% reduction driven by RBI's AFA mandates, tokenisation of card data, and improved transaction monitoring by banks and payment systems.</div>
+            <div class="glossary-term-calc">Reported under RBI's Fraud Reporting &amp; Monitoring System (FRMS). Includes Card-not-present (CNP) fraud, card-present fraud, internet banking fraud, and UPI-related fraud. RBI's 2FA (two-factor authentication) mandate, tokenisation (replacing card numbers with tokens for online transactions), and UPI PIN requirements have dramatically reduced digital fraud incidence.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Evergreening <span class="g-tag g-red">Fraud Tactic</span></div>
+            <div class="glossary-term-def">Practice of disguising NPA status by extending fresh loans to borrowers to enable them to repay existing loans — masking true asset quality. The original loan gets repaid using new loan proceeds, delaying NPA recognition. Considered a form of advance fraud when done intentionally to mislead about asset quality. RBI's asset quality review (AQR) in 2015-16 targeted this practice.</div>
+            <div class="glossary-term-calc">Difficult to detect from outside — requires forensic review of cash flows and loan utilisation. RBI's supervisory stance: banks must demonstrate end-use monitoring for loans above ₹5 Cr. Advance fraud surge (₹8,917 Cr FY24 → ₹40,774 Cr FY26) partly reflects better detection by supervisors using data analytics, not necessarily more fraud occurring.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">AFA (Additional Factor of Authentication) <span class="g-tag g-green">Safeguard</span></div>
+            <div class="glossary-term-def">RBI's mandatory second layer of verification for digital payments — the OTP, PIN, or biometric factor required beyond the basic credentials. AFA for card-not-present transactions (OTP to mobile), for UPI (UPI PIN), and for RTGS/NEFT (OTP + digital signature). This is the single most impactful regulatory intervention that caused digital fraud to collapse 99% in 3 years.</div>
+            <div class="glossary-term-calc">AFA implementation phased since 2009 (RBI's 2009 circular on online banking). 2021 extension: mandatory AFA for all recurring e-mandates above ₹15,000. 2023: tokenisation made mandatory for online card transactions. Combined effect: even if a criminal has card details, they cannot transact without the OTP delivered to the registered mobile.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Off-Balance Sheet Fraud <span class="g-tag g-purple">Fraud Category</span></div>
+            <div class="glossary-term-def">Fraud in contingent liabilities — fraudulent issuance of Letters of Undertaking (LoUs), Letters of Credit (LCs), Bank Guarantees, and Bill Co-acceptances — often without adequate security or authorisation. The PNB fraud (Nirav Modi, 2018, ₹13,000 Cr+) was the most famous Indian case. These instruments don't appear on the balance sheet until called upon, enabling fraudsters to exploit audit gaps.</div>
+            <div class="glossary-term-calc">Reported separately under FRMS. RBI plugged the LoU-for-import-credit loophole in 2018. Current focus: unauthorised guarantee issuances and fraudulent LC discounting. FY26 off-balance sheet fraud: ~₹477 Cr (23 cases) — small but strategically important risk. Banks required to reconcile SWIFT messages with Core Banking System (CBS) in real time since 2018.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Wilful Default <span class="g-tag g-amber">Legal Category</span></div>
+            <div class="glossary-term-def">A borrower is classified as a "Wilful Defaulter" when they default on a loan despite having the capacity to repay, or divert/siphon funds away from the borrowing entity. Once declared a wilful defaulter, the promoter/guarantor is: barred from new bank credit for 5 years, barred from new companies, and the bank must file criminal complaint. This is distinct from fraud — wilful default is intentional non-payment, fraud involves misrepresentation to obtain credit.</div>
+            <div class="glossary-term-calc">Classification process: bank's review committee identifies willful default → approval by board-level committee → borrower given 15 days to represent → final declaration. Reported to CIBIL's Wilful Defaulters list (quarterly). Wilful defaults above ₹25 Cr are also reported to RBI. FY26: this category is embedded in advance fraud when misrepresentation is also proven.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Tokenisation <span class="g-tag g-green">Fraud Prevention</span></div>
+            <div class="glossary-term-def">Replacing actual card numbers (Primary Account Numbers, PANs) with a unique "token" for online and contactless transactions. The merchant/payment aggregator never sees the real card number — they receive a token that is useless if stolen. Made mandatory by RBI for all card-on-file transactions from January 2022. Result: card-not-present (CNP) fraud has become structurally much harder to execute.</div>
+            <div class="glossary-term-calc">Token generated by card network (Visa, Mastercard, RuPay) for each device-merchant combination. The underlying card number is stored only by the card network and issuing bank. Tokens are device-specific — a token for a merchant on one device cannot be used on another. This is a key reason for the collapse in digital fraud cases from 28,836 (FY24) to 293 (FY26).</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───────────────── TAB 8: REGULATORY PULSE ───────────────── -->
+  <div id="tab-regulatory" class="tab-panel">
+    <div class="module-header">
+      <div>
+        <div class="module-title">Regulatory Pulse — Key RBI Actions FY 2025-26</div>
+        <div class="module-desc">Major regulatory initiatives, frameworks issued, and forward agenda for FY27</div>
+      </div>
+      <div class="module-source">Source: RBI Annual Report 2025-26 · Chapters IV–IX</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--blue)">244</div>
+        <div class="stat-box-label">Master Directions Post-Consolidation</div>
+        <div class="stat-box-delta up">↓ From 11,000+ circulars</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--green)">9.6 Cr</div>
+        <div class="stat-box-label">ULI API Hits (Mar 2026)</div>
+        <div class="stat-box-delta up">117 lenders, 134 data services</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--teal)">90</div>
+        <div class="stat-box-label">PSO Onsite Inspections</div>
+        <div class="stat-box-delta neutral">Incl. CCIL, NPCI, 36 PPI issuers</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-val" style="color:var(--purple)">23</div>
+        <div class="stat-box-label">New PA Authorisations</div>
+        <div class="stat-box-delta up">Total 68 non-bank PAs now</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px">
+      <div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;color:var(--text)">FY25-26 Regulatory Actions</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Apr 2025</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)">1</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-blue">Lending</span>
+              <h4>Co-Lending Draft Guidelines</h4>
+              <p>Comprehensive co-lending framework for all REs issued for public comment. Final guidelines pending examination of feedback received.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">May 2025</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--purple)">2</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-purple">Governance</span>
+              <h4>Payment Regulatory Board (PRB) Formed</h4>
+              <p>Amendments to PSS Act 2007 came into force. PRB established as India's dedicated payments regulator within RBI.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Jul 2025</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--teal)">3</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-teal">Benchmark</span>
+              <h4>SORR Benchmark Launched</h4>
+              <p>Secured Overnight Rupee Rate (SORR) — based on basket repo and triparty repo — authorised as official benchmark. FBIL began publication from July 7, 2025.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Sep 2025</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--amber)">4</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-amber">Liquidity</span>
+              <h4>Revised Liquidity Management Framework</h4>
+              <p>New LMF effective September 30, 2025. Addresses surplus-to-deficit transition and improves transmission of monetary policy via WACR corridor.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Oct 2025</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)">5</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-green">Payments</span>
+              <h4>CTS Same-Day Settlement Live</h4>
+              <p>Continuous clearing of cheques under CTS went live October 4, 2025. Cheque clearing cycle reduced from T+1 days to a few hours. Customer accounts credited within 1 hour of settlement.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Feb 2026</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--red)">6</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-red">Consumer</span>
+              <h4>Anti-Mis-Selling Directions Issued</h4>
+              <p>Draft Amendment Directions on 'Advertising, Marketing and Sales of Financial Products' issued February 11, 2026 — targeting mis-selling by REs of both own and third-party products.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Mar 2026</div>
+            <div class="timeline-spine"><div class="timeline-dot" style="background:var(--pink)">7</div><div class="timeline-line"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-tag tag-pink">Digital</span>
+              <h4>Payments Vision 2028 Released</h4>
+              <p>RBI's strategic roadmap for digital payments through December 2028. Focus on rural penetration, cross-border UPI expansion, and AI-based fraud prevention.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;color:var(--text)">FY26-27 Regulatory Agenda (Forward Look)</h3>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="chart-card">
+            <span class="timeline-tag tag-blue" style="margin-bottom:8px;display:inline-block">Expected Completion</span>
+            <h4 style="font-size:13px;font-weight:600;margin-bottom:6px">Expected Credit Loss (ECL) Framework</h4>
+            <p style="font-size:12px;color:var(--text-mid);line-height:1.6">Final IFRS 9-aligned ECL provisioning norms for banks — biggest capital impact regulation in a decade. Banks must model through-the-cycle PDs and LGDs. Deferred multiple times; final issuance expected FY27.</p>
+          </div>
+          <div class="chart-card">
+            <span class="timeline-tag tag-green" style="margin-bottom:8px;display:inline-block">Infrastructure</span>
+            <h4 style="font-size:13px;font-weight:600;margin-bottom:6px">Unified Lending Interface (ULI) Scale-Up</h4>
+            <p style="font-size:12px;color:var(--text-mid);line-height:1.6">ULI already at 9.6 crore API hits with 117 lenders. FY27 target: expand data services from 134 to broader GST, land records, and alternate data sets. Core DPI for MSME and agriculture credit.</p>
+          </div>
+          <div class="chart-card">
+            <span class="timeline-tag tag-orange" style="margin-bottom:8px;display:inline-block">Climate</span>
+            <h4 style="font-size:13px;font-weight:600;margin-bottom:6px">Climate Risk Disclosure & Stress Testing</h4>
+            <p style="font-size:12px;color:var(--text-mid);line-height:1.6">Suite of climate regulations at advanced stages: disclosure norms, RB-CRIS data repository, scenario analysis guidance, and principles for climate risk management — all targeted for FY27 finalization.</p>
+          </div>
+          <div class="chart-card">
+            <span class="timeline-tag tag-purple" style="margin-bottom:8px;display:inline-block">AI & Tech</span>
+            <h4 style="font-size:13px;font-weight:600;margin-bottom:6px">AI/ML Model Risk Management Framework</h4>
+            <p style="font-size:12px;color:var(--text-mid);line-height:1.6">Draft Directions on model risk management (for AI/ML models) at final stages. Applies to all REs using AI — credit scoring, fraud detection, pricing models. Aligned with FREE-AI Committee recommendations.</p>
+          </div>
+          <div class="chart-card">
+            <span class="timeline-tag tag-teal" style="margin-bottom:8px;display:inline-block">Infrastructure</span>
+            <h4 style="font-size:13px;font-weight:600;margin-bottom:6px">Alternate Payment System (APS) Launch</h4>
+            <p style="font-size:12px;color:var(--text-mid);line-height:1.6">IFTAS developing APS integrating NEFT, RTGS, and SFMS into a unified platform. Currently in functional and performance testing. Launch targeted FY27 — India's most significant payment infrastructure upgrade since RTGS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-strip purple">
+      <div class="insight-label">Analyst Take — Regulatory</div>
+      <div class="insight-text">
+        <strong>FY26 was a year of consolidation and infrastructure — FY27 will be a year of consequence.</strong> The 11,000-circular-to-244-Master-Direction consolidation is a foundational reform that reduces compliance cost for all REs. But the real watch items are: ECL provisioning (will reset capital planning for every Indian bank), the AI/ML model risk framework (will change how fintechs and banks deploy credit models), and the APS launch (India's payment backbone upgrade). <strong>ULI is the most underappreciated fintech initiative in India</strong> — 9.6 crore API hits and 134 data services is the plumbing for the next credit cycle. Boards and management teams should be briefing on all five agenda items now.
+      </div>
+    </div>
+
+    <details class="glossary-section">
+      <summary class="glossary-header">
+        <div class="glossary-title">📖 Key Terms &amp; Methodology <span class="glossary-count">10 Terms</span></div>
+        <span class="glossary-chevron">▾</span>
+      </summary>
+      <div class="glossary-body">
+        <div class="glossary-grid">
+          <div class="glossary-term">
+            <div class="glossary-term-name">Master Direction (MD) <span class="g-tag">Regulatory Tool</span></div>
+            <div class="glossary-term-def">Consolidated regulatory instructions issued by RBI on a specific topic — replacing the hundreds of individual circulars, notifications, and guidelines issued over decades. The FY26 exercise consolidated 11,000+ circulars issued since RBI's founding into 244 Master Directions. MDs are living documents — updated as new circulars are issued, keeping the regulatory landscape current.</div>
+            <div class="glossary-term-calc">Published on RBI's website under "Regulations → Master Directions." Each MD has a unique RBI reference number and is version-controlled. Banks and NBFCs are expected to comply with MDs in totality; older individual circulars subsumed in MDs no longer have independent standing. The MD consolidation reduced compliance cost by enabling a single point of reference per topic.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">ECL (Expected Credit Loss) Framework <span class="g-tag g-red">Upcoming</span></div>
+            <div class="glossary-term-def">IFRS 9-aligned provisioning approach requiring banks to provision for <em>expected</em> losses over the life of a loan — a forward-looking model — vs the current incurred-loss model (provision only after a default occurs). ECL will require banks to estimate through-the-cycle Probability of Default (PD), Loss Given Default (LGD), and Exposure at Default (EAD) for every loan.</div>
+            <div class="glossary-term-calc">Three-stage classification: <strong>Stage 1</strong> — performing loans (12-month ECL provision); <strong>Stage 2</strong> — significant credit deterioration (lifetime ECL provision); <strong>Stage 3</strong> — credit-impaired/NPA (lifetime ECL provision, similar to current). ECL will significantly increase upfront provisions for banks — estimates suggest system-wide capital requirement could rise ₹1–3 lakh crore. Expected final issuance: FY27.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">ULI (Unified Lending Interface) <span class="g-tag g-green">DPI</span></div>
+            <div class="glossary-term-def">RBI's open API platform for frictionless digital credit — described as "UPI for lending." Enables lenders to access real-time borrower data from diverse sources (land records, GST, milk cooperatives, state data lakes, CIBIL, NACH mandate data) via a single consent-based API call, dramatically reducing credit assessment time from weeks to minutes.</div>
+            <div class="glossary-term-calc">Architecture: Borrower gives consent → Lender queries ULI API → ULI fetches data from multiple source systems → Lender gets unified data view. As of March 2026: 9.6 crore API calls, 117 lenders live, 134 data services integrated. Developed by Reserve Bank Innovation Hub (RBIH). Target: expand data services to include more land registries, self-employment income data, and state DBT payment history.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">SORR (Secured Overnight Rupee Rate) <span class="g-tag g-teal">Benchmark</span></div>
+            <div class="glossary-term-def">India's new overnight benchmark interest rate based on <em>secured</em> money market transactions — basket of TREP (Tri-Party Repo) + Repo (bilateral secured). Replaces MIBOR (Mumbai Interbank Offer Rate) for secured market pricing. More representative of actual market conditions than MIBOR, which was based on the unsecured call money market and prone to thin trading.</div>
+            <div class="glossary-term-calc">Computed as a volume-weighted average of TREP and repo transactions settled on a given day. Published by FBIL (Financial Benchmarks India Pvt Ltd) daily, with publication commencing July 7, 2025. Used as reference rate for floating-rate financial instruments, interest rate derivatives, and LIBOR-replacement contracts in India. Analogous to SOFR (USA) or SONIA (UK).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PRB (Payment Regulatory Board) <span class="g-tag g-purple">Regulator</span></div>
+            <div class="glossary-term-def">India's dedicated payments regulator — a statutory board established within RBI following amendments to the Payment and Settlement Systems (PSS) Act 2007, which came into force in May 2025. Chaired by the RBI Governor, with RBI Deputy Governor and external members. Has exclusive authority to regulate and supervise all payment and settlement systems in India.</div>
+            <div class="glossary-term-calc">PRB's mandate: regulate and supervise PSOs (Payment System Operators), authorise new payment systems, issue policy/framework for digital payments, impose penalties on non-compliant PSOs, and advise GoI on payment policy. Key decisions: Payments Vision 2028, PA (Payment Aggregator) regulatory framework, NETC expansion, and UPI global rollout. Operational since June 2025.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PSO (Payment System Operator) <span class="g-tag">Entity</span></div>
+            <div class="glossary-term-def">Any entity authorised to operate a payment system in India under the PSS Act. Includes: NPCI (UPI, RuPay, NACH, AePS, IMPS), card networks (Visa, Mastercard, AmEx, Diners), PPI issuers (Paytm, PhonePe wallet), Payment Aggregators (Razorpay, PayU, CCAvenue), RTGS/NEFT/CTS systems (RBI-owned), and CCIL (Clearing Corporation of India). As of FY26: 90 PSO onsite inspections conducted.</div>
+            <div class="glossary-term-calc">PSOs classified by RBI into: Systemically Important PSOs (SIPS — NPCI, CCIL, card networks) and other PSOs. SIPS face higher supervision, more frequent inspection, and stricter data storage requirements. All PSOs must store Indian payment data exclusively within India (RBI's data localisation norm, 2018).</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">PA (Payment Aggregator) <span class="g-tag g-amber">Entity</span></div>
+            <div class="glossary-term-def">Entities that facilitate online payment collection from customers on behalf of merchants — without being banks or card networks. They aggregate payment flows from multiple instruments (cards, UPI, wallets, net banking) and settle to merchants. Examples: Razorpay, PayU, CCAvenue, Cashfree, Juspay, Paytm PG. As of FY26: 68 non-bank PAs authorised by RBI (23 new authorisations in FY26).</div>
+            <div class="glossary-term-calc">PA regulation effective January 2023. Requirements: minimum net worth ₹25 Cr (₹15 Cr at application), escrow settlement accounts, merchant onboarding norms, data security (PCI-DSS), and restricted settlement timelines (T+1). Banks acting as PAs are subject to separate RBI directions. The 68-PA count is for non-bank entities; total PAs including banks is higher.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">Co-lending Framework <span class="g-tag">Lending Model</span></div>
+            <div class="glossary-term-def">Arrangement where a bank and an NBFC jointly originate and hold a loan — the bank provides the lower-cost capital (typically 80%) and the NBFC provides credit assessment, origination, and servicing (and holds 20%). Allows NBFCs to scale lending without the full cost of capital, and banks to extend PSL credit through NBFC networks. Current framework (2020) covers only bank-NBFC; the FY26 draft expands to all Regulated Entities (REs).</div>
+            <div class="glossary-term-calc">Current: Bank holds ≥80% of loan on its books at own rate; NBFC holds remaining ≥20% at agreed rate; combined rate offered to borrower. Loans classified under the bank's books (PSL eligible). New draft framework (April 2025): expands to include bank-bank and NBFC-NBFC co-lending. Final guidelines expected FY27 after public comment review.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">LMF (Liquidity Management Framework) <span class="g-tag g-teal">Policy Tool</span></div>
+            <div class="glossary-term-def">RBI's framework governing how it manages banking system liquidity — the daily surplus or deficit of funds in the overnight interbank market. Revised effective September 30, 2025, to address the structural transition from a surplus liquidity mode (FY21–FY24) to a deficit mode (FY25–H1 FY26). The new LMF improved the transmission of RBI's rate signals to market rates.</div>
+            <div class="glossary-term-calc">Key tools under LMF: SDF (Standing Deposit Facility, floor), MSF (Marginal Standing Facility, ceiling), VRR (Variable Rate Repo — auctions for injecting liquidity), VRRR (Variable Rate Reverse Repo — auctions for absorbing liquidity), and OMOs. The revised LMF introduced a new 14-day VRR as the main liquidity operation, replacing the previous overnight-focused framework.</div>
+          </div>
+          <div class="glossary-term">
+            <div class="glossary-term-name">CTS (Cheque Truncation System) <span class="g-tag">Payment Rail</span></div>
+            <div class="glossary-term-def">Electronic cheque clearing system where physical cheque movement is replaced by digital image and data transmission — cheques are scanned at the presenting bank branch and sent electronically to the paying bank. CTS has been in operation since 2008. The FY26 upgrade (from October 4, 2025): same-day (continuous) settlement — reducing the T+1 clearing cycle to just a few hours, with customer account credits within 1 hour of settlement.</div>
+            <div class="glossary-term-calc">FY26 cheque volume: 5,588 lakh transactions (₹89+ lakh crore in value). Despite declining transaction count (paper cheques losing to UPI), the value-per-transaction is high — cheques remain important for high-value business, property, and government payments. The continuous settlement upgrade aligns CTS with global best practice and improves working capital for corporates dependent on cheque-based B2B payments.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+</div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<div class="footer">
+  <p><strong>Vatayan Labs</strong> · Data-driven research on Indian banking, payments &amp; markets</p>
+  <p style="margin-top:6px">Built from <a href="https://www.rbi.org.in" target="_blank">RBI Annual Report 2025-26</a> primary data · 7 Appendix Tables + 246-page Report · All figures for FY 2025-26 unless stated · P = Provisional</p>
+  <p style="margin-top:6px">Visit <a href="https://curious-investor-research.vercel.app" target="_blank">curious-investor-research.vercel.app</a> for more research on how India moves money.</p>
+</div>
+
+<!-- ══════════════════ JAVASCRIPT ══════════════════ -->
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const YEARS_9 = ['FY18','FY19','FY20','FY21','FY22','FY23','FY24','FY25','FY26'];
+const MONTHS_FY26 = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+
+const DATA = {
+  credit: {
+    creditGrowth: [10.0, 13.3, 6.1, 5.6, 9.6, 15.0, 20.2, 11.0, 17.1],
+    depositGrowth:[6.2, 10.0, 7.9, 11.4, 8.9, 9.6, 13.5, 10.3, 16.2],
+    cdRatio:      [75.5, 77.7, 76.4, 72.4, 72.2, 75.8, 80.3, 80.8, 81.4],
+    creditGdp:    [50.5, 51.7, 51.6, 55.2, 50.4, 52.4, 56.7, 57.4, 61.8],
+    nonFood:      [10.2,8.8,9.3,9.9,9.9,10.2,11.1,11.4,14.4,14.4,14.3,15.9],
+    agriculture:  [9.2,7.5,6.8,7.3,7.6,9.0,8.9,8.7,12.1,11.4,12.3,15.7],
+    industry:     [7.0,5.3,6.3,6.5,7.0,7.8,10.0,9.6,12.8,12.1,13.5,15.0],
+    microSmall:   [9.2,13.7,19.2,20.9,20.8,22.0,25.9,24.6,30.4,31.2,30.4,33.1],
+  },
+  payments: {
+    upiVol:    [1311295, 1858660, 2416169],
+    neftVol:   [72640, 96198, 100996],
+    impsVol:   [60053, 56250, 49431],
+    ccVol:     [35610, 47741, 60238],
+    dcVol:     [22860, 16120, 12802],
+    nachCrVol: [16227, 16939, 18284],
+    nachDrVol: [16426, 19762, 21614],
+    ppiVol:    [78775, 70254, 98699],
+    rtgsVol:   [2700, 3025, 3500],
+    paperVol:  [6632, 6095, 5588],
+    upiVal:    [200.0, 260.6, 314.2],
+    neftVal:   [391.4, 444.6, 502.3],
+    impsVal:   [65.0, 71.4, 76.7],
+    ccVal:     [18.3, 21.1, 23.6],
+    dcVal:     [5.9, 5.0, 4.5],
+    nachCrVal: [15.3, 16.7, 19.0],
+    nachDrVal: [16.8, 22.0, 26.9],
+    ppiVal:    [2.8, 2.2, 2.9],
+    rtgsVal:   [1708.9, 2013.9, 2273.7],
+  },
+  resources: {
+    years: ['FY24', 'FY25', 'FY26P'],
+    bankCredit: [22.95, 18.08, 29.19],
+    nbfc:       [4.44, 6.34, 4.43],
+    hfc:        [1.42, 1.28, 0.13],
+    aifi:       [0.73, 1.00, 0.88],
+    equity:     [1.35, 3.81, 3.62],
+    bonds:      [1.67, 1.98, 3.22],
+    foreign:    [2.43, 3.25, 5.19],
+    bankOuts:   [165.64, 183.72, 212.91],
+    nonBankOuts:[77.57, 88.86, 101.09],
+  },
+  msme: {
+    years: ['FY24', 'FY25', 'Dec FY26'],
+    micro:  [13.3, 15.0, 18.3],
+    small:  [8.6, 9.8, 11.5],
+    medium: [5.3, 6.3, 6.9],
+    microAcct: [231.9, 223.9, 217.4],
+    smallAcct: [21.3, 15.2, 13.9],
+    mediumAcct:[3.8, 4.0, 3.4],
+    totalAcct: [257.0, 243.1, 234.7],
+    totalAmt:  [27.3, 31.1, 36.8],
+    pslBanks:  ['Public Sector','Private Sector','Foreign Banks','SFBs','All SCBs'],
+    pslPct:    [42.8, 47.2, 42.0, 78.8, 45.0],
+    pslAmt:    [39.3, 31.5, 3.0, 1.9, 75.7],
+  },
+  inclusion: {
+    fiYears: ['2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+    fiIndex: [43.4, 46.0, 49.9, 53.1, 53.9, 56.4, 60.1, 64.2, 67.0],
+    infraCat: ['Branches\n(Rural)','Branches\n(Urban)','BC Outlets\n(Rural)','BC Outlets\n(Urban)'],
+    infraVal: [56579, 113610, 756840, 418410], // approx from table
+  },
+  macro: {
+    m3:      [9.2, 10.5, 8.9, 12.2, 8.8, 9.0, 11.6, 9.4, 15.3],
+    rm:      [27.3, 14.5, 9.4, 18.8, 13.0, 7.8, 5.6, 4.3, 6.0],
+    mult:    [5.8, 5.6, 5.5, 5.2, 5.0, 5.1, 5.4, 5.7, 6.1],
+    rateYears: ['FY24','FY25','FY26'],
+    gsec10:  [7.2, 6.9, 6.5],
+    call:    [6.6, 6.5, 5.4],
+    tbill91: [6.8, 6.6, 5.5],
+    cp:      [7.4, 7.4, 6.6],
+    cd:      [7.2, 7.2, 6.3],
+  },
+  fraud: {
+    years: ['FY24','FY25','FY26'],
+    advCases:  [4105, 7924, 8640],
+    digCases:  [28836, 13332, 293],
+    depCases:  [2002, 1207, 407],
+    forexCases:[19, 23, 23],
+    advVal:    [8917, 30367, 40774],
+    digVal:    [1452, 517, 29],
+    depVal:    [240, 521, 377],
+    forexVal:  [38, 16, 125],
+  }
+};
+
+// ── CHART HELPERS ──────────────────────────────────────────────────────────
+const PALETTE = ['#1d4ed8','#0891b2','#059669','#d97706','#dc2626','#7c3aed','#db2777','#ea580c'];
+const PALETTE_LIGHT = ['rgba(29,78,216,.15)','rgba(8,145,178,.15)','rgba(5,150,105,.15)','rgba(217,119,6,.15)','rgba(220,38,38,.15)','rgba(124,58,237,.15)'];
+
+const baseFont = { family: "'Inter', sans-serif", size: 11 };
+
+const defaultOptions = (extras = {}) => ({
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: {
+    legend: { labels: { font: baseFont, color: '#64748b', boxWidth: 12, padding: 16 } },
+    tooltip: {
+      backgroundColor: '#0f172a',
+      titleColor: '#f1f5f9',
+      bodyColor: '#94a3b8',
+      padding: 12,
+      cornerRadius: 8,
+      titleFont: { ...baseFont, weight: '600' },
+      bodyFont: baseFont,
+    },
+  },
+  scales: {
+    x: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b' } },
+    y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b' } },
+  },
+  ...extras,
+});
+
+// ── TAB MANAGEMENT ─────────────────────────────────────────────────────────
+const initialised = new Set();
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (!initialised.has(id)) { initialised.add(id); initCharts(id); }
+}
+
+function initCharts(id) {
+  if (id === 'credit')    initCreditCharts();
+  if (id === 'payments')  initPaymentCharts();
+  if (id === 'resources') initResourceCharts();
+  if (id === 'msme')      initMSMECharts();
+  if (id === 'inclusion') initInclusionCharts();
+  if (id === 'macro')     initMacroCharts();
+  if (id === 'fraud')     initFraudCharts();
+}
+
+// init credit tab on load
+window.addEventListener('DOMContentLoaded', () => { initialised.add('credit'); initCreditCharts(); });
+
+// ── CREDIT CHARTS ──────────────────────────────────────────────────────────
+function initCreditCharts() {
+  const d = DATA.credit;
+
+  new Chart(document.getElementById('chartCreditDeposit'), {
+    type: 'bar',
+    data: {
+      labels: YEARS_9,
+      datasets: [
+        { label: 'Bank Credit Growth', data: d.creditGrowth, backgroundColor: '#1d4ed8cc', borderColor: '#1d4ed8', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Deposit Growth', data: d.depositGrowth, backgroundColor: '#0891b2cc', borderColor: '#0891b2', borderWidth: 1.5, borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      plugins: { ...defaultOptions().plugins },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartCDRatio'), {
+    type: 'line',
+    data: {
+      labels: YEARS_9,
+      datasets: [
+        {
+          label: 'Credit-Deposit Ratio', data: d.cdRatio,
+          borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,.08)',
+          fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#7c3aed', borderWidth: 2.5,
+          yAxisID: 'y',
+        },
+        {
+          label: 'Credit-GDP Ratio', data: d.creditGdp,
+          borderColor: '#0891b2', backgroundColor: 'transparent',
+          fill: false, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#0891b2',
+          borderWidth: 2.5, borderDash: [5,3],
+          yAxisID: 'y',
+        }
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartSectoral'), {
+    type: 'line',
+    data: {
+      labels: MONTHS_FY26,
+      datasets: [
+        { label: 'Non-Food Credit', data: d.nonFood, borderColor: '#1d4ed8', backgroundColor: 'rgba(29,78,216,.05)', fill: true, tension: 0.4, pointRadius: 3, borderWidth: 2.5 },
+        { label: 'Agriculture', data: d.agriculture, borderColor: '#059669', backgroundColor: 'transparent', fill: false, tension: 0.4, pointRadius: 3, borderWidth: 2 },
+        { label: 'Industry', data: d.industry, borderColor: '#d97706', backgroundColor: 'transparent', fill: false, tension: 0.4, pointRadius: 3, borderWidth: 2 },
+        { label: 'Micro & Small', data: d.microSmall, borderColor: '#dc2626', backgroundColor: 'transparent', fill: false, tension: 0.4, pointRadius: 3, borderWidth: 2, borderDash: [4,2] },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { font: baseFont, color: '#64748b', boxWidth: 12, padding: 16 } }, tooltip: defaultOptions().plugins.tooltip },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
+      }
+    }
+  });
+}
+
+// ── PAYMENTS CHARTS ────────────────────────────────────────────────────────
+function initPaymentCharts() {
+  const d = DATA.payments;
+  const FY26 = 2;
+
+  // Payment mix donut FY26 (volumes in lakh)
+  new Chart(document.getElementById('chartPaymentMix'), {
+    type: 'doughnut',
+    data: {
+      labels: ['UPI','NACH Dr','PPIs','NACH Cr','NEFT','IMPS','Credit Cards','Debit Cards','Others'],
+      datasets: [{
+        data: [
+          d.upiVol[FY26], d.nachDrVol[FY26], d.ppiVol[FY26], d.nachCrVol[FY26],
+          d.neftVol[FY26], d.impsVol[FY26], d.ccVol[FY26], d.dcVol[FY26], d.rtgsVol[FY26]
+        ],
+        backgroundColor: ['#0891b2','#1d4ed8','#7c3aed','#059669','#d97706','#db2777','#dc2626','#ea580c','#94a3b8'],
+        borderWidth: 2, borderColor: '#ffffff', hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      cutout: '65%',
+      plugins: {
+        legend: { position: 'right', labels: { font: { ...baseFont, size: 10 }, color: '#64748b', boxWidth: 10, padding: 8 } },
+        tooltip: { ...defaultOptions().plugins.tooltip, callbacks: { label: ctx => ` ${ctx.label}: ${(ctx.raw/10).toFixed(0)}Cr txns` } }
+      }
+    }
+  });
+
+  // Rails value comparison
+  new Chart(document.getElementById('chartRailsValue'), {
+    type: 'bar',
+    data: {
+      labels: ['RTGS','NEFT','UPI','IMPS','NACH\n(Credit)','Credit\nCards','Debit\nCards'],
+      datasets: [
+        { label: 'FY24', data: [d.rtgsVal[0], d.neftVal[0], d.upiVal[0], d.impsVal[0], d.nachCrVal[0], d.ccVal[0], d.dcVal[0]], backgroundColor: '#bfdbfe', borderRadius: 3 },
+        { label: 'FY25', data: [d.rtgsVal[1], d.neftVal[1], d.upiVal[1], d.impsVal[1], d.nachCrVal[1], d.ccVal[1], d.dcVal[1]], backgroundColor: '#60a5fa', borderRadius: 3 },
+        { label: 'FY26', data: [d.rtgsVal[2], d.neftVal[2], d.upiVal[2], d.impsVal[2], d.nachCrVal[2], d.ccVal[2], d.dcVal[2]], backgroundColor: '#1d4ed8', borderRadius: 3 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { ...baseFont, size: 10 }, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => '₹' + v } },
+      }
+    }
+  });
+
+  // Cards divergence
+  new Chart(document.getElementById('chartCards'), {
+    type: 'bar',
+    data: {
+      labels: ['FY24','FY25','FY26'],
+      datasets: [
+        { label: 'Credit Cards (lakh txns)', data: d.ccVol, backgroundColor: '#dc2626cc', borderColor: '#dc2626', borderWidth: 1.5, borderRadius: 5 },
+        { label: 'Debit Cards (lakh txns)', data: d.dcVol, backgroundColor: '#94a3b8cc', borderColor: '#94a3b8', borderWidth: 1.5, borderRadius: 5 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      indexAxis: 'x',
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v.toLocaleString() } },
+      }
+    }
+  });
+}
+
+// ── RESOURCE FLOW CHARTS ───────────────────────────────────────────────────
+function initResourceCharts() {
+  const d = DATA.resources;
+
+  new Chart(document.getElementById('chartResourceFlow'), {
+    type: 'bar',
+    data: {
+      labels: d.years,
+      datasets: [
+        { label: 'Bank Credit', data: d.bankCredit, backgroundColor: '#1d4ed8cc', stack: 'a', borderRadius: 0 },
+        { label: 'NBFCs (net)', data: d.nbfc,       backgroundColor: '#7c3aedcc', stack: 'a' },
+        { label: 'HFCs (net)', data: d.hfc,         backgroundColor: '#0891b2cc', stack: 'a' },
+        { label: 'AIFIs', data: d.aifi,             backgroundColor: '#059669cc', stack: 'a' },
+        { label: 'Equity', data: d.equity,           backgroundColor: '#d97706cc', stack: 'a' },
+        { label: 'Corp Bonds', data: d.bonds,        backgroundColor: '#db2777cc', stack: 'a' },
+        { label: 'Foreign', data: d.foreign,         backgroundColor: '#ea580ccc', stack: 'a' },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, stacked: true, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, stacked: true, ticks: { font: baseFont, color: '#64748b', callback: v => '₹' + v + 'L Cr' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartOutstanding'), {
+    type: 'bar',
+    data: {
+      labels: d.years,
+      datasets: [
+        { label: 'Bank Credit Outstanding', data: d.bankOuts, backgroundColor: '#1d4ed8cc', borderColor: '#1d4ed8', borderWidth: 1.5, borderRadius: 5 },
+        { label: 'Non-Bank Credit Outstanding', data: d.nonBankOuts, backgroundColor: '#7c3aedcc', borderColor: '#7c3aed', borderWidth: 1.5, borderRadius: 5 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => '₹' + v + 'L Cr' } },
+      }
+    }
+  });
+}
+
+// ── MSME CHARTS ────────────────────────────────────────────────────────────
+function initMSMECharts() {
+  const d = DATA.msme;
+
+  new Chart(document.getElementById('chartMSMECredit'), {
+    type: 'bar',
+    data: {
+      labels: d.years,
+      datasets: [
+        { label: 'Micro', data: d.micro, backgroundColor: '#ea580ccc', borderColor: '#ea580c', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Small', data: d.small, backgroundColor: '#d97706cc', borderColor: '#d97706', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Medium', data: d.medium, backgroundColor: '#059669cc', borderColor: '#059669', borderWidth: 1.5, borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => '₹' + v + ' L Cr' } },
+      }
+    }
+  });
+
+  // PSL achievement horizontal bar
+  new Chart(document.getElementById('chartPSL'), {
+    type: 'bar',
+    data: {
+      labels: d.pslBanks,
+      datasets: [
+        {
+          label: '% of ANBC',
+          data: d.pslPct,
+          backgroundColor: d.pslPct.map(v => v >= 40 ? '#059669cc' : '#dc2626cc'),
+          borderColor: d.pslPct.map(v => v >= 40 ? '#059669' : '#dc2626'),
+          borderWidth: 1.5, borderRadius: 5,
+        }
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      indexAxis: 'y',
+      plugins: {
+        ...defaultOptions().plugins,
+        annotation: {},
+        legend: { display: false },
+        tooltip: { ...defaultOptions().plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw}% of ANBC` } }
+      },
+      scales: {
+        x: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' }, min: 0, max: 90 },
+        y: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+      }
+    }
+  });
+
+  // MSME divergence: accounts falling, amounts rising
+  new Chart(document.getElementById('chartMSMEDivergence'), {
+    type: 'bar',
+    data: {
+      labels: d.years,
+      datasets: [
+        {
+          label: 'Total Accounts (lakh)', data: d.totalAcct,
+          backgroundColor: '#bfdbfe', borderColor: '#1d4ed8', borderWidth: 1.5, borderRadius: 4,
+          yAxisID: 'y',
+        },
+        {
+          type: 'line',
+          label: 'Total Credit (₹ L Cr)', data: d.totalAmt,
+          borderColor: '#dc2626', backgroundColor: 'transparent',
+          tension: 0.4, pointRadius: 6, pointBackgroundColor: '#dc2626', borderWidth: 2.5,
+          yAxisID: 'y2',
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { labels: { font: baseFont, color: '#64748b', boxWidth: 12, padding: 16 } }, tooltip: defaultOptions().plugins.tooltip },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { position: 'left', grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#1d4ed8', callback: v => v + 'L' }, title: { display: true, text: 'Accounts (lakh)', font: baseFont, color: '#1d4ed8' } },
+        y2: { position: 'right', grid: { display: false }, ticks: { font: baseFont, color: '#dc2626', callback: v => '₹' + v }, title: { display: true, text: '₹ L Cr', font: baseFont, color: '#dc2626' } },
+      }
+    }
+  });
+}
+
+// ── INCLUSION CHARTS ───────────────────────────────────────────────────────
+function initInclusionCharts() {
+  const d = DATA.inclusion;
+
+  new Chart(document.getElementById('chartFIIndex'), {
+    type: 'line',
+    data: {
+      labels: d.fiYears,
+      datasets: [{
+        label: 'FI-Index',
+        data: d.fiIndex,
+        borderColor: '#059669',
+        backgroundColor: 'rgba(5,150,105,.12)',
+        fill: true, tension: 0.4,
+        pointRadius: 5, pointBackgroundColor: '#059669', borderWidth: 2.5,
+        pointHoverRadius: 7,
+      }]
+    },
+    options: {
+      ...defaultOptions(),
+      plugins: {
+        ...defaultOptions().plugins,
+        legend: { display: false },
+        tooltip: { ...defaultOptions().plugins.tooltip, callbacks: { label: ctx => ` FI-Index: ${ctx.raw}` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b' }, min: 35, max: 75 },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartInfra'), {
+    type: 'bar',
+    data: {
+      labels: ['Bank Branches\n(Rural)', 'Bank Branches\n(Urban)', 'BC Outlets\n(Rural)', 'BC Outlets\n(Urban)'],
+      datasets: [{
+        label: 'Count (Dec 2025)',
+        data: [56579, 113610, 756840, 418410],
+        backgroundColor: ['#dbeafe','#bfdbfe','#d1fae5','#a7f3d0'],
+        borderColor: ['#1d4ed8','#1d4ed8','#059669','#059669'],
+        borderWidth: 2, borderRadius: 6,
+      }]
+    },
+    options: {
+      ...defaultOptions(),
+      plugins: { ...defaultOptions().plugins, legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { ...baseFont, size: 10 }, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v >= 100000 ? (v/100000).toFixed(1)+'L' : v.toLocaleString() } },
+      }
+    }
+  });
+}
+
+// ── MACRO CHARTS ───────────────────────────────────────────────────────────
+function initMacroCharts() {
+  const d = DATA.macro;
+
+  new Chart(document.getElementById('chartM3Credit'), {
+    type: 'bar',
+    data: {
+      labels: YEARS_9,
+      datasets: [
+        { label: 'M3 (Broad Money) Growth', data: d.m3, backgroundColor: '#d97706cc', borderColor: '#d97706', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Bank Credit Growth', data: DATA.credit.creditGrowth, backgroundColor: '#1d4ed8cc', borderColor: '#1d4ed8', borderWidth: 1.5, borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartRates'), {
+    type: 'bar',
+    data: {
+      labels: d.rateYears,
+      datasets: [
+        { label: '10-yr G-Sec Yield', data: d.gsec10, backgroundColor: '#1d4ed8cc', borderColor: '#1d4ed8', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Call Money Rate', data: d.call, backgroundColor: '#0891b2cc', borderColor: '#0891b2', borderWidth: 1.5, borderRadius: 4 },
+        { label: '91-Day T-Bill', data: d.tbill91, backgroundColor: '#7c3aedcc', borderColor: '#7c3aed', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'CP Rate', data: d.cp, backgroundColor: '#d97706cc', borderColor: '#d97706', borderWidth: 1.5, borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' }, min: 4, max: 8 },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartRM'), {
+    type: 'bar',
+    data: {
+      labels: YEARS_9,
+      datasets: [
+        {
+          type: 'bar',
+          label: 'Reserve Money Growth (%)', data: d.rm,
+          backgroundColor: '#bfdbfe', borderColor: '#1d4ed8', borderWidth: 1.5, borderRadius: 4,
+          yAxisID: 'y',
+        },
+        {
+          type: 'line',
+          label: 'Money Multiplier', data: d.mult,
+          borderColor: '#dc2626', backgroundColor: 'transparent',
+          tension: 0.4, pointRadius: 5, pointBackgroundColor: '#dc2626', borderWidth: 2.5,
+          yAxisID: 'y2',
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { labels: { font: baseFont, color: '#64748b', boxWidth: 12, padding: 16 } }, tooltip: defaultOptions().plugins.tooltip },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { position: 'left', grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#1d4ed8', callback: v => v + '%' }, title: { display: true, text: 'RM Growth (%)', font: baseFont, color: '#1d4ed8' } },
+        y2: { position: 'right', grid: { display: false }, ticks: { font: baseFont, color: '#dc2626' }, min: 4, max: 7, title: { display: true, text: 'Multiplier', font: baseFont, color: '#dc2626' } },
+      }
+    }
+  });
+}
+
+// ── FRAUD CHARTS ───────────────────────────────────────────────────────────
+function initFraudCharts() {
+  const d = DATA.fraud;
+
+  new Chart(document.getElementById('chartFraudCases'), {
+    type: 'bar',
+    data: {
+      labels: d.years,
+      datasets: [
+        { label: 'Advances', data: d.advCases, backgroundColor: '#dc2626cc', borderColor: '#dc2626', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Card/Internet/Digital', data: d.digCases, backgroundColor: '#d97706cc', borderColor: '#d97706', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Deposits', data: d.depCases, backgroundColor: '#7c3aedcc', borderColor: '#7c3aed', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Forex', data: d.forexCases, backgroundColor: '#0891b2cc', borderColor: '#0891b2', borderWidth: 1.5, borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v.toLocaleString() } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartFraudValue'), {
+    type: 'bar',
+    data: {
+      labels: d.years,
+      datasets: [
+        { label: 'Advances (₹ Cr)', data: d.advVal, backgroundColor: '#dc2626cc', borderColor: '#dc2626', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Card/Internet/Digital', data: d.digVal, backgroundColor: '#d97706cc', borderColor: '#d97706', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Deposits', data: d.depVal, backgroundColor: '#7c3aedcc', borderColor: '#7c3aed', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Forex', data: d.forexVal, backgroundColor: '#0891b2cc', borderColor: '#0891b2', borderWidth: 1.5, borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => '₹' + v.toLocaleString() + ' Cr' } },
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
