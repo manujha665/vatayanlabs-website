@@ -127,6 +127,9 @@ a.card:hover { box-shadow: var(--shadow-md); border-color: var(--blue-light); tr
 .prose a { color: var(--blue); }
 .prose a.btn-primary { color: #fff; }
 .prose a.btn-secondary { color: var(--text); }
+.author-flex { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.author-flex > div { flex: 1 1 320px; }
+.author-photo { width: 180px; height: 180px; object-fit: cover; object-position: top; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-md); }
 
 @media (max-width: 640px) {
   .hero h1 { font-size: 28px; }
