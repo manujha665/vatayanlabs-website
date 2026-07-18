@@ -12,7 +12,7 @@
     { "source": "/reports/2026/india-payments-fy26-dashboard.html", "destination": "/dashboards/india-payments/", "permanent": true },
     { "source": "/mutual-funds", "destination": "/dashboards/", "permanent": true },
     { "source": "/mutual-funds/", "destination": "/dashboards/", "permanent": true },
-    { "source": "/indian-banks", "destination": "/dashboards/", "permanent": true },
-    { "source": "/indian-banks/", "destination": "/dashboards/", "permanent": true }
+    { "source": "/indian-banks", "destination": "/dashboards/indian-banks/", "permanent": true },
+    { "source": "/indian-banks/", "destination": "/dashboards/indian-banks/", "permanent": true }
   ]
 }

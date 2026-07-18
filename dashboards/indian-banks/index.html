@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India Banking Scorecard — Vatayan Labs</title>
+  <meta name="description" content="Interactive scorecard tracking 14 Indian banks and NBFCs across NIM, GNPA, RoA, RoE, CRAR, CASA and PAT from Q1FY23 to Q4FY26.">
+  <link rel="stylesheet" href="/dashboards/indian-banks/legacy.css">
+  <link rel="canonical" href="https://vatayanlabs.com/dashboards/indian-banks/">
+  <meta property="og:title" content="India Banking Scorecard — Vatayan Labs">
+  <meta property="og:description" content="Interactive scorecard tracking 14 Indian banks and NBFCs across NIM, GNPA, RoA, RoE, CRAR, CASA and PAT from Q1FY23 to Q4FY26.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vatayanlabs.com/dashboards/indian-banks/">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vatayanlabs.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Dashboards", "item": "https://vatayanlabs.com/dashboards/" },
+      { "@type": "ListItem", "position": 3, "name": "India Banking Scorecard", "item": "https://vatayanlabs.com/dashboards/indian-banks/" }
+    ]
+  }
+  </script>
+
+  <script>try{var t=localStorage.getItem("cir-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <style>
+    /* ── Theme variables — dark is the default ── */
+    .ibs-wrap {
+      --bg:          #0F1923;
+      --bg2:         #111D2A;
+      --card:        #1A2E4A;
+      --border:      rgba(46,93,168,0.3);
+      --text:        #E8EDF2;
+      --muted:       #7F8FA4;
+      --pill-off:    #1A2E4A;
+      --pill-txt:    #7F8FA4;
+      --tab-line:    #1A2E4A;
+      --tab-off:     #7F8FA4;
+      --note-bg:     #1A2E4A;
+      --note-txt:    #B2BEC3;
+      --row-even:    #111D2A;
+      --row-odd:     #0F1923;
+      --foot:        #2C3E50;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: calc(100vh - 58px);
+    }
+    /* Light mode */
+    html[data-theme="light"] .ibs-wrap {
+      --bg:          #F8FAFC;
+      --bg2:         #fff;
+      --card:        #EEF4FF;
+      --border:      #CBD5E1;
+      --text:        #1A2E4A;
+      --muted:       #64748B;
+      --pill-off:    #E2E8F0;
+      --pill-txt:    #475569;
+      --tab-line:    #E2E8F0;
+      --tab-off:     #64748B;
+      --note-bg:     #EEF6FF;
+      --note-txt:    #1A2E4A;
+      --row-even:    #F8FAFC;
+      --row-odd:     #fff;
+      --foot:        #94A3B8;
+    }
+    @media (prefers-color-scheme: light) {
+      html:not([data-theme="dark"]) .ibs-wrap {
+        --bg:#F8FAFC; --bg2:#fff; --card:#EEF4FF; --border:#CBD5E1; --text:#1A2E4A;
+        --muted:#64748B; --pill-off:#E2E8F0; --pill-txt:#475569; --tab-line:#E2E8F0;
+        --tab-off:#64748B; --note-bg:#EEF6FF; --note-txt:#1A2E4A;
+        --row-even:#F8FAFC; --row-odd:#fff; --foot:#94A3B8;
+      }
+    }
+
+    /* ── Layout ── */
+    .ibs-hero { background: linear-gradient(135deg,#1A2E4A 0%,#0F1923 100%); padding: 20px 28px 14px; border-bottom: 2px solid #2E5DA8; }
+    .ibs-hero h1 { margin: 0 0 3px; font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+    .ibs-hero-sub { font-size: 11px; color: #7F8FA4; margin-top: 3px; }
+    .ibs-kicker { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #3A8DDE; text-transform: uppercase; margin-bottom: 4px; }
+    .ibs-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
+    .ibs-stat { text-align: right; }
+    .ibs-stat-label { font-size: 11px; color: #7F8FA4; }
+    .ibs-stat-value { font-size: 16px; font-weight: 700; color: #3A8DDE; }
+    .ibs-slider-row { margin-top: 14px; display: flex; align-items: center; gap: 14px; }
+    .ibs-slider-label { font-size: 11px; color: #7F8FA4; white-space: nowrap; }
+    #qSlider { flex: 1; max-width: 280px; accent-color: #3A8DDE; }
+    .ibs-q-label { font-size: 14px; font-weight: 700; color: #F39C12; min-width: 64px; }
+
+    .ibs-body { padding: 16px 28px 0; background: var(--bg); }
+    .ibs-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .ibs-pill { padding: 6px 14px; border-radius: 20px; border: none; cursor: pointer; font-size: 12px; font-weight: 600; background: var(--pill-off); color: var(--pill-txt); transition: all .15s; font-family: inherit; }
+    .ibs-pill.on { background: #3A8DDE; color: #fff; }
+    .ibs-cats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .ibs-cat-btn { padding: 4px 12px; border-radius: 14px; cursor: pointer; font-size: 11px; font-weight: 600; transition: all .15s; font-family: inherit; }
+    .ibs-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--tab-line); margin-bottom: 20px; }
+    .ibs-tab { padding: 9px 18px; border: none; border-bottom: 2px solid transparent; background: transparent; color: var(--tab-off); font-weight: 400; font-size: 12px; cursor: pointer; margin-bottom: -2px; font-family: inherit; }
+    .ibs-tab.on { color: #3A8DDE; font-weight: 700; border-bottom-color: #3A8DDE; }
+    .ibs-tab-panel { display: none; }
+    .ibs-tab-panel.on { display: block; }
+
+    /* ── Heatmap table — fixed layout for equal metric columns ── */
+    .ibs-table-wrap { overflow-x: auto; }
+    .ibs-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1060px; table-layout: fixed; }
+    .ibs-table thead tr { background: #1A2E4A; }
+    .ibs-table th {
+      padding: 8px 6px; text-align: center; color: #94A3B8; font-weight: 600;
+      border-bottom: 2px solid #2E5DA8; cursor: pointer;
+      white-space: normal; word-break: normal; line-height: 1.3; font-size: 10px;
+    }
+    .ibs-table th.active { color: #F39C12; font-weight: 700; }
+    .ibs-table th.name-col { text-align: left; }
+    .ibs-table td { padding: 7px 6px; border-bottom: 1px solid var(--border); text-align: center; font-weight: 600; font-size: 11px; font-family: 'Courier New', monospace; }
+    .ibs-table td.name-col { text-align: left; font-family: inherit; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 7px 10px; }
+    .ibs-table td.cat-col { text-align: center; font-family: inherit; }
+    .ibs-table .cat-chip { padding: 2px 5px; border-radius: 8px; font-size: 9px; font-weight: 600; white-space: nowrap; display: inline-block; line-height: 1.5; }
+    .ibs-row-even { background: var(--row-even); }
+    .ibs-row-odd  { background: var(--row-odd); }
+
+    /* ── Charts ── */
+    .ibs-chart-area { position: relative; height: 320px; margin-bottom: 12px; }
+    .ibs-bank-toggles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .ibs-bank-btn { padding: 4px 10px; border-radius: 14px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: inherit; }
+    .ibs-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+    .ibs-legend-item { font-size: 11px; display: flex; align-items: center; gap: 4px; }
+    .ibs-legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+    /* ── Notes & Footer ── */
+    .ibs-note-strip { margin-top: 28px; background: var(--note-bg); border-radius: 10px; padding: 14px 18px; border-left: 4px solid #F39C12; }
+    .ibs-note-title { font-size: 11px; color: #F39C12; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
+    .ibs-notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 10px; }
+    .ibs-note { font-size: 11px; color: var(--note-txt); line-height: 1.6; }
+    .ibs-footer-note { margin-top: 14px; font-size: 10px; color: var(--foot); text-align: center; padding-bottom: 28px; }
+    .ibs-hint { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+    .ibs-radar-area { position: relative; height: 340px; }
+    .ibs-radar-info { font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .ibs-heat-info { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+    .ibs-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; flex-shrink: 0; }
+  </style>
+</head>
+<body class="sr-body" data-content-id="india-banking-scorecard">
+  
+<!-- Vatayan Labs site bar -->
+<div style="background:#0b1120;color:#cbd5e1;font-family:'Inter',-apple-system,sans-serif;padding:9px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:white;font-weight:700;">
+    <img src="/assets/logo-badge.png" alt="" width="26" height="26" style="display:block;border-radius:7px;">
+    Vatayan Labs
+  </a>
+  <span style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/sectors/" style="color:#cbd5e1;text-decoration:none;">Sectors</a>
+    <a href="/dashboards/" style="color:white;text-decoration:none;font-weight:600;">Dashboards</a>
+    <a href="/newsletter/" style="color:#cbd5e1;text-decoration:none;">Newsletter</a>
+    <a href="/about/" style="color:#cbd5e1;text-decoration:none;">About</a>
+  </span>
+</div>
+
+
+  <div class="ibs-wrap">
+    <div class="ibs-hero">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <div>
+          <div class="ibs-kicker">Vatayan Labs</div>
+          <h1>India Banking Scorecard</h1>
+          <div class="ibs-hero-sub">15 entities · PSU + Private + NBFC · Q1FY23–Q4FY26 · ₹ in Crores</div>
+        </div>
+        <div class="ibs-stats">
+          <div class="ibs-stat"><div class="ibs-stat-label">Universe</div><div class="ibs-stat-value">15 Entities</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Quarters</div><div class="ibs-stat-value">16 Q tracked</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Latest PAT (agg)</div><div class="ibs-stat-value" id="latestPAT">—</div></div>
+        </div>
+      </div>
+      <div class="ibs-slider-row">
+        <span class="ibs-slider-label">Snapshot quarter:</span>
+        <input type="range" id="qSlider" min="0" max="15" value="15">
+        <span class="ibs-q-label" id="qLabel">Q4FY26</span>
+      </div>
+    </div>
+
+    <div class="ibs-body">
+      <div class="ibs-pills" id="metricPills"></div>
+      <div class="ibs-cats" id="catBtns"></div>
+      <div class="ibs-tabs">
+        <button class="ibs-tab on" data-tab="heatmap">🟥 Heatmap</button>
+        <button class="ibs-tab" data-tab="trend">📈 Trend Lines</button>
+        <button class="ibs-tab" data-tab="bar">📊 Peer Bar</button>
+        <button class="ibs-tab" data-tab="radar">🕸 Radar</button>
+      </div>
+
+      <div class="ibs-tab-panel on" id="panel-heatmap">
+        <div class="ibs-heat-info">Color scale: <span style="color:#27AE60">■ Best</span> → <span style="color:#E74C3C">■ Weakest</span> relative to current filtered universe · Snapshot: <strong id="heatQLabel" style="color:#F39C12">Q4FY26</strong></div>
+        <div class="ibs-table-wrap"><table class="ibs-table" id="heatTable"></table></div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ CASA Ratio not applicable for NBFCs (shown as —). Market Cap values are approximate Q4FY26 snapshots. Click any pill or column header to sort ↓↑.</div>
+      </div>
+
+      <div class="ibs-tab-panel" id="panel-trend">
+        <div class="ibs-hint">Select up to 6 banks to compare <strong id="trendMetricLabel" style="color:#F39C12"></strong> over time:</div>
+        <div class="ibs-bank-toggles" id="bankToggles"></div>
+        <div class="ibs-chart-area"><canvas id="trendChart"></canvas></div>
+      </div>
+
+      <div class="ibs-tab-panel" id="panel-bar">
+        <div class="ibs-hint">Peer comparison — <strong id="barMetricLabel" style="color:#F39C12"></strong> at <strong id="barQLabel" style="color:#F39C12"></strong> · <span id="barBetter"></span></div>
+        <div class="ibs-chart-area"><canvas id="barChart"></canvas></div>
+        <div class="ibs-legend" id="barLegend"></div>
+      </div>
+
+      <div class="ibs-tab-panel" id="panel-radar">
+        <div class="ibs-hint">Normalised scorecard (0–100) across 6 key metrics at <strong id="radarQLabel" style="color:#F39C12"></strong> · Max 4 banks for readability</div>
+        <div class="ibs-bank-toggles" id="radarToggles"></div>
+        <div class="ibs-radar-area"><canvas id="radarChart"></canvas></div>
+        <div class="ibs-radar-info">ⓘ Radar scores are normalised relative to the universe shown. 100 = best performer in that metric for the selected quarter.</div>
+      </div>
+
+      <div class="ibs-note-strip">
+        <div class="ibs-note-title">Dashboard Intelligence Notes</div>
+        <div class="ibs-notes-grid">
+          <div class="ibs-note">🔴 PSU NPA compression is the biggest structural story — SBI GNPA fell from ~6.5% (Q1FY23) to sub-2% (Q4FY26). Watch slippage ratios for reversal signals.</div>
+          <div class="ibs-note">💰 NBFC NIM premium (Bajaj Finance ~10.5%) vs banking (HDFC Bank ~3.5%) reflects risk-adjusted pricing. NBFCs carry no CASA advantage.</div>
+          <div class="ibs-note">⚖️ IndusInd stress is visible in RoE compression and GNPA tick-up through FY25. Compare against Kotak's capital efficiency on the Radar tab.</div>
+          <div class="ibs-note">📐 AUSFB NIM (~5.5%) is the highest among banks — premium for SFB model. Capital adequacy at 21.5%+ is a buffer the market re-rates over time.</div>
+        </div>
+      </div>
+      <div class="ibs-footer-note">Vatayan Labs · For educational purposes only · Not investment advice</div>
+    </div>
+  </div>
+
+  <div data-slot="article-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script>
+  (function() {
+    const BANKS = [
+      { name:"SBI",        full:"State Bank of India",     cat:"PSU Big 4", type:"PSU" },
+      { name:"BOB",        full:"Bank of Baroda",           cat:"PSU Big 4", type:"PSU" },
+      { name:"PNB",        full:"Punjab Natl Bank",         cat:"PSU Big 4", type:"PSU" },
+      { name:"Canara",     full:"Canara Bank",               cat:"PSU Big 4", type:"PSU" },
+      { name:"HDFC Bank",  full:"HDFC Bank",                 cat:"Pvt Big 4", type:"Private" },
+      { name:"ICICI",      full:"ICICI Bank",                cat:"Pvt Big 4", type:"Private" },
+      { name:"Axis",       full:"Axis Bank",                 cat:"Pvt Big 4", type:"Private" },
+      { name:"Kotak",      full:"Kotak Mah. Bank",           cat:"Pvt Big 4", type:"Private" },
+      { name:"Federal",    full:"Federal Bank",              cat:"Mid-Size",  type:"Private" },
+      { name:"IndusInd",   full:"IndusInd Bank",             cat:"Mid-Size",  type:"Private" },
+      { name:"Yes Bank",   full:"Yes Bank",                  cat:"Mid-Size",  type:"Private" },
+      { name:"AUSFB",      full:"AU Small Finance Bank",     cat:"Mid-Size",  type:"Private" },
+      { name:"IDFC First", full:"IDFC First Bank",           cat:"Mid-Size",  type:"Private" },
+      { name:"Bajaj Fin",  full:"Bajaj Finance",             cat:"Big NBFC",  type:"NBFC" },
+      { name:"L&T Fin",    full:"L&T Finance",               cat:"Big NBFC",  type:"NBFC" },
+    ];
+    const QUARTERS = ["Q1FY23","Q2FY23","Q3FY23","Q4FY23","Q1FY24","Q2FY24","Q3FY24","Q4FY24","Q1FY25","Q2FY25","Q3FY25","Q4FY25","Q1FY26","Q2FY26","Q3FY26","Q4FY26"];
+    const SEED = {
+      "SBI":        { gnpa:[6.5,5.9,5.5,3.97,3.5,3.52,3.43,2.24,2.2,2.13,2.07,1.96,1.85,1.8,1.75,1.72],   nnpa:[1.52,1.32,1.25,0.67,0.57,0.55,0.55,0.57,0.57,0.53,0.50,0.47,0.45,0.43,0.42,0.50],   nim:[3.0,3.1,3.1,3.2,3.3,3.3,3.3,3.4,3.1,3.0,3.1,3.2,3.0,3.0,3.0,3.1],   roa:[0.6,0.7,0.8,1.0,1.0,1.1,1.1,1.04,1.0,1.1,1.1,1.1,1.1,1.1,1.1,1.1],   roe:[14,15,16,18,18,19,19,17,18,18,19,20,19,19,20,20],   crar:[13.0,13.5,13.5,14.7,14.7,14.0,14.0,14.28,14.0,13.9,14.0,14.3,14.2,14.1,14.2,14.4],   casa:[45,46,45,44,43,43,42,42,41,40,40,40,39,38,38,38],   pat:[9113,12068,13364,16695,16695,18537,18331,9114,21384,21552,18331,20698,21384,17035,19116,22069],   mcap:Array(16).fill(700000) },
+      "BOB":        { gnpa:[7.2,6.8,6.1,3.79,3.3,3.0,2.9,2.92,2.9,2.85,2.8,2.43,2.4,2.3,2.3,2.3],         nnpa:[1.72,1.58,1.46,0.69,0.65,0.62,0.60,0.62,0.61,0.60,0.59,0.40,0.55,0.53,0.52,0.60],   nim:[3.0,3.1,3.1,3.3,3.3,3.3,3.1,3.27,3.3,3.0,3.0,3.1,2.9,2.9,3.0,3.0],   roa:[0.7,0.8,0.9,1.0,1.1,1.2,1.2,1.19,1.1,1.1,1.2,1.3,1.2,1.2,1.2,1.3],   roe:[12,13,15,17,18,19,19,18.3,17,18,19,19,18,18,18,19],   crar:[15,15.5,15.3,16.24,15.8,15.3,15.3,16.31,15.5,15.0,15.3,16.3,15.5,15.5,15.5,15.8],   casa:[43,44,43,42,42,41,41,41,41,40,39,38,38,38,37,37],   pat:[2168,3313,3853,4775,4775,4886,5009,4886,4776,5009,5238,4886,5009,4552,4776,5238],   mcap:Array(16).fill(110000) },
+      "PNB":        { gnpa:[12.0,10.5,9.8,8.74,8.7,7.7,7.2,6.24,6.5,6.0,4.9,4.09,4.0,3.9,3.6,3.4],        nnpa:[4.52,3.80,3.42,1.98,1.70,1.40,1.20,0.96,0.93,0.85,0.65,0.42,0.40,0.38,0.36,0.40],   nim:[2.8,2.9,2.9,3.0,3.0,3.1,3.0,3.0,2.9,3.0,3.0,3.1,3.0,3.0,3.0,3.0],   roa:[0.2,0.3,0.4,0.5,0.5,0.6,0.7,0.5,0.7,0.8,0.9,0.8,0.8,0.8,0.9,0.9],   roe:[4,6,8,9,9,10,11,9,11,12,13,12,12,12,13,13],   crar:[14.5,14.8,14.8,15.5,14.8,14.9,15.0,14.62,14.0,14.5,14.5,14.7,14.0,14.2,14.3,14.5],   casa:[44,44,43,43,43,42,42,43,43,42,42,42,41,41,41,40],   pat:[629,1025,1540,3010,3010,2145,3252,3010,3010,3252,3504,3754,3252,2904,3252,3754],   mcap:Array(16).fill(100000) },
+      "Canara":     { gnpa:[8.9,8.0,7.5,5.35,5.4,5.1,4.7,4.23,4.2,4.1,4.0,3.73,3.5,3.4,3.3,3.2],          nnpa:[2.48,2.09,1.96,1.27,1.23,1.12,1.01,0.89,0.85,0.81,0.78,0.73,0.55,0.50,0.48,0.40],   nim:[2.7,2.8,2.8,2.9,3.0,3.0,3.0,3.05,2.9,2.9,3.0,3.0,2.9,2.9,3.0,3.0],   roa:[0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.03,0.9,1.0,1.0,1.0,1.0,1.0,1.0,1.0],   roe:[8,9,11,14,14,15,17,16.6,14,16,16,17,16,16,16,17],   crar:[13.9,14.5,14.3,16.68,15.5,15.8,15.3,16.31,14.5,14.8,15.5,16.5,14.8,15.0,15.3,15.8],   casa:[33,33,32,32,32,31,31,32,31,30,30,30,30,29,29,29],   pat:[2525,2882,3606,3757,3757,4110,3883,4283,4110,4283,4110,4283,4283,4110,4535,4761],   mcap:Array(16).fill(80000) },
+      "HDFC Bank":  { gnpa:[1.2,1.2,1.3,1.12,1.3,1.3,1.3,1.24,1.4,1.4,1.4,1.33,1.3,1.3,1.3,1.3],          nnpa:[0.32,0.33,0.35,0.33,0.35,0.33,0.33,0.33,0.42,0.41,0.42,0.41,0.40,0.38,0.38,0.40],   nim:[4.1,4.2,4.1,4.1,4.3,4.3,4.1,3.63,3.4,3.6,3.5,3.5,3.5,3.5,3.6,3.7],   roa:[1.9,1.9,2.0,2.0,2.0,1.9,1.9,1.98,1.8,1.9,1.8,1.8,1.8,1.8,1.8,1.9],   roe:[16,17,17,17,17,17,16,17.0,15,16,15,16,16,16,16,16],   crar:[19.0,18.5,18.9,19.26,19.0,18.5,18.0,18.8,17.9,18.5,18.0,18.5,18.0,18.3,18.5,18.5],   casa:[46,47,46,44,44,43,42,38,36,36,36,35,34,34,34,35],   pat:[10055,11125,12259,16373,16373,15976,15812,16373,16175,15812,16512,17825,17258,16512,17095,18375],   mcap:Array(16).fill(1300000) },
+      "ICICI":      { gnpa:[3.3,3.2,3.0,2.16,2.3,2.5,2.5,2.16,2.2,2.2,2.2,1.96,2.0,2.0,2.0,2.0],          nnpa:[0.55,0.52,0.48,0.48,0.43,0.43,0.44,0.42,0.43,0.43,0.42,0.42,0.42,0.40,0.40,0.42],   nim:[4.0,4.0,4.1,4.9,4.9,4.7,4.5,4.53,4.5,4.5,4.4,4.4,4.4,4.3,4.3,4.4],   roa:[1.8,1.8,2.0,2.35,2.4,2.4,2.4,2.35,2.3,2.4,2.4,2.4,2.3,2.3,2.4,2.4],   roe:[17,17,18,18,18,18,18,18.0,17,18,18,18,18,18,18,18],   crar:[17.5,17.5,17.5,18.34,17.0,16.5,16.5,16.28,16.5,16.5,16.5,16.5,16.0,16.0,16.5,16.5],   casa:[44,44,44,43,44,44,43,41,40,40,40,40,40,40,39,39],   pat:[7019,7558,8312,10272,10272,10708,11061,10272,11059,11059,11792,12630,12630,11792,12630,13475],   mcap:Array(16).fill(900000) },
+      "Axis":       { gnpa:[3.7,3.5,3.3,1.73,1.7,1.7,1.7,1.58,1.5,1.4,1.4,1.54,1.5,1.5,1.5,1.4],          nnpa:[0.93,0.84,0.76,0.39,0.38,0.38,0.39,0.34,0.35,0.32,0.32,0.34,0.33,0.33,0.33,0.40],   nim:[3.8,3.9,3.9,4.3,4.3,4.3,4.2,4.11,4.0,4.1,4.0,4.0,3.9,3.9,4.0,4.0],   roa:[1.6,1.6,1.7,1.76,1.7,1.8,1.7,1.76,1.7,1.8,1.7,1.7,1.8,1.8,1.8,1.8],   roe:[16,16,17,18,17,18,17,18.0,16,18,17,17,18,18,18,18],   crar:[15.5,16.0,16.0,17.59,16.5,16.0,16.0,16.63,16.0,16.5,16.0,16.7,16.0,16.3,16.5,16.7],   casa:[42,43,43,45,46,46,46,44,42,42,42,42,41,41,41,41],   pat:[4118,5329,5329,6160,6160,6035,6211,6160,7130,7114,6204,7509,7114,7509,7130,7509],   mcap:Array(16).fill(320000) },
+      "Kotak":      { gnpa:[2.4,2.3,2.1,1.72,1.7,1.7,1.7,1.73,1.5,1.5,1.5,1.41,1.4,1.3,1.3,1.3],          nnpa:[0.64,0.64,0.55,0.43,0.40,0.38,0.38,0.34,0.35,0.35,0.35,0.31,0.30,0.28,0.28,0.30],   nim:[5.0,4.9,4.9,5.33,5.3,5.2,5.2,5.22,5.0,5.0,5.0,5.1,5.0,4.9,5.0,5.0],   roa:[2.2,2.2,2.3,2.35,2.4,2.4,2.4,2.35,2.4,2.4,2.4,2.4,2.4,2.3,2.3,2.4],   roe:[14,15,15,15,15,15,15,14.7,14,14,14,15,15,15,15,15],   crar:[20.0,20.5,20.5,21.8,21.0,20.5,20.5,21.84,21.5,21.5,21.5,22.0,21.5,21.5,21.5,22.0],   casa:[52,52,53,53,53,52,52,52,50,50,50,49,48,48,48,48],   pat:[2071,2313,2792,3496,3496,3452,3005,3496,3451,3520,3344,3451,3451,3344,3451,3681],   mcap:Array(16).fill(370000) },
+      "Federal":    { gnpa:[2.6,2.5,2.4,2.36,2.4,2.5,2.4,2.43,2.3,2.3,2.3,2.11,2.1,2.0,2.0,1.9],          nnpa:[0.86,0.82,0.78,0.76,0.74,0.74,0.74,0.80,0.79,0.78,0.76,0.65,0.63,0.60,0.59,0.60],   nim:[3.3,3.4,3.4,3.4,3.4,3.3,3.2,3.16,3.1,3.2,3.2,3.1,3.1,3.1,3.1,3.2],   roa:[1.2,1.3,1.3,1.31,1.3,1.3,1.4,1.31,1.3,1.3,1.4,1.5,1.4,1.4,1.4,1.5],   roe:[14,14,14,14,14,14,15,14.0,14,14,15,15,15,15,15,15],   crar:[14.5,14.8,14.5,15.12,14.5,14.8,14.8,15.34,14.5,14.5,14.8,15.5,14.8,14.8,15.0,15.5],   casa:[33,33,33,31,31,30,30,29,29,29,29,28,28,28,28,28],   pat:[701,770,804,954,954,1009,1009,1007,1034,1034,1010,1060,1095,1010,1095,1126],   mcap:Array(16).fill(28000) },
+      "IndusInd":   { gnpa:[2.2,2.1,2.1,2.06,2.1,2.3,2.5,2.06,2.2,2.6,2.9,2.25,2.3,2.4,2.4,2.3],          nnpa:[0.59,0.57,0.58,0.57,0.58,0.63,0.68,0.57,0.62,0.72,0.82,0.63,0.65,0.67,0.66,0.65],   nim:[4.3,4.2,4.2,4.29,4.3,4.3,4.2,4.29,4.3,4.3,4.2,4.1,4.0,4.0,3.9,4.0],   roa:[1.8,1.8,1.8,1.77,1.8,1.8,1.8,1.77,1.7,1.5,1.4,1.5,1.5,1.5,1.5,1.5],   roe:[14,14,14,14,14,13,13,14.0,13,11,11,12,12,12,12,12],   crar:[17.5,18.0,18.0,18.06,17.5,17.5,17.5,18.06,17.5,17.0,17.0,16.5,16.5,16.5,16.5,16.5],   casa:[42,42,42,38,38,38,38,38,37,36,35,35,35,34,34,34],   pat:[1631,1805,2043,2202,2202,2202,2152,2202,1994,1994,1994,2100,2202,2152,2202,2202],   mcap:Array(16).fill(38000) },
+      "Yes Bank":   { gnpa:[13.0,11.0,9.0,5.0,3.3,2.9,2.8,1.73,1.6,1.8,1.7,1.7,1.6,1.5,1.5,1.5],          nnpa:[4.22,3.55,2.88,1.72,1.10,0.95,0.89,0.48,0.46,0.53,0.50,0.50,0.47,0.45,0.44,0.30],   nim:[2.5,2.8,2.9,2.5,2.5,2.8,3.0,2.4,2.5,2.5,2.5,2.4,2.4,2.4,2.5,2.5],   roa:[0.1,0.2,0.3,0.5,0.5,0.5,0.5,0.5,0.4,0.5,0.5,0.5,0.5,0.5,0.5,0.5],   roe:[2,3,4,7,8,8,8,8.0,6,8,8,8,8,8,8,8],   crar:[17.4,17.5,17.8,18.4,18.0,17.5,17.5,18.4,17.5,17.5,17.5,17.5,17.5,17.5,17.5,17.5],   casa:[30,31,32,30,32,32,31,31,31,31,30,30,30,30,29,29],   pat:[51,153,202,451,451,502,502,451,502,502,502,502,502,451,502,551],   mcap:Array(16).fill(46000) },
+      "AUSFB":      { gnpa:[1.7,1.8,1.9,1.73,1.7,1.8,1.7,1.67,1.8,2.0,1.9,1.84,1.8,1.7,1.7,1.7],          nnpa:[0.52,0.53,0.56,0.53,0.50,0.51,0.53,0.52,0.55,0.61,0.57,0.55,0.53,0.51,0.50,0.50],   nim:[6.1,6.0,5.9,5.8,5.7,5.7,5.7,5.83,5.7,5.6,5.6,5.5,5.4,5.4,5.5,5.5],   roa:[1.8,1.9,1.8,1.76,1.7,1.7,1.7,1.76,1.7,1.6,1.6,1.5,1.5,1.5,1.5,1.5],   roe:[17,18,18,16,17,17,17,16.0,15,15,15,14,14,14,14,14],   crar:[21.0,21.5,21.5,22.73,22.0,22.0,22.0,22.73,22.0,22.0,22.0,21.5,21.5,21.5,21.5,21.5],   casa:[22,23,23,23,24,23,23,24,23,24,23,24,23,23,23,23],   pat:[281,325,372,425,425,469,469,425,502,469,501,502,469,441,469,502],   mcap:Array(16).fill(52000) },
+      "IDFC First": { gnpa:[6.2,5.8,5.4,4.33,4.0,3.8,3.5,3.12,3.0,2.8,2.5,2.42,2.3,2.2,2.1,2.0],          nnpa:[1.58,1.46,1.35,1.25,1.18,0.94,0.74,0.68,0.65,0.73,0.69,0.67,0.60,0.58,0.56,0.50],   nim:[6.3,6.3,6.4,6.5,6.4,6.3,6.3,6.4,6.3,6.2,6.2,6.1,6.0,6.0,6.0,6.0],   roa:[0.6,0.7,0.8,1.0,1.0,1.1,1.1,1.18,1.1,1.0,1.0,1.1,1.1,1.2,1.2,1.2],   roe:[6,7,8,11,11,12,12,13,12,11,11,12,12,13,13,12],   crar:[16.0,16.2,16.5,16.82,16.5,16.0,16.2,16.11,16.0,15.8,15.9,16.0,16.0,15.8,16.0,16.2],   casa:[44,45,46,46,47,47,48,47,47,48,48,48,49,49,50,50],   pat:[602,765,803,1128,1128,1253,1516,1128,1302,1070,1062,1110,1302,1069,1302,1575],   mcap:Array(16).fill(42000) },
+      "Bajaj Fin":  { gnpa:[1.6,1.6,1.5,1.14,1.2,1.3,1.4,0.91,1.4,1.1,1.0,0.97,0.95,0.95,0.95,0.95],       nnpa:[0.54,0.56,0.51,0.41,0.43,0.47,0.52,0.31,0.52,0.40,0.37,0.37,0.35,0.35,0.35,0.35],   nim:[11.5,11.5,11.5,10.7,11.0,11.5,11.0,11.2,10.5,10.5,11.0,11.0,10.5,10.5,10.5,10.5],   roa:[4.5,4.5,4.5,4.96,5.0,5.0,4.9,4.96,5.0,5.0,5.0,5.0,5.0,4.9,5.0,5.0],   roe:[22,22,22,22,22,23,23,22.0,22,23,23,23,23,23,23,24],   crar:[26.0,25.5,25.5,24.08,24.0,24.5,24.5,24.08,24.0,24.5,24.5,24.0,24.0,24.0,24.0,24.0],   casa:[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],   pat:[2420,2781,3053,3824,3824,4013,3550,3824,4520,4781,4781,4781,4781,4520,4781,5107],   mcap:Array(16).fill(500000) },
+      "L&T Fin":    { gnpa:[4.0,3.5,3.0,3.34,2.8,2.5,2.3,3.09,2.0,1.9,1.8,3.7,2.0,2.0,2.0,2.0],           nnpa:[1.40,1.21,0.98,0.98,0.82,0.77,0.72,0.87,0.55,0.50,0.48,0.98,0.50,0.50,0.49,0.80],   nim:[8.0,8.1,8.0,7.5,7.5,7.5,7.5,8.0,7.0,7.5,7.5,7.5,7.0,7.0,7.5,7.5],   roa:[2.0,2.0,2.0,2.53,2.5,2.5,2.5,2.53,2.5,2.5,2.5,2.0,2.5,2.5,2.5,2.5],   roe:[14,14,14,15,15,15,15,15.0,14,15,15,12,14,14,15,15],   crar:[22.0,22.5,22.5,25.32,24.0,24.0,24.5,25.32,24.0,24.0,24.5,24.0,24.0,24.0,24.0,24.5],   casa:[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],   pat:[519,622,791,1023,1023,1140,1140,1023,696,863,863,583,863,863,863,1023],   mcap:Array(16).fill(38000) },
+    };
+    const METRICS = {
+      gnpa:{ label:"Gross NPA %",   th:"GNPA%",    unit:"%",    better:"low",  domain:[0,14] },
+      nnpa:{ label:"NNPA %",        th:"NNPA%",    unit:"%",    better:"low",  domain:[0,5]  },
+      nim: { label:"NIM %",         th:"NIM%",     unit:"%",    better:"high", domain:[2,12] },
+      roa: { label:"RoA %",         th:"RoA%",     unit:"%",    better:"high", domain:[0,6]  },
+      roe: { label:"RoE %",         th:"RoE%",     unit:"%",    better:"high", domain:[0,25] },
+      crar:{ label:"CRAR %",        th:"CRAR%",    unit:"%",    better:"high", domain:[12,28]},
+      casa:{ label:"CASA Ratio %",  th:"CASA%",    unit:"%",    better:"high", domain:[20,60]},
+      pat: { label:"PAT (₹ Cr)",    th:"PAT(₹Cr)", unit:"₹Cr", better:"high", domain:[0,25000]},
+      mcap:{ label:"Mkt Cap (₹Cr)", th:"Mkt Cap",  unit:"₹Cr", better:"high", domain:[0,1400000],
+        fmt: v => v>=100000 ? (v/100000).toFixed(1)+"L" : (v/1000).toFixed(0)+"K" },
+    };
+    const CAT_COLORS = { "PSU Big 4":"#2E5DA8","Pvt Big 4":"#27AE60","Mid-Size":"#E67E22","Big NBFC":"#8E44AD" };
+    const CATS = ["All","PSU Big 4","Pvt Big 4","Mid-Size","Big NBFC"];
+    const CHART_COLORS = ["#3A8DDE","#27AE60","#E67E22","#8E44AD","#E74C3C","#F39C12"];
+    const RADAR_METRICS = ["gnpa","nnpa","nim","roa","roe","crar","casa"];
+
+    let activeMetric = "gnpa", activeCat = "All", activeQ = 15, activeTab = "heatmap";
+    let sortDir = "desc";
+    let selectedBanks = ["SBI","HDFC Bank","ICICI","Bajaj Fin"];
+    let trendChartInst = null, barChartInst = null, radarChartInst = null;
+
+    function isLight() {
+      return document.documentElement.getAttribute("data-theme") === "light";
+    }
+    function chartTheme() {
+      const light = isLight();
+      return {
+        grid:   light ? "rgba(203,213,225,0.6)" : "rgba(26,46,74,0.8)",
+        labels: light ? "#64748B" : "#7F8FA4",
+        radar:  light ? "#CBD5E1" : "#1A2E4A",
+      };
+    }
+
+    function getVal(name, metric, qi) {
+      return (SEED[name] && SEED[name][metric]) ? SEED[name][metric][qi] : null;
+    }
+    function filteredBanks() {
+      return activeCat === "All" ? BANKS : BANKS.filter(b => b.cat === activeCat);
+    }
+    function sortedBanks() {
+      const banks = filteredBanks().slice();
+      banks.sort((a, b) => {
+        const va = getVal(a.name, activeMetric, activeQ);
+        const vb = getVal(b.name, activeMetric, activeQ);
+        if (va === null && vb === null) return 0;
+        if (va === null) return 1;
+        if (vb === null) return -1;
+        return sortDir === "desc" ? vb - va : va - vb;
+      });
+      return banks;
+    }
+
+    function setMetric(key) {
+      if (key === activeMetric) {
+        sortDir = sortDir === "desc" ? "asc" : "desc";
+      } else {
+        activeMetric = key;
+        sortDir = "desc";
+      }
+      renderPills();
+      renderActiveTab();
+    }
+
+    function updatePAT() {
+      const total = BANKS.reduce((s,b) => s + (getVal(b.name,"pat",QUARTERS.length-1)||0), 0);
+      document.getElementById("latestPAT").textContent = "₹" + (total/1000).toFixed(0) + "K Cr";
+    }
+
+    function renderPills() {
+      document.getElementById("metricPills").innerHTML = Object.entries(METRICS).map(([k,m]) => {
+        const on = k === activeMetric;
+        const arrow = on ? (sortDir === "desc" ? " ↓" : " ↑") : "";
+        return `<button class="ibs-pill${on?" on":""}" data-metric="${k}">${m.label}${arrow}</button>`;
+      }).join("");
+    }
+
+    function renderCats() {
+      document.getElementById("catBtns").innerHTML = CATS.map(c => {
+        const col = CAT_COLORS[c] || "#3A8DDE", on = c === activeCat;
+        return `<button class="ibs-cat-btn" data-cat="${c}" style="border:1.5px solid ${col};background:${on?col:"transparent"};color:${on?"#fff":col}">${c}</button>`;
+      }).join("");
+    }
+
+    function heatColor(value, metric, min, max) {
+      if (value === null) return { bg:"transparent", text:"#AAA" };
+      const m = METRICS[metric];
+      const norm = (value - min) / (max - min || 1);
+      const score = m.better === "high" ? norm : (1 - norm);
+      const r = Math.round(255 - score * 120);
+      const g = Math.round(150 + score * 105);
+      const b = Math.round(130 - score * 100);
+      const text = score > 0.5 ? "#155724" : score < 0.25 ? "#721c24" : "#333";
+      return { bg:`rgb(${r},${g},${b})`, text };
+    }
+
+    function fmtVal(v, mKey) {
+      const m = METRICS[mKey];
+      if (m.fmt) return m.fmt(v);
+      if (m.unit === "₹Cr") return v >= 1000 ? (v/1000).toFixed(1)+"K" : String(v);
+      return v.toFixed(2);
+    }
+
+    function renderHeatmap() {
+      const banks = sortedBanks();
+      const mKeys = Object.keys(METRICS);
+      const mm = {};
+      mKeys.forEach(m => {
+        const vals = BANKS.map(b => getVal(b.name,m,activeQ)).filter(v => v !== null);
+        mm[m] = { min: Math.min(...vals), max: Math.max(...vals) };
+      });
+      document.getElementById("heatQLabel").textContent = QUARTERS[activeQ];
+
+      // 9 metric cols — widen min-width for all columns
+      let html = `<colgroup><col style="width:175px"><col style="width:70px">${mKeys.map(()=>'<col>').join('')}</colgroup>`;
+      html += "<thead><tr>";
+      html += `<th class="name-col">Bank</th><th class="cat-th">Category</th>`;
+      mKeys.forEach(m => {
+        const arrow = m === activeMetric ? (sortDir==="desc"?" ↓":" ↑") : "";
+        html += `<th class="${m===activeMetric?"active":""}" data-metric="${m}">${METRICS[m].th}${arrow}</th>`;
+      });
+      html += "</tr></thead><tbody>";
+      banks.forEach((b, bi) => {
+        html += `<tr class="${bi%2===0?"ibs-row-even":"ibs-row-odd"}">`;
+        html += `<td class="name-col"><span class="ibs-dot" style="background:${CAT_COLORS[b.cat]}"></span>${b.full}</td>`;
+        html += `<td class="cat-col"><span class="ibs-cat-chip" style="background:${CAT_COLORS[b.cat]}33;color:${CAT_COLORS[b.cat]}">${b.cat}</span></td>`;
+        mKeys.forEach(m => {
+          const v = getVal(b.name, m, activeQ);
+          if (v === null) { html += `<td style="color:#AAA">—</td>`; return; }
+          const {bg,text} = heatColor(v, m, mm[m].min, mm[m].max);
+          html += `<td style="background:${bg};color:${text};font-size:13px;font-weight:700">${fmtVal(v,m)}</td>`;
+        });
+        html += "</tr>";
+      });
+      html += "</tbody>";
+      document.getElementById("heatTable").innerHTML = html;
+    }
+
+    function renderTrend() {
+      document.getElementById("trendMetricLabel").textContent = METRICS[activeMetric].label;
+      const ct = chartTheme();
+      const tog = document.getElementById("bankToggles");
+      tog.innerHTML = BANKS.map(b => {
+        const on = selectedBanks.includes(b.name), col = CAT_COLORS[b.cat];
+        return `<button class="ibs-bank-btn" data-bank="${b.name}" style="border:1.5px solid ${col};background:${on?col:"transparent"};color:${on?"#fff":col}">${b.name}</button>`;
+      }).join("");
+      const data = { labels: QUARTERS, datasets: selectedBanks.map((bk,i) => ({
+        label: bk, data: QUARTERS.map((_,qi) => getVal(bk, activeMetric, qi)),
+        borderColor: CHART_COLORS[i%6], backgroundColor: "transparent",
+        borderWidth: 2, pointRadius: 0, spanGaps: true,
+      })) };
+      if (trendChartInst) { trendChartInst.destroy(); trendChartInst = null; }
+      trendChartInst = new Chart(document.getElementById("trendChart").getContext("2d"), {
+        type: "line", data,
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid} },
+            y: { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid}, min:METRICS[activeMetric].domain[0], max:METRICS[activeMetric].domain[1] },
+          },
+          plugins: { legend:{labels:{color:ct.labels,font:{size:11}}} },
+        }
+      });
+    }
+
+    function renderBar() {
+      document.getElementById("barMetricLabel").textContent = METRICS[activeMetric].label;
+      document.getElementById("barQLabel").textContent = QUARTERS[activeQ];
+      document.getElementById("barBetter").textContent = METRICS[activeMetric].better === "high" ? "Higher is better" : "Lower is better";
+      const ct = chartTheme();
+      const banks = filteredBanks().filter(b => getVal(b.name,activeMetric,activeQ) !== null);
+      document.getElementById("barLegend").innerHTML = Object.entries(CAT_COLORS).map(([cat,col])=>
+        `<span class="ibs-legend-item"><span class="ibs-legend-dot" style="background:${col}"></span><span style="color:${col}">${cat}</span></span>`
+      ).join("");
+      if (barChartInst) { barChartInst.destroy(); barChartInst = null; }
+      barChartInst = new Chart(document.getElementById("barChart").getContext("2d"), {
+        type: "bar",
+        data: { labels: banks.map(b=>b.name), datasets: [{ label: METRICS[activeMetric].label,
+          data: banks.map(b=>getVal(b.name,activeMetric,activeQ)),
+          backgroundColor: banks.map(b=>CAT_COLORS[b.cat]), borderRadius: 4 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { ticks:{color:ct.labels,font:{size:10},maxRotation:35}, grid:{color:ct.grid} },
+            y: { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid}, min:METRICS[activeMetric].domain[0], max:METRICS[activeMetric].domain[1] },
+          },
+          plugins: { legend:{display:false} },
+        }
+      });
+    }
+
+    function renderRadar() {
+      document.getElementById("radarQLabel").textContent = QUARTERS[activeQ];
+      const ct = chartTheme();
+      const top4 = selectedBanks.slice(0,4);
+      document.getElementById("radarToggles").innerHTML = BANKS.map(b => {
+        const on = top4.includes(b.name), col = CAT_COLORS[b.cat];
+        return `<button class="ibs-bank-btn" data-bank="${b.name}" style="border:1.5px solid ${col};background:${on?col:"transparent"};color:${on?"#fff":col}">${b.name}</button>`;
+      }).join("");
+      const mm = {};
+      RADAR_METRICS.forEach(m => {
+        const vals = BANKS.map(b=>getVal(b.name,m,activeQ)).filter(v=>v!==null);
+        mm[m] = { min:Math.min(...vals), max:Math.max(...vals) };
+      });
+      const datasets = top4.map((bk,i) => ({
+        label: bk,
+        data: RADAR_METRICS.map(m => {
+          const v = getVal(bk,m,activeQ);
+          if (v === null) return 0;
+          const norm = (v-mm[m].min)/(mm[m].max-mm[m].min||1);
+          return Math.round((METRICS[m].better==="high"?norm:(1-norm))*100);
+        }),
+        borderColor: CHART_COLORS[i], backgroundColor: CHART_COLORS[i]+"26",
+        borderWidth: 2, pointRadius: 3,
+      }));
+      if (radarChartInst) { radarChartInst.destroy(); radarChartInst = null; }
+      radarChartInst = new Chart(document.getElementById("radarChart").getContext("2d"), {
+        type: "radar",
+        data: { labels: RADAR_METRICS.map(m=>METRICS[m].label), datasets },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: { r: { min:0, max:100, ticks:{display:false}, grid:{color:ct.radar}, pointLabels:{color:ct.labels,font:{size:10}} } },
+          plugins: { legend:{labels:{color:ct.labels,font:{size:11}}} },
+        }
+      });
+    }
+
+    function renderActiveTab() {
+      if (activeTab==="heatmap") renderHeatmap();
+      else if (activeTab==="trend") renderTrend();
+      else if (activeTab==="bar") renderBar();
+      else renderRadar();
+    }
+
+    // ── Events ──
+    document.querySelectorAll(".ibs-tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".ibs-tab").forEach(b=>b.classList.remove("on"));
+        document.querySelectorAll(".ibs-tab-panel").forEach(p=>p.classList.remove("on"));
+        btn.classList.add("on");
+        activeTab = btn.dataset.tab;
+        document.getElementById("panel-"+activeTab).classList.add("on");
+        renderActiveTab();
+      });
+    });
+
+    document.getElementById("qSlider").addEventListener("input", function() {
+      activeQ = +this.value;
+      document.getElementById("qLabel").textContent = QUARTERS[activeQ];
+      renderActiveTab();
+    });
+    document.getElementById("metricPills").addEventListener("click", e => {
+      const btn = e.target.closest("[data-metric]");
+      if (!btn) return;
+      setMetric(btn.dataset.metric);
+    });
+    document.getElementById("heatTable").addEventListener("click", e => {
+      const th = e.target.closest("[data-metric]");
+      if (!th) return;
+      setMetric(th.dataset.metric);
+    });
+    document.getElementById("catBtns").addEventListener("click", e => {
+      const btn = e.target.closest("[data-cat]");
+      if (!btn) return;
+      activeCat = btn.dataset.cat;
+      renderCats();
+      renderActiveTab();
+    });
+    document.getElementById("bankToggles").addEventListener("click", e => {
+      const btn = e.target.closest("[data-bank]");
+      if (!btn) return;
+      const bk = btn.dataset.bank;
+      selectedBanks = selectedBanks.includes(bk) ? selectedBanks.filter(n=>n!==bk) : [...selectedBanks,bk].slice(-6);
+      renderTrend();
+    });
+    document.getElementById("radarToggles").addEventListener("click", e => {
+      const btn = e.target.closest("[data-bank]");
+      if (!btn) return;
+      const bk = btn.dataset.bank;
+      selectedBanks = selectedBanks.includes(bk) ? selectedBanks.filter(n=>n!==bk) : [...selectedBanks,bk].slice(-4);
+      renderRadar();
+    });
+
+    // Re-render charts when theme changes
+    new MutationObserver(() => {
+      if (activeTab !== "heatmap") renderActiveTab();
+    }).observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] });
+
+    // Init
+    updatePAT();
+    renderPills();
+    renderCats();
+    renderHeatmap();
+  })();
+  </script>
+</body>
+</html>
