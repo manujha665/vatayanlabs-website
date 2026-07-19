@@ -146,6 +146,31 @@
     .chart-row { grid-template-columns: 1fr; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "India Payments Intelligence — RBI ATM, Card and UPI Statistics FY26",
+  "description": "UPI, credit card, debit card and ATM transaction volumes and values from RBI payment system statistics, covering March 2025, September 2025 and March 2026 — including India's first digital-majority month.",
+  "url": "https://vatayanlabs.com/dashboards/india-payments/",
+  "temporalCoverage": "2025-03/2026-03",
+  "spatialCoverage": "India",
+  "keywords": [
+    "UPI data",
+    "India payments",
+    "RBI ATM statistics",
+    "credit card data India",
+    "digital payments"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Vatayan Labs",
+    "url": "https://vatayanlabs.com/"
+  },
+  "isBasedOn": "Reserve Bank of India payment system statistics and NPCI releases",
+  "isAccessibleForFree": true
+}
+</script>
 </head>
 <body>
 <!-- Vatayan Labs site bar -->
@@ -1671,5 +1696,13 @@ heatmapData.forEach(row => {
   </tr>`;
 });
 </script>
+
+<!-- Related research bar -->
+<div style="background:#0b1120;color:#cbd5e1;font-family:'Inter',-apple-system,sans-serif;padding:14px 24px;font-size:13px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
+  <span style="color:#64748b;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:1px;">Related research</span>
+  <a href="/sectors/capital-markets/" style="color:#cbd5e1;text-decoration:none;">Capital Markets series</a>
+  <a href="/sectors/" style="color:#cbd5e1;text-decoration:none;">All sector studies</a>
+  <a href="/newsletter/" style="color:#93c5fd;text-decoration:none;">Get updates by email →</a>
+</div>
 </body>
 </html>

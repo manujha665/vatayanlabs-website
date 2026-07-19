@@ -160,6 +160,33 @@
     .ibs-heat-info { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
     .ibs-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; flex-shrink: 0; }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "India Banking Scorecard — Quarterly Metrics for 15 Banks & NBFCs",
+  "description": "Gross NPA, Net NPA, NIM, RoA, RoE, CRAR, CASA ratio, PAT and market cap for 15 Indian banks and NBFCs (PSU, private and NBFC), quarterly from Q1FY23 to Q4FY26. Presented as an interactive heatmap, trend lines, peer comparison and radar views.",
+  "url": "https://vatayanlabs.com/dashboards/indian-banks/",
+  "temporalCoverage": "2022-04/2026-03",
+  "spatialCoverage": "India",
+  "keywords": [
+    "Indian banks",
+    "GNPA",
+    "NPA data",
+    "NIM",
+    "bank asset quality",
+    "NBFC",
+    "banking scorecard"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Vatayan Labs",
+    "url": "https://vatayanlabs.com/"
+  },
+  "isBasedOn": "Quarterly financial results and statutory filings of the covered banks and NBFCs",
+  "isAccessibleForFree": true
+}
+</script>
 </head>
 <body class="sr-body" data-content-id="india-banking-scorecard">
   
@@ -582,5 +609,13 @@
     renderHeatmap();
   })();
   </script>
+
+<!-- Related research bar -->
+<div style="background:#0b1120;color:#cbd5e1;font-family:'Inter',-apple-system,sans-serif;padding:14px 24px;font-size:13px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
+  <span style="color:#64748b;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:1px;">Related research</span>
+  <a href="/sectors/microfinance/" style="color:#cbd5e1;text-decoration:none;">Microfinance deep dives</a>
+  <a href="/sectors/gold/" style="color:#cbd5e1;text-decoration:none;">The Gold Series</a>
+  <a href="/newsletter/" style="color:#93c5fd;text-decoration:none;">Get updates by email →</a>
+</div>
 </body>
 </html>
