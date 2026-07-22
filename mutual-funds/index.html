@@ -239,7 +239,7 @@
         <h1>Mutual Fund Intelligence Hub</h1>
         <p>Institutional-depth one-pagers on India's best active funds · <span id="fundCount">7</span> funds analysed · Views by Manu Vatayan Jha, SEBI Registered MF Distributor</p>
         <div class="mf-hero-stats">
-          <div><div class="mf-hero-stat-label">Funds Covered</div><div class="mf-hero-stat-value" id="heroFundCount">7 / 9</div></div>
+          <div><div class="mf-hero-stat-label">Funds Covered</div><div class="mf-hero-stat-value" id="heroFundCount">9 / 11</div></div>
           <div><div class="mf-hero-stat-label">Categories</div><div class="mf-hero-stat-value">6 (4 active)</div></div>
           <div><div class="mf-hero-stat-label">Avg Manu Rating</div><div class="mf-hero-stat-value" id="heroAvgRating">—</div></div>
           <div><div class="mf-hero-stat-label">Coverage Gap</div><div class="mf-hero-stat-value">Large Cap + ELSS</div></div>
@@ -290,76 +290,96 @@
     var CATEGORIES = ["Large Cap","Mid Cap","Small Cap","Flexi Cap","Value/Contra","ELSS"];
 
     var FUNDS = [
-      { id:"mo-midcap", name:"Motilal Oswal Midcap Fund", shortName:"MO Midcap", amc:"Motilal Oswal AMC", category:"Mid Cap", subcategory:"Actively Managed", aum:"₹22,500 Cr", expRatio:"0.55%", launchYear:"2014", benchmark:"Nifty Midcap 150 TRI", minSIP:"₹500",
-        managers:[{name:"Niket Shah",since:"2019",note:"Concentrated quality growth specialist"},{name:"Rakesh Shetty",since:"2021",note:"Co-manager, quant overlay"}],
-        ret:{f:{y1:55.8,y3:38.4,y5:31.6,y10:22.1},b:{y1:44.1,y3:29.2,y5:26.4,y10:18.3},c:{y1:47.2,y3:31.0,y5:28.0,y10:19.5}},
-        risk:{sharpe:2.18,sortino:2.45,beta:0.95,stdDev:18.5,alpha:9.2,maxDD:-28.3},
-        portfolio:{stocks:28,pe:48.2,pb:8.1,topSector:"Capital Goods",capBias:"Pure Midcap — SEBI-defined universe",turnover:"32% (low for category)"},
-        holdings:[{n:"Tube Investments",p:7.8},{n:"Polycab India",p:7.2},{n:"Kalyan Jewellers",p:6.5},{n:"Persistent Systems",p:6.1},{n:"Coforge",p:5.8}],
+      { id:"mo-midcap", name:"Motilal Oswal Midcap Fund", shortName:"MO Midcap", amc:"Motilal Oswal AMC", category:"Mid Cap", subcategory:"Actively Managed", aum:"₹37,474 Cr", expRatio:"0.94%", launchYear:"2014", benchmark:"Nifty Midcap 150 TRI", minSIP:"₹500",
+        managers:[{name:"Ajay Khandelwal",since:"2024",note:"Lead manager post Niket Shah transition"},{name:"Ankit Agarwal",since:"2026",note:"Co-manager, joined Jan 2026"},{name:"Rakesh Shetty",since:"2022",note:"Co-manager"}],
+        ret:{f:{y1:3.8,y3:20.5,y5:23.3,y10:17.8},b:{y1:4.0,y3:21.0,y5:22.0,y10:17.5},c:{y1:3.2,y3:19.5,y5:21.0,y10:16.8}},
+        risk:{sharpe:2.18,sortino:2.45,beta:0.95,stdDev:18.5,alpha:-0.5,maxDD:-28.3},
+        portfolio:{stocks:31,pe:48.2,pb:8.1,topSector:"Capital Goods",capBias:"Pure Midcap — SEBI-defined universe",turnover:"32% (low for category)"},
+        holdings:[{n:"One 97 (Paytm)",p:7.3},{n:"Kalyan Jewellers",p:6.3},{n:"Coforge",p:6.0},{n:"Eternal (Zomato)",p:6.0},{n:"KEI Industries",p:5.6}],
         philosophy:"QGLP framework — Quality, Growth, Longevity, Price. One of India's most concentrated midcap funds (28 stocks vs category avg of 60+). Conviction-based bets with low churn. If a business is right, price will follow. Not for momentum chasers.",
         verdict:"The most polarising midcap fund in India — when it works, it blazes. When wrong, it bleeds. The QGLP lens is sound but concentration is a two-edged sword. Best for investors who trust the framework deeply and can hold through a full cycle without second-guessing.",
-        rating:4, idealFor:"Aggressive investors who understand concentration risk and have 7–10 year conviction", holdPeriod:"Minimum 7 years", watchFor:"Valuation stretch (PE ~48x), style drift if AUM keeps growing, key-man dependency on Niket Shah",
+        rating:4, idealFor:"Aggressive investors who understand concentration risk and have 7–10 year conviction", holdPeriod:"Minimum 7 years", watchFor:"Manager transition after Niket Shah's exit — whether the QGLP discipline persists; AUM now ₹37,000+ Cr",
         chip:"BUY on dips via SIP", chipColor:"#16A34A" },
-      { id:"hdfc-midcap", name:"HDFC Midcap Opportunities Fund", shortName:"HDFC Midcap", amc:"HDFC AMC", category:"Mid Cap", subcategory:"Actively Managed", aum:"₹82,000 Cr", expRatio:"0.70%", launchYear:"2007", benchmark:"Nifty Midcap 150 TRI", minSIP:"₹100",
-        managers:[{name:"Chirag Setalvad",since:"2007",note:"Longest-tenured midcap FM in India, 17+ years"}],
-        ret:{f:{y1:44.8,y3:27.4,y5:27.2,y10:22.4},b:{y1:44.1,y3:29.2,y5:26.4,y10:18.3},c:{y1:47.2,y3:31.0,y5:28.0,y10:19.5}},
-        risk:{sharpe:1.72,sortino:1.90,beta:0.90,stdDev:17.2,alpha:4.8,maxDD:-30.1},
-        portfolio:{stocks:68,pe:37.8,pb:6.4,topSector:"Financial Services",capBias:"Mostly midcap, up to 15% large, 10% small cap",turnover:"28% (very low — patient capital)"},
-        holdings:[{n:"Cholamandalam Inv.",p:5.8},{n:"Max Healthcare",p:5.1},{n:"Indian Hotels",p:4.8},{n:"Persistent Systems",p:4.5},{n:"Balkrishna Industries",p:4.2}],
+      { id:"hdfc-midcap", name:"HDFC Midcap Opportunities Fund", shortName:"HDFC Midcap", amc:"HDFC AMC", category:"Mid Cap", subcategory:"Actively Managed", aum:"₹1,00,858 Cr", expRatio:"0.75%", launchYear:"2007", benchmark:"Nifty Midcap 150 TRI", minSIP:"₹100",
+        managers:[{name:"Chirag Setalvad",since:"2007",note:"Longest-tenured midcap FM in India"},{name:"Dhruv Muchhal",since:"2023",note:"Co-manager"}],
+        ret:{f:{y1:5.5,y3:20.2,y5:20.8,y10:18.4},b:{y1:4.0,y3:21.0,y5:22.0,y10:17.5},c:{y1:3.2,y3:19.5,y5:21.0,y10:16.8}},
+        risk:{sharpe:1.72,sortino:1.90,beta:0.90,stdDev:17.2,alpha:-0.8,maxDD:-30.1},
+        portfolio:{stocks:78,pe:37.8,pb:6.4,topSector:"Financial Services",capBias:"Mostly midcap, up to 15% large, 10% small cap",turnover:"28% (very low — patient capital)"},
+        holdings:[{n:"Federal Bank",p:4.2},{n:"Max Financial",p:4.1},{n:"AU Small Finance Bank",p:4.1},{n:"Balkrishna Industries",p:3.1},{n:"Fortis Healthcare",p:3.1}],
         philosophy:"Quality at reasonable price, with a patience premium. Chirag Setalvad's 17-year tenure is the longest in India's midcap category. Low churn, broad diversification, avoids fads. HDFC Midcap is the 'boring and brilliant' fund.",
         verdict:"The most reliable midcap vehicle in India. Not the sexiest, not the highest 1Y return. But in 10Y CAGR terms, this fund is in the top decile consistently. The ₹82,000 Cr AUM is a genuine concern — midcap investing with this corpus requires precision. But Chirag earns his trust.",
         rating:5, idealFor:"Patient compounders — anyone starting a 15-year SIP needs this as their midcap core", holdPeriod:"Minimum 7 years", watchFor:"AUM overhang (largest midcap fund), can it sustain alpha at ₹82K Cr? Watch if small cap allocation creeps up",
         chip:"CORE HOLD — SIP anchor", chipColor:"#16A34A" },
-      { id:"nippon-smallcap", name:"Nippon India Small Cap Fund", shortName:"Nippon Small Cap", amc:"Nippon India AMC", category:"Small Cap", subcategory:"Actively Managed", aum:"₹58,000 Cr", expRatio:"0.68%", launchYear:"2010", benchmark:"Nifty Smallcap 250 TRI", minSIP:"₹100",
+      { id:"nippon-smallcap", name:"Nippon India Small Cap Fund", shortName:"Nippon Small Cap", amc:"Nippon India AMC", category:"Small Cap", subcategory:"Actively Managed", aum:"₹78,407 Cr", expRatio:"0.70%", launchYear:"2010", benchmark:"Nifty Smallcap 250 TRI", minSIP:"₹100",
         managers:[{name:"Samir Rachh",since:"2016",note:"Longest-serving active small cap FM in India"}],
-        ret:{f:{y1:38.2,y3:28.4,y5:34.6,y10:25.1},b:{y1:35.4,y3:24.1,y5:29.0,y10:20.2},c:{y1:36.8,y3:25.5,y5:31.0,y10:21.8}},
-        risk:{sharpe:1.84,sortino:2.01,beta:0.92,stdDev:22.4,alpha:5.8,maxDD:-34.8},
-        portfolio:{stocks:212,pe:34.8,pb:5.7,topSector:"Capital Goods",capBias:"Pure small cap, 65% in the 251–500 ranked segment",turnover:"22% (extremely low — effectively a buy-and-hold portfolio)"},
-        holdings:[{n:"KPIT Technologies",p:3.8},{n:"Tube Investments",p:3.2},{n:"Voltamp Transformers",p:2.8},{n:"Apar Industries",p:2.5},{n:"Aavas Financiers",p:2.2}],
+        ret:{f:{y1:8.1,y3:17.0,y5:20.1,y10:22.2},b:{y1:2.0,y3:18.0,y5:22.0,y10:15.5},c:{y1:4.0,y3:19.0,y5:21.5,y10:16.0}},
+        risk:{sharpe:1.84,sortino:2.01,beta:0.92,stdDev:22.4,alpha:-1.0,maxDD:-34.8},
+        portfolio:{stocks:254,pe:34.8,pb:5.7,topSector:"Capital Goods",capBias:"Pure small cap, 65% in the 251–500 ranked segment",turnover:"22% (extremely low — effectively a buy-and-hold portfolio)"},
+        holdings:[{n:"Cash / Repo",p:3.1},{n:"HDFC Bank",p:2.0},{n:"BHEL",p:1.8},{n:"Apar Industries",p:1.7},{n:"TD Power Systems",p:1.5}],
         philosophy:"Maximum diversification as a risk management tool. 212 stocks is not a lack of conviction — it's Samir Rachh's deliberate philosophy: in the small cap universe, unknown unknowns are high, so breadth is the hedge.",
         verdict:"The gold standard of Indian small cap funds — biggest AUM, longest FM tenure, strongest 5Y track record. If you are going to own ONE small cap fund and you are a SIP investor, this is it.",
         rating:5, idealFor:"Long-term SIP investors (10Y+) who want broad small cap exposure without active stock selection anxiety", holdPeriod:"Minimum 10 years — non-negotiable in small cap", watchFor:"AUM too large for nimble small cap investing. Watch if 5Y alpha compresses below 3%.",
         chip:"CORE SIP — but monitor AUM ceiling", chipColor:"#16A34A" },
-      { id:"hdfc-smallcap", name:"HDFC Small Cap Fund", shortName:"HDFC Small Cap", amc:"HDFC AMC", category:"Small Cap", subcategory:"Actively Managed", aum:"₹36,000 Cr", expRatio:"0.65%", launchYear:"2008", benchmark:"Nifty Smallcap 250 TRI", minSIP:"₹100",
-        managers:[{name:"Chirag Setalvad",since:"2014",note:"Manages both HDFC Midcap and Small Cap — rare dual mandate"}],
-        ret:{f:{y1:40.4,y3:26.2,y5:29.8,y10:19.6},b:{y1:35.4,y3:24.1,y5:29.0,y10:20.2},c:{y1:36.8,y3:25.5,y5:31.0,y10:21.8}},
-        risk:{sharpe:1.68,sortino:1.85,beta:0.88,stdDev:20.8,alpha:5.5,maxDD:-33.2},
-        portfolio:{stocks:82,pe:30.2,pb:4.5,topSector:"Chemicals",capBias:"Small cap focus, up to 20% mid cap flexibility",turnover:"24% (conservative churn)"},
-        holdings:[{n:"Sonata Software",p:4.8},{n:"Redington India",p:4.2},{n:"Atul Auto",p:3.8},{n:"KPIT Technologies",p:3.5},{n:"NIIT Technologies",p:3.1}],
+      { id:"hdfc-smallcap", name:"HDFC Small Cap Fund", shortName:"HDFC Small Cap", amc:"HDFC AMC", category:"Small Cap", subcategory:"Actively Managed", aum:"₹40,417 Cr", expRatio:"0.76%", launchYear:"2008", benchmark:"Nifty Smallcap 250 TRI", minSIP:"₹100",
+        managers:[{name:"Chirag Setalvad",since:"2014",note:"Value-conscious small cap veteran"},{name:"Dhruv Muchhal",since:"2023",note:"Co-manager"}],
+        ret:{f:{y1:3.5,y3:11.6,y5:15.0,y10:17.6},b:{y1:2.0,y3:18.0,y5:22.0,y10:15.5},c:{y1:4.0,y3:19.0,y5:21.5,y10:16.0}},
+        risk:{sharpe:1.68,sortino:1.85,beta:0.88,stdDev:20.8,alpha:-6.4,maxDD:-33.2},
+        portfolio:{stocks:85,pe:30.2,pb:4.5,topSector:"Chemicals",capBias:"Small cap focus, up to 20% mid cap flexibility",turnover:"24% (conservative churn)"},
+        holdings:[{n:"Aster DM Healthcare",p:3.8},{n:"Firstsource Solutions",p:3.3},{n:"Bank of Baroda",p:3.2},{n:"Gabriel India",p:3.0},{n:"Eris Lifesciences",p:2.3}],
         philosophy:"Quality bias in a volatile universe. Chirag Setalvad's approach in small cap mirrors his midcap style — buy quality businesses, hold them long, ignore noise. Lower PE (30x vs category), higher margin of safety than peers.",
         verdict:"Chirag Setalvad managing both midcap and small cap simultaneously is a notable red flag from a capacity and focus perspective. Best used as a complement to Nippon Small Cap — they behave differently in the same storms.",
         rating:4, idealFor:"Investors who want quality-biased small cap exposure as a complement to a high-AUM diversified small cap fund like Nippon", holdPeriod:"Minimum 7–10 years", watchFor:"Dual-mandate concentration risk on Chirag Setalvad. If he leaves, review immediately.",
         chip:"SATELLITE — pair with Nippon", chipColor:"#D97706" },
-      { id:"bandhan-smallcap", name:"Bandhan Small Cap Fund", shortName:"Bandhan Small Cap", amc:"Bandhan AMC", category:"Small Cap", subcategory:"Actively Managed", aum:"₹7,800 Cr", expRatio:"0.39%", launchYear:"2020", benchmark:"Nifty Smallcap 250 TRI", minSIP:"₹100",
+      { id:"bandhan-smallcap", name:"Bandhan Small Cap Fund", shortName:"Bandhan Small Cap", amc:"Bandhan AMC", category:"Small Cap", subcategory:"Actively Managed", aum:"₹28,466 Cr", expRatio:"0.59%", launchYear:"2020", benchmark:"Nifty Smallcap 250 TRI", minSIP:"₹100",
         managers:[{name:"Harsh Libra",since:"2020",note:"Building a GARP-style small cap portfolio from inception"}],
-        ret:{f:{y1:36.4,y3:24.8,y5:null,y10:null},b:{y1:35.4,y3:24.1,y5:29.0,y10:20.2},c:{y1:36.8,y3:25.5,y5:31.0,y10:21.8}},
-        risk:{sharpe:1.62,sortino:1.78,beta:0.94,stdDev:21.5,alpha:4.8,maxDD:-32.1},
-        portfolio:{stocks:58,pe:32.1,pb:5.2,topSector:"Capital Goods",capBias:"Pure small cap — SEBI compliant",turnover:"38%"},
-        holdings:[{n:"PTC Industries",p:4.5},{n:"Minda Corporation",p:4.0},{n:"Shyam Metalics",p:3.6},{n:"Ami Organics",p:3.4},{n:"Suryoday SFB",p:3.1}],
+        ret:{f:{y1:6.2,y3:28.0,y5:20.7,y10:null},b:{y1:2.0,y3:18.0,y5:22.0,y10:15.5},c:{y1:4.0,y3:19.0,y5:21.5,y10:16.0}},
+        risk:{sharpe:1.62,sortino:1.78,beta:0.94,stdDev:21.5,alpha:10.0,maxDD:-32.1},
+        portfolio:{stocks:259,pe:32.1,pb:5.2,topSector:"Capital Goods",capBias:"Pure small cap — SEBI compliant",turnover:"38%"},
+        holdings:[{n:"Cash / Reverse Repo",p:8.0},{n:"REC",p:3.2},{n:"Sobha",p:3.1},{n:"State Bank of India",p:2.2},{n:"Arvind",p:1.9}],
         philosophy:"Growth at Reasonable Price (GARP) in small cap. Harsh Libra runs a concentrated (58 stocks) small cap book vs the 150-200 stock norm. The 0.39% expense ratio is the killer USP — lowest in the small cap category by a wide margin.",
         verdict:"The most compelling cost argument in Indian small cap MFs. At 0.39% vs category average of ~0.65%, you are starting with a 26bps structural edge every year. Watch for AUM scale-up — the low cost will attract flows.",
         rating:4, idealFor:"Cost-conscious long-term SIP investors who want active small cap with passive-level fees", holdPeriod:"Minimum 7 years; full track record still building", watchFor:"Short 3Y track record — avoid large lump sums. FM tenure and philosophy consistency as AUM scales past ₹15,000 Cr",
         chip:"WATCH & BUILD — low cost edge", chipColor:"#D97706" },
-      { id:"ppfas", name:"Parag Parikh Flexi Cap Fund", shortName:"PPFAS Flexi Cap", amc:"PPFAS AMC", category:"Flexi Cap", subcategory:"Value + International", aum:"₹87,000 Cr", expRatio:"0.57%", launchYear:"2013", benchmark:"Nifty 500 TRI 65% / MSCI World 35%", minSIP:"₹1,000",
+      { id:"ppfas", name:"Parag Parikh Flexi Cap Fund", shortName:"PPFAS Flexi Cap", amc:"PPFAS AMC", category:"Flexi Cap", subcategory:"Value + International", aum:"₹1,43,388 Cr", expRatio:"0.53%", launchYear:"2013", benchmark:"Nifty 500 TRI 65% / MSCI World 35%", minSIP:"₹1,000",
         managers:[{name:"Rajeev Thakkar",since:"2013",note:"CIO, Buffett-Munger value disciple, permanent capital mindset"},{name:"Rukun Tarachandani",since:"2020",note:"Co-manager, international equity specialist"}],
-        ret:{f:{y1:40.2,y3:26.1,y5:27.4,y10:21.2},b:{y1:35.0,y3:22.0,y5:22.1,y10:15.4},c:{y1:37.5,y3:24.0,y5:24.5,y10:17.2}},
-        risk:{sharpe:1.88,sortino:2.10,beta:0.72,stdDev:15.8,alpha:7.2,maxDD:-22.4},
+        ret:{f:{y1:-1.6,y3:14.5,y5:14.3,y10:16.5},b:{y1:1.5,y3:14.0,y5:16.5,y10:14.5},c:{y1:1.0,y3:13.0,y5:15.5,y10:13.5}},
+        risk:{sharpe:1.88,sortino:2.10,beta:0.72,stdDev:15.8,alpha:0.5,maxDD:-22.4},
         portfolio:{stocks:28,pe:22.1,pb:3.8,topSector:"Technology (incl. FAANG)",capBias:"~55% large, ~25% mid, ~20% international (SEBI-capped)",turnover:"18% (among the lowest in any category)"},
-        holdings:[{n:"Bajaj Holdings",p:9.8},{n:"ITC",p:8.4},{n:"HCL Technologies",p:7.2},{n:"Alphabet (Google)",p:6.8},{n:"Meta Platforms",p:5.6}],
+        holdings:[{n:"HDFC Bank",p:8.3},{n:"Power Grid",p:6.2},{n:"ITC",p:6.1},{n:"ICICI Bank",p:5.5},{n:"Coal India",p:5.4}],
         philosophy:"The only Indian MF that genuinely buys global equities as a structural hedge. Rajeev Thakkar's value philosophy, Buffett-Munger lens, and low-churn discipline create a fund that behaves unlike every other Indian flexi cap.",
         verdict:"PPFAS is the gold standard of Indian flexi cap investing. It is the most differentiated active fund in India — international allocation, lowest beta, widest moat. The only fund that truly earns the 'global diversifier' label.",
         rating:5, idealFor:"Investors who want global diversification within an Indian MF structure, with a value discipline", holdPeriod:"7–10 years minimum", watchFor:"SEBI cap on international equity (25%) limits the global diversification upside. Watch if AUM crosses ₹1L Cr — Rajeev has been vocal about AUM constraints",
         chip:"CORE — must-own flexi cap", chipColor:"#16A34A" },
-      { id:"icici-value", name:"ICICI Prudential Value Discovery Fund", shortName:"ICICI Value", amc:"ICICI Prudential AMC", category:"Value/Contra", subcategory:"Value Investing", aum:"₹50,000 Cr", expRatio:"0.95%", launchYear:"2004", benchmark:"Nifty 500 TRI", minSIP:"₹100",
+      { id:"icici-value", name:"ICICI Prudential Value Discovery Fund", shortName:"ICICI Value", amc:"ICICI Prudential AMC", category:"Value/Contra", subcategory:"Value Investing", aum:"₹60,198 Cr", expRatio:"1.08%", launchYear:"2004", benchmark:"Nifty 500 TRI", minSIP:"₹100",
         managers:[{name:"S. Naren",since:"2004",note:"India's most prominent value investor, CIO of ICICI Prudential AMC"},{name:"Dharmesh Kakkad",since:"2014",note:"Co-manager, deep value screener"}],
-        ret:{f:{y1:38.6,y3:23.8,y5:24.2,y10:20.4},b:{y1:35.0,y3:21.8,y5:22.0,y10:15.8},c:{y1:36.2,y3:22.5,y5:23.0,y10:17.4}},
-        risk:{sharpe:1.56,sortino:1.72,beta:0.84,stdDev:17.4,alpha:5.8,maxDD:-29.6},
-        portfolio:{stocks:70,pe:19.2,pb:3.5,topSector:"Financial Services",capBias:"~60% large, ~25% mid, ~15% small — P/E-driven, not cap-driven",turnover:"45%"},
-        holdings:[{n:"ICICI Bank",p:8.4},{n:"Infosys",p:6.8},{n:"Maruti Suzuki",p:5.6},{n:"Bharti Airtel",p:4.8},{n:"Sun Pharmaceutical",p:4.2}],
+        ret:{f:{y1:-1.3,y3:14.7,y5:17.1,y10:15.9},b:{y1:1.5,y3:14.0,y5:16.5,y10:14.5},c:{y1:0.5,y3:13.5,y5:16.0,y10:14.0}},
+        risk:{sharpe:1.56,sortino:1.72,beta:0.84,stdDev:17.4,alpha:0.7,maxDD:-29.6},
+        portfolio:{stocks:76,pe:19.2,pb:3.5,topSector:"Financial Services",capBias:"~60% large, ~25% mid, ~15% small — P/E-driven, not cap-driven",turnover:"45%"},
+        holdings:[{n:"ICICI Bank",p:9.7},{n:"HDFC Bank",p:9.6},{n:"Infosys",p:5.3},{n:"Reliance Industries",p:5.2},{n:"Sun Pharma",p:4.8}],
         philosophy:"Benjamin Graham's margin of safety, applied to Indian equity markets since 2004. S. Naren screens for stocks trading below intrinsic value, with a hard discipline on PE and PB screens. The fund's PE of 19.2x is the lowest in any actively managed equity category.",
         verdict:"India's oldest value fund (2004) with India's most prominent value investor (S. Naren). The 10Y track record — 20.4% CAGR — speaks for itself. A 20-year SIP in this fund is a retirement strategy.",
         rating:5, idealFor:"Long-term investors who believe value will outperform growth over full cycles, and want India's best value investor making those calls", holdPeriod:"10+ years — value cycles are long", watchFor:"0.95% expense ratio — verify Direct plan is optimised. Track relative performance vs SBI Contra. Naren's departure risk is the single biggest factor to monitor",
         chip:"CORE VALUE — 20Y SIP", chipColor:"#16A34A" },
+      { id:"sbi-contra", name:"SBI Contra Fund", shortName:"SBI Contra", amc:"SBI Mutual Fund", category:"Value/Contra", subcategory:"Actively Managed", aum:"₹47,362 Cr", expRatio:"0.84%", launchYear:"1999", benchmark:"BSE 500 TRI", minSIP:"₹500",
+        managers:[{name:"Dinesh Balachandran",since:"2018",note:"Deep-value contrarian, CFA — the architect of the fund's revival"},{name:"Pradeep Kesavan",since:"2023",note:"Co-manager, overseas investments"}],
+        ret:{f:{y1:-1.2,y3:13.7,y5:17.3,y10:16.1},b:{y1:1.5,y3:14.0,y5:16.5,y10:14.5},c:{y1:0.5,y3:13.5,y5:16.0,y10:14.0}},
+        risk:{sharpe:-0.43,sortino:-0.04,beta:0.90,stdDev:12.0,alpha:-0.8,maxDD:-22.0},
+        portfolio:{stocks:98,pe:19.5,pb:2.9,topSector:"Financial Services",capBias:"Multicap contrarian — large-cap tilt with active cash and index hedges",turnover:"Moderate — the cash calls do the work"},
+        holdings:[{n:"Cash / Repo",p:7.8},{n:"Nifty index hedge",p:7.6},{n:"HDFC Bank",p:5.1},{n:"Reliance Industries",p:4.8},{n:"ICICI Bank",p:4.3}],
+        philosophy:"Dinesh Balachandran's contrarian playbook — buy what the market shuns, and hold cash and index hedges when it won't offer value. One of the few Indian funds that treats an 8% cash position and Nifty hedges as active decisions rather than drag. 98 stocks, deep-value bias, patience as strategy.",
+        verdict:"India's largest contra fund by a distance. The FY22–24 value rally made it a star; the current flat patch is what owning a contrarian actually feels like. The cash-and-hedge discipline cushions drawdowns but will lag sharp rallies. Judge it over cycles, not quarters.",
+        rating:4, idealFor:"Patient investors comfortable being early — and looking wrong — for long stretches", holdPeriod:"5–7 years minimum", watchFor:"AUM size (₹47,000+ Cr) blunting mid/small contrarian picks; cash drag if a broad rally runs; style crowding as 'contra' becomes fashionable",
+        chip:"SIP — expect quiet stretches", chipColor:"#D97706" },
+      { id:"hdfc-flexicap", name:"HDFC Flexi Cap Fund", shortName:"HDFC Flexi Cap", amc:"HDFC AMC", category:"Flexi Cap", subcategory:"Actively Managed", aum:"₹1,06,496 Cr", expRatio:"0.78%", launchYear:"1995", benchmark:"NIFTY 500 TRI", minSIP:"₹100",
+        managers:[{name:"Amit Ganatra",since:"2025",note:"Took over the book after the Roshi Jain era"},{name:"Dhruv Muchhal",since:"2023",note:"Co-manager, dedicated overseas"}],
+        ret:{f:{y1:3.3,y3:17.4,y5:18.9,y10:16.4},b:{y1:1.5,y3:14.0,y5:16.5,y10:14.5},c:{y1:1.0,y3:13.0,y5:15.5,y10:13.5}},
+        risk:{sharpe:-0.01,sortino:0.0,beta:0.88,stdDev:12.5,alpha:1.4,maxDD:-26.0},
+        portfolio:{stocks:55,pe:20.4,pb:3.2,topSector:"Financial Services",capBias:"Flexi mandate with a strong large-cap financials tilt",turnover:"Low — conviction positions held for years"},
+        holdings:[{n:"ICICI Bank",p:9.2},{n:"Axis Bank",p:6.8},{n:"HDFC Bank",p:6.8},{n:"State Bank of India",p:4.3},{n:"SBI Life Insurance",p:3.5}],
+        philosophy:"Banks-heavy conviction investing — the top five holdings are four banks and an insurer. Concentrated sector calls, low churn, and a willingness to look wrong for quarters at a time. The financials overweight through FY23–25 paid off handsomely.",
+        verdict:"The classic large-fund workhorse: ₹1.06 lakh crore of AUM and a financials tilt that makes it as much a bet on India's credit cycle as a flexi cap. Post the manager transition, watch whether the concentrated style persists. A solid core holding — but not a diversifier if you already own bank-heavy funds.",
+        rating:4, idealFor:"Core-portfolio investors wanting large-cap-tilted flexi exposure with an experienced house", holdPeriod:"5+ years", watchFor:"Manager transition continuity; overlap with your existing financials exposure; sheer size limiting mid/small-cap alpha",
+        chip:"CORE HOLD", chipColor:"#16A34A" },
     ];
 
     var activeCat = "Mid Cap";
@@ -510,7 +530,7 @@
               '<thead><tr>'+['','1 Year','3 Years','5 Years','10 Years'].map(function(h,i){return '<th'+(i===0?' class="left"':'')+'>'+h+'</th>';}).join("")+'</tr></thead>'+
               '<tbody>'+retRows+'</tbody>'+
             '</table></div>'+
-            '<div class="mf-data-note" style="margin-top:6px">*CAGR (%) as of Jan 2025. For illustration. Verify on AMC website or AMFI. Past performance is not indicative of future returns.</div>'+
+            '<div class="mf-data-note" style="margin-top:6px">*CAGR (%) as of 21 Jul 2026, direct plans (sources: AMC/AMFI aggregators). Benchmark and category rows approximate. For illustration. Verify on AMC website or AMFI. Past performance is not indicative of future returns.</div>'+
           '</div>'+
           '<div class="mf-modal-section"><div class="mf-modal-section-title">Risk Metrics (3Y)</div><div class="mf-risk-box">'+riskRows+'<div class="mf-risk-row" style="border:none;padding-top:6px"><span style="font-size:12px;color:'+B.muted+'">Max Drawdown</span><span style="font-size:13px;font-weight:700;color:'+B.danger+'">'+f.risk.maxDD+'%</span></div></div></div>'+
           '<div class="mf-modal-section"><div class="mf-modal-section-title">Portfolio DNA</div><div class="mf-risk-box">'+dnaRows+'<div class="mf-cap-bias"><strong>Cap bias:</strong> '+f.portfolio.capBias+'</div></div></div>'+
@@ -569,7 +589,7 @@
     var total = FUNDS.length;
     var avg = (FUNDS.reduce(function(s,f){return s+f.rating;},0)/total).toFixed(1);
     document.getElementById("fundCount").textContent = total;
-    document.getElementById("heroFundCount").textContent = total+" / 9";
+    document.getElementById("heroFundCount").textContent = total+" / 11";
     document.getElementById("heroAvgRating").textContent = avg+" / 5";
 
     render();
