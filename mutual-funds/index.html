@@ -46,6 +46,12 @@
 
   <script>document.documentElement.setAttribute("data-theme","light")</script>
   <style>
+    /* Modal renders outside .mf-wrap — mirror the light theme vars on :root */
+    :root {
+      --bg:#F8FAFC; --card:#fff; --stat-bg:#F8FAFC; --border:#E2E8F0; --text:#1A2E4A;
+      --muted:#64748B; --tab-bg:#fff; --tab-bdr:#E2E8F0; --tab-off:#64748B;
+      --modal-bg:#fff; --risk-bg:#F8FAFC; --ph-bg:#F8FAFC;
+    }
     /* ── Theme variables — light is default ── */
     .mf-wrap {
       --bg:       #F8FAFC;
@@ -511,7 +517,7 @@
           '<div class="mf-modal-section"><div class="mf-modal-section-title">Top 5 Holdings</div><div class="mf-risk-box">'+holdRows+'</div></div>'+
           '<div class="mf-modal-section"><div class="mf-modal-section-title">Fund Managers</div>'+mgrs+'</div>'+
           '<div class="mf-modal-section mf-full-col"><div class="mf-modal-section-title">Investment Philosophy</div><div class="mf-philosophy-box"><p class="mf-philosophy-text">'+f.philosophy+'</p></div></div>'+
-          '<div class="mf-modal-section mf-full-col"><div class="mf-modal-section-title">Manu\'s View <span style="color:'+B.muted+';font-weight:400;text-transform:none;font-size:11px">— CII Editorial</span></div>'+
+          '<div class="mf-modal-section mf-full-col"><div class="mf-modal-section-title">Manu\'s View</div>'+
             '<div class="mf-verdict-box">'+
               '<p class="mf-verdict-text">'+f.verdict+'</p>'+
               '<div class="mf-verdict-grid">'+
@@ -524,7 +530,7 @@
             '</div>'+
           '</div>'+
           '<div class="mf-modal-section mf-full-col"><div class="mf-verdict-banner" style="background:'+f.chipColor+'15;border-color:'+f.chipColor+'">'+
-            '<div><div style="font-size:10px;font-weight:700;color:'+f.chipColor+';text-transform:uppercase;letter-spacing:1px">CII Verdict</div><div class="mf-verdict-title">'+f.chip+'</div></div>'+
+            '<div><div style="font-size:10px;font-weight:700;color:'+f.chipColor+';text-transform:uppercase;letter-spacing:1px">Verdict</div><div class="mf-verdict-title">'+f.chip+'</div></div>'+
             '<div class="mf-stars">'+stars(f.rating)+'</div>'+
           '</div></div>'+
           '<div class="mf-modal-section mf-full-col" style="font-size:10px;color:var(--muted);line-height:1.5;border-top:1px solid var(--border);padding-top:12px">⚠️ All data is approximate and for educational purposes only. Not financial advice. Verify on AMFI, AMC websites, or ValueResearch before investing.</div>'+
