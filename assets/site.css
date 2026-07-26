@@ -19,6 +19,7 @@
   --text-faint: #94a3b8;
   --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
   --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+  --nav-w: 260px;
 }
 
 body {
@@ -28,36 +29,63 @@ body {
   min-height: 100vh;
   font-size: 15px;
   line-height: 1.6;
+  padding-left: var(--nav-w);
 }
 
-/* ── SITE NAV ── */
+/* ── SITE NAV (fixed left sidebar) ── */
 .site-nav {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+  width: var(--nav-w);
+  background: linear-gradient(170deg, #0f172a 0%, #1e3a5f 55%, #1e40af 100%);
   color: white;
-  padding: 0 24px;
+  padding: 26px 18px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,.08);
 }
 .site-nav-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 8px;
-  min-height: 60px; padding: 10px 0;
+  max-width: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: stretch;
+  flex-wrap: nowrap; gap: 30px; min-height: 0;
 }
-.site-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+.site-brand { display: flex; align-items: flex-start; gap: 11px; text-decoration: none; color: white; padding: 0 6px; }
 .site-logo {
-  width: 34px; height: 34px; border-radius: 9px;
+  width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
   background: linear-gradient(135deg, #3b82f6, #06b6d4);
   display: flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 800; color: white; letter-spacing: -1px;
+  font-size: 17px; font-weight: 800; color: white; letter-spacing: -1px;
 }
-.site-brand-name { font-size: 17px; font-weight: 700; letter-spacing: -.3px; }
-.site-brand-tag { font-size: 11px; color: #93c5fd; display: block; margin-top: -2px; }
-.site-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.site-brand-name { font-size: 20px; font-weight: 700; letter-spacing: -.4px; line-height: 1.2; }
+.site-brand-tag { font-size: 12.5px; color: #93c5fd; display: block; margin-top: 3px; line-height: 1.35; }
+.site-links { display: flex; flex-direction: column; gap: 4px; flex-wrap: nowrap; }
 .site-links a {
-  color: #cbd5e1; text-decoration: none; font-size: 13px; font-weight: 500;
-  padding: 8px 12px; border-radius: 8px; transition: all .15s ease;
+  display: block;
+  color: #cbd5e1; text-decoration: none; font-size: 16px; font-weight: 600;
+  padding: 12px 14px; border-radius: 10px; transition: all .15s ease;
 }
 .site-links a:hover { color: white; background: rgba(255,255,255,.08); }
-.site-links a.active { color: white; background: rgba(255,255,255,.12); }
+.site-links a.active { color: white; background: rgba(255,255,255,.12); box-shadow: inset 3px 0 0 #38bdf8; }
+
+/* Sidebar collapses back to a horizontal top bar on narrow screens */
+@media (max-width: 900px) {
+  body { padding-left: 0; }
+  .site-nav {
+    position: static; width: auto; bottom: auto;
+    padding: 0 20px; overflow-y: visible;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+    border-right: none;
+  }
+  .site-nav-inner {
+    flex-direction: row; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px; padding: 12px 0;
+  }
+  .site-brand { padding: 0; align-items: center; }
+  .site-logo { width: 34px; height: 34px; border-radius: 9px; }
+  .site-brand-name { font-size: 18px; }
+  .site-brand-tag { font-size: 11.5px; margin-top: 0; }
+  .site-links { flex-direction: row; flex-wrap: wrap; gap: 2px; }
+  .site-links a { font-size: 15px; padding: 9px 12px; }
+  .site-links a.active { box-shadow: none; }
+}
 
 /* ── PAGE LAYOUT ── */
 .page { max-width: 1100px; margin: 0 auto; padding: 40px 24px 64px; }
