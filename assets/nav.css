@@ -1,0 +1,89 @@
+/* Vatayan Labs — site navigation (fixed left sidebar)
+   Single source of truth for the nav across the whole site:
+     • shell pages pull this in via the @import at the top of site.css
+     • the standalone dashboards <link> it directly
+
+   Standalone dashboards also load a legacy stylesheet that declares its own
+   .site-nav / .site-logo / .sr-body a rules, some with !important. Those pages
+   tag the nav with .vl-sidebar, which the defensive block at the bottom uses to
+   win on specificity regardless of load order. */
+
+:root { --nav-w: 260px; }
+
+body { padding-left: var(--nav-w); }
+
+.site-nav {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+  display: block; width: var(--nav-w); margin: 0;
+  background: linear-gradient(170deg, #0f172a 0%, #1e3a5f 55%, #1e40af 100%);
+  color: white;
+  padding: 26px 18px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.site-nav-inner {
+  max-width: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: stretch;
+  flex-wrap: nowrap; gap: 30px; min-height: 0;
+}
+.site-brand { display: flex; align-items: flex-start; gap: 11px; text-decoration: none; color: white; padding: 0 6px; }
+.site-logo {
+  width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: 800; color: white; letter-spacing: -1px;
+}
+.site-brand-name { font-size: 20px; font-weight: 700; letter-spacing: -.4px; line-height: 1.2; }
+.site-brand-tag { font-size: 12.5px; color: #93c5fd; display: block; margin-top: 3px; line-height: 1.35; }
+.site-links { display: flex; flex-direction: column; gap: 4px; flex-wrap: nowrap; }
+.site-links a {
+  display: block;
+  color: #cbd5e1; text-decoration: none; font-size: 16px; font-weight: 600;
+  padding: 12px 14px; border-radius: 10px; transition: all .15s ease;
+}
+.site-links a:hover { color: white; background: rgba(255,255,255,.08); }
+.site-links a.active { color: white; background: rgba(255,255,255,.12); box-shadow: inset 3px 0 0 #38bdf8; }
+
+/* Sidebar collapses back to a horizontal top bar on narrow screens */
+@media (max-width: 900px) {
+  body { padding-left: 0; }
+  .site-nav {
+    display: block; position: static; width: auto; bottom: auto;
+    padding: 0 20px; overflow-y: visible;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+    border-right: none;
+  }
+  .site-nav-inner {
+    flex-direction: row; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px; padding: 12px 0;
+  }
+  .site-brand { padding: 0; align-items: center; }
+  .site-logo { width: 34px; height: 34px; border-radius: 9px; }
+  .site-brand-name { font-size: 18px; }
+  .site-brand-tag { font-size: 11.5px; margin-top: 0; }
+  .site-links { flex-direction: row; flex-wrap: wrap; gap: 2px; }
+  .site-links a { font-size: 15px; padding: 9px 12px; }
+  .site-links a.active { box-shadow: none; }
+}
+
+/* ── Defensive overrides for the standalone dashboards ──
+   legacy.css declares `.site-nav a { color: var(--ink-2) !important }`,
+   `.site-nav a.active { color: var(--accent) !important }`, `.sr-body a { color:
+   var(--accent) }` and hides .site-nav below 860px. The .vl-sidebar ancestor
+   outranks all of those. */
+.vl-sidebar { display: block; }
+.vl-sidebar .site-brand,
+.vl-sidebar .site-brand-name { color: #fff !important; }
+.vl-sidebar .site-brand-tag { color: #93c5fd !important; }
+.vl-sidebar .site-logo { display: block; background: none; }
+.vl-sidebar a:hover { text-decoration: none !important; }
+.vl-sidebar .site-links a {
+  color: #cbd5e1 !important; background: none;
+  font-size: 16px; font-weight: 600; padding: 12px 14px; border-radius: 10px;
+}
+.vl-sidebar .site-links a:hover { color: #fff !important; background: rgba(255,255,255,.08); }
+.vl-sidebar .site-links a.active { color: #fff !important; background: rgba(255,255,255,.12); }
+
+@media (max-width: 900px) {
+  .vl-sidebar .site-links a { font-size: 15px; padding: 9px 12px; }
+}

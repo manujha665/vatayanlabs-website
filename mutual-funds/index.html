@@ -213,23 +213,29 @@
     .mf-verdict-banner { background:rgba(0,0,0,.04); border-radius:10px; padding:12px 16px; border:1.5px solid; display:flex; justify-content:space-between; align-items:center; }
     .mf-data-note { font-size:10px; color:var(--muted); }
   </style>
+<link rel="stylesheet" href="/assets/nav.css">
 </head>
 <body class="sr-body" data-content-id="mf-intelligence-hub">
   
-<!-- Vatayan Labs site bar -->
-<div style="background:#0b1120;color:#cbd5e1;font-family:'Inter',-apple-system,sans-serif;padding:9px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;">
-  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:white;font-weight:700;">
-    <img src="/assets/logo-badge.png" alt="" width="26" height="26" style="display:block;border-radius:7px;">
-    Vatayan Labs
-  </a>
-  <span style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="/dashboards/" style="color:#cbd5e1;text-decoration:none;">Dashboards</a>
-    <a href="/sectors/" style="color:#cbd5e1;text-decoration:none;">Sectors</a>
-    <a href="/mutual-funds/" style="color:white;text-decoration:none;font-weight:600;">Mutual Funds</a>
-    <a href="/downloads/" style="color:#cbd5e1;text-decoration:none;">Downloads</a>
-    <a href="/about/" style="color:#cbd5e1;text-decoration:none;">About</a>
-  </span>
-</div>
+<!-- Vatayan Labs site nav -->
+<nav class="site-nav vl-sidebar">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <img class="site-logo" src="/assets/logo-badge.png" alt="" width="40" height="40">
+      <span>
+        <span class="site-brand-name">Vatayan Labs</span>
+        <span class="site-brand-tag">A window into how India moves money</span>
+      </span>
+    </a>
+    <div class="site-links">
+      <a href="/dashboards/">Dashboards</a>
+      <a href="/sectors/">Sectors</a>
+      <a href="/mutual-funds/" class="active">Mutual Funds</a>
+      <a href="/downloads/">Downloads</a>
+      <a href="/about/">About</a>
+    </div>
+  </div>
+</nav>
 
 
   <div class="mf-wrap">
