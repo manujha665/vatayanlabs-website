@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank vs Bank — India Payments Comparison | Vatayan Labs</title>
+<meta name="description" content="Compare any two Indian banks head-to-head on ATMs, PoS, UPI QR codes, credit and debit cards, spending and digital mix — or benchmark a full peer group of PSUs, private banks, SFBs, payments banks and foreign banks. Built on RBI data through June 2026.">
+<link rel="canonical" href="https://vatayanlabs.com/dashboards/india-payments/compare/">
+<meta property="og:title" content="Bank vs Bank — India Payments Comparison">
+<meta property="og:description" content="Head-to-head and peer-group comparison of Indian banks across 20+ payment metrics, on RBI data through June 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatayanlabs.com/dashboards/india-payments/compare/">
+<link rel="icon" href="/favicon.ico">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E0WLCFVLDX');
+</script>
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "xoi9afzxww");
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bank vs Bank — India Payments Comparison",
+  "url": "https://vatayanlabs.com/dashboards/india-payments/compare/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "description": "Interactive tool to compare Indian banks head-to-head and by peer group across RBI payment-system metrics.",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "creator": { "@type": "Organization", "name": "Vatayan Labs", "url": "https://vatayanlabs.com/" }
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --bg:#f8f9fa; --surface:#fff; --surface2:#f1f3f5;
+    --text:#1a1a2e; --text2:#4a5568; --text3:#718096;
+    --border:rgba(0,0,0,.08); --border2:rgba(0,0,0,.13);
+    --accent:#1a56db; --accent2:#0e9f6e; --accent3:#e3a008;
+    --danger:#c81e1e; --purple:#7e3af2;
+    --a:#1a56db; --b:#e3733d;
+    --radius:12px; --radius-sm:8px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.6}
+  a{color:var(--accent)}
+
+  .page{max-width:1200px;margin:0 auto;padding:28px 20px 60px}
+  .crumbs{font-size:12px;color:var(--text3);margin-bottom:10px}
+  .crumbs a{text-decoration:none}
+  .crumbs a:hover{text-decoration:underline}
+  .page-title{font-size:22px;font-weight:700;margin-bottom:4px}
+  .page-sub{font-size:13px;color:var(--text3);margin-bottom:24px}
+
+  .nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+  .nav-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface);cursor:pointer;font-size:12px;font-weight:500;color:var(--text2);transition:all .15s}
+  .nav-btn:hover,.nav-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  .section{display:none}
+  .section.visible{display:block}
+
+  .insight-banner{background:var(--surface);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:22px;font-size:13px;color:var(--text2)}
+  .insight-banner strong{color:var(--text)}
+
+  .full-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:20px}
+  .chart-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+  .chart-sub{font-size:11px;color:var(--text3);margin-bottom:14px}
+  .chart-wrap{position:relative;width:100%}
+  .chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-bottom:20px}
+
+  /* ── pickers ── */
+  .picker-bar{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:end;background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px}
+  .picker{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .picker label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)}
+  select,input[type=search]{width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit}
+  select:focus,input:focus{outline:2px solid rgba(26,86,219,.35);outline-offset:1px}
+  .vs{font-size:12px;font-weight:700;color:var(--text3);padding-bottom:9px;letter-spacing:1px}
+  .swap-btn{border:1px solid var(--border2);background:var(--surface);border-radius:var(--radius-sm);cursor:pointer;padding:7px 10px;font-size:12px;color:var(--text2);font-family:inherit}
+  .swap-btn:hover{background:var(--surface2)}
+  .dot-a,.dot-b{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .dot-a{background:var(--a)} .dot-b{background:var(--b)}
+
+  /* ── verdict ── */
+  .verdict{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+  .vcard{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;border-top:3px solid var(--a)}
+  .vcard.b{border-top-color:var(--b)}
+  .vcard-name{font-size:16px;font-weight:700;margin-bottom:2px}
+  .vcard-cat{font-size:11px;color:var(--text3);margin-bottom:12px}
+  .vcard-wins{font-size:34px;font-weight:700;line-height:1;color:var(--a)}
+  .vcard.b .vcard-wins{color:var(--b)}
+  .vcard-wl{font-size:11px;color:var(--text3);margin-top:4px}
+  .vcard-strengths{margin-top:12px;font-size:12px;color:var(--text2);line-height:1.55}
+  .vcard-strengths span{display:inline-block;background:var(--surface2);border-radius:5px;padding:2px 7px;margin:2px 3px 2px 0;font-size:11px}
+
+  /* ── comparison table ── */
+  .cmp{width:100%;border-collapse:collapse;font-size:12px}
+  .cmp th{padding:8px;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2);text-align:right;white-space:nowrap}
+  .cmp th:first-child{text-align:left}
+  .cmp td{padding:9px 8px;border-bottom:.5px solid var(--border);text-align:right;white-space:nowrap}
+  .cmp td:first-child{text-align:left;white-space:normal}
+  .cmp tr.grp td{background:var(--surface2);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);padding:6px 8px;text-align:left}
+  .m-name{font-weight:500;color:var(--text)}
+  .m-unit{font-size:10px;color:var(--text3)}
+  .val{font-weight:700;font-variant-numeric:tabular-nums}
+  .val.win{color:var(--accent2)}
+  .yoy{font-size:11px;font-variant-numeric:tabular-nums}
+  .yoy.up{color:var(--accent2)} .yoy.down{color:var(--danger)} .yoy.flat{color:var(--text3)}
+  .barcell{width:150px}
+  .minibar{display:flex;height:7px;border-radius:4px;overflow:hidden;background:var(--surface2)}
+  .minibar i{display:block;height:100%}
+  .minibar i.a{background:var(--a)} .minibar i.b{background:var(--b)}
+
+  /* ── league table ── */
+  .league{width:100%;border-collapse:collapse;font-size:12px}
+  .league th{padding:8px;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}
+  .league th:nth-child(-n+2){text-align:left}
+  .league th:hover{color:var(--accent)}
+  .league th.sorted{color:var(--accent)}
+  .league td{padding:8px;border-bottom:.5px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}
+  .league td:nth-child(-n+2){text-align:left}
+  .league tr:hover td{background:var(--surface2)}
+  .rank{color:var(--text3);font-size:11px;width:34px}
+  .share-cell{width:130px}
+  .sharebar{background:var(--surface2);border-radius:3px;height:7px;margin-top:3px}
+  .sharebar i{display:block;height:7px;border-radius:3px;background:var(--accent)}
+  .tfoot td{font-weight:700;background:var(--surface2);border-bottom:none}
+
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+  .stat{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+  .stat-label{font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+  .stat-value{font-size:21px;font-weight:700;line-height:1.2}
+  .stat-sub{font-size:11px;color:var(--text3);margin-top:3px}
+
+  .chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .chip{padding:5px 12px;border-radius:16px;border:1px solid var(--border2);background:var(--surface);cursor:pointer;font-size:11.5px;font-weight:500;color:var(--text2);font-family:inherit}
+  .chip:hover{border-color:var(--accent)}
+  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  .highlights{background:var(--surface2);border-radius:var(--radius);padding:16px 18px;margin-top:16px}
+  .highlights-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+  .highlight-list{display:flex;flex-direction:column;gap:7px}
+  .highlight-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text2);line-height:1.5}
+  .hi-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+  .highlight-item strong{color:var(--text)}
+
+  .note{font-size:11px;color:var(--text3);line-height:1.6;margin-top:14px}
+  .flag{color:var(--accent3);cursor:help;text-decoration:none;border:none;font-size:11px}
+  .scroll-x{overflow-x:auto}
+  .loading{padding:60px 20px;text-align:center;color:var(--text3);font-size:13px}
+
+  @media (max-width:720px){
+    .picker-bar{grid-template-columns:1fr;gap:10px}
+    .vs{display:none}
+    .verdict{grid-template-columns:1fr}
+    .chart-row{grid-template-columns:1fr}
+    .barcell{display:none}
+    .cmp th.barcell{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Vatayan Labs site bar -->
+<div style="background:#0b1120;color:#cbd5e1;font-family:'Inter',-apple-system,sans-serif;padding:9px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:white;font-weight:700;">
+    <img src="/assets/logo-badge.png" alt="" width="26" height="26" style="display:block;border-radius:7px;">
+    Vatayan Labs
+  </a>
+  <span style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/dashboards/" style="color:white;text-decoration:none;font-weight:600;">Dashboards</a>
+    <a href="/sectors/" style="color:#cbd5e1;text-decoration:none;">Sectors</a>
+    <a href="/mutual-funds/" style="color:#cbd5e1;text-decoration:none;">Mutual Funds</a>
+    <a href="/downloads/" style="color:#cbd5e1;text-decoration:none;">Downloads</a>
+    <a href="/about/" style="color:#cbd5e1;text-decoration:none;">About</a>
+  </span>
+</div>
+
+<div class="page">
+  <div class="crumbs"><a href="/dashboards/">Dashboards</a> / <a href="/dashboards/india-payments/">India Payments</a> / Bank vs Bank</div>
+  <h1 class="page-title">Bank vs Bank — Payments Comparison</h1>
+  <p class="page-sub" id="page-sub">Loading RBI data…</p>
+
+  <nav class="nav">
+    <button class="nav-btn active" data-tab="h2h">Head-to-Head</button>
+    <button class="nav-btn" data-tab="peers">Peer Groups</button>
+    <button class="nav-btn" data-tab="cohort">Cohort Trends</button>
+    <a class="nav-btn" href="/dashboards/india-payments/" style="text-decoration:none;display:inline-block">← Full Dashboard</a>
+  </nav>
+
+  <div id="boot" class="loading">Loading dataset…</div>
+
+  <!-- ══════════════════════════════ HEAD TO HEAD ══════════════════════════════ -->
+  <section class="section" id="tab-h2h">
+    <div class="insight-banner">
+      <strong>Pick any two banks.</strong> Every metric below is straight from the RBI's monthly ATM &amp; Card statistics — no estimates. The winner on each line is highlighted, and the bar shows how the two split the combined total. Change either bank and the whole page recomputes.
+    </div>
+
+    <div class="picker-bar">
+      <div class="picker">
+        <label><span class="dot-a"></span> Bank A</label>
+        <select id="sel-a"></select>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+        <span class="vs">VS</span>
+        <button class="swap-btn" id="swap" title="Swap banks">⇄</button>
+      </div>
+      <div class="picker">
+        <label><span class="dot-b"></span> Bank B</label>
+        <select id="sel-b"></select>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <div class="vcard" id="vc-a"></div>
+      <div class="vcard b" id="vc-b"></div>
+    </div>
+
+    <div class="full-card">
+      <div class="chart-title" id="cmp-title">Metric-by-metric comparison</div>
+      <div class="chart-sub" id="cmp-sub"></div>
+      <div class="scroll-x">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th id="th-a">Bank A</th>
+              <th>YoY</th>
+              <th class="barcell">Split</th>
+              <th id="th-b">Bank B</th>
+              <th>YoY</th>
+            </tr>
+          </thead>
+          <tbody id="cmp-body"></tbody>
+        </table>
+      </div>
+      <div class="note" id="cmp-note"></div>
+    </div>
+
+    <div class="full-card">
+      <div class="chart-title">Trend comparison</div>
+      <div class="chart-sub">Pick a metric to see how both banks have moved across the last ten RBI reporting months.</div>
+      <div class="chip-row" id="trend-chips"></div>
+      <div class="chart-wrap" style="height:300px"><canvas id="c-trend"></canvas></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="full-card" style="margin-bottom:0">
+        <div class="chart-title">Where the money flows</div>
+        <div class="chart-sub">Share of each bank's total card transaction value by channel, latest month</div>
+        <div class="chart-wrap" style="height:260px"><canvas id="c-mix"></canvas></div>
+      </div>
+      <div class="full-card" style="margin-bottom:0">
+        <div class="chart-title">Scale-normalised profile</div>
+        <div class="chart-sub">Each bank indexed against the larger of the two on each metric (100 = leader)</div>
+        <div class="chart-wrap" style="height:260px"><canvas id="c-radar"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ PEER GROUPS ══════════════════════════════ -->
+  <section class="section" id="tab-peers">
+    <div class="insight-banner">
+      <strong>Compare like with like.</strong> A payments bank and a PSU are not the same business — this tab ranks every institution against its own cohort. Choose a peer group and a metric to get the full league table, with each bank's share of the group.
+    </div>
+
+    <div class="picker-bar" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="picker">
+        <label>Peer group</label>
+        <select id="sel-group"></select>
+      </div>
+      <div class="picker">
+        <label>Metric</label>
+        <select id="sel-metric"></select>
+      </div>
+      <div class="picker">
+        <label>Compare against</label>
+        <select id="sel-basis">
+          <option value="2025-06">Same month last year (YoY)</option>
+          <option value="2026-03">Previous quarter (QoQ)</option>
+          <option value="2024-06">Two years ago</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="stat-row" id="grp-stats"></div>
+
+    <div class="full-card">
+      <div class="chart-title" id="league-title">League table</div>
+      <div class="chart-sub" id="league-sub"></div>
+      <div class="chart-wrap" style="height:300px;margin-bottom:18px"><canvas id="c-league"></canvas></div>
+      <div class="scroll-x">
+        <table class="league" id="league-table">
+          <thead>
+            <tr>
+              <th data-sort="rank">#</th>
+              <th data-sort="name">Bank</th>
+              <th data-sort="val" class="sorted">Latest</th>
+              <th data-sort="chg">Change</th>
+              <th data-sort="pct">%</th>
+              <th data-sort="share" class="share-cell">Share of group</th>
+            </tr>
+          </thead>
+          <tbody id="league-body"></tbody>
+          <tfoot id="league-foot"></tfoot>
+        </table>
+      </div>
+      <div class="highlights">
+        <div class="highlights-label">What the table says</div>
+        <div class="highlight-list" id="league-notes"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ COHORT TRENDS ══════════════════════════════ -->
+  <section class="section" id="tab-cohort">
+    <div class="insight-banner">
+      <strong>The cohorts are diverging.</strong> Public sector banks, private banks, small finance banks, payments banks and foreign banks are running structurally different payment strategies. This tab puts the five cohorts on the same axis so the divergence is visible.
+    </div>
+
+    <div class="picker-bar" style="grid-template-columns:1fr 1fr">
+      <div class="picker">
+        <label>Metric</label>
+        <select id="sel-cmetric"></select>
+      </div>
+      <div class="picker">
+        <label>View</label>
+        <select id="sel-cview">
+          <option value="abs">Absolute level</option>
+          <option value="idx">Indexed to Mar '24 = 100</option>
+          <option value="shr">Share of all-bank total (%)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <div class="chart-title" id="cohort-title">Cohort trend</div>
+      <div class="chart-sub">Five bank cohorts across ten RBI reporting months, March 2024 to June 2026</div>
+      <div class="chart-wrap" style="height:340px"><canvas id="c-cohort"></canvas></div>
+      <div class="highlights">
+        <div class="highlights-label">Cohort read</div>
+        <div class="highlight-list" id="cohort-notes"></div>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <div class="chart-title">Cohort scorecard — latest month</div>
+      <div class="chart-sub">Every cohort on every headline metric, with year-on-year change</div>
+      <div class="scroll-x">
+        <table class="league" id="cohort-table">
+          <thead id="cohort-head"></thead>
+          <tbody id="cohort-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="note" id="footnote"></div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════
+   Bank vs Bank — India Payments
+   All figures computed live from payments-data.json (RBI monthly returns).
+   ═══════════════════════════════════════════════════════════════════════ */
+
+const CH = { a:'#1a56db', b:'#e3733d', green:'#0e9f6e', amber:'#e3a008', red:'#c81e1e', purple:'#7e3af2', grey:'#94a3b8' };
+const COHORT_COLORS = { PSU:'#1a56db', PVT:'#0e9f6e', SFB:'#7e3af2', PMT:'#e3a008', FRN:'#94a3b8' };
+
+const chartDefaults = {
+  responsive:true, maintainAspectRatio:false,
+  interaction:{ mode:'index', intersect:false },
+  plugins:{
+    legend:{ display:true, position:'bottom', labels:{ boxWidth:10, boxHeight:10, font:{size:11}, color:'#4a5568', padding:12, usePointStyle:true, pointStyle:'circle' } },
+    tooltip:{ backgroundColor:'#fff', titleColor:'#111', bodyColor:'#4a5568', borderColor:'rgba(0,0,0,.1)', borderWidth:1, padding:10, cornerRadius:8 }
+  },
+  scales:{
+    x:{ grid:{ color:'rgba(0,0,0,.05)' }, ticks:{ color:'#9ca3af', font:{size:11} } },
+    y:{ grid:{ color:'rgba(0,0,0,.05)' }, ticks:{ color:'#9ca3af', font:{size:11} } }
+  }
+};
+
+let D, F, P, LBL, BANKS, LATEST, PREV_Y, PREV_Q;
+const charts = {};
+
+/* ── number formatting ─────────────────────────────────────────────── */
+const inr = n => n.toLocaleString('en-IN', { maximumFractionDigits:0 });
+function fmtNum(n, dp=0){
+  if (!isFinite(n)) return '—';
+  return n.toLocaleString('en-IN', { minimumFractionDigits:dp, maximumFractionDigits:dp });
+}
+const FMT = {
+  units:  v => v === 0 ? '—' : inr(Math.round(v)),
+  lakh:   v => v === 0 ? '—' : fmtNum(v/1e5, 2) + ' L',
+  crore:  v => v === 0 ? '—' : fmtNum(v/1e7, 2) + ' Cr',
+  crtxn:  v => v === 0 ? '—' : fmtNum(v/1e7, 2) + ' Cr',
+  rscr:   v => v === 0 ? '—' : '₹' + fmtNum(v, 0) + ' Cr',
+  rs:     v => v === 0 ? '—' : '₹' + fmtNum(v, 0),
+  pct:    v => !isFinite(v) ? '—' : fmtNum(v, 1) + '%'
+};
+
+/* ── metric registry ───────────────────────────────────────────────
+   calc() takes the raw 26-field array for one bank-month.
+   Values in the file are: counts = units, volumes = txns, values = Rs '000.
+   ------------------------------------------------------------------ */
+const g = (v, f) => v[F[f]] || 0;
+const CR = 1e4;   // Rs '000 -> Rs crore
+
+function ccSpend(v){ return g(v,'cc_pos_r') + g(v,'cc_onl_r'); }
+function dcSpend(v){ return g(v,'dc_pos_r') + g(v,'dc_onl_r'); }
+function digitalR(v){ return ccSpend(v) + dcSpend(v); }
+function atmCashR(v){ return g(v,'dc_atm_r') + g(v,'cc_atm_r'); }
+function ratio(a, b){ return b ? a/b : NaN; }
+
+const METRICS = [
+  { s:'Acceptance infrastructure' },
+  { k:'atm',      n:'ATMs & CRMs',            u:'units',   f:'units', c:v => g(v,'atm_on')+g(v,'atm_off') },
+  { k:'atm_on',   n:'On-site ATMs',           u:'in branches', f:'units', c:v => g(v,'atm_on') },
+  { k:'atm_off',  n:'Off-site ATMs',          u:'standalone',  f:'units', c:v => g(v,'atm_off') },
+  { k:'pos',      n:'PoS terminals',          u:'lakh',    f:'lakh',  c:v => g(v,'pos') },
+  { k:'micro_atm',n:'Micro ATMs',             u:'lakh',    f:'lakh',  c:v => g(v,'micro_atm') },
+  { k:'upi_qr',   n:'UPI QR codes',           u:'crore',   f:'crore', c:v => g(v,'upi_qr') },
+  { k:'bharat_qr',n:'Bharat QR codes',        u:'lakh',    f:'lakh',  c:v => g(v,'bharat_qr') },
+
+  { s:'Cards in force' },
+  { k:'cc',       n:'Credit cards',           u:'crore',   f:'crore', c:v => g(v,'cc') },
+  { k:'dc',       n:'Debit cards',            u:'crore',   f:'crore', c:v => g(v,'dc') },
+
+  { s:'Credit card usage (month)' },
+  { k:'cc_pos_r', n:'CC spend at PoS',        u:'₹ crore', f:'rscr',  c:v => g(v,'cc_pos_r')/CR },
+  { k:'cc_onl_r', n:'CC spend online',        u:'₹ crore', f:'rscr',  c:v => g(v,'cc_onl_r')/CR },
+  { k:'cc_tot_r', n:'CC total spend',         u:'₹ crore', f:'rscr',  c:v => ccSpend(v)/CR },
+  { k:'cc_pos_v', n:'CC PoS transactions',    u:'crore',   f:'crtxn', c:v => g(v,'cc_pos_v') },
+  { k:'cc_onl_v', n:'CC online transactions', u:'crore',   f:'crtxn', c:v => g(v,'cc_onl_v') },
+
+  { s:'Debit card usage (month)' },
+  { k:'dc_pos_r', n:'DC spend at PoS',        u:'₹ crore', f:'rscr',  c:v => g(v,'dc_pos_r')/CR },
+  { k:'dc_onl_r', n:'DC spend online',        u:'₹ crore', f:'rscr',  c:v => g(v,'dc_onl_r')/CR },
+  { k:'dc_atm_r', n:'ATM cash withdrawn',     u:'₹ crore', f:'rscr',  c:v => g(v,'dc_atm_r')/CR },
+  { k:'dc_atm_v', n:'ATM withdrawals',        u:'crore',   f:'crtxn', c:v => g(v,'dc_atm_v') },
+
+  { s:'Efficiency & behaviour', ratio:true },
+  { k:'spend_cc', n:'Spend per credit card',  u:'₹ / month', f:'rs', c:v => ratio(ccSpend(v)*1000, g(v,'cc')), r:1 },
+  { k:'spend_dc', n:'Spend per debit card',   u:'₹ / month', f:'rs', c:v => ratio(dcSpend(v)*1000, g(v,'dc')), r:1 },
+  { k:'tk_ccpos', n:'Avg CC PoS ticket',      u:'₹',       f:'rs',  c:v => ratio(g(v,'cc_pos_r')*1000, g(v,'cc_pos_v')), r:1 },
+  { k:'tk_cconl', n:'Avg CC online ticket',   u:'₹',       f:'rs',  c:v => ratio(g(v,'cc_onl_r')*1000, g(v,'cc_onl_v')), r:1 },
+  { k:'tk_atm',   n:'Avg ATM withdrawal',     u:'₹',       f:'rs',  c:v => ratio(g(v,'dc_atm_r')*1000, g(v,'dc_atm_v')), r:1 },
+  { k:'cc_onl_sh',n:'Online share of CC spend', u:'%',     f:'pct', c:v => 100*ratio(g(v,'cc_onl_r'), ccSpend(v)), r:1 },
+  { k:'dig_mix',  n:'Digital mix',            u:'% of value not cash', f:'pct', c:v => 100*ratio(digitalR(v), digitalR(v)+atmCashR(v)), r:1 },
+  { k:'cash_out', n:'Cash-out per ATM',       u:'₹ / month', f:'rs', c:v => ratio(g(v,'dc_atm_r')*1000, g(v,'atm_on')+g(v,'atm_off')), r:1 }
+];
+const MLIST = METRICS.filter(m => m.k);
+const MBY = Object.fromEntries(MLIST.map(m => [m.k, m]));
+
+/* metrics offered in the peer/cohort selectors — absolute ones first */
+const PEER_METRICS = ['cc','dc','cc_tot_r','cc_onl_r','cc_pos_r','dc_atm_r','dc_atm_v','atm','atm_off','pos','upi_qr','micro_atm','spend_cc','tk_atm','cc_onl_sh','dig_mix','cash_out'];
+const TREND_METRICS = ['cc','cc_tot_r','cc_onl_r','dc','dc_atm_r','atm','upi_qr','dig_mix','spend_cc','tk_atm'];
+
+/* ── data access ───────────────────────────────────────────────────── */
+function bankSeries(bank, period){ return bank.s[period] || null; }
+function metricVal(m, v){ if (!v) return NaN; const x = m.c(v); return isFinite(x) ? x : NaN; }
+function pctChange(now, then){
+  if (!isFinite(now) || !isFinite(then) || then === 0) return NaN;
+  return 100 * (now/then - 1);
+}
+/* ── reporting-discontinuity flags ─────────────────────────────────── */
+function flagFor(bankKey, metricKey, period){
+  const fl = (D.meta.flags || []).find(f =>
+    f.bank === bankKey && f.fields.includes(metricKey) && period >= f.from);
+  return fl || null;
+}
+function flagMark(fl){
+  return fl ? ` <abbr class="flag" title="${fl.note.replace(/"/g,'&quot;')}">⚠︎</abbr>` : '';
+}
+
+function chgClass(p, invert){
+  if (!isFinite(p) || Math.abs(p) < 0.05) return 'flat';
+  const good = invert ? p < 0 : p > 0;
+  return good ? 'up' : 'down';
+}
+function fmtChg(p){
+  if (!isFinite(p)) return '—';
+  return (p > 0 ? '+' : '') + fmtNum(p, 1) + '%';
+}
+/* For metrics that are already percentages, a percentage *change* is unreadable
+   ("digital mix 52.2%, +6.9%" means what?). Report those in percentage points. */
+function isPct(m){ return m.f === 'pct'; }
+/* a change that rounds to zero at the display precision should read as such,
+   not as a misleading signed "−0.00 Cr" */
+function signedChange(m, chg){
+  if (!isFinite(chg)) return '—';
+  const body = FMT[m.f](Math.abs(chg));
+  if (body === '—' || !/[1-9]/.test(body)) return '≈0';
+  return (chg > 0 ? '+' : '−') + body;
+}
+function deltaOf(m, now, then){
+  if (!isFinite(now) || !isFinite(then)) return NaN;
+  return isPct(m) ? (now - then) : pctChange(now, then);
+}
+function fmtDelta(m, now, then){
+  const d = deltaOf(m, now, then);
+  if (!isFinite(d)) return '—';
+  return isPct(m) ? (d > 0 ? '+' : '−') + fmtNum(Math.abs(d), 1) + 'pp' : fmtChg(d);
+}
+
+/* ═════════════════════════ HEAD TO HEAD ═════════════════════════ */
+let A_KEY, B_KEY, TREND_M = 'cc_tot_r';
+
+function bank(k){ return BANKS.find(b => b.key === k); }
+
+function renderH2H(){
+  const A = bank(A_KEY), B = bank(B_KEY);
+  const av = bankSeries(A, LATEST), bv = bankSeries(B, LATEST);
+  const ap = bankSeries(A, PREV_Y), bp = bankSeries(B, PREV_Y);
+
+  document.getElementById('th-a').innerHTML = '<span class="dot-a"></span> ' + A.name;
+  document.getElementById('th-b').innerHTML = '<span class="dot-b"></span> ' + B.name;
+  document.getElementById('cmp-sub').textContent =
+    `${A.full} vs ${B.full} — ${D.meta.latestLabel}, with year-on-year change against ${LBL[P.indexOf(PREV_Y)]}`;
+
+  /* table */
+  const rows = [];
+  let winA = 0, winB = 0;
+  const strengthsA = [], strengthsB = [];
+
+  for (const m of METRICS){
+    if (m.s){ rows.push(`<tr class="grp"><td colspan="6">${m.s}</td></tr>`); continue; }
+    const x = metricVal(m, av), y = metricVal(m, bv);
+    if (!isFinite(x) && !isFinite(y)) continue;
+    const xPrev = metricVal(m, ap), yPrev = metricVal(m, bp);
+    const xp = deltaOf(m, x, xPrev), yp = deltaOf(m, y, yPrev);
+    const fx = FMT[m.f], hasX = isFinite(x) && x > 0, hasY = isFinite(y) && y > 0;
+    const flA = flagFor(A.key, m.k, LATEST), flB = flagFor(B.key, m.k, LATEST);
+
+    /* winner: higher is better on every metric here except avg ticket sizes and
+       off-site ATMs (neutral), and any metric carrying a reporting flag */
+    let aWin = false, bWin = false;
+    if (hasX && hasY && !flA && !flB && m.k !== 'tk_atm' && m.k !== 'tk_ccpos' && m.k !== 'tk_cconl' && m.k !== 'atm_off'){
+      if (x > y * 1.001){ aWin = true; winA++; }
+      else if (y > x * 1.001){ bWin = true; winB++; }
+    }
+    if (aWin && x > y * 1.5) strengthsA.push(m.n);
+    if (bWin && y > x * 1.5) strengthsB.push(m.n);
+
+    /* split bar — only meaningful for additive metrics */
+    let bar = '<span style="color:var(--text3);font-size:11px">n/a</span>';
+    if (!m.r && hasX && hasY){
+      const t = x + y, pa = 100*x/t;
+      bar = `<span class="minibar"><i class="a" style="width:${pa}%"></i><i class="b" style="width:${100-pa}%"></i></span>`;
+    } else if (m.r && hasX && hasY){
+      const mx = Math.max(x, y), pa = 100*x/(x+y);
+      bar = `<span class="minibar"><i class="a" style="width:${pa}%"></i><i class="b" style="width:${100-pa}%"></i></span>`;
+    }
+
+    rows.push(`<tr>
+      <td><span class="m-name">${m.n}</span><br><span class="m-unit">${m.u}</span></td>
+      <td class="val${aWin ? ' win' : ''}">${hasX ? fx(x) : '—'}${flagMark(flA)}</td>
+      <td class="yoy ${flA ? 'flat' : chgClass(xp)}">${fmtDelta(m, x, xPrev)}</td>
+      <td class="barcell">${bar}</td>
+      <td class="val${bWin ? ' win' : ''}">${hasY ? fx(y) : '—'}${flagMark(flB)}</td>
+      <td class="yoy ${flB ? 'flat' : chgClass(yp)}">${fmtDelta(m, y, yPrev)}</td>
+    </tr>`);
+  }
+  document.getElementById('cmp-body').innerHTML = rows.join('');
+
+  /* verdict cards */
+  const total = winA + winB;
+  document.getElementById('vc-a').innerHTML = verdictCard(A, winA, total, strengthsA);
+  document.getElementById('vc-b').innerHTML = verdictCard(B, winB, total, strengthsB);
+
+  document.getElementById('cmp-note').innerHTML =
+    `Leads are counted on comparable metrics only — average ticket sizes and off-site ATM counts are shown for context but not scored, since a bigger number is not automatically better. ` +
+    `“n/a” bars appear where two banks' figures cannot be meaningfully added together.`;
+
+  drawTrend(); drawMix(A, B, av, bv); drawRadar(A, B, av, bv);
+  syncURL();
+}
+
+function verdictCard(bk, wins, total, strengths){
+  const grp = D.groupNames[bk.group] || bk.group;
+  const pct = total ? Math.round(100*wins/total) : 0;
+  return `<div class="vcard-name">${bk.full}</div>
+    <div class="vcard-cat">${grp}</div>
+    <div class="vcard-wins">${wins}</div>
+    <div class="vcard-wl">of ${total} comparable metrics led (${pct}%)</div>
+    <div class="vcard-strengths">${
+      strengths.length
+        ? 'Clear leads: ' + strengths.slice(0,6).map(s => `<span>${s}</span>`).join('')
+        : '<span style="color:var(--text3)">No metric where it leads by more than 50%.</span>'
+    }</div>`;
+}
+
+function drawTrend(){
+  const m = MBY[TREND_M], A = bank(A_KEY), B = bank(B_KEY);
+  const mk = bk => P.map(p => { const v = bankSeries(bk, p); const x = v ? metricVal(m, v) : NaN; return isFinite(x) ? x : null; });
+  charts.trend?.destroy();
+  charts.trend = new Chart(document.getElementById('c-trend'), {
+    type:'line',
+    data:{ labels:LBL, datasets:[
+      { label:A.name, data:mk(A), borderColor:CH.a, backgroundColor:'rgba(26,86,219,.07)', tension:.3, pointRadius:3.5, borderWidth:2.5, fill:true, spanGaps:true },
+      { label:B.name, data:mk(B), borderColor:CH.b, backgroundColor:'transparent', tension:.3, pointRadius:3.5, borderWidth:2.5, spanGaps:true }
+    ]},
+    options:{ ...chartDefaults,
+      plugins:{ ...chartDefaults.plugins,
+        tooltip:{ ...chartDefaults.plugins.tooltip, callbacks:{ label: c => `${c.dataset.label}: ${FMT[m.f](c.parsed.y)}` } } },
+      scales:{ ...chartDefaults.scales,
+        y:{ ...chartDefaults.scales.y, ticks:{ ...chartDefaults.scales.y.ticks, callback: v => FMT[m.f](v) } } } }
+  });
+}
+
+function drawMix(A, B, av, bv){
+  const parts = [
+    ['CC online', v => g(v,'cc_onl_r'), CH.a],
+    ['CC PoS',    v => g(v,'cc_pos_r'), CH.purple],
+    ['DC PoS',    v => g(v,'dc_pos_r'), CH.green],
+    ['DC online', v => g(v,'dc_onl_r'), CH.amber],
+    ['ATM cash',  v => g(v,'dc_atm_r') + g(v,'cc_atm_r'), CH.red]
+  ];
+  const share = v => { const t = parts.reduce((s,p) => s + p[1](v), 0); return parts.map(p => t ? 100*p[1](v)/t : 0); };
+  const sa = share(av), sb = share(bv);
+  charts.mix?.destroy();
+  charts.mix = new Chart(document.getElementById('c-mix'), {
+    type:'bar',
+    data:{ labels:[A.name, B.name],
+      datasets: parts.map((p, i) => ({ label:p[0], data:[sa[i], sb[i]], backgroundColor:p[2], borderRadius:3, barPercentage:.6 })) },
+    options:{ ...chartDefaults, indexAxis:'y',
+      plugins:{ ...chartDefaults.plugins,
+        tooltip:{ ...chartDefaults.plugins.tooltip, callbacks:{ label: c => `${c.dataset.label}: ${fmtNum(c.parsed.x,1)}%` } } },
+      scales:{
+        x:{ ...chartDefaults.scales.x, stacked:true, max:100, ticks:{ ...chartDefaults.scales.x.ticks, callback: v => v + '%' } },
+        y:{ ...chartDefaults.scales.y, stacked:true, grid:{ display:false } } } }
+  });
+}
+
+function drawRadar(A, B, av, bv){
+  const keys = ['cc','dc','cc_tot_r','upi_qr','atm','pos','dc_atm_r'];
+  const labels = keys.map(k => MBY[k].n);
+  const idx = (v, other) => keys.map(k => {
+    const x = metricVal(MBY[k], v), y = metricVal(MBY[k], other);
+    const mx = Math.max(x || 0, y || 0);
+    return mx ? 100*(x || 0)/mx : 0;
+  });
+  charts.radar?.destroy();
+  charts.radar = new Chart(document.getElementById('c-radar'), {
+    type:'radar',
+    data:{ labels, datasets:[
+      { label:A.name, data:idx(av, bv), borderColor:CH.a, backgroundColor:'rgba(26,86,219,.14)', pointBackgroundColor:CH.a, borderWidth:2, pointRadius:3 },
+      { label:B.name, data:idx(bv, av), borderColor:CH.b, backgroundColor:'rgba(227,115,61,.14)', pointBackgroundColor:CH.b, borderWidth:2, pointRadius:3 }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:chartDefaults.plugins.legend,
+        tooltip:{ ...chartDefaults.plugins.tooltip, callbacks:{ label: c => `${c.dataset.label}: ${fmtNum(c.parsed.r,0)} / 100` } } },
+      scales:{ r:{ beginAtZero:true, max:100, grid:{ color:'rgba(0,0,0,.07)' }, angleLines:{ color:'rgba(0,0,0,.07)' },
+        pointLabels:{ font:{ size:10 }, color:'#4a5568' }, ticks:{ display:false } } } }
+  });
+}
+
+/* ═════════════════════════ PEER GROUPS ═════════════════════════ */
+let GRP = 'PVT', PMETRIC = 'cc', BASIS = '2025-06', SORT = { by:'val', dir:-1 };
+
+function groupBanks(grp){
+  return BANKS.filter(b => b.group === grp && b.s[LATEST]);
+}
+
+function renderPeers(){
+  const m = MBY[PMETRIC];
+  const members = groupBanks(GRP);
+  const rows = members.map(b => {
+    const v = bankSeries(b, LATEST), o = bankSeries(b, BASIS);
+    const val = metricVal(m, v), prev = o ? metricVal(m, o) : NaN;
+    return { key:b.key, name:b.name, full:b.full, val:isFinite(val) ? val : 0,
+             prev:isFinite(prev) ? prev : NaN, chg:(isFinite(val) && isFinite(prev)) ? val - prev : NaN,
+             pct:deltaOf(m, val, prev), flag:flagFor(b.key, m.k, LATEST) };
+  }).filter(r => r.val !== 0 || isFinite(r.prev));
+
+  const totalNow = m.r
+    ? metricVal(m, D.groups[GRP].s[LATEST])
+    : rows.reduce((s,r) => s + r.val, 0);
+  const totalPrev = m.r
+    ? metricVal(m, D.groups[GRP].s[BASIS])
+    : rows.reduce((s,r) => s + (isFinite(r.prev) ? r.prev : 0), 0);
+  const allNow = metricVal(m, D.groups.ALL.s[LATEST]);
+
+  rows.forEach(r => r.share = (!m.r && totalNow) ? 100*r.val/totalNow : NaN);
+
+  /* sort */
+  const dir = SORT.dir;
+  rows.sort((x, y) => {
+    let a = x[SORT.by], b = y[SORT.by];
+    if (SORT.by === 'name'){ return dir * x.name.localeCompare(y.name); }
+    if (SORT.by === 'rank'){ a = x.val; b = y.val; }
+    if (!isFinite(a)) a = -Infinity; if (!isFinite(b)) b = -Infinity;
+    return dir * (a - b);
+  });
+
+  const basisLabel = LBL[P.indexOf(BASIS)];
+
+  /* stat tiles */
+  const grpName = D.groupNames[GRP];
+  document.getElementById('grp-stats').innerHTML = `
+    <div class="stat"><div class="stat-label">${grpName}</div>
+      <div class="stat-value">${members.length}</div><div class="stat-sub">institutions reporting</div></div>
+    <div class="stat"><div class="stat-label">${m.n} — cohort</div>
+      <div class="stat-value">${FMT[m.f](totalNow)}</div>
+      <div class="stat-sub">${m.r ? 'cohort-wide figure' : 'sum of all members'}</div></div>
+    <div class="stat"><div class="stat-label">vs ${basisLabel}</div>
+      <div class="stat-value" style="color:${chgClass(deltaOf(m, totalNow, totalPrev)) === 'down' ? 'var(--danger)' : 'var(--accent2)'}">${fmtDelta(m, totalNow, totalPrev)}</div>
+      <div class="stat-sub">cohort change</div></div>
+    <div class="stat"><div class="stat-label">Share of all banks</div>
+      <div class="stat-value">${m.r ? '—' : fmtNum(100*totalNow/allNow, 1) + '%'}</div>
+      <div class="stat-sub">${m.r ? 'ratio metric' : 'of the ' + FMT[m.f](allNow) + ' system total'}</div></div>`;
+
+  document.getElementById('league-title').textContent = `${grpName} — ${m.n}`;
+  document.getElementById('league-sub').textContent =
+    `${D.meta.latestLabel}, ranked. Change measured against ${basisLabel}. Figures in ${m.u}.`;
+
+  /* table */
+  const maxV = Math.max(...rows.map(r => Math.abs(r.val)), 1);
+  document.getElementById('league-body').innerHTML = rows.map((r, i) => `
+    <tr>
+      <td class="rank">${i+1}</td>
+      <td><span class="m-name">${r.full}</span>${flagMark(r.flag)}</td>
+      <td class="val">${FMT[m.f](r.val)}</td>
+      <td class="yoy ${r.flag ? 'flat' : chgClass(r.pct)}">${isPct(m)
+        ? (isFinite(r.prev) ? '<span style="color:var(--text3)">was ' + FMT[m.f](r.prev) + '</span>' : '—')
+        : signedChange(m, r.chg)}</td>
+      <td class="yoy ${r.flag ? 'flat' : chgClass(r.pct)}">${fmtDelta(m, r.val, r.prev)}</td>
+      <td class="share-cell">${isFinite(r.share)
+        ? fmtNum(r.share,1) + '%<div class="sharebar"><i style="width:' + Math.min(100, r.share) + '%"></i></div>'
+        : '<span style="color:var(--text3)">—</span>'}</td>
+    </tr>`).join('');
+
+  const totDelta = deltaOf(m, totalNow, totalPrev);
+  document.getElementById('league-foot').innerHTML = `<tr class="tfoot">
+    <td></td><td>${grpName} ${m.r ? 'overall' : 'total'}</td>
+    <td>${FMT[m.f](totalNow)}</td>
+    <td class="${chgClass(totDelta)}">${isPct(m)
+      ? (isFinite(totalPrev) ? '<span style="color:var(--text3)">was ' + FMT[m.f](totalPrev) + '</span>' : '—')
+      : signedChange(m, totalNow - totalPrev)}</td>
+    <td class="${chgClass(totDelta)}">${fmtDelta(m, totalNow, totalPrev)}</td>
+    <td>${m.r ? '' : '100%'}</td></tr>`;
+
+  /* header sort marks */
+  document.querySelectorAll('#league-table th').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.sort === SORT.by);
+  });
+
+  /* chart — top 15 */
+  const top = rows.slice().sort((a,b) => b.val - a.val).slice(0, 15);
+  charts.league?.destroy();
+  charts.league = new Chart(document.getElementById('c-league'), {
+    type:'bar',
+    data:{ labels:top.map(r => r.name),
+      datasets:[{ label:m.n, data:top.map(r => r.val),
+        backgroundColor:top.map(r => isFinite(r.pct) && r.pct < 0 ? CH.red : COHORT_COLORS[GRP] || CH.a),
+        borderRadius:3 }] },
+    options:{ ...chartDefaults, indexAxis:'y',
+      plugins:{ ...chartDefaults.plugins, legend:{ display:false },
+        tooltip:{ ...chartDefaults.plugins.tooltip, callbacks:{
+          label: c => `${FMT[m.f](c.parsed.x)}  (${fmtChg(top[c.dataIndex].pct)} vs ${basisLabel})` } } },
+      scales:{
+        x:{ ...chartDefaults.scales.x, ticks:{ ...chartDefaults.scales.x.ticks, callback: v => FMT[m.f](v) } },
+        y:{ ...chartDefaults.scales.y, grid:{ display:false }, ticks:{ ...chartDefaults.scales.y.ticks, autoSkip:false, font:{size:10.5} } } } }
+  });
+
+  renderLeagueNotes(rows, m, totalNow, basisLabel, grpName);
+}
+
+function renderLeagueNotes(rows, m, totalNow, basisLabel, grpName){
+  const byVal = rows.slice().filter(r => r.val > 0).sort((a,b) => b.val - a.val);
+  /* growth callouts only make sense off a base that is material within the cohort —
+     otherwise a bank going from 12 cards to 4,000 shows as +33,000% */
+  const lead = byVal.length ? byVal[0].val : 0;
+  const material = r => isFinite(r.pct) && r.val > 0 && !r.flag &&
+                        r.prev >= lead * 0.02 && r.val >= lead * 0.02;
+  const byPct = rows.slice().filter(material).sort((a,b) => b.pct - a.pct);
+  const notes = [];
+
+  if (byVal.length){
+    const top1 = byVal[0];
+    const top3 = byVal.slice(0,3).reduce((s,r) => s + r.val, 0);
+    if (!m.r && totalNow){
+      notes.push(['🥇', `<strong>${top1.full} leads the cohort</strong> at ${FMT[m.f](top1.val)} — ${fmtNum(100*top1.val/totalNow,1)}% of all ${grpName.toLowerCase()}. The top three together hold ${fmtNum(100*top3/totalNow,1)}%.`]);
+    } else {
+      notes.push(['🥇', `<strong>${top1.full} ranks first</strong> on ${m.n.toLowerCase()} at ${FMT[m.f](top1.val)}, against a cohort figure of ${FMT[m.f](totalNow)}.`]);
+    }
+  }
+  if (byPct.length){
+    const fast = byPct[0], slow = byPct[byPct.length-1];
+    if (isFinite(fast.pct)) notes.push(['📈', `<strong>${fast.full} is the fastest mover</strong> — ${fmtChg(fast.pct)} since ${basisLabel}, from ${FMT[m.f](fast.prev)} to ${FMT[m.f](fast.val)}.`]);
+    if (isFinite(slow.pct) && slow.key !== fast.key) notes.push([slow.pct < 0 ? '📉' : '🐢', `<strong>${slow.full} sits at the other end</strong> at ${fmtChg(slow.pct)}, ${slow.pct < 0 ? 'shrinking' : 'growing slowest'} in the cohort.`]);
+    const scored = rows.filter(r => isFinite(r.pct) && r.val > 0 && !r.flag);
+    const shrinking = scored.filter(r => r.pct < 0).length;
+    if (shrinking) notes.push(['⚖️', `<strong>${shrinking} of ${scored.length} ${shrinking === 1 ? 'institution is' : 'institutions are'} going backwards</strong> on this metric since ${basisLabel} — the cohort average hides a genuine split.`]);
+    if (byPct.length < scored.length) notes.push(['🔍', `Growth callouts above are limited to institutions holding at least 2% of the cohort leader's figure, so a very small base cannot masquerade as the fastest grower.`]);
+  }
+  if (!notes.length) notes.push(['ℹ️', 'No institution in this cohort reports this metric.']);
+
+  document.getElementById('league-notes').innerHTML = notes.map(([i,t]) =>
+    `<div class="highlight-item"><span class="hi-icon">${i}</span><span>${t}</span></div>`).join('');
+}
+
+/* ═════════════════════════ COHORT TRENDS ═════════════════════════ */
+let CMETRIC = 'cc_tot_r', CVIEW = 'abs';
+const COHORTS = ['PSU','PVT','SFB','PMT','FRN'];
+
+function renderCohort(){
+  const m = MBY[CMETRIC];
+  const series = {};
+  for (const c of COHORTS){
+    series[c] = P.map(p => {
+      const v = D.groups[c].s[p]; if (!v) return null;
+      const x = metricVal(m, v); return isFinite(x) ? x : null;
+    });
+  }
+  const allS = P.map(p => metricVal(m, D.groups.ALL.s[p]));
+
+  let data = {}, yFmt = v => FMT[m.f](v), yTitle = m.n;
+  if (CVIEW === 'abs'){
+    data = series;
+  } else if (CVIEW === 'idx'){
+    for (const c of COHORTS){
+      const base = series[c][0];
+      data[c] = series[c].map(v => (base && v != null) ? 100*v/base : null);
+    }
+    yFmt = v => fmtNum(v, 0); yTitle = 'Index (Mar \'24 = 100)';
+  } else {
+    for (const c of COHORTS){
+      data[c] = series[c].map((v, i) => (v != null && allS[i]) ? 100*v/allS[i] : null);
+    }
+    yFmt = v => fmtNum(v, 1) + '%'; yTitle = 'Share of all-bank total';
+  }
+
+  document.getElementById('cohort-title').textContent = `${m.n} by bank cohort — ${yTitle}`;
+
+  charts.cohort?.destroy();
+  charts.cohort = new Chart(document.getElementById('c-cohort'), {
+    type:'line',
+    data:{ labels:LBL, datasets:COHORTS.map(c => ({
+      label:D.groupNames[c], data:data[c], borderColor:COHORT_COLORS[c],
+      backgroundColor:'transparent', tension:.3, pointRadius:3, borderWidth:2.2, spanGaps:true })) },
+    options:{ ...chartDefaults,
+      plugins:{ ...chartDefaults.plugins,
+        tooltip:{ ...chartDefaults.plugins.tooltip, callbacks:{ label: c => `${c.dataset.label}: ${yFmt(c.parsed.y)}` } } },
+      scales:{ ...chartDefaults.scales,
+        y:{ ...chartDefaults.scales.y, ticks:{ ...chartDefaults.scales.y.ticks, callback: yFmt } } } }
+  });
+
+  /* notes */
+  const last = {}, first = {}, yoy = {};
+  const iY = P.indexOf(PREV_Y);
+  for (const c of COHORTS){
+    last[c] = series[c][series[c].length-1];
+    first[c] = series[c][0];
+    yoy[c] = deltaOf(m, series[c][series[c].length-1], series[c][iY]);
+  }
+  const dl = c => isPct(m) ? (yoy[c] > 0 ? '+' : '−') + fmtNum(Math.abs(yoy[c]),1) + 'pp' : fmtChg(yoy[c]);
+  const ranked = COHORTS.filter(c => isFinite(last[c]) && last[c] > 0).sort((a,b) => last[b]-last[a]);
+  const growth = COHORTS.filter(c => isFinite(yoy[c])).sort((a,b) => yoy[b]-yoy[a]);
+  const notes = [];
+  if (ranked.length){
+    const t = allS[allS.length-1];
+    notes.push(['🏆', `<strong>${D.groupNames[ranked[0]]} lead on ${m.n.toLowerCase()}</strong> at ${FMT[m.f](last[ranked[0]])}${(!m.r && t) ? ` — ${fmtNum(100*last[ranked[0]]/t,1)}% of the system` : ''}.`]);
+  }
+  if (growth.length){
+    notes.push(['⚡', `<strong>${D.groupNames[growth[0]]} are moving fastest</strong> at ${dl(growth[0])} year on year, versus ${dl(growth[growth.length-1])} for ${D.groupNames[growth[growth.length-1]].toLowerCase()}.`]);
+  }
+  const shrink = growth.filter(c => yoy[c] < 0).map(c => D.groupNames[c]);
+  if (shrink.length) notes.push(['📉', `<strong>Contracting year on year:</strong> ${shrink.join(', ')}.`]);
+  document.getElementById('cohort-notes').innerHTML = notes.map(([i,t]) =>
+    `<div class="highlight-item"><span class="hi-icon">${i}</span><span>${t}</span></div>`).join('');
+
+  renderCohortTable();
+}
+
+function renderCohortTable(){
+  const keys = ['atm','pos','upi_qr','cc','dc','cc_tot_r','dc_atm_r','dig_mix','spend_cc'];
+  document.getElementById('cohort-head').innerHTML =
+    '<tr><th style="cursor:default">Cohort</th>' +
+    keys.map(k => `<th style="cursor:default">${MBY[k].n}</th>`).join('') + '</tr>';
+  document.getElementById('cohort-body').innerHTML = COHORTS.concat(['ALL']).map(c => {
+    const v = D.groups[c].s[LATEST], o = D.groups[c].s[PREV_Y];
+    return `<tr${c === 'ALL' ? ' class="tfoot"' : ''}>
+      <td><span class="m-name">${D.groupNames[c]}</span></td>` +
+      keys.map(k => {
+        const m = MBY[k];
+        const x = metricVal(m, v), prev = metricVal(m, o), p = deltaOf(m, x, prev);
+        return `<td>${isFinite(x) && x !== 0 ? FMT[m.f](x) : '—'}<br><span class="yoy ${chgClass(p)}">${fmtDelta(m, x, prev)}</span></td>`;
+      }).join('') + '</tr>';
+  }).join('');
+}
+
+/* ═════════════════════════ WIRING ═════════════════════════ */
+function opt(v, t, sel){ return `<option value="${v}"${v === sel ? ' selected' : ''}>${t}</option>`; }
+
+function bankOptions(sel){
+  const order = ['PSU','PVT','SFB','PMT','FRN'];
+  return order.map(gp => {
+    const list = BANKS.filter(b => b.group === gp && b.s[LATEST])
+                      .sort((a,b) => a.full.localeCompare(b.full));
+    if (!list.length) return '';
+    return `<optgroup label="${D.groupNames[gp]}">` +
+      list.map(b => opt(b.key, b.full, sel)).join('') + '</optgroup>';
+  }).join('');
+}
+
+function syncURL(){
+  const u = new URL(location.href);
+  u.searchParams.set('a', A_KEY); u.searchParams.set('b', B_KEY);
+  history.replaceState(null, '', u);
+}
+
+function switchTab(id){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn[data-tab]').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('visible');
+  document.querySelector(`.nav-btn[data-tab="${id}"]`).classList.add('active');
+  if (id === 'peers') renderPeers();
+  if (id === 'cohort') renderCohort();
+}
+
+function init(data){
+  D = data;
+  F = Object.fromEntries(D.fields.map((f,i) => [f,i]));
+  P = D.periods; LBL = D.labels; BANKS = D.banks;
+  LATEST = D.meta.latest; PREV_Y = D.meta.prevYear; PREV_Q = D.meta.prevQuarter;
+
+  document.getElementById('boot').style.display = 'none';
+  document.getElementById('tab-h2h').classList.add('visible');
+  document.getElementById('page-sub').textContent =
+    `Every scheduled bank, ${LBL[0]} to ${LBL[LBL.length-1]} — RBI ATM, acceptance-infrastructure and card statistics. ${BANKS.length} institutions, ${P.length} reporting months.`;
+
+  /* default pair, overridable by ?a=&b= */
+  const q = new URLSearchParams(location.search);
+  const has = k => BANKS.some(b => b.key === k && b.s[LATEST]);
+  A_KEY = has(q.get('a')) ? q.get('a') : 'HDFC BANK';
+  B_KEY = has(q.get('b')) ? q.get('b') : 'ICICI BANK';
+
+  const selA = document.getElementById('sel-a'), selB = document.getElementById('sel-b');
+  selA.innerHTML = bankOptions(A_KEY);
+  selB.innerHTML = bankOptions(B_KEY);
+  selA.onchange = () => { A_KEY = selA.value; renderH2H(); };
+  selB.onchange = () => { B_KEY = selB.value; renderH2H(); };
+  document.getElementById('swap').onclick = () => {
+    [A_KEY, B_KEY] = [B_KEY, A_KEY];
+    selA.value = A_KEY; selB.value = B_KEY; renderH2H();
+  };
+
+  /* trend metric chips */
+  document.getElementById('trend-chips').innerHTML = TREND_METRICS.map(k =>
+    `<button class="chip${k === TREND_M ? ' active' : ''}" data-m="${k}">${MBY[k].n}</button>`).join('');
+  document.getElementById('trend-chips').onclick = e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    TREND_M = b.dataset.m;
+    document.querySelectorAll('#trend-chips .chip').forEach(c => c.classList.toggle('active', c === b));
+    drawTrend();
+  };
+
+  /* peer controls */
+  const selG = document.getElementById('sel-group');
+  selG.innerHTML = ['PVT','PSU','SFB','PMT','FRN'].map(k => opt(k, D.groupNames[k], GRP)).join('');
+  selG.onchange = () => { GRP = selG.value; renderPeers(); };
+
+  const selM = document.getElementById('sel-metric');
+  selM.innerHTML = PEER_METRICS.map(k => opt(k, MBY[k].n, PMETRIC)).join('');
+  selM.onchange = () => { PMETRIC = selM.value; renderPeers(); };
+
+  const selBasis = document.getElementById('sel-basis');
+  selBasis.innerHTML = [[PREV_Y,'Same month last year (YoY)'], [PREV_Q,'Previous quarter (QoQ)'], [P[1],'Two years ago']]
+    .map(([v,t]) => opt(v, t, BASIS)).join('');
+  selBasis.onchange = () => { BASIS = selBasis.value; renderPeers(); };
+
+  document.querySelectorAll('#league-table th').forEach(th => {
+    th.onclick = () => {
+      const by = th.dataset.sort;
+      SORT.dir = (SORT.by === by) ? -SORT.dir : (by === 'name' ? 1 : -1);
+      SORT.by = by; renderPeers();
+    };
+  });
+
+  /* cohort controls */
+  const selCM = document.getElementById('sel-cmetric');
+  selCM.innerHTML = PEER_METRICS.map(k => opt(k, MBY[k].n, CMETRIC)).join('');
+  selCM.onchange = () => { CMETRIC = selCM.value; renderCohort(); };
+  const selCV = document.getElementById('sel-cview');
+  selCV.onchange = () => { CVIEW = selCV.value; renderCohort(); };
+
+  document.querySelectorAll('.nav-btn[data-tab]').forEach(b => {
+    b.onclick = () => switchTab(b.dataset.tab);
+  });
+
+  document.getElementById('footnote').innerHTML =
+    `<strong>Source:</strong> ${D.meta.source}. Latest month: ${D.meta.latestLabel}. ` +
+    D.meta.notes.join(' ') +
+    ` Bank names follow the RBI's reporting list; institutions that merged or exited during the period appear only in the months they reported.` +
+    (D.meta.flags || []).map(f => `<br><strong>⚠︎ Reporting note:</strong> ${f.note}`).join('');
+
+  renderH2H();
+}
+
+fetch('../payments-data.json')
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(init)
+  .catch(e => {
+    document.getElementById('boot').innerHTML =
+      'Could not load the dataset. Please refresh the page.<br><span style="font-size:11px">' + e.message + '</span>';
+  });
+</script>
+</body>
+</html>

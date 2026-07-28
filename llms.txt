@@ -5,7 +5,8 @@
 ## Live dashboards (interactive, primary data)
 
 - [RBI Annual Report 2025-26 Dashboard](https://vatayanlabs.com/dashboards/rbi-annual-report-2025-26/): India credit growth, payments, money supply and financial inclusion from the RBI Annual Report.
-- [India Payments Intelligence](https://vatayanlabs.com/dashboards/india-payments/): UPI, cards and ATM trends from RBI FY26 data, including India's first digital-majority month.
+- [India Payments Intelligence](https://vatayanlabs.com/dashboards/india-payments/): UPI QR, credit card, debit card and ATM trends from RBI monthly returns, March 2024 to June 2026 — including the digital-vs-cash crossover and the four consecutive months digital has held the majority.
+- [Bank vs Bank — Payments Comparison](https://vatayanlabs.com/dashboards/india-payments/compare/): Head-to-head comparison of any two Indian banks across 25 RBI payment metrics, plus peer-group league tables for PSUs, private banks, small finance banks, payments banks and foreign banks.
 - [India Banking Scorecard](https://vatayanlabs.com/dashboards/indian-banks/): Quarterly GNPA, NIM, RoA, RoE, CRAR, CASA and PAT for 15 Indian banks and NBFCs, Q1FY23-Q4FY26.
 
 ## Sector studies (long-form research)
