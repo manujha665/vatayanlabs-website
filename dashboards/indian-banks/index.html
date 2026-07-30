@@ -19,11 +19,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>India Banking Scorecard — Vatayan Labs</title>
-  <meta name="description" content="Interactive scorecard tracking 14 Indian banks and NBFCs across NIM, GNPA, RoA, RoE, CRAR, CASA and PAT from Q1FY23 to Q4FY26.">
+  <meta name="description" content="Quarterly scorecard tracking 22 Indian banks and NBFCs on reported PAT, Gross NPA and Net NPA from Q2FY25 to Q1FY27, plus a market cap, valuation and returns snapshot.">
   <link rel="stylesheet" href="/dashboards/indian-banks/legacy.css">
   <link rel="canonical" href="https://vatayanlabs.com/dashboards/indian-banks/">
   <meta property="og:title" content="India Banking Scorecard — Vatayan Labs">
-  <meta property="og:description" content="Interactive scorecard tracking 14 Indian banks and NBFCs across NIM, GNPA, RoA, RoE, CRAR, CASA and PAT from Q1FY23 to Q4FY26.">
+  <meta property="og:description" content="Quarterly scorecard tracking 22 Indian banks and NBFCs on reported PAT, Gross NPA and Net NPA from Q2FY25 to Q1FY27.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vatayanlabs.com/dashboards/indian-banks/">
 <meta property="og:image" content="https://vatayanlabs.com/assets/og/og-dashboards.png">
@@ -116,15 +116,15 @@
     .ibs-pill.on { background: #3A8DDE; color: #fff; }
     .ibs-cats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .ibs-cat-btn { padding: 4px 12px; border-radius: 14px; cursor: pointer; font-size: 11px; font-weight: 600; transition: all .15s; font-family: inherit; }
-    .ibs-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--tab-line); margin-bottom: 20px; }
+    .ibs-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--tab-line); margin-bottom: 20px; flex-wrap: wrap; }
     .ibs-tab { padding: 9px 18px; border: none; border-bottom: 2px solid transparent; background: transparent; color: var(--tab-off); font-weight: 400; font-size: 12px; cursor: pointer; margin-bottom: -2px; font-family: inherit; }
     .ibs-tab.on { color: #3A8DDE; font-weight: 700; border-bottom-color: #3A8DDE; }
     .ibs-tab-panel { display: none; }
     .ibs-tab-panel.on { display: block; }
 
-    /* ── Heatmap table — fixed layout for equal metric columns ── */
+    /* ── Heatmap table ── */
     .ibs-table-wrap { overflow-x: auto; }
-    .ibs-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1060px; table-layout: fixed; }
+    .ibs-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1080px; table-layout: fixed; }
     .ibs-table thead tr { background: #1A2E4A; }
     .ibs-table th {
       padding: 8px 6px; text-align: center; color: #94A3B8; font-weight: 600;
@@ -136,9 +136,18 @@
     .ibs-table td { padding: 7px 6px; border-bottom: 1px solid var(--border); text-align: center; font-weight: 600; font-size: 11px; font-family: 'Courier New', monospace; }
     .ibs-table td.name-col { text-align: left; font-family: inherit; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 7px 10px; }
     .ibs-table td.cat-col { text-align: center; font-family: inherit; }
-    .ibs-table .cat-chip { padding: 2px 5px; border-radius: 8px; font-size: 9px; font-weight: 600; white-space: nowrap; display: inline-block; line-height: 1.5; }
+    .ibs-table .ibs-cat-chip { padding: 2px 5px; border-radius: 8px; font-size: 9px; font-weight: 600; white-space: nowrap; display: inline-block; line-height: 1.5; }
     .ibs-row-even { background: var(--row-even); }
     .ibs-row-odd  { background: var(--row-odd); }
+
+    /* ── Snapshot table ── */
+    .ibs-snap { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 1040px; }
+    .ibs-snap thead tr { background: #1A2E4A; }
+    .ibs-snap th { padding: 8px 8px; color: #94A3B8; font-weight: 600; font-size: 10px; border-bottom: 2px solid #2E5DA8; text-align: center; }
+    .ibs-snap th:first-child { text-align: left; }
+    .ibs-snap td { padding: 7px 8px; border-bottom: 1px solid var(--border); text-align: center; font-size: 11px; font-family: 'Courier New', monospace; color: var(--text); }
+    .ibs-snap td:first-child { text-align: left; font-family: inherit; font-weight: 600; }
+    .ibs-snap td.na { color: var(--muted); }
 
     /* ── Charts ── */
     .ibs-chart-area { position: relative; height: 320px; margin-bottom: 12px; }
@@ -153,6 +162,10 @@
     .ibs-note-title { font-size: 11px; color: #F39C12; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
     .ibs-notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 10px; }
     .ibs-note { font-size: 11px; color: var(--note-txt); line-height: 1.6; }
+    .ibs-method { margin-top: 16px; background: var(--note-bg); border-radius: 10px; padding: 14px 18px; border-left: 4px solid #3A8DDE; }
+    .ibs-method-title { font-size: 11px; color: #3A8DDE; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
+    .ibs-method p { font-size: 11px; color: var(--note-txt); line-height: 1.7; margin: 0 0 7px; }
+    .ibs-method p:last-child { margin-bottom: 0; }
     .ibs-footer-note { margin-top: 14px; font-size: 10px; color: var(--foot); text-align: center; padding-bottom: 28px; }
     .ibs-hint { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
     .ibs-radar-area { position: relative; height: 340px; }
@@ -164,33 +177,34 @@
 {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  "name": "India Banking Scorecard — Quarterly Metrics for 15 Banks & NBFCs",
-  "description": "Gross NPA, Net NPA, NIM, RoA, RoE, CRAR, CASA ratio, PAT and market cap for 15 Indian banks and NBFCs (PSU, private and NBFC), quarterly from Q1FY23 to Q4FY26. Presented as an interactive heatmap, trend lines, peer comparison and radar views.",
+  "name": "India Banking Scorecard — Quarterly PAT and Asset Quality for 22 Banks & NBFCs",
+  "description": "Reported profit after tax, gross NPA ratio and net NPA ratio for 22 Indian banks and NBFCs (PSU, private, NBFC and diversified financials), quarterly from Q2FY25 (Sep 2024) to Q1FY27 (Jun 2026). Presented as an interactive heatmap, trend lines, peer comparison and radar views, plus a snapshot of market capitalisation, P/E, P/BV, RoE and RoA.",
   "url": "https://vatayanlabs.com/dashboards/indian-banks/",
-  "temporalCoverage": "2022-04/2026-03",
+  "temporalCoverage": "2024-07/2026-06",
   "spatialCoverage": "India",
   "keywords": [
     "Indian banks",
     "GNPA",
     "NPA data",
-    "NIM",
     "bank asset quality",
     "NBFC",
-    "banking scorecard"
+    "banking scorecard",
+    "quarterly results"
   ],
   "creator": {
     "@type": "Organization",
     "name": "Vatayan Labs",
     "url": "https://vatayanlabs.com/"
   },
-  "isBasedOn": "Quarterly financial results and statutory filings of the covered banks and NBFCs",
-  "isAccessibleForFree": true
+  "isBasedOn": "Company-reported quarterly results as aggregated by screener.in and StockScans peer-comparison exports, cross-checked against company press releases for the most recent quarter",
+  "isAccessibleForFree": true,
+  "dateModified": "2026-07-30"
 }
 </script>
 <link rel="stylesheet" href="/assets/nav.css">
 </head>
 <body class="sr-body" data-content-id="india-banking-scorecard">
-  
+
 <!-- Vatayan Labs site nav -->
 <nav class="site-nav vl-sidebar">
   <div class="site-nav-inner">
@@ -218,18 +232,18 @@
         <div>
           <div class="ibs-kicker">Vatayan Labs</div>
           <h1>India Banking Scorecard</h1>
-          <div class="ibs-hero-sub">15 entities · PSU + Private + NBFC · Q1FY23–Q4FY26 · ₹ in Crores</div>
+          <div class="ibs-hero-sub">22 entities · PSU + Private + NBFC + Diversified · Q2FY25–Q1FY27 · ₹ in Crores · Updated 30 Jul 2026</div>
         </div>
         <div class="ibs-stats">
-          <div class="ibs-stat"><div class="ibs-stat-label">Universe</div><div class="ibs-stat-value">15 Entities</div></div>
-          <div class="ibs-stat"><div class="ibs-stat-label">Quarters</div><div class="ibs-stat-value">16 Q tracked</div></div>
-          <div class="ibs-stat"><div class="ibs-stat-label">Latest PAT (agg)</div><div class="ibs-stat-value" id="latestPAT">—</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Universe</div><div class="ibs-stat-value">22 Entities</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Quarters</div><div class="ibs-stat-value">8 Q tracked</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Q1FY27 PAT (agg)</div><div class="ibs-stat-value" id="latestPAT">—</div></div>
         </div>
       </div>
       <div class="ibs-slider-row">
         <span class="ibs-slider-label">Snapshot quarter:</span>
-        <input type="range" id="qSlider" min="0" max="15" value="15">
-        <span class="ibs-q-label" id="qLabel">Q4FY26</span>
+        <input type="range" id="qSlider" min="0" max="7" value="7">
+        <span class="ibs-q-label" id="qLabel">Q1FY27</span>
       </div>
     </div>
 
@@ -241,16 +255,17 @@
         <button class="ibs-tab" data-tab="trend">📈 Trend Lines</button>
         <button class="ibs-tab" data-tab="bar">📊 Peer Bar</button>
         <button class="ibs-tab" data-tab="radar">🕸 Radar</button>
+        <button class="ibs-tab" data-tab="snapshot">📋 Snapshot &amp; Valuation</button>
       </div>
 
       <div class="ibs-tab-panel on" id="panel-heatmap">
-        <div class="ibs-heat-info">Color scale: <span style="color:#27AE60">■ Best</span> → <span style="color:#E74C3C">■ Weakest</span> relative to current filtered universe · Snapshot: <strong id="heatQLabel" style="color:#F39C12">Q4FY26</strong></div>
+        <div class="ibs-heat-info">Color scale: <span style="color:#27AE60">■ Best</span> → <span style="color:#E74C3C">■ Weakest</span> relative to current filtered universe · Snapshot: <strong id="heatQLabel" style="color:#F39C12">Q1FY27</strong></div>
         <div class="ibs-table-wrap"><table class="ibs-table" id="heatTable"></table></div>
-        <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ CASA Ratio not applicable for NBFCs (shown as —). Market Cap values are approximate Q4FY26 snapshots. Click any pill or column header to sort ↓↑.</div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ <strong>*</strong> Market cap and RoA are point-in-time values as of 30 Jul 2026 — they do <strong>not</strong> change when you move the snapshot-quarter slider. Every other column does. SBI, Bajaj Finance and Aditya Birla Capital had not reported Q1FY27 at the time of this update — shown as —. Click any pill or column header to sort ↓↑.</div>
       </div>
 
       <div class="ibs-tab-panel" id="panel-trend">
-        <div class="ibs-hint">Select up to 6 banks to compare <strong id="trendMetricLabel" style="color:#F39C12"></strong> over time:</div>
+        <div class="ibs-hint">Select up to 6 entities to compare <strong id="trendMetricLabel" style="color:#F39C12"></strong> over time:</div>
         <div class="ibs-bank-toggles" id="bankToggles"></div>
         <div class="ibs-chart-area"><canvas id="trendChart"></canvas></div>
       </div>
@@ -262,21 +277,37 @@
       </div>
 
       <div class="ibs-tab-panel" id="panel-radar">
-        <div class="ibs-hint">Normalised scorecard (0–100) across 6 key metrics at <strong id="radarQLabel" style="color:#F39C12"></strong> · Max 4 banks for readability</div>
+        <div class="ibs-hint">Normalised scorecard (0–100) across 5 tracked metrics at <strong id="radarQLabel" style="color:#F39C12"></strong> · Max 4 entities for readability</div>
         <div class="ibs-bank-toggles" id="radarToggles"></div>
         <div class="ibs-radar-area"><canvas id="radarChart"></canvas></div>
         <div class="ibs-radar-info">ⓘ Radar scores are normalised relative to the universe shown. 100 = best performer in that metric for the selected quarter.</div>
       </div>
 
+      <div class="ibs-tab-panel" id="panel-snapshot">
+        <div class="ibs-hint">Two different things, kept apart on purpose. <strong style="color:#F39C12">Q1FY27 as reported</strong> is what companies disclosed for the June 2026 quarter. <strong style="color:#3A8DDE">Market snapshot</strong> is price-based and trailing — RoE and RoA here are TTM, <em>not</em> quarterly. Blanks are genuine gaps, not zeros. Sorted by market cap.</div>
+        <div class="ibs-table-wrap"><table class="ibs-snap" id="snapTable"></table></div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ NIM definitions are not uniform across lenders — Bank of Baroda's is domestic (global 2.77%), HDFC Bank's is on total assets (3.40% on interest-earning assets), and L&amp;T Finance reports NIM + fees. Compare within category, not across. CASA is disclosed as a ratio by very few lenders in their quarterly release. IndusInd's P/E and RoE are distorted by the FY26 loss quarters and should not be read as a valuation signal.</div>
+      </div>
+
       <div class="ibs-note-strip">
         <div class="ibs-note-title">Dashboard Intelligence Notes</div>
         <div class="ibs-notes-grid">
-          <div class="ibs-note">🔴 PSU NPA compression is the biggest structural story — SBI GNPA fell from ~6.5% (Q1FY23) to sub-2% (Q4FY26). Watch slippage ratios for reversal signals.</div>
-          <div class="ibs-note">💰 NBFC NIM premium (Bajaj Finance ~10.5%) vs banking (HDFC Bank ~3.5%) reflects risk-adjusted pricing. NBFCs carry no CASA advantage.</div>
-          <div class="ibs-note">⚖️ IndusInd stress is visible in RoE compression and GNPA tick-up through FY25. Compare against Kotak's capital efficiency on the Radar tab.</div>
-          <div class="ibs-note">📐 AUSFB NIM (~5.5%) is the highest among banks — premium for SFB model. Capital adequacy at 21.5%+ is a buffer the market re-rates over time.</div>
+          <div class="ibs-note">🔴 PSU asset-quality compression is the cleanest trend in the panel — Bank of India GNPA 4.41% → 1.81% and Canara 3.73% → 1.57% over eight quarters. Indian Bank now runs a 0.15% net NPA.</div>
+          <div class="ibs-note">⚖️ IndusInd is the outlier. Losses of ₹2,236cr (Q4FY25) and ₹445cr (Q2FY26) followed the derivatives accounting episode; GNPA peaked at 3.64% and has since eased to 3.25%, with PAT back to ₹1,002cr.</div>
+          <div class="ibs-note">💰 NBFC gross NPAs sit structurally higher — Shriram 4.64%, Chola 4.50% on RBI norms — because the underlying asset mix is used-vehicle and MSME credit, not because of distress. Read them against their own history.</div>
+          <div class="ibs-note">📐 Two Q1FY27 results need adjusting before comparison: Bank of Baroda's ₹1,278cr PAT is after a ₹5,680cr NMC Health settlement (₹5,528cr ex-item), and IDFC First's ₹1,075cr is a record, up 132% YoY.</div>
         </div>
       </div>
+
+      <div class="ibs-method">
+        <div class="ibs-method-title">Methodology &amp; Sources</div>
+        <p><strong>What's here:</strong> reported revenue, profit after tax, gross NPA ratio and net NPA ratio for eight quarters, Q2FY25 (Sep 2024) through Q1FY27 (Jun 2026). Revenue YoY is derived from a twelve-quarter revenue series (four quarters deeper than the display window) so it resolves for every displayed quarter, and is suppressed where the year-ago base is missing or non-meaningful. Market cap and RoA are carried in the heatmap for ranking convenience but are single point-in-time values at 30 Jul 2026, marked with an asterisk — they do not move with the quarter slider. Figures are standalone unless a company only publishes consolidated numbers — Jio Financial and L&amp;T Finance are consolidated, and IndusInd's Q1FY27 consolidated PAT was ₹1,037cr against the ₹1,002cr standalone shown here.</p>
+        <p><strong>Sources:</strong> company-reported quarterly results as aggregated by screener.in, cross-checked against company press releases and results coverage for Q1FY27. Where a company had not reported at the time of this update — SBI (board meeting 7 Aug 2026), Bajaj Finance (30 Jul 2026) and Aditya Birla Capital (31 Jul 2026) — the cell is left blank rather than estimated.</p>
+        <p><strong>Known limits:</strong> Yes Bank's NPA ratios are carried at one decimal place at source, so small moves are not resolvable. Chola and L&amp;T Finance report Gross Stage 3 under Ind AS; Chola's RBI-norms GNPA is used here for comparability, and L&amp;T Finance's Gross Stage 3 history is incomplete. Jio Financial and Aditya Birla Capital are grouped separately because bank asset-quality and margin metrics do not describe them meaningfully — Jio Financial's lending AUM was ₹30,667cr against a consolidated PAT driven largely by asset management and treasury.</p>
+        <p><strong>Snapshot tab:</strong> market capitalisation, P/E, P/BV, RoE and RoA are a market snapshot at 30 Jul 2026, sourced from StockScans peer-comparison exports (Bank of India and Shriram Finance from screener.in, which StockScans does not cover in these peer sets). RoE and RoA there are <em>trailing</em> figures, not quarterly — they are deliberately kept in a separate column group from the Q1FY27 reported figures so the two are not read as the same thing.</p>
+        <p><strong>Still not shown:</strong> NIM and CASA have no quarterly time series here. NIM is disclosed on inconsistent bases (domestic vs global, total assets vs interest-earning assets, NIM+fees for some NBFCs) and CASA is rarely given as a ratio in quarterly releases, so both appear only as a Q1FY27 snapshot where the company stated them. CRAR is not tracked. Building real quarterly series for these needs bank-by-bank investor presentations rather than an aggregator.</p>
+      </div>
+
       <div class="ibs-footer-note">Vatayan Labs · For educational purposes only · Not investment advice</div>
     </div>
   </div>
@@ -287,60 +318,131 @@
   <script>
   (function() {
     const BANKS = [
-      { name:"SBI",        full:"State Bank of India",     cat:"PSU Big 4", type:"PSU" },
-      { name:"BOB",        full:"Bank of Baroda",           cat:"PSU Big 4", type:"PSU" },
-      { name:"PNB",        full:"Punjab Natl Bank",         cat:"PSU Big 4", type:"PSU" },
-      { name:"Canara",     full:"Canara Bank",               cat:"PSU Big 4", type:"PSU" },
-      { name:"HDFC Bank",  full:"HDFC Bank",                 cat:"Pvt Big 4", type:"Private" },
-      { name:"ICICI",      full:"ICICI Bank",                cat:"Pvt Big 4", type:"Private" },
-      { name:"Axis",       full:"Axis Bank",                 cat:"Pvt Big 4", type:"Private" },
-      { name:"Kotak",      full:"Kotak Mah. Bank",           cat:"Pvt Big 4", type:"Private" },
-      { name:"Federal",    full:"Federal Bank",              cat:"Mid-Size",  type:"Private" },
-      { name:"IndusInd",   full:"IndusInd Bank",             cat:"Mid-Size",  type:"Private" },
-      { name:"Yes Bank",   full:"Yes Bank",                  cat:"Mid-Size",  type:"Private" },
-      { name:"AUSFB",      full:"AU Small Finance Bank",     cat:"Mid-Size",  type:"Private" },
-      { name:"IDFC First", full:"IDFC First Bank",           cat:"Mid-Size",  type:"Private" },
-      { name:"Bajaj Fin",  full:"Bajaj Finance",             cat:"Big NBFC",  type:"NBFC" },
-      { name:"L&T Fin",    full:"L&T Finance",               cat:"Big NBFC",  type:"NBFC" },
+      { name:"SBI",         full:"State Bank of India",      cat:"PSU" },
+      { name:"BOB",         full:"Bank of Baroda",            cat:"PSU" },
+      { name:"PNB",         full:"Punjab Natl Bank",          cat:"PSU" },
+      { name:"Canara",      full:"Canara Bank",                cat:"PSU" },
+      { name:"Union",       full:"Union Bank of India",        cat:"PSU" },
+      { name:"Indian Bank", full:"Indian Bank",                cat:"PSU" },
+      { name:"BoI",         full:"Bank of India",              cat:"PSU" },
+      { name:"HDFC Bank",   full:"HDFC Bank",                  cat:"Pvt Big 4" },
+      { name:"ICICI",       full:"ICICI Bank",                 cat:"Pvt Big 4" },
+      { name:"Axis",        full:"Axis Bank",                  cat:"Pvt Big 4" },
+      { name:"Kotak",       full:"Kotak Mah. Bank",            cat:"Pvt Big 4" },
+      { name:"Federal",     full:"Federal Bank",               cat:"Mid-Size Pvt" },
+      { name:"IndusInd",    full:"IndusInd Bank",              cat:"Mid-Size Pvt" },
+      { name:"Yes Bank",    full:"Yes Bank",                   cat:"Mid-Size Pvt" },
+      { name:"AUSFB",       full:"AU Small Finance Bank",      cat:"Mid-Size Pvt" },
+      { name:"IDFC First",  full:"IDFC First Bank",            cat:"Mid-Size Pvt" },
+      { name:"Bajaj Fin",   full:"Bajaj Finance",              cat:"NBFC" },
+      { name:"L&T Fin",     full:"L&T Finance",                cat:"NBFC" },
+      { name:"Chola",       full:"Cholamandalam Inv. & Fin.",  cat:"NBFC" },
+      { name:"Shriram",     full:"Shriram Finance",            cat:"NBFC" },
+      { name:"Jio Fin",     full:"Jio Financial Services",     cat:"Diversified" },
+      { name:"AB Capital",  full:"Aditya Birla Capital",       cat:"Diversified" },
     ];
-    const QUARTERS = ["Q1FY23","Q2FY23","Q3FY23","Q4FY23","Q1FY24","Q2FY24","Q3FY24","Q4FY24","Q1FY25","Q2FY25","Q3FY25","Q4FY25","Q1FY26","Q2FY26","Q3FY26","Q4FY26"];
+    // Q2FY25 = Sep-24 … Q1FY27 = Jun-26
+    const QUARTERS = ["Q2FY25","Q3FY25","Q4FY25","Q1FY26","Q2FY26","Q3FY26","Q4FY26","Q1FY27"];
+    const N = null;
     const SEED = {
-      "SBI":        { gnpa:[6.5,5.9,5.5,3.97,3.5,3.52,3.43,2.24,2.2,2.13,2.07,1.96,1.85,1.8,1.75,1.72],   nnpa:[1.52,1.32,1.25,0.67,0.57,0.55,0.55,0.57,0.57,0.53,0.50,0.47,0.45,0.43,0.42,0.50],   nim:[3.0,3.1,3.1,3.2,3.3,3.3,3.3,3.4,3.1,3.0,3.1,3.2,3.0,3.0,3.0,3.1],   roa:[0.6,0.7,0.8,1.0,1.0,1.1,1.1,1.04,1.0,1.1,1.1,1.1,1.1,1.1,1.1,1.1],   roe:[14,15,16,18,18,19,19,17,18,18,19,20,19,19,20,20],   crar:[13.0,13.5,13.5,14.7,14.7,14.0,14.0,14.28,14.0,13.9,14.0,14.3,14.2,14.1,14.2,14.4],   casa:[45,46,45,44,43,43,42,42,41,40,40,40,39,38,38,38],   pat:[9113,12068,13364,16695,16695,18537,18331,9114,21384,21552,18331,20698,21384,17035,19116,22069],   mcap:Array(16).fill(700000) },
-      "BOB":        { gnpa:[7.2,6.8,6.1,3.79,3.3,3.0,2.9,2.92,2.9,2.85,2.8,2.43,2.4,2.3,2.3,2.3],         nnpa:[1.72,1.58,1.46,0.69,0.65,0.62,0.60,0.62,0.61,0.60,0.59,0.40,0.55,0.53,0.52,0.60],   nim:[3.0,3.1,3.1,3.3,3.3,3.3,3.1,3.27,3.3,3.0,3.0,3.1,2.9,2.9,3.0,3.0],   roa:[0.7,0.8,0.9,1.0,1.1,1.2,1.2,1.19,1.1,1.1,1.2,1.3,1.2,1.2,1.2,1.3],   roe:[12,13,15,17,18,19,19,18.3,17,18,19,19,18,18,18,19],   crar:[15,15.5,15.3,16.24,15.8,15.3,15.3,16.31,15.5,15.0,15.3,16.3,15.5,15.5,15.5,15.8],   casa:[43,44,43,42,42,41,41,41,41,40,39,38,38,38,37,37],   pat:[2168,3313,3853,4775,4775,4886,5009,4886,4776,5009,5238,4886,5009,4552,4776,5238],   mcap:Array(16).fill(110000) },
-      "PNB":        { gnpa:[12.0,10.5,9.8,8.74,8.7,7.7,7.2,6.24,6.5,6.0,4.9,4.09,4.0,3.9,3.6,3.4],        nnpa:[4.52,3.80,3.42,1.98,1.70,1.40,1.20,0.96,0.93,0.85,0.65,0.42,0.40,0.38,0.36,0.40],   nim:[2.8,2.9,2.9,3.0,3.0,3.1,3.0,3.0,2.9,3.0,3.0,3.1,3.0,3.0,3.0,3.0],   roa:[0.2,0.3,0.4,0.5,0.5,0.6,0.7,0.5,0.7,0.8,0.9,0.8,0.8,0.8,0.9,0.9],   roe:[4,6,8,9,9,10,11,9,11,12,13,12,12,12,13,13],   crar:[14.5,14.8,14.8,15.5,14.8,14.9,15.0,14.62,14.0,14.5,14.5,14.7,14.0,14.2,14.3,14.5],   casa:[44,44,43,43,43,42,42,43,43,42,42,42,41,41,41,40],   pat:[629,1025,1540,3010,3010,2145,3252,3010,3010,3252,3504,3754,3252,2904,3252,3754],   mcap:Array(16).fill(100000) },
-      "Canara":     { gnpa:[8.9,8.0,7.5,5.35,5.4,5.1,4.7,4.23,4.2,4.1,4.0,3.73,3.5,3.4,3.3,3.2],          nnpa:[2.48,2.09,1.96,1.27,1.23,1.12,1.01,0.89,0.85,0.81,0.78,0.73,0.55,0.50,0.48,0.40],   nim:[2.7,2.8,2.8,2.9,3.0,3.0,3.0,3.05,2.9,2.9,3.0,3.0,2.9,2.9,3.0,3.0],   roa:[0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.03,0.9,1.0,1.0,1.0,1.0,1.0,1.0,1.0],   roe:[8,9,11,14,14,15,17,16.6,14,16,16,17,16,16,16,17],   crar:[13.9,14.5,14.3,16.68,15.5,15.8,15.3,16.31,14.5,14.8,15.5,16.5,14.8,15.0,15.3,15.8],   casa:[33,33,32,32,32,31,31,32,31,30,30,30,30,29,29,29],   pat:[2525,2882,3606,3757,3757,4110,3883,4283,4110,4283,4110,4283,4283,4110,4535,4761],   mcap:Array(16).fill(80000) },
-      "HDFC Bank":  { gnpa:[1.2,1.2,1.3,1.12,1.3,1.3,1.3,1.24,1.4,1.4,1.4,1.33,1.3,1.3,1.3,1.3],          nnpa:[0.32,0.33,0.35,0.33,0.35,0.33,0.33,0.33,0.42,0.41,0.42,0.41,0.40,0.38,0.38,0.40],   nim:[4.1,4.2,4.1,4.1,4.3,4.3,4.1,3.63,3.4,3.6,3.5,3.5,3.5,3.5,3.6,3.7],   roa:[1.9,1.9,2.0,2.0,2.0,1.9,1.9,1.98,1.8,1.9,1.8,1.8,1.8,1.8,1.8,1.9],   roe:[16,17,17,17,17,17,16,17.0,15,16,15,16,16,16,16,16],   crar:[19.0,18.5,18.9,19.26,19.0,18.5,18.0,18.8,17.9,18.5,18.0,18.5,18.0,18.3,18.5,18.5],   casa:[46,47,46,44,44,43,42,38,36,36,36,35,34,34,34,35],   pat:[10055,11125,12259,16373,16373,15976,15812,16373,16175,15812,16512,17825,17258,16512,17095,18375],   mcap:Array(16).fill(1300000) },
-      "ICICI":      { gnpa:[3.3,3.2,3.0,2.16,2.3,2.5,2.5,2.16,2.2,2.2,2.2,1.96,2.0,2.0,2.0,2.0],          nnpa:[0.55,0.52,0.48,0.48,0.43,0.43,0.44,0.42,0.43,0.43,0.42,0.42,0.42,0.40,0.40,0.42],   nim:[4.0,4.0,4.1,4.9,4.9,4.7,4.5,4.53,4.5,4.5,4.4,4.4,4.4,4.3,4.3,4.4],   roa:[1.8,1.8,2.0,2.35,2.4,2.4,2.4,2.35,2.3,2.4,2.4,2.4,2.3,2.3,2.4,2.4],   roe:[17,17,18,18,18,18,18,18.0,17,18,18,18,18,18,18,18],   crar:[17.5,17.5,17.5,18.34,17.0,16.5,16.5,16.28,16.5,16.5,16.5,16.5,16.0,16.0,16.5,16.5],   casa:[44,44,44,43,44,44,43,41,40,40,40,40,40,40,39,39],   pat:[7019,7558,8312,10272,10272,10708,11061,10272,11059,11059,11792,12630,12630,11792,12630,13475],   mcap:Array(16).fill(900000) },
-      "Axis":       { gnpa:[3.7,3.5,3.3,1.73,1.7,1.7,1.7,1.58,1.5,1.4,1.4,1.54,1.5,1.5,1.5,1.4],          nnpa:[0.93,0.84,0.76,0.39,0.38,0.38,0.39,0.34,0.35,0.32,0.32,0.34,0.33,0.33,0.33,0.40],   nim:[3.8,3.9,3.9,4.3,4.3,4.3,4.2,4.11,4.0,4.1,4.0,4.0,3.9,3.9,4.0,4.0],   roa:[1.6,1.6,1.7,1.76,1.7,1.8,1.7,1.76,1.7,1.8,1.7,1.7,1.8,1.8,1.8,1.8],   roe:[16,16,17,18,17,18,17,18.0,16,18,17,17,18,18,18,18],   crar:[15.5,16.0,16.0,17.59,16.5,16.0,16.0,16.63,16.0,16.5,16.0,16.7,16.0,16.3,16.5,16.7],   casa:[42,43,43,45,46,46,46,44,42,42,42,42,41,41,41,41],   pat:[4118,5329,5329,6160,6160,6035,6211,6160,7130,7114,6204,7509,7114,7509,7130,7509],   mcap:Array(16).fill(320000) },
-      "Kotak":      { gnpa:[2.4,2.3,2.1,1.72,1.7,1.7,1.7,1.73,1.5,1.5,1.5,1.41,1.4,1.3,1.3,1.3],          nnpa:[0.64,0.64,0.55,0.43,0.40,0.38,0.38,0.34,0.35,0.35,0.35,0.31,0.30,0.28,0.28,0.30],   nim:[5.0,4.9,4.9,5.33,5.3,5.2,5.2,5.22,5.0,5.0,5.0,5.1,5.0,4.9,5.0,5.0],   roa:[2.2,2.2,2.3,2.35,2.4,2.4,2.4,2.35,2.4,2.4,2.4,2.4,2.4,2.3,2.3,2.4],   roe:[14,15,15,15,15,15,15,14.7,14,14,14,15,15,15,15,15],   crar:[20.0,20.5,20.5,21.8,21.0,20.5,20.5,21.84,21.5,21.5,21.5,22.0,21.5,21.5,21.5,22.0],   casa:[52,52,53,53,53,52,52,52,50,50,50,49,48,48,48,48],   pat:[2071,2313,2792,3496,3496,3452,3005,3496,3451,3520,3344,3451,3451,3344,3451,3681],   mcap:Array(16).fill(370000) },
-      "Federal":    { gnpa:[2.6,2.5,2.4,2.36,2.4,2.5,2.4,2.43,2.3,2.3,2.3,2.11,2.1,2.0,2.0,1.9],          nnpa:[0.86,0.82,0.78,0.76,0.74,0.74,0.74,0.80,0.79,0.78,0.76,0.65,0.63,0.60,0.59,0.60],   nim:[3.3,3.4,3.4,3.4,3.4,3.3,3.2,3.16,3.1,3.2,3.2,3.1,3.1,3.1,3.1,3.2],   roa:[1.2,1.3,1.3,1.31,1.3,1.3,1.4,1.31,1.3,1.3,1.4,1.5,1.4,1.4,1.4,1.5],   roe:[14,14,14,14,14,14,15,14.0,14,14,15,15,15,15,15,15],   crar:[14.5,14.8,14.5,15.12,14.5,14.8,14.8,15.34,14.5,14.5,14.8,15.5,14.8,14.8,15.0,15.5],   casa:[33,33,33,31,31,30,30,29,29,29,29,28,28,28,28,28],   pat:[701,770,804,954,954,1009,1009,1007,1034,1034,1010,1060,1095,1010,1095,1126],   mcap:Array(16).fill(28000) },
-      "IndusInd":   { gnpa:[2.2,2.1,2.1,2.06,2.1,2.3,2.5,2.06,2.2,2.6,2.9,2.25,2.3,2.4,2.4,2.3],          nnpa:[0.59,0.57,0.58,0.57,0.58,0.63,0.68,0.57,0.62,0.72,0.82,0.63,0.65,0.67,0.66,0.65],   nim:[4.3,4.2,4.2,4.29,4.3,4.3,4.2,4.29,4.3,4.3,4.2,4.1,4.0,4.0,3.9,4.0],   roa:[1.8,1.8,1.8,1.77,1.8,1.8,1.8,1.77,1.7,1.5,1.4,1.5,1.5,1.5,1.5,1.5],   roe:[14,14,14,14,14,13,13,14.0,13,11,11,12,12,12,12,12],   crar:[17.5,18.0,18.0,18.06,17.5,17.5,17.5,18.06,17.5,17.0,17.0,16.5,16.5,16.5,16.5,16.5],   casa:[42,42,42,38,38,38,38,38,37,36,35,35,35,34,34,34],   pat:[1631,1805,2043,2202,2202,2202,2152,2202,1994,1994,1994,2100,2202,2152,2202,2202],   mcap:Array(16).fill(38000) },
-      "Yes Bank":   { gnpa:[13.0,11.0,9.0,5.0,3.3,2.9,2.8,1.73,1.6,1.8,1.7,1.7,1.6,1.5,1.5,1.5],          nnpa:[4.22,3.55,2.88,1.72,1.10,0.95,0.89,0.48,0.46,0.53,0.50,0.50,0.47,0.45,0.44,0.30],   nim:[2.5,2.8,2.9,2.5,2.5,2.8,3.0,2.4,2.5,2.5,2.5,2.4,2.4,2.4,2.5,2.5],   roa:[0.1,0.2,0.3,0.5,0.5,0.5,0.5,0.5,0.4,0.5,0.5,0.5,0.5,0.5,0.5,0.5],   roe:[2,3,4,7,8,8,8,8.0,6,8,8,8,8,8,8,8],   crar:[17.4,17.5,17.8,18.4,18.0,17.5,17.5,18.4,17.5,17.5,17.5,17.5,17.5,17.5,17.5,17.5],   casa:[30,31,32,30,32,32,31,31,31,31,30,30,30,30,29,29],   pat:[51,153,202,451,451,502,502,451,502,502,502,502,502,451,502,551],   mcap:Array(16).fill(46000) },
-      "AUSFB":      { gnpa:[1.7,1.8,1.9,1.73,1.7,1.8,1.7,1.67,1.8,2.0,1.9,1.84,1.8,1.7,1.7,1.7],          nnpa:[0.52,0.53,0.56,0.53,0.50,0.51,0.53,0.52,0.55,0.61,0.57,0.55,0.53,0.51,0.50,0.50],   nim:[6.1,6.0,5.9,5.8,5.7,5.7,5.7,5.83,5.7,5.6,5.6,5.5,5.4,5.4,5.5,5.5],   roa:[1.8,1.9,1.8,1.76,1.7,1.7,1.7,1.76,1.7,1.6,1.6,1.5,1.5,1.5,1.5,1.5],   roe:[17,18,18,16,17,17,17,16.0,15,15,15,14,14,14,14,14],   crar:[21.0,21.5,21.5,22.73,22.0,22.0,22.0,22.73,22.0,22.0,22.0,21.5,21.5,21.5,21.5,21.5],   casa:[22,23,23,23,24,23,23,24,23,24,23,24,23,23,23,23],   pat:[281,325,372,425,425,469,469,425,502,469,501,502,469,441,469,502],   mcap:Array(16).fill(52000) },
-      "IDFC First": { gnpa:[6.2,5.8,5.4,4.33,4.0,3.8,3.5,3.12,3.0,2.8,2.5,2.42,2.3,2.2,2.1,2.0],          nnpa:[1.58,1.46,1.35,1.25,1.18,0.94,0.74,0.68,0.65,0.73,0.69,0.67,0.60,0.58,0.56,0.50],   nim:[6.3,6.3,6.4,6.5,6.4,6.3,6.3,6.4,6.3,6.2,6.2,6.1,6.0,6.0,6.0,6.0],   roa:[0.6,0.7,0.8,1.0,1.0,1.1,1.1,1.18,1.1,1.0,1.0,1.1,1.1,1.2,1.2,1.2],   roe:[6,7,8,11,11,12,12,13,12,11,11,12,12,13,13,12],   crar:[16.0,16.2,16.5,16.82,16.5,16.0,16.2,16.11,16.0,15.8,15.9,16.0,16.0,15.8,16.0,16.2],   casa:[44,45,46,46,47,47,48,47,47,48,48,48,49,49,50,50],   pat:[602,765,803,1128,1128,1253,1516,1128,1302,1070,1062,1110,1302,1069,1302,1575],   mcap:Array(16).fill(42000) },
-      "Bajaj Fin":  { gnpa:[1.6,1.6,1.5,1.14,1.2,1.3,1.4,0.91,1.4,1.1,1.0,0.97,0.95,0.95,0.95,0.95],       nnpa:[0.54,0.56,0.51,0.41,0.43,0.47,0.52,0.31,0.52,0.40,0.37,0.37,0.35,0.35,0.35,0.35],   nim:[11.5,11.5,11.5,10.7,11.0,11.5,11.0,11.2,10.5,10.5,11.0,11.0,10.5,10.5,10.5,10.5],   roa:[4.5,4.5,4.5,4.96,5.0,5.0,4.9,4.96,5.0,5.0,5.0,5.0,5.0,4.9,5.0,5.0],   roe:[22,22,22,22,22,23,23,22.0,22,23,23,23,23,23,23,24],   crar:[26.0,25.5,25.5,24.08,24.0,24.5,24.5,24.08,24.0,24.5,24.5,24.0,24.0,24.0,24.0,24.0],   casa:[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],   pat:[2420,2781,3053,3824,3824,4013,3550,3824,4520,4781,4781,4781,4781,4520,4781,5107],   mcap:Array(16).fill(500000) },
-      "L&T Fin":    { gnpa:[4.0,3.5,3.0,3.34,2.8,2.5,2.3,3.09,2.0,1.9,1.8,3.7,2.0,2.0,2.0,2.0],           nnpa:[1.40,1.21,0.98,0.98,0.82,0.77,0.72,0.87,0.55,0.50,0.48,0.98,0.50,0.50,0.49,0.80],   nim:[8.0,8.1,8.0,7.5,7.5,7.5,7.5,8.0,7.0,7.5,7.5,7.5,7.0,7.0,7.5,7.5],   roa:[2.0,2.0,2.0,2.53,2.5,2.5,2.5,2.53,2.5,2.5,2.5,2.0,2.5,2.5,2.5,2.5],   roe:[14,14,14,15,15,15,15,15.0,14,15,15,12,14,14,15,15],   crar:[22.0,22.5,22.5,25.32,24.0,24.0,24.5,25.32,24.0,24.0,24.5,24.0,24.0,24.0,24.0,24.5],   casa:[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],   pat:[519,622,791,1023,1023,1140,1140,1023,696,863,863,583,863,863,863,1023],   mcap:Array(16).fill(38000) },
+      "SBI":         { pat:[18331,16891,18643,19160,20160,21028,19684,N],  gnpa:[2.13,2.07,1.82,1.83,1.73,1.57,1.49,N],   nnpa:[0.53,0.53,0.47,0.47,0.42,0.39,0.39,N] },
+      "BOB":         { pat:[5238,4837,5048,4541,4809,5055,5616,1278],      gnpa:[2.50,2.43,2.26,2.28,2.16,2.04,1.89,1.99], nnpa:[0.60,0.59,0.58,0.60,0.57,0.57,0.45,0.50] },
+      "PNB":         { pat:[4303,4508,4567,1675,4904,5100,5225,5253],      gnpa:[4.48,4.09,3.95,3.78,3.45,3.19,2.95,2.78], nnpa:[0.46,0.41,0.40,0.38,0.36,0.32,0.29,0.28] },
+      "Canara":      { pat:[4015,4104,5003,4752,4774,5155,4506,4856],      gnpa:[3.73,3.34,2.94,2.69,2.35,2.08,1.84,1.57], nnpa:[0.99,0.89,0.70,0.63,0.54,0.45,0.43,0.36] },
+      "Union":       { pat:[4720,4604,4985,4116,4249,5017,5316,5332],      gnpa:[4.36,3.85,3.60,3.52,3.29,3.06,2.82,2.65], nnpa:[0.98,0.82,0.63,0.62,0.55,0.51,0.48,0.47] },
+      "Indian Bank": { pat:[2706,2852,2956,2973,3018,3061,3103,3273],      gnpa:[3.48,3.26,3.09,3.01,2.60,2.23,1.98,1.86], nnpa:[0.27,0.21,0.19,0.18,0.16,0.15,0.15,0.15] },
+      "BoI":         { pat:[2374,2517,2626,2252,2555,2705,3016,3068],      gnpa:[4.41,3.69,3.27,2.92,2.54,2.26,1.98,1.81], nnpa:[0.94,0.85,0.82,0.75,0.65,0.60,0.56,0.51] },
+      "HDFC Bank":   { pat:[16821,16736,17616,18155,18641,18654,19221,19060], gnpa:[1.36,1.42,1.33,1.40,1.24,1.24,1.15,1.17], nnpa:[0.41,0.46,0.43,0.47,0.42,0.42,0.38,0.41] },
+      "ICICI":       { pat:[11746,11792,12630,12768,12359,11318,13702,14804], gnpa:[1.97,1.96,1.67,1.67,1.58,1.53,1.40,1.38], nnpa:[0.42,0.42,0.39,0.41,0.39,0.37,0.33,0.35] },
+      "Axis":        { pat:[6918,6304,7118,5806,5090,6490,7071,7114],      gnpa:[1.44,1.46,1.28,1.57,1.46,1.40,1.23,1.28], nnpa:[0.34,0.35,0.33,0.45,0.44,0.42,0.37,0.39] },
+      "Kotak":       { pat:[3344,3305,3552,3282,3253,3446,4027,4123],      gnpa:[1.49,1.50,1.42,1.48,1.39,1.30,1.20,1.18], nnpa:[0.43,0.41,0.31,0.34,0.32,0.31,0.25,0.27] },
+      "Federal":     { pat:[1057,955,1030,862,955,1041,1259,1177],         gnpa:[2.09,1.95,1.84,1.91,1.83,1.72,1.62,1.52], nnpa:[0.57,0.49,0.44,0.48,0.48,0.42,0.20,0.18] },
+      "IndusInd":    { pat:[1325,1401,-2236,684,-445,161,533,1002],        gnpa:[2.11,2.25,3.13,3.64,3.60,3.56,3.43,3.25], nnpa:[0.64,0.68,0.95,1.12,1.04,1.04,1.00,0.95] },
+      "Yes Bank":    { pat:[553,612,738,801,654,952,1068,1071],            gnpa:[1.60,1.60,1.60,1.60,1.60,1.50,1.30,1.30], nnpa:[0.50,0.50,0.30,0.30,0.30,0.30,0.20,0.20] },
+      "AUSFB":       { pat:[571,528,504,581,561,668,832,796],              gnpa:[1.98,2.31,2.28,2.47,2.41,2.30,2.03,2.10], nnpa:[0.75,0.91,0.74,0.88,0.88,0.88,0.74,0.76] },
+      "IDFC First":  { pat:[201,339,304,463,352,503,319,1075],             gnpa:[1.92,1.94,1.87,1.97,1.86,1.69,1.61,1.51], nnpa:[0.48,0.52,0.53,0.55,0.52,0.53,0.48,0.44] },
+      "Bajaj Fin":   { pat:[5614,3706,3940,4133,4251,4581,4840,N],         gnpa:[1.33,1.41,1.18,1.28,1.59,1.56,1.27,N],   nnpa:[0.58,0.61,0.56,0.63,0.77,0.61,0.52,N] },
+      "L&T Fin":     { pat:[689,619,631,694,728,731,947,895],              gnpa:[N,N,N,3.31,N,N,N,2.86],                  nnpa:[N,N,N,N,N,N,N,N] },
+      "Chola":       { pat:[963,1087,1267,1136,1155,1288,1641,1654],       gnpa:[3.78,4.00,3.97,4.29,4.57,4.63,4.36,4.50], nnpa:[2.48,2.66,2.63,2.86,3.07,3.13,2.87,2.95] },
+      "Shriram":     { pat:[2071,3570,2139,2156,2307,2522,3014,3445],      gnpa:[5.32,5.38,4.55,4.53,4.57,4.54,4.58,4.64], nnpa:[2.64,2.68,2.64,2.57,2.49,2.38,2.33,2.33] },
+      "Jio Fin":     { pat:[689,295,316,325,695,269,272,830],              gnpa:[N,N,N,N,N,N,N,N],                        nnpa:[N,N,N,N,N,N,N,N] },
+      "AB Capital":  { pat:[1032,613,654,676,916,740,777,N],               gnpa:[1.51,1.33,N,N,N,N,N,N],                  nnpa:[0.85,0.70,N,N,N,N,N,N] },
     };
-    const METRICS = {
-      gnpa:{ label:"Gross NPA %",   th:"GNPA%",    unit:"%",    better:"low",  domain:[0,14] },
-      nnpa:{ label:"NNPA %",        th:"NNPA%",    unit:"%",    better:"low",  domain:[0,5]  },
-      nim: { label:"NIM %",         th:"NIM%",     unit:"%",    better:"high", domain:[2,12] },
-      roa: { label:"RoA %",         th:"RoA%",     unit:"%",    better:"high", domain:[0,6]  },
-      roe: { label:"RoE %",         th:"RoE%",     unit:"%",    better:"high", domain:[0,25] },
-      crar:{ label:"CRAR %",        th:"CRAR%",    unit:"%",    better:"high", domain:[12,28]},
-      casa:{ label:"CASA Ratio %",  th:"CASA%",    unit:"%",    better:"high", domain:[20,60]},
-      pat: { label:"PAT (₹ Cr)",    th:"PAT(₹Cr)", unit:"₹Cr", better:"high", domain:[0,25000]},
-      mcap:{ label:"Mkt Cap (₹Cr)", th:"Mkt Cap",  unit:"₹Cr", better:"high", domain:[0,1400000],
-        fmt: v => v>=100000 ? (v/100000).toFixed(1)+"L" : (v/1000).toFixed(0)+"K" },
-    };
-    const CAT_COLORS = { "PSU Big 4":"#2E5DA8","Pvt Big 4":"#27AE60","Mid-Size":"#E67E22","Big NBFC":"#8E44AD" };
-    const CATS = ["All","PSU Big 4","Pvt Big 4","Mid-Size","Big NBFC"];
-    const CHART_COLORS = ["#3A8DDE","#27AE60","#E67E22","#8E44AD","#E74C3C","#F39C12"];
-    const RADAR_METRICS = ["gnpa","nnpa","nim","roa","roe","crar","casa"];
 
-    let activeMetric = "gnpa", activeCat = "All", activeQ = 15, activeTab = "heatmap";
+    // Snapshot. nim/casa = as reported for Q1FY27 (blank = not disclosed).
+    // mcap/pe/pbv/roe/roa = market snapshot at 30 Jul 2026; RoE and RoA are trailing, not quarterly.
+    const SNAP = {
+      "SBI":         { mcap:935708,  pe:11.15, pbv:1.67, roe:14.5, roa:1.04, note:"Q1FY27 results due 7 Aug 2026" },
+      "BOB":         { nim:"2.93", nimNote:"domestic", mcap:125845, pe:6.93,  pbv:0.75, roe:10.5, roa:0.84, note:"PAT after ₹5,680cr NMC settlement; ₹5,528cr ex-item" },
+      "PNB":         { mcap:127664, pe:5.79,  pbv:0.87, roe:13.2, roa:1.01, note:"Q1FY27 RoA 1.04% as reported" },
+      "Canara":      { nim:"2.52", mcap:113129, pe:5.70,  pbv:0.97, roe:15.3, roa:0.98 },
+      "Union":       { mcap:130596, pe:6.32,  pbv:0.99, roe:14.3, roa:1.28 },
+      "Indian Bank": { mcap:111488, pe:8.72,  pbv:1.45, roe:14.9, roa:1.24 },
+      "BoI":         { mcap:62699,  pe:5.53,  pbv:0.70, roe:12.4 },
+      "HDFC Bank":   { nim:"3.26", nimNote:"total assets", mcap:1152767, pe:14.56, pbv:1.92, roe:13.7, roa:1.66, note:"3.40% NIM on interest-earning assets" },
+      "ICICI":       { nim:"4.36", mcap:1031572, pe:18.34, pbv:2.76, roe:15.8, roa:1.98 },
+      "Axis":        { nim:"3.46", mcap:384468, pe:13.82, pbv:1.73, roe:12.6, roa:1.40, note:"NIM at cycle low" },
+      "Kotak":       { nim:"4.53", mcap:387251, pe:19.08, pbv:2.14, roe:10.7, roa:1.92 },
+      "Federal":     { nim:"3.33", mcap:88765,  pe:18.90, pbv:2.31, roe:11.7, roa:1.12, note:"Net NPA at decadal low" },
+      "IndusInd":    { nim:"3.57", mcap:78700,  pe:59.52, pbv:1.21, roe:1.4,  roa:0.16, note:"PE and RoE distorted by FY26 loss quarters" },
+      "Yes Bank":    { nim:"2.70", mcap:71658,  pe:19.18, pbv:1.37, roe:7.2,  roa:0.82 },
+      "AUSFB":       { nim:"5.90", mcap:78242,  pe:27.31, pbv:3.96, roe:13.4, roa:1.38, note:"Q1FY27 RoA 1.7%, RoE 15.6% as reported" },
+      "IDFC First":  { nim:"5.96", casa:"50.8", mcap:73270, pe:32.70, pbv:1.51, roe:4.8, roa:0.55, note:"Record quarterly PAT" },
+      "Bajaj Fin":   { mcap:656465, pe:34.45, pbv:5.76, roe:17.0, roa:3.45, note:"Q1FY27 results released 30 Jul 2026 — pending update" },
+      "L&T Fin":     { nim:"10.47", nimNote:"NIM + fees", mcap:77462, pe:24.32, pbv:2.77, roe:10.7, roa:2.10, note:"Loan book ₹1,29,634cr, +27% YoY" },
+      "Chola":       { mcap:153726, pe:26.58, pbv:5.05, roe:17.2, roa:2.13, note:"AUM ₹2.54 lakh cr, +23% YoY" },
+      "Shriram":     { mcap:245872, pe:21.80, pbv:2.99, roe:16.4 },
+      "Jio Fin":     { mcap:164735, pe:77.48, pbv:1.16, roe:1.2,  roa:0.95, note:"Jio Credit AUM ₹30,667cr; JioBlackRock AUM ₹18,412cr" },
+      "AB Capital":  { mcap:108790, pe:27.61, pbv:2.83, roe:11.2, roa:1.15, note:"Q1FY27 results due 31 Jul 2026" },
+    };
+
+    // Revenue runs 4 quarters deeper than the display window so YoY resolves for
+    // every displayed quarter. Index 0-3 = Sep23..Jun24 (lookback only),
+    // index 4-11 = Q2FY25..Q1FY27 (the displayed eight).
+    const REV = {
+      "SBI":         [101379,106734,111043,111526,113871,117427,119509,117996,119654,122352,123098,N],
+      "BOB":         [27862,28605,29583,29629,30278,30908,31117,31091,31511,31750,32642,33211],
+      "PNB":         [26355,27288,28113,28556,29875,31340,31989,31964,31872,32231,32157,32897],
+      "Canara":      [26838,28039,28807,28701,29740,30312,31002,31003,31544,31982,31838,32957],
+      "Union":       [24587,25363,26350,26364,26708,26544,27695,26919,26191,26443,26439,27203],
+      "Indian Bank": [13743,14198,14624,15039,15348,15759,15856,16283,16590,17098,17480,18090],
+      "BoI":         [14971,15218,16162,16938,17355,18211,18323,18352,18406,18927,19476,19949],
+      "HDFC Bank":   [67698,70583,71473,73033,74017,76007,77460,77470,76691,76751,76610,79363],
+      "ICICI":       [34920,36695,37948,38996,40537,41300,42431,42947,41758,41966,43275,45671],
+      "Axis":        [14312,15429,16136,16612,16937,17348,17432,17504,17226,17988,18267,19340],
+      "Kotak":       [11193,11799,12307,12746,13216,13428,13530,13837,13649,13903,14175,14477],
+      "Federal":     [5455,5730,5978,6331,6577,6809,6648,6687,6742,6868,7399,7238],
+      "IndusInd":    [11248,11572,12199,12547,12686,12801,10634,12264,11609,11373,11005,11310],
+      "Yes Bank":    [6711,6985,7447,7719,7730,7829,7616,7596,7379,7543,7651,8044],
+      "AUSFB":       [2531,2736,2830,3769,3911,4113,4271,4378,4511,4727,5019,5303],
+      "IDFC First":  [7356,7879,8219,8789,8957,9343,9413,9642,9937,10417,10553,11051],
+      "Bajaj Fin":   [11408,12103,12760,13724,14488,15371,15638,16697,17184,17870,18430,N],
+      "L&T Fin":     [3214,3533,3670,3782,4015,4095,4020,4257,4333,4578,4921,5213],
+      "Chola":       [4435,4960,5388,5785,6227,6709,7025,7245,7470,7875,8392,8833],
+      "Shriram":     [8556,8922,9484,9592,10090,10698,11454,11536,11908,12166,12509,13394],
+      "Jio Fin":     [608,414,418,418,694,438,493,612,981,901,1019,2004],
+      // ABCAPITAL standalone revenue before Mar-24 is a holdco artefact (₹9-134cr
+      // against a ₹4,000cr run-rate) — nulled so YoY does not print nonsense.
+      "AB Capital":  [N,N,4139,N,4158,3792,3853,4010,4507,4384,4572,N],
+    };
+
+    const METRICS = {
+      pat:    { label:"PAT (₹ Cr)",     th:"PAT(₹Cr)",      unit:"₹Cr", better:"high", domain:[-3000,22000] },
+      rev:    { label:"Revenue (₹ Cr)", th:"Rev(₹Cr)",      unit:"₹Cr", better:"high", domain:null },
+      revyoy: { label:"Revenue YoY %",  th:"Rev YoY%",      unit:"%",   better:"high", domain:null },
+      gnpa:   { label:"Gross NPA %",    th:"GNPA%",         unit:"%",   better:"low",  domain:[0,6] },
+      nnpa:   { label:"Net NPA %",      th:"NNPA%",         unit:"%",   better:"low",  domain:[0,3.5] },
+      mcap:   { label:"Mkt Cap (₹ Cr)", th:"Mkt Cap*",      unit:"₹Cr", better:"high", domain:null,  fixed:true },
+      roa:    { label:"RoA % (TTM)",    th:"RoA%*",         unit:"%",   better:"high", domain:[0,4], fixed:true },
+    };
+    const CAT_COLORS = { "PSU":"#2E5DA8","Pvt Big 4":"#27AE60","Mid-Size Pvt":"#E67E22","NBFC":"#8E44AD","Diversified":"#16A085" };
+    const CATS = ["All","PSU","Pvt Big 4","Mid-Size Pvt","NBFC","Diversified"];
+    const CHART_COLORS = ["#3A8DDE","#27AE60","#E67E22","#8E44AD","#E74C3C","#F39C12"];
+    const RADAR_METRICS = ["pat","revyoy","gnpa","nnpa","roa"];
+
+    let activeMetric = "gnpa", activeCat = "All", activeQ = 7, activeTab = "heatmap";
     let sortDir = "desc";
-    let selectedBanks = ["SBI","HDFC Bank","ICICI","Bajaj Fin"];
+    let selectedBanks = ["HDFC Bank","ICICI","IndusInd","Chola"];
     let trendChartInst = null, barChartInst = null, radarChartInst = null;
 
     function isLight() {
@@ -356,7 +458,27 @@
     }
 
     function getVal(name, metric, qi) {
-      return (SEED[name] && SEED[name][metric]) ? SEED[name][metric][qi] : null;
+      // Market cap and TTM RoA are point-in-time, not quarterly — the same value
+      // is returned for every quarter, and the UI flags them with an asterisk.
+      if (METRICS[metric] && METRICS[metric].fixed) {
+        const s = SNAP[name];
+        const v = s ? s[metric] : null;
+        return (v === undefined || v === null) ? null : v;
+      }
+      if (metric === "rev") {
+        const r = REV[name];
+        return r ? (r[qi + 4] ?? null) : null;
+      }
+      if (metric === "revyoy") {
+        const r = REV[name];
+        if (!r) return null;
+        const cur = r[qi + 4], prior = r[qi];
+        if (cur === null || prior === null || cur === undefined || prior === undefined || prior <= 0) return null;
+        return +(((cur - prior) / prior) * 100).toFixed(1);
+      }
+      const rec = SEED[name];
+      if (!rec) return null;
+      return rec[metric] ? rec[metric][qi] : null;
     }
     function filteredBanks() {
       return activeCat === "All" ? BANKS : BANKS.filter(b => b.cat === activeCat);
@@ -386,8 +508,14 @@
     }
 
     function updatePAT() {
-      const total = BANKS.reduce((s,b) => s + (getVal(b.name,"pat",QUARTERS.length-1)||0), 0);
-      document.getElementById("latestPAT").textContent = "₹" + (total/1000).toFixed(0) + "K Cr";
+      const last = QUARTERS.length - 1;
+      let total = 0, n = 0;
+      BANKS.forEach(b => {
+        const v = getVal(b.name, "pat", last);
+        if (v !== null) { total += v; n++; }
+      });
+      document.getElementById("latestPAT").textContent =
+        "₹" + (total/1000).toFixed(0) + "K Cr (" + n + "/" + BANKS.length + ")";
     }
 
     function renderPills() {
@@ -418,10 +546,19 @@
     }
 
     function fmtVal(v, mKey) {
-      const m = METRICS[mKey];
-      if (m.fmt) return m.fmt(v);
-      if (m.unit === "₹Cr") return v >= 1000 ? (v/1000).toFixed(1)+"K" : String(v);
+      if (mKey === "pat" || mKey === "rev") return Math.abs(v) >= 1000 ? (v/1000).toFixed(1)+"K" : String(v);
+      if (mKey === "mcap") return fmtMcap(v);
+      if (mKey === "revyoy") return (v > 0 ? "+" : "") + v.toFixed(1);
       return v.toFixed(2);
+    }
+
+    // Some metrics (revenue, revenue growth, market cap) span too wide a range for a
+    // fixed axis — leave those to Chart.js auto-scaling instead of clipping outliers.
+    function yScale(ct) {
+      const d = METRICS[activeMetric].domain;
+      const s = { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid} };
+      if (d) { s.min = d[0]; s.max = d[1]; }
+      return s;
     }
 
     function renderHeatmap() {
@@ -434,10 +571,9 @@
       });
       document.getElementById("heatQLabel").textContent = QUARTERS[activeQ];
 
-      // 9 metric cols — widen min-width for all columns
-      let html = `<colgroup><col style="width:175px"><col style="width:70px">${mKeys.map(()=>'<col>').join('')}</colgroup>`;
+      let html = `<colgroup><col style="width:210px"><col style="width:100px">${mKeys.map(()=>'<col>').join('')}</colgroup>`;
       html += "<thead><tr>";
-      html += `<th class="name-col">Bank</th><th class="cat-th">Category</th>`;
+      html += `<th class="name-col">Entity</th><th class="cat-th">Category</th>`;
       mKeys.forEach(m => {
         const arrow = m === activeMetric ? (sortDir==="desc"?" ↓":" ↑") : "";
         html += `<th class="${m===activeMetric?"active":""}" data-metric="${m}">${METRICS[m].th}${arrow}</th>`;
@@ -459,6 +595,62 @@
       document.getElementById("heatTable").innerHTML = html;
     }
 
+    function fmtMcap(v) {
+      if (!v) return null;
+      return v >= 100000 ? (v/100000).toFixed(2) + "L" : (v/1000).toFixed(0) + "K";
+    }
+
+    function renderSnapshot() {
+      const repCols = [
+        { key:"nim",  label:"NIM %" },
+        { key:"casa", label:"CASA %" },
+      ];
+      const mktCols = [
+        { key:"mcap", label:"Mkt Cap ₹Cr" },
+        { key:"pe",   label:"P/E" },
+        { key:"pbv",  label:"P/BV" },
+        { key:"roe",  label:"RoE %" },
+        { key:"roa",  label:"RoA %" },
+      ];
+      // heaviest first — market cap reads better than dashboard order here
+      const banks = filteredBanks().slice().sort((a,b) =>
+        ((SNAP[b.name]||{}).mcap || 0) - ((SNAP[a.name]||{}).mcap || 0));
+
+      let html = `<thead>`;
+      html += `<tr>`;
+      html += `<th rowspan="2" style="text-align:left;vertical-align:bottom">Entity</th>`;
+      html += `<th colspan="${repCols.length}" style="color:#F39C12;border-bottom:1px solid #2E5DA8">Q1FY27 as reported</th>`;
+      html += `<th colspan="${mktCols.length}" style="color:#3A8DDE;border-bottom:1px solid #2E5DA8">Market snapshot · 30 Jul 2026</th>`;
+      html += `<th rowspan="2" style="text-align:left;vertical-align:bottom">Note</th>`;
+      html += `</tr><tr>`;
+      repCols.forEach(c => { html += `<th>${c.label}</th>`; });
+      mktCols.forEach(c => { html += `<th>${c.label}</th>`; });
+      html += `</tr></thead><tbody>`;
+
+      banks.forEach((b, bi) => {
+        const s = SNAP[b.name] || {};
+        html += `<tr class="${bi%2===0?"ibs-row-even":"ibs-row-odd"}">`;
+        html += `<td><span class="ibs-dot" style="background:${CAT_COLORS[b.cat]}"></span>${b.full}</td>`;
+        repCols.forEach(c => {
+          const v = s[c.key];
+          if (!v) { html += `<td class="na">—</td>`; return; }
+          const sup = (c.key === "nim" && s.nimNote) ? `<span style="font-size:9px;color:var(--muted)"> ${s.nimNote}</span>` : "";
+          html += `<td>${v}${sup}</td>`;
+        });
+        mktCols.forEach(c => {
+          let v = s[c.key];
+          if (v === undefined || v === null) { html += `<td class="na">—</td>`; return; }
+          if (c.key === "mcap") v = fmtMcap(v);
+          else v = Number(v).toFixed(2);
+          html += `<td>${v}</td>`;
+        });
+        html += `<td style="text-align:left;font-family:inherit;font-size:10px;color:var(--muted)">${s.note || ""}</td>`;
+        html += "</tr>";
+      });
+      html += "</tbody>";
+      document.getElementById("snapTable").innerHTML = html;
+    }
+
     function renderTrend() {
       document.getElementById("trendMetricLabel").textContent = METRICS[activeMetric].label;
       const ct = chartTheme();
@@ -470,7 +662,7 @@
       const data = { labels: QUARTERS, datasets: selectedBanks.map((bk,i) => ({
         label: bk, data: QUARTERS.map((_,qi) => getVal(bk, activeMetric, qi)),
         borderColor: CHART_COLORS[i%6], backgroundColor: "transparent",
-        borderWidth: 2, pointRadius: 0, spanGaps: true,
+        borderWidth: 2, pointRadius: 2, spanGaps: true,
       })) };
       if (trendChartInst) { trendChartInst.destroy(); trendChartInst = null; }
       trendChartInst = new Chart(document.getElementById("trendChart").getContext("2d"), {
@@ -479,7 +671,7 @@
           responsive: true, maintainAspectRatio: false,
           scales: {
             x: { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid} },
-            y: { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid}, min:METRICS[activeMetric].domain[0], max:METRICS[activeMetric].domain[1] },
+            y: yScale(ct),
           },
           plugins: { legend:{labels:{color:ct.labels,font:{size:11}}} },
         }
@@ -505,7 +697,7 @@
           responsive: true, maintainAspectRatio: false,
           scales: {
             x: { ticks:{color:ct.labels,font:{size:10},maxRotation:35}, grid:{color:ct.grid} },
-            y: { ticks:{color:ct.labels,font:{size:10}}, grid:{color:ct.grid}, min:METRICS[activeMetric].domain[0], max:METRICS[activeMetric].domain[1] },
+            y: yScale(ct),
           },
           plugins: { legend:{display:false} },
         }
@@ -552,6 +744,7 @@
       if (activeTab==="heatmap") renderHeatmap();
       else if (activeTab==="trend") renderTrend();
       else if (activeTab==="bar") renderBar();
+      else if (activeTab==="snapshot") renderSnapshot();
       else renderRadar();
     }
 
@@ -606,7 +799,7 @@
 
     // Re-render charts when theme changes
     new MutationObserver(() => {
-      if (activeTab !== "heatmap") renderActiveTab();
+      if (activeTab !== "heatmap" && activeTab !== "snapshot") renderActiveTab();
     }).observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] });
 
     // Init
