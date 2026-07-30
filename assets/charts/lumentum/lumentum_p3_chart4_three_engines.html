@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Growth Engines</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  .engines {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .engine {
+    background: #0d1b2a;
+    border-radius: 4px;
+    padding: 20px 16px;
+    border: 1px solid #1e3a5f;
+  }
+  .engine.primary { border-color: #f97316; }
+  .engine.growing { border-color: #1e6b9b; }
+  .engine.pipeline { border-color: #1e3a5f; border-style: dashed; }
+
+  .eng-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .badge-now { background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+  .badge-growing { background: rgba(30,107,155,0.2); color: #60a5fa; border: 1px solid rgba(30,107,155,0.35); }
+  .badge-future { background: rgba(26,61,92,0.3); color: #4a6b8a; border: 1px solid #1e3a5f; }
+
+  .eng-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f0f4f8;
+    margin-bottom: 6px;
+  }
+  .eng-subtitle { color: #f97316; font-size: 10px; margin-bottom: 12px; }
+  .engine.growing .eng-subtitle { color: #60a5fa; }
+  .engine.pipeline .eng-subtitle { color: #4a6b8a; }
+
+  .eng-stat {
+    background: #111d2e;
+    border-radius: 3px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #1a2f45;
+  }
+  .eng-stat-val { font-size: 16px; font-weight: 600; }
+  .engine.primary .eng-stat-val { color: #f97316; }
+  .engine.growing .eng-stat-val { color: #4ade80; }
+  .engine.pipeline .eng-stat-val { color: #7a9bbf; }
+  .eng-stat-label { font-size: 9px; color: #4a6b8a; margin-top: 2px; }
+
+  .eng-bullets { list-style: none; }
+  .eng-bullets li { font-size: 10px; color: #7a9bbf; padding: 4px 0; border-bottom: 1px solid #1a2f45; line-height: 1.4; }
+  .eng-bullets li:last-child { border-bottom: none; }
+  .eng-bullets li::before { content: '→ '; color: #f97316; }
+  .engine.growing .eng-bullets li::before { color: #60a5fa; }
+  .engine.pipeline .eng-bullets li::before { color: #4a6b8a; }
+
+  .chart-wrap { height: 180px; position: relative; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 04 — Three Growth Engines</div>
+  <h2>EMLs Today. OCS Tomorrow. CPO After That.</h2>
+  <div class="sub">Lumentum's staggered revenue runway: three product lines at different stages of maturity</div>
+
+  <div class="engines">
+    <div class="engine primary">
+      <span class="eng-badge badge-now">▲ Now — Core</span>
+      <div class="eng-title">EML Laser Chips</div>
+      <div class="eng-subtitle">200G per lane · 1.6T Enabler</div>
+      <div class="eng-stat">
+        <div class="eng-stat-val">50–60%</div>
+        <div class="eng-stat-label">Global market share, high-end EML</div>
+      </div>
+      <div class="eng-stat">
+        <div class="eng-stat-val">+40% / yr</div>
+        <div class="eng-stat-label">Capacity expansion committed for 2025 & 2026</div>
+      </div>
+      <ul class="eng-bullets">
+        <li>Only at-volume supplier of 200G EMLs globally</li>
+        <li>Demand exceeds supply by 25–30%</li>
+        <li>Pricing power confirmed — double-digit ASP increases in 2026</li>
+        <li>Required for every 1.6T transceiver shipped</li>
+      </ul>
+    </div>
+
+    <div class="engine growing">
+      <span class="eng-badge badge-growing">↑ Scaling — OCS</span>
+      <div class="eng-title">Optical Circuit Switches</div>
+      <div class="eng-subtitle">Data Center Fabric Routing</div>
+      <div class="eng-stat">
+        <div class="eng-stat-val">$400M+</div>
+        <div class="eng-stat-label">Backlog as of Q2 FY2026</div>
+      </div>
+      <div class="eng-stat">
+        <div class="eng-stat-val">$100M/Q</div>
+        <div class="eng-stat-label">Target quarterly revenue by end CY2026</div>
+      </div>
+      <ul class="eng-bullets">
+        <li>Cleared $10M/quarter 3 months ahead of target</li>
+        <li>3 hyperscaler customers now (was 1 in 2025)</li>
+        <li>Google demonstrating 40% power savings via OCS</li>
+        <li>Zero electrical conversion = lower latency + energy</li>
+      </ul>
+    </div>
+
+    <div class="engine pipeline">
+      <span class="eng-badge badge-future">→ Pipeline — CPO</span>
+      <div class="eng-title">Co-Packaged Optics</div>
+      <div class="eng-subtitle">Optics Integrated Into the ASIC</div>
+      <div class="eng-stat">
+        <div class="eng-stat-val">$100M+</div>
+        <div class="eng-stat-label">Single CPO order received, H1 2027 delivery</div>
+      </div>
+      <div class="eng-stat">
+        <div class="eng-stat-val">2027–28</div>
+        <div class="eng-stat-label">Expected volume revenue ramp</div>
+      </div>
+      <ul class="eng-bullets">
+        <li>Optics packaged directly into network switch chip</li>
+        <li>3.5× efficiency improvement vs pluggable optics</li>
+        <li>NVIDIA planning CPO in 2027+ hardware generations</li>
+        <li>Lumentum received largest single order in company history</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="engChart"></canvas>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Q2 FY2026 & Q3 FY2026 earnings calls. OCS = Optical Circuit Switch. CPO = Co-Packaged Optics. EML = Electro-Absorption Modulated Laser. Market share estimates from mlq.ai research and Anand Capital analysis. CPO efficiency data from industry research.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('engChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['FY2025', 'FY2026E', 'FY2027E', 'FY2028E'],
+    datasets: [
+      {
+        label: 'EML & Transceivers',
+        data: [1400, 2400, 3200, 4500],
+        backgroundColor: 'rgba(249,115,22,0.75)',
+        borderColor: '#f97316',
+        borderWidth: 1,
+        borderRadius: 3,
+        stack: 'revenue',
+        barPercentage: 0.65,
+      },
+      {
+        label: 'OCS Revenue',
+        data: [20, 280, 500, 700],
+        backgroundColor: 'rgba(30,107,155,0.75)',
+        borderColor: '#1e6b9b',
+        borderWidth: 1,
+        borderRadius: 3,
+        stack: 'revenue',
+        barPercentage: 0.65,
+      },
+      {
+        label: 'CPO Revenue',
+        data: [0, 10, 150, 600],
+        backgroundColor: 'rgba(74,222,128,0.5)',
+        borderColor: '#4ade80',
+        borderWidth: 1,
+        borderRadius: 3,
+        stack: 'revenue',
+        barPercentage: 0.65,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        align: 'end',
+        labels: {
+          color: '#b0c4d8',
+          font: { family: 'IBM Plex Mono', size: 10 },
+          boxWidth: 10,
+          padding: 16,
+        }
+      },
+      tooltip: {
+        backgroundColor: '#0d1b2a',
+        borderColor: '#1e3a5f',
+        borderWidth: 1,
+        titleColor: '#f97316',
+        bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: { label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y}M` }
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: { color: '#1a2f45' },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 11 } }
+      },
+      y: {
+        stacked: true,
+        grid: { color: '#1a2f45' },
+        ticks: {
+          color: '#7a9bbf',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          callback: v => `$${v}M`
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

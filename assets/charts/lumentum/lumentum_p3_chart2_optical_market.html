@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optical Market Explosion</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  .two-col { display: flex; gap: 24px; align-items: flex-start; }
+  .col-left { flex: 1.2; }
+  .col-right { flex: 1; }
+
+  .chart-wrap { position: relative; height: 280px; }
+
+  .gen-stack { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+  .gen-row { display: flex; align-items: center; gap: 10px; }
+  .gen-label { width: 55px; font-size: 10px; color: #7a9bbf; flex-shrink: 0; }
+  .gen-bar-bg { flex: 1; background: #0d1b2a; height: 32px; border-radius: 3px; overflow: hidden; border: 1px solid #1a2f45; position: relative; }
+  .gen-bar-fill { height: 100%; border-radius: 2px; display: flex; align-items: center; padding-left: 10px; }
+  .gen-bar-val { font-size: 10px; font-weight: 600; }
+  .gen-note { font-size: 9px; color: #4a6b8a; margin-top: 2px; }
+
+  .col-title { font-size: 10px; color: #f97316; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 02 — Market Size & Generation Doubling</div>
+  <h2>The Market That Keeps Growing Faster Than Forecasts</h2>
+  <div class="sub">AI Optical Transceiver Market (USD Billions, LightCounting) + Optical Content Per Server Rack by Generation</div>
+
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-title">Market Size (AI Optical Transceivers)</div>
+      <div class="chart-wrap">
+        <canvas id="mktChart"></canvas>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="col-title">Optical Content Per Rack — Each Gen Doubles</div>
+      <div class="gen-stack">
+        <div>
+          <div class="gen-row">
+            <div class="gen-label">100G</div>
+            <div class="gen-bar-bg">
+              <div class="gen-bar-fill" style="width:14%; background: linear-gradient(90deg,#1a2f45,#1e3a5f);">
+                <span class="gen-bar-val" style="color:#4a6b8a;">1×</span>
+              </div>
+            </div>
+          </div>
+          <div class="gen-note" style="padding-left:65px;">Baseline optical content ~$800 per rack</div>
+        </div>
+        <div>
+          <div class="gen-row">
+            <div class="gen-label">400G</div>
+            <div class="gen-bar-bg">
+              <div class="gen-bar-fill" style="width:28%; background: linear-gradient(90deg,#1e4d7b,#1e6b9b);">
+                <span class="gen-bar-val" style="color:#b0c4d8;">2×</span>
+              </div>
+            </div>
+          </div>
+          <div class="gen-note" style="padding-left:65px;">~$1,600 per rack · Mainstream 2022–24</div>
+        </div>
+        <div>
+          <div class="gen-row">
+            <div class="gen-label">800G</div>
+            <div class="gen-bar-bg">
+              <div class="gen-bar-fill" style="width:55%; background: linear-gradient(90deg,#f97316,#fb923c);">
+                <span class="gen-bar-val" style="color:#0d1b2a;">4×</span>
+              </div>
+            </div>
+          </div>
+          <div class="gen-note" style="padding-left:65px;">~$3,200 per rack · 2025 dominant gen</div>
+        </div>
+        <div>
+          <div class="gen-row">
+            <div class="gen-label">1.6T</div>
+            <div class="gen-bar-bg">
+              <div class="gen-bar-fill" style="width:100%; background: linear-gradient(90deg,#f97316,#fbbf24);">
+                <span class="gen-bar-val" style="color:#0d1b2a;">8× ⬆</span>
+              </div>
+            </div>
+          </div>
+          <div class="gen-note" style="padding-left:65px;">~$6,400+ per rack · Ramping in 2026</div>
+        </div>
+        <div>
+          <div class="gen-row">
+            <div class="gen-label">3.2T</div>
+            <div class="gen-bar-bg" style="border-style: dashed; opacity:0.5;">
+              <div class="gen-bar-fill" style="width:100%; background: linear-gradient(90deg,#f9731640,#fbbf2440);">
+                <span class="gen-bar-val" style="color:#7a9bbf;">16× ?</span>
+              </div>
+            </div>
+          </div>
+          <div class="gen-note" style="padding-left:65px; color:#2d4a63;">Future gen · R&D stage · 400G per lane</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Sources: LightCounting Optical Market Forecast 2026; TrendForce AI Optics Report April 2026; C-Light Transceiver Market Analysis 2025–2030. Content-per-rack estimates are illustrative based on transceiver ASP scaling ratios. Lumentum's 200G EML chips are the enabling component for 1.6T transceivers.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('mktChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 280);
+gradient.addColorStop(0, 'rgba(249,115,22,0.3)');
+gradient.addColorStop(1, 'rgba(249,115,22,0.02)');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['2022', '2023', '2024', '2025', '2026E'],
+    datasets: [{
+      label: 'Market Size ($B)',
+      data: [8.9, 9.5, 11.7, 16.5, 26.0],
+      backgroundColor: ['#1e4d7b99','#1e4d7b99','#1e6b9b99','#f9731699','#f97316cc'],
+      borderColor:    ['#1e4d7b','#1e4d7b','#1e6b9b','#f97316','#f97316'],
+      borderWidth: 2,
+      borderRadius: 3,
+      barPercentage: 0.65,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0d1b2a',
+        borderColor: '#1e3a5f',
+        borderWidth: 1,
+        titleColor: '#f97316',
+        bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: {
+          label: ctx => ` $${ctx.parsed.y}B`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#1a2f45' },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 11 } }
+      },
+      y: {
+        grid: { color: '#1a2f45' },
+        ticks: {
+          color: '#7a9bbf',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          callback: v => `$${v}B`
+        }
+      }
+    },
+    animation: {
+      onComplete: function() {
+        const chart = this;
+        const ctx2 = chart.ctx;
+        ctx2.save();
+        ctx2.font = '600 10px IBM Plex Mono';
+        ctx2.textAlign = 'center';
+        const growths = [null, '+7%', '+23%', '+41%', '+58%'];
+        chart.data.datasets.forEach((dataset, i) => {
+          chart.getDatasetMeta(i).data.forEach((bar, index) => {
+            if (growths[index]) {
+              ctx2.fillStyle = index === 4 ? '#4ade80' : '#7a9bbf';
+              ctx2.fillText(growths[index], bar.x, bar.y - 8);
+            }
+          });
+        });
+        ctx2.restore();
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCF Price Decoder</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 30px; }
+
+  .price-anchor {
+    background: #0d1b2a;
+    border: 2px solid #f97316;
+    border-radius: 4px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .pa-price { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700; color: #f97316; }
+  .pa-label { color: #7a9bbf; font-size: 11px; line-height: 1.5; }
+  .pa-label span { color: #f0f4f8; font-weight: 600; }
+
+  .assumption-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  .assumption-box {
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 18px 16px;
+  }
+  .ab-title { color: #4a6b8a; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .ab-implied {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .orange { color: #f97316; }
+  .green { color: #4ade80; }
+  .red { color: #ef4444; }
+  .blue { color: #60a5fa; }
+  .ab-desc { font-size: 10px; color: #7a9bbf; line-height: 1.5; margin-bottom: 8px; }
+  .ab-verdict {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .verdict-stretch { background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+  .verdict-possible { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+  .verdict-reasonable { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+
+  .reality-check {
+    background: #0d1b2a;
+    border-left: 3px solid #fbbf24;
+    padding: 14px 18px;
+    border-radius: 0 3px 3px 0;
+  }
+  .rc-title { color: #fbbf24; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .rc-body { color: #7a9bbf; font-size: 11px; line-height: 1.6; }
+  .rc-body strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 02 — DCF Price Decoder</div>
+  <h2>What Does $945 Per Share Actually Believe?</h2>
+  <div class="sub">Reverse-engineering the market's embedded assumptions at the current stock price</div>
+
+  <div class="price-anchor">
+    <div class="pa-price">$945</div>
+    <div class="pa-label">
+      Current stock price · June 2026<br>
+      Market cap: <span>~$67.8B</span> · Enterprise value: <span>~$64.5B</span><br>
+      52-week range: <span>$80 → $1,086</span> · Up <span>~1,076% from 52-week low</span>
+    </div>
+  </div>
+
+  <div class="assumption-grid">
+    <div class="assumption-box">
+      <div class="ab-title">Revenue CAGR Implied (FY2026–FY2028)</div>
+      <div class="ab-implied orange">~45–50%</div>
+      <div class="ab-desc">To reach management's $2B quarterly run-rate (~$8B/year) by FY2028 from ~$3B today requires ~45% annual growth. Analyst consensus: 43% for 3 years.</div>
+      <span class="ab-verdict verdict-possible">Demanding but visible</span>
+    </div>
+    <div class="assumption-box">
+      <div class="ab-title">Exit Non-GAAP Operating Margin (FY2028)</div>
+      <div class="ab-implied green">28–32%</div>
+      <div class="ab-desc">For $30 EPS (management target) on $8B revenue, margins need to reach ~30%+. Currently at 30% in Q3 FY2026 — so this is a continuation, not a stretch.</div>
+      <span class="ab-verdict verdict-reasonable">Plausible — already trending there</span>
+    </div>
+    <div class="assumption-box">
+      <div class="ab-title">Exit Multiple on FY2028 Earnings</div>
+      <div class="ab-implied blue">~31x</div>
+      <div class="ab-desc">At $30 non-GAAP EPS and $945 stock price today → 31x FY2028 earnings. For a high-growth hardware company with AI infrastructure exposure, 30x is defensible in a bull market.</div>
+      <span class="ab-verdict verdict-possible">Reasonable if growth holds</span>
+    </div>
+    <div class="assumption-box">
+      <div class="ab-title">No Significant Execution Stumble</div>
+      <div class="ab-implied red">Zero margin</div>
+      <div class="ab-desc">The current price assumes: no fab delays, no hyperscaler capex pause, no margin compression from competition, no macro shock. Any one of these changes the math sharply.</div>
+      <span class="ab-verdict verdict-stretch">Key risk — no buffer priced in</span>
+    </div>
+  </div>
+
+  <div class="reality-check">
+    <div class="rc-title">⚠ The Honest Assessment</div>
+    <div class="rc-body">At $945, you are paying today's price for a business that needs to roughly <strong>2.6× its current quarterly revenue by FY2028 while simultaneously expanding margins by 500+ basis points</strong>. This is achievable if the AI capex cycle sustains. It is not forgiving if it doesn't. <strong>The margin of safety at current prices is thin.</strong> You're not buying the business as it exists — you're buying the business as it must become.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">DCF assumptions: 10% discount rate, 3% terminal growth, 10-year model. FY2028 EPS target of $30 from management commentary (FinancialContent, March 2026). Shares outstanding ~71.7M common + 2.876M preferred = ~74.6M fully diluted. EV calculation: $67.8B market cap - $3.17B cash + $1.15B convertible debt = ~$64.5B.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+</body>
+</html>

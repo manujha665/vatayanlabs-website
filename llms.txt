@@ -15,6 +15,7 @@
 - [Defence](https://vatayanlabs.com/sectors/defence/): "Read the Defence" — 7-part series on India's defence decade, HAL, BEL and the value chain.
 - [Microfinance](https://vatayanlabs.com/sectors/microfinance/): The microfinance stress cycle and the CGSMFI-2.0 credit guarantee.
 - [Mutual Funds](https://vatayanlabs.com/sectors/mutual-funds/): The SIP illusion, momentum funds, the 77% concentration problem in Indian equity portfolios, and India's first REIT index fund.
+- [Semiconductors](https://vatayanlabs.com/sectors/semiconductors/): Five-part business study of Lumentum ($LITE) — photonics, the NVIDIA relationship, valuation and the India angle.
 - [Capital Markets](https://vatayanlabs.com/sectors/capital-markets/): 4-part series on India's market infrastructure — depositories (CDSL/NSDL), RTAs and global peers.
 
 ## About

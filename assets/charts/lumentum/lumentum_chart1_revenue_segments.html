@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum Revenue by Segment</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1b2a;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+  }
+  .card {
+    background: #111d2e;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 40px 44px 36px;
+    width: 780px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+  }
+  .label-top {
+    color: #f97316;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #f0f4f8;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .sub {
+    color: #7a9bbf;
+    font-size: 11px;
+    margin-bottom: 32px;
+  }
+  .chart-wrap {
+    position: relative;
+    height: 320px;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid #1e3a5f;
+    margin: 28px 0 18px;
+  }
+  .footnote {
+    color: #4a6b8a;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+  .brand {
+    color: #f97316;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-align: right;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 01 — Segment Revenue</div>
+  <h2>Lumentum: Cloud & Networking Dominates</h2>
+  <div class="sub">Annual Revenue by Segment (USD Millions) · FY2021–FY2025 (Fiscal Year ends June)</div>
+  <div class="chart-wrap">
+    <canvas id="chart1"></canvas>
+  </div>
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings SEC Filings. FY = Fiscal Year ending June. Cloud & Networking includes datacom, telecom, and 3D sensing historically. Industrial Tech includes commercial lasers.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+<script>
+const ctx = document.getElementById('chart1').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+    datasets: [
+      {
+        label: 'Cloud & Networking',
+        data: [1380, 1490, 1530, 1150, 1430],
+        backgroundColor: '#f97316',
+        borderRadius: 3,
+        barPercentage: 0.65,
+      },
+      {
+        label: 'Industrial Tech',
+        data: [270, 285, 240, 209, 215],
+        backgroundColor: '#1e6b9b',
+        borderRadius: 3,
+        barPercentage: 0.65,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        align: 'end',
+        labels: {
+          color: '#b0c4d8',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          boxWidth: 12,
+          padding: 20,
+        }
+      },
+      tooltip: {
+        backgroundColor: '#0d1b2a',
+        borderColor: '#1e3a5f',
+        borderWidth: 1,
+        titleColor: '#f97316',
+        bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: {
+          label: ctx => ` $${ctx.parsed.y}M`
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: false,
+        grid: { color: '#1a2f45', drawBorder: false },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 11 } }
+      },
+      y: {
+        grid: { color: '#1a2f45', drawBorder: false },
+        ticks: {
+          color: '#7a9bbf',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          callback: v => `$${v}M`
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

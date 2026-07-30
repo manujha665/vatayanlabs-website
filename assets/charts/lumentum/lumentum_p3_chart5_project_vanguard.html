@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Vanguard Geopolitical Moat</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 30px; }
+
+  .vs-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 24px;
+  }
+  .vs-col {
+    background: #0d1b2a;
+    border-radius: 4px;
+    padding: 20px 18px;
+    border: 1px solid #1e3a5f;
+  }
+  .vs-col.us { border-color: #4ade80; }
+  .vs-col.china { border-color: #ef4444; opacity: 0.75; }
+  .vs-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #4a6b8a;
+    font-weight: 600;
+  }
+  .col-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .col-flag { font-size: 22px; }
+  .col-label { font-size: 12px; font-weight: 600; }
+  .vs-col.us .col-label { color: #4ade80; }
+  .vs-col.china .col-label { color: #ef4444; }
+
+  .attr-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a2f45;
+  }
+  .attr-row:last-child { border-bottom: none; }
+  .attr-name { font-size: 10px; color: #4a6b8a; }
+  .attr-val { font-size: 10px; font-weight: 600; }
+  .green { color: #4ade80; }
+  .red { color: #ef4444; }
+  .orange { color: #f97316; }
+  .neutral { color: #7a9bbf; }
+
+  .fab-timeline {
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 20px 20px;
+    margin-bottom: 16px;
+  }
+  .fab-title { color: #f97316; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .fab-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .fab-step { flex: 1; text-align: center; position: relative; }
+  .fab-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+  }
+  .fab-dot.done { background: #4ade80; }
+  .fab-dot.current { background: #f97316; box-shadow: 0 0 10px rgba(249,115,22,0.5); }
+  .fab-dot.next { background: #1e3a5f; border: 2px solid #1e6b9b; }
+  .fab-line {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background: #1e3a5f;
+    z-index: 0;
+  }
+  .fab-step:last-child .fab-line { display: none; }
+  .fab-date { font-size: 10px; font-weight: 600; }
+  .fab-step.done-s .fab-date { color: #4ade80; }
+  .fab-step.active-s .fab-date { color: #f97316; }
+  .fab-step.next-s .fab-date { color: #4a6b8a; }
+  .fab-label { font-size: 9px; color: #4a6b8a; margin-top: 4px; line-height: 1.3; }
+
+  .geopolitical-note {
+    background: #0d1b2a;
+    border-left: 3px solid #4ade80;
+    padding: 14px 18px;
+    border-radius: 0 3px 3px 0;
+  }
+  .geo-title { color: #4ade80; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .geo-body { color: #7a9bbf; font-size: 11px; line-height: 1.6; }
+  .geo-body strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 05 — Project Vanguard: Geopolitical Moat</div>
+  <h2>Why "Made in USA" is a Competitive Advantage, Not a Slogan</h2>
+  <div class="sub">US vs China optical manufacturing positioning — and the Greensboro fab timeline</div>
+
+  <div class="vs-grid">
+    <div class="vs-col us">
+      <div class="col-header">
+        <span class="col-flag">🇺🇸</span>
+        <div class="col-label">US Manufacturers (Lumentum + Coherent)</div>
+      </div>
+      <div class="attr-row"><span class="attr-name">Export Controls</span><span class="attr-val green">No restrictions</span></div>
+      <div class="attr-row"><span class="attr-name">Hyperscaler Status</span><span class="attr-val green">Preferred & growing</span></div>
+      <div class="attr-row"><span class="attr-name">NVIDIA Partnership</span><span class="attr-val green">$2B each · Locked in</span></div>
+      <div class="attr-row"><span class="attr-name">Technology Tier</span><span class="attr-val green">200G EML · Only supplier</span></div>
+      <div class="attr-row"><span class="attr-name">Fab Location</span><span class="attr-val green">San Jose CA + Greensboro NC</span></div>
+      <div class="attr-row"><span class="attr-name">Supply Reliability</span><span class="attr-val green">No geopolitical risk</span></div>
+    </div>
+    <div class="vs-middle">VS</div>
+    <div class="vs-col china">
+      <div class="col-header">
+        <span class="col-flag">🇨🇳</span>
+        <div class="col-label">Chinese Manufacturers (Accelink, HGGenuine)</div>
+      </div>
+      <div class="attr-row"><span class="attr-name">Export Controls</span><span class="attr-val red">Subject to BIS rules</span></div>
+      <div class="attr-row"><span class="attr-name">Hyperscaler Status</span><span class="attr-val red">Actively being reduced</span></div>
+      <div class="attr-row"><span class="attr-name">NVIDIA Partnership</span><span class="attr-val red">Excluded under controls</span></div>
+      <div class="attr-row"><span class="attr-name">Technology Tier</span><span class="attr-val orange">100G EML · 2–3yr gap</span></div>
+      <div class="attr-row"><span class="attr-name">Fab Location</span><span class="attr-val red">China (supply chain risk)</span></div>
+      <div class="attr-row"><span class="attr-name">Supply Reliability</span><span class="attr-val red">Geopolitical uncertainty</span></div>
+    </div>
+  </div>
+
+  <div class="fab-timeline">
+    <div class="fab-title">Project Vanguard: Greensboro, NC New Fab — Milestone Timeline</div>
+    <div class="fab-steps">
+      <div class="fab-step done-s">
+        <div class="fab-line"></div>
+        <div class="fab-dot done"></div>
+        <div class="fab-date">Mar 2026</div>
+        <div class="fab-label">NVIDIA $2B investment confirmed. Fab funding secured.</div>
+      </div>
+      <div class="fab-step active-s">
+        <div class="fab-line"></div>
+        <div class="fab-dot current"></div>
+        <div class="fab-date">Mid 2026</div>
+        <div class="fab-label">Site construction underway. 1.6T DR4 module shipments begin.</div>
+      </div>
+      <div class="fab-step next-s">
+        <div class="fab-line"></div>
+        <div class="fab-dot next"></div>
+        <div class="fab-date">H2 2027</div>
+        <div class="fab-label">First CPO deliveries from new fab. Yield qualification phase.</div>
+      </div>
+      <div class="fab-step next-s">
+        <div class="fab-line"></div>
+        <div class="fab-dot next"></div>
+        <div class="fab-date">2028</div>
+        <div class="fab-label">Full volume production. Supports $2B quarterly revenue target.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="geopolitical-note">
+    <div class="geo-title">The Bigger Picture for Indian Investors</div>
+    <div class="geo-body">India's own hyperscaler build-out (Google, Microsoft, Amazon data centers in Mumbai, Pune, Hyderabad) will eventually require this same optical infrastructure. The supply chain that Lumentum is building in the US is the same supply chain that will power Indian data centers. <strong>Indirectly, Lumentum's technology will be inside the AI infrastructure serving India</strong> — even if Lumentum has no direct India revenue line today.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings 8-K (March 2026), SEC filings, semiconductor-today.com analysis. BIS = Bureau of Industry and Security (US). Export control status of Chinese optical manufacturers based on Commerce Department Entity List restrictions as of June 2026.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+</body>
+</html>

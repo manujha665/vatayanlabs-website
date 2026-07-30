@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Deal Anatomy</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 32px; }
+
+  .date-banner {
+    background: #0d1b2a;
+    border: 1px solid #f97316;
+    border-radius: 3px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .date-badge { color: #f97316; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+  .date-desc { color: #7a9bbf; font-size: 11px; }
+
+  .deal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .deal-card {
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 18px 16px;
+  }
+  .deal-card.highlight { border-color: #f97316; background: #0d1b2a; }
+  .deal-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .deal-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f97316;
+    margin-bottom: 4px;
+  }
+  .deal-title { color: #f0f4f8; font-size: 11px; font-weight: 600; margin-bottom: 8px; }
+  .deal-desc { color: #7a9bbf; font-size: 10px; line-height: 1.5; }
+  .deal-detail { color: #4a6b8a; font-size: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #1a2f45; }
+
+  .what-it-means {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .wim-item {
+    background: #0d1b2a;
+    border-radius: 3px;
+    padding: 12px 14px;
+    border: 1px solid #1a2f45;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .wim-dot {
+    width: 8px;
+    height: 8px;
+    background: #f97316;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .wim-text { font-size: 11px; color: #7a9bbf; line-height: 1.5; }
+  .wim-text strong { color: #f0f4f8; }
+
+  .section-title { color: #7a9bbf; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 03 — The NVIDIA Deal: Anatomy</div>
+  <h2>Jensen Huang's $2 Billion Signal</h2>
+  <div class="sub">What NVIDIA's March 2, 2026 strategic investment in Lumentum actually means — and what it doesn't</div>
+
+  <div class="date-banner">
+    <div class="date-badge">March 2, 2026</div>
+    <div class="date-desc">NVIDIA simultaneously invested $2B in both Lumentum and Coherent — a combined $4B optical bet on the same day</div>
+  </div>
+
+  <div class="deal-grid">
+    <div class="deal-card highlight">
+      <span class="deal-icon">💰</span>
+      <div class="deal-amount">$2B</div>
+      <div class="deal-title">Equity Investment</div>
+      <div class="deal-desc">NVIDIA purchased 2.876M shares of new Series A Convertible Preferred Stock at $695.31 per share via private placement.</div>
+      <div class="deal-detail">Converts 1:1 into common stock at NVIDIA's option. Carries dividends + voting rights on as-converted basis.</div>
+    </div>
+    <div class="deal-card">
+      <span class="deal-icon">📦</span>
+      <div class="deal-amount">$B+</div>
+      <div class="deal-title">Purchase Commitment</div>
+      <div class="deal-desc">Non-exclusive multi-billion dollar purchase commitment from NVIDIA for advanced laser components over multiple years.</div>
+      <div class="deal-detail">This pre-allocates production capacity and de-risks Lumentum's capex investment in the new fab.</div>
+    </div>
+    <div class="deal-card">
+      <span class="deal-icon">🏭</span>
+      <div class="deal-amount">New</div>
+      <div class="deal-title">Fab Capacity Rights</div>
+      <div class="deal-desc">NVIDIA secured future capacity access rights at Lumentum's new US-based fabrication facility (Greensboro, NC).</div>
+      <div class="deal-detail">Effectively NVIDIA is reserving production slots before the fab opens — ensuring optical supply for future GPU generations.</div>
+    </div>
+  </div>
+
+  <div class="section-title">What This Actually Means for Investors</div>
+  <div class="what-it-means">
+    <div class="wim-item">
+      <div class="wim-dot"></div>
+      <div class="wim-text"><strong>Demand validation:</strong> Jensen Huang wrote a $2B cheque. That is the most credible forward demand signal in optical networking history.</div>
+    </div>
+    <div class="wim-item">
+      <div class="wim-dot"></div>
+      <div class="wim-text"><strong>Balance sheet transformation:</strong> Cash went from ~$900M to ~$2.9B overnight. New fab can be funded without debt.</div>
+    </div>
+    <div class="wim-item">
+      <div class="wim-dot"></div>
+      <div class="wim-text"><strong>Dilution risk:</strong> 2.876M preferred shares will convert to common stock. At ~70M diluted shares today, this is ~4% dilution. Meaningful but not catastrophic.</div>
+    </div>
+    <div class="wim-item">
+      <div class="wim-dot"></div>
+      <div class="wim-text"><strong>Non-exclusive caveat:</strong> NVIDIA also invested in Coherent on the same day. They are buying supply security across multiple vendors — not awarding a monopoly.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings 8-K filed March 2, 2026 (SEC). NVIDIA Newsroom press release. All financial terms from official SEC filings. The $695.31 purchase price represents approximately a 15% premium to the 30-day VWAP at time of investment.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+</body>
+</html>

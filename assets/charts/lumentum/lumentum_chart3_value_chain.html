@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum Value Chain</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1b2a;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+  }
+  .card {
+    background: #111d2e;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 40px 44px 36px;
+    width: 780px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+  }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 36px; }
+
+  .chain {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 32px;
+  }
+  .node {
+    flex: 1;
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 16px 12px;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .node.highlight {
+    background: #1a2f0a;
+    border-color: #f97316;
+    border-width: 2px;
+  }
+  .node-title {
+    color: #f0f4f8;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .node.highlight .node-title { color: #f97316; }
+  .node-sub {
+    color: #4a6b8a;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .node.highlight .node-sub { color: #7a9bbf; }
+  .node-examples {
+    color: #4ade80;
+    font-size: 9px;
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+  }
+  .arrow {
+    color: #1e3a5f;
+    font-size: 22px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+  .badge {
+    display: inline-block;
+    background: #f97316;
+    color: #0d1b2a;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .cloudlight-note {
+    background: #0d1b2a;
+    border-left: 3px solid #4ade80;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    border-radius: 0 3px 3px 0;
+  }
+  .cloudlight-note .note-title {
+    color: #4ade80;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .cloudlight-note .note-body {
+    color: #7a9bbf;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .note-body strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 03 — Value Chain Position</div>
+  <h2>Where Lumentum Sits in the AI Data Center Stack</h2>
+  <div class="sub">From raw photonics to the GPU cluster — tracing the optical value chain</div>
+
+  <div class="chain">
+    <div class="node highlight">
+      <div class="node-title">LUMENTUM</div>
+      <div class="node-sub">Laser chips, EML components, OCS, narrow linewidth lasers</div>
+      <div class="node-examples">InP Wafer Fab → Component</div>
+      <div class="badge">★ You are here</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-title">TRANSCEIVER MAKERS</div>
+      <div class="node-sub">Assemble components into pluggable modules</div>
+      <div class="node-examples">InnoLight · Accelink · Coherent</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-title">NETWORK OEMs</div>
+      <div class="node-sub">Build switches and routers using transceivers</div>
+      <div class="node-examples">Cisco · Ciena · Nokia</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node">
+      <div class="node-title">HYPERSCALERS</div>
+      <div class="node-sub">Deploy networking for GPU clusters and AI factories</div>
+      <div class="node-examples">Google · Microsoft · Meta · Amazon</div>
+    </div>
+  </div>
+
+  <div class="cloudlight-note">
+    <div class="note-title">↑ THE CLOUDLIGHT PIVOT (Nov 2023)</div>
+    <div class="note-body">Before this acquisition, Lumentum only sold to Transceiver Makers. After CloudLight, Lumentum can <strong>bypass the transceiver layer</strong> and sell complete optical modules <strong>directly to Hyperscalers</strong> — capturing more margin and building a deeper customer relationship. This is the single most important strategic move in the company's recent history.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings investor materials & CII analysis. OEM = Original Equipment Manufacturer. InP = Indium Phosphide (the semiconductor material used for optical lasers).</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+</body>
+</html>

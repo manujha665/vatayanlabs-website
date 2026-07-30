@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valuation Context</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  .two-col { display: flex; gap: 20px; }
+  .col { flex: 1; }
+  .col-title { color: #f97316; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 230px; }
+
+  .multiple-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .multiple-table th {
+    color: #4a6b8a; font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 8px; text-align: left; border-bottom: 1px solid #1a2f45;
+    font-weight: 400;
+  }
+  .multiple-table td { padding: 9px 8px; font-size: 11px; border-bottom: 1px solid #1a2f45; }
+  .multiple-table tr:last-child td { border-bottom: none; }
+  .multiple-table .company { color: #b0c4d8; }
+  .multiple-table .metric { color: #7a9bbf; font-size: 10px; }
+  .multiple-table .val { color: #f0f4f8; font-weight: 600; }
+  .multiple-table .highlight td { background: rgba(249,115,22,0.06); }
+  .multiple-table .highlight .company { color: #f97316; }
+  .tag { display: inline-block; padding: 1px 6px; border-radius: 2px; font-size: 8px; font-weight: 600; letter-spacing: 1px; margin-left: 6px; vertical-align: middle; }
+  .tag-expensive { background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+  .tag-fair { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+  .tag-cheap { background: rgba(30,107,155,0.2); color: #60a5fa; border: 1px solid rgba(30,107,155,0.3); }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 01 — Valuation Context</div>
+  <h2>What Are You Actually Paying? Multiples in Context.</h2>
+  <div class="sub">Lumentum current valuation vs. historical own-average and comparable AI infrastructure companies · June 2026</div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="col-title">LITE: EV/Revenue Over Time</div>
+      <div class="chart-wrap"><canvas id="c1"></canvas></div>
+    </div>
+    <div class="col">
+      <div class="col-title">Peer Comparison — EV/NTM Revenue</div>
+      <table class="multiple-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>EV/NTM Rev</th>
+            <th>NTM Rev Growth</th>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td class="company">Lumentum (LITE)</td>
+            <td class="val">~16x</td>
+            <td class="val">+43%</td>
+            <td><span class="tag tag-expensive">Rich</span></td>
+          </tr>
+          <tr>
+            <td class="company">Coherent (COHR)</td>
+            <td class="val">~4x</td>
+            <td class="val">+28%</td>
+            <td><span class="tag tag-cheap">Cheaper</span></td>
+          </tr>
+          <tr>
+            <td class="company">NVIDIA (NVDA)</td>
+            <td class="val">~22x</td>
+            <td class="val">+52%</td>
+            <td><span class="tag tag-fair">Comparable</span></td>
+          </tr>
+          <tr>
+            <td class="company">TSMC (TSM)</td>
+            <td class="val">~11x</td>
+            <td class="val">+26%</td>
+            <td><span class="tag tag-cheap">Cheaper</span></td>
+          </tr>
+          <tr>
+            <td class="company">App. Opto (AAOI)</td>
+            <td class="val">~8x</td>
+            <td class="val">+60%</td>
+            <td><span class="tag tag-cheap">Cheaper</span></td>
+          </tr>
+          <tr>
+            <td class="company">Vertiv (VRT)</td>
+            <td class="val">~6x</td>
+            <td class="val">+18%</td>
+            <td><span class="tag tag-cheap">Cheaper</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Sources: Company filings, S&P Global Market Intelligence, Investing.com. NTM = Next Twelve Months. EV = Enterprise Value (Market Cap + Net Debt − Cash). LITE market cap ~$67B at $945/share × 71.7M shares. LITE EV ~$64B after netting $3.2B cash. Peer multiples approximate as of June 2026. LITE non-GAAP forward P/E at $945: ~124x FY2026E ($7.60 consensus non-GAAP EPS).</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('c1').getContext('2d');
+// EV/Revenue by fiscal year — using market cap ÷ revenue as proxy (simplified)
+// FY2021: ~$6B mkt cap / $1.58B rev ≈ 3.8x; FY2022 peak ~$8B/1.72B ≈ 4.6x; 
+// FY2023 drop ~$5B/1.77B ≈ 2.8x; FY2024 trough ~$3.5B/1.36B ≈ 2.6x;
+// FY2025 recovery ~$15B/1.65B ≈ 9x; Current (FY2026E): ~$64B EV/3B ≈ 21x
+// Let's use these approximate EV/Revenue figures
+const labels = ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025', 'FY2026E'];
+const data = [3.8, 4.6, 2.8, 2.6, 9.1, 21.4];
+const colors = data.map((v, i) => i === 5 ? 'rgba(249,115,22,0.85)' : 'rgba(30,107,155,0.75)');
+const borders = data.map((v, i) => i === 5 ? '#f97316' : '#1e6b9b');
+
+// historical avg line
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      {
+        label: 'EV/Revenue',
+        data,
+        backgroundColor: colors,
+        borderColor: borders,
+        borderWidth: 2,
+        borderRadius: 3,
+        barPercentage: 0.65,
+        order: 2,
+      },
+      {
+        label: '5yr Avg (ex-current): 4.6x',
+        data: [4.6, 4.6, 4.6, 4.6, 4.6, 4.6],
+        type: 'line',
+        borderColor: '#4ade80',
+        borderWidth: 1.5,
+        borderDash: [5, 4],
+        pointRadius: 0,
+        fill: false,
+        order: 1,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top', align: 'end',
+        labels: { color: '#b0c4d8', font: { family: 'IBM Plex Mono', size: 10 }, boxWidth: 16, padding: 14, usePointStyle: true }
+      },
+      tooltip: {
+        backgroundColor: '#0d1b2a', borderColor: '#1e3a5f', borderWidth: 1,
+        titleColor: '#f97316', bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: { label: ctx => ` EV/Revenue: ${ctx.parsed.y}x` }
+      }
+    },
+    scales: {
+      x: { grid: { color: '#1a2f45' }, ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 } } },
+      y: {
+        grid: { color: '#1a2f45' },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 }, callback: v => `${v}x` }
+      }
+    },
+    animation: {
+      onComplete: function() {
+        const ch = this; const c2 = ch.ctx;
+        c2.save();
+        c2.font = '600 10px IBM Plex Mono';
+        c2.textAlign = 'center';
+        ch.data.datasets[0].data.forEach((val, i) => {
+          const bar = ch.getDatasetMeta(0).data[i];
+          const color = i === 5 ? '#f97316' : '#7a9bbf';
+          c2.fillStyle = color;
+          c2.fillText(`${val}x`, bar.x, bar.y - 8);
+        });
+        c2.restore();
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

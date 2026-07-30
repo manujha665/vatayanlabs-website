@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum Quarterly Revenue Ramp</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1b2a;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+  }
+  .card {
+    background: #111d2e;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 40px 44px 36px;
+    width: 780px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+  }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 32px; }
+  .chart-wrap { position: relative; height: 320px; }
+  .annotation-box {
+    background: #0d1b2a;
+    border: 1px solid #f97316;
+    border-radius: 3px;
+    padding: 10px 14px;
+    margin-top: 20px;
+    display: flex;
+    gap: 32px;
+  }
+  .ann-item { text-align: center; }
+  .ann-val { color: #4ade80; font-size: 18px; font-weight: 600; letter-spacing: 1px; }
+  .ann-label { color: #7a9bbf; font-size: 10px; margin-top: 2px; }
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; letter-spacing: 0.5px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 02 — Quarterly Revenue Ramp</div>
+  <h2>The AI Acceleration in Numbers</h2>
+  <div class="sub">Quarterly Net Revenue (USD Millions) · Q4 FY2024 to Q3 FY2026</div>
+  <div class="chart-wrap">
+    <canvas id="chart2"></canvas>
+  </div>
+  <div class="annotation-box">
+    <div class="ann-item">
+      <div class="ann-val">$308M</div>
+      <div class="ann-label">Trough (Q4 FY24)</div>
+    </div>
+    <div class="ann-item">
+      <div class="ann-val">$808M</div>
+      <div class="ann-label">Q3 FY26</div>
+    </div>
+    <div class="ann-item">
+      <div class="ann-val">+162%</div>
+      <div class="ann-label">Revenue Growth in 6 Qtrs</div>
+    </div>
+    <div class="ann-item">
+      <div class="ann-val">$3.2B+</div>
+      <div class="ann-label">Annualised Run Rate</div>
+    </div>
+  </div>
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings SEC Filings & Earnings Releases. CloudLight acquisition closed Nov 2023. NVIDIA $2B investment announced Mar 2026.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+<script>
+const ctx = document.getElementById('chart2').getContext('2d');
+
+const gradient = ctx.createLinearGradient(0, 0, 0, 320);
+gradient.addColorStop(0, 'rgba(249,115,22,0.3)');
+gradient.addColorStop(1, 'rgba(249,115,22,0.01)');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Q4 FY24', 'Q1 FY25', 'Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26'],
+    datasets: [{
+      label: 'Quarterly Revenue',
+      data: [308, 337, 402, 425, 481, 534, 665, 808],
+      borderColor: '#f97316',
+      backgroundColor: gradient,
+      borderWidth: 2.5,
+      pointBackgroundColor: '#f97316',
+      pointBorderColor: '#0d1b2a',
+      pointBorderWidth: 2,
+      pointRadius: 6,
+      pointHoverRadius: 8,
+      fill: true,
+      tension: 0.35,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0d1b2a',
+        borderColor: '#f97316',
+        borderWidth: 1,
+        titleColor: '#f97316',
+        bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: {
+          label: ctx => ` Revenue: $${ctx.parsed.y}M`
+        }
+      },
+      annotation: {}
+    },
+    scales: {
+      x: {
+        grid: { color: '#1a2f45', drawBorder: false },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 11 } }
+      },
+      y: {
+        grid: { color: '#1a2f45', drawBorder: false },
+        ticks: {
+          color: '#7a9bbf',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          callback: v => `$${v}M`
+        },
+        min: 200,
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

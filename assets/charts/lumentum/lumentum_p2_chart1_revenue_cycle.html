@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum Revenue Cycle</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1b2a;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+  }
+  .card {
+    background: #111d2e;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 40px 44px 36px;
+    width: 820px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+  }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+  .chart-wrap { position: relative; height: 300px; }
+
+  .events {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .ev {
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 3px;
+    padding: 8px 12px;
+    flex: 1;
+    min-width: 170px;
+  }
+  .ev-year { color: #f97316; font-size: 9px; letter-spacing: 2px; margin-bottom: 3px; }
+  .ev-label { color: #7a9bbf; font-size: 10px; line-height: 1.4; }
+  .ev.key { border-color: #f97316; }
+  .ev.key .ev-year { color: #4ade80; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 01 — Six-Year Revenue Cycle</div>
+  <h2>Boom. Bust. Boom Again.</h2>
+  <div class="sub">Annual Net Revenue (USD Millions) · FY2020–FY2025 + TTM to Mar 2026 · Fiscal Year ends June</div>
+  <div class="chart-wrap">
+    <canvas id="c1"></canvas>
+  </div>
+
+  <div class="events">
+    <div class="ev">
+      <div class="ev-year">FY2020–FY2022 ▲ FIRST PEAK</div>
+      <div class="ev-label">3D sensing (Apple Face ID) + Telecom demand drove strong margins. Non-GAAP OpM touched 35%.</div>
+    </div>
+    <div class="ev">
+      <div class="ev-year">FY2023–FY2024 ▼ THE BUST</div>
+      <div class="ev-label">Inventory glut across telecom/datacom. Apple 3D sensing cuts. NeoPhotonics acquisition digestion.</div>
+    </div>
+    <div class="ev key">
+      <div class="ev-year">FY2025–TTM ▲ AI SUPERCYCLE</div>
+      <div class="ev-label">CloudLight acquisition + AI data center surge. Revenue +162% from trough to Q3 FY26.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings SEC Filings. TTM = Trailing Twelve Months to March 2026. FY2021 estimated from quarterly disclosures. Growth rates shown as YoY % on each bar.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('c1').getContext('2d');
+
+const revenues = [1680, 1580, 1720, 1770, 1359, 1645, 2488];
+const labels = ['FY2020', 'FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025', 'TTM FY26'];
+const growth = [null, -6, +9, +3, -23, +21, +51];
+const colors = revenues.map((v, i) => {
+  if (i === 4) return '#ef4444';         // bust year red
+  if (i === 5 || i === 6) return '#f97316'; // recovery orange
+  return '#1e6b9b';                      // boom years blue
+});
+const borderColors = colors.map(c => c);
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Net Revenue',
+      data: revenues,
+      backgroundColor: colors.map(c => c + 'cc'),
+      borderColor: colors,
+      borderWidth: 2,
+      borderRadius: 3,
+      barPercentage: 0.65,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0d1b2a',
+        borderColor: '#1e3a5f',
+        borderWidth: 1,
+        titleColor: '#f97316',
+        bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: {
+          label: ctx => ` Revenue: $${ctx.parsed.y.toLocaleString()}M`,
+          afterLabel: (ctx) => {
+            const g = growth[ctx.dataIndex];
+            return g != null ? ` YoY: ${g > 0 ? '+' : ''}${g}%` : '';
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#1a2f45', drawBorder: false },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 11 } }
+      },
+      y: {
+        min: 0,
+        max: 2800,
+        grid: { color: '#1a2f45', drawBorder: false },
+        ticks: {
+          color: '#7a9bbf',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          callback: v => `$${v}M`
+        }
+      }
+    },
+    animation: {
+      onComplete: function() {
+        const chart = this;
+        const ctx2 = chart.ctx;
+        ctx2.save();
+        ctx2.font = '600 10px IBM Plex Mono';
+        ctx2.textAlign = 'center';
+        chart.data.datasets.forEach((dataset, i) => {
+          chart.getDatasetMeta(i).data.forEach((bar, index) => {
+            const g = growth[index];
+            if (g != null) {
+              const label = `${g > 0 ? '+' : ''}${g}%`;
+              ctx2.fillStyle = g < 0 ? '#ef4444' : '#4ade80';
+              ctx2.fillText(label, bar.x, bar.y - 10);
+            }
+          });
+        });
+        ctx2.restore();
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

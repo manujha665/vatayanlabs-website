@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum Moat Scorecard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1b2a;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+  }
+  .card {
+    background: #111d2e;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 40px 44px 36px;
+    width: 780px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+  }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 32px; }
+
+  .moat-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .moat-label {
+    width: 200px;
+    flex-shrink: 0;
+    color: #b0c4d8;
+    font-size: 11px;
+  }
+  .moat-bar-bg {
+    flex: 1;
+    background: #0d1b2a;
+    height: 28px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #1a2f45;
+    position: relative;
+  }
+  .moat-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: width 1s ease;
+  }
+  .high { background: linear-gradient(90deg, #f97316, #fb923c); color: #0d1b2a; }
+  .med-high { background: linear-gradient(90deg, #1e6b9b, #2d8ec7); color: #f0f4f8; }
+  .medium { background: linear-gradient(90deg, #1a3d5c, #245a7d); color: #7a9bbf; }
+  .low { background: linear-gradient(90deg, #1a2f45, #1e3a5f); color: #4a6b8a; }
+
+  .moat-score {
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .score-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .badge-high { background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+  .badge-medh { background: rgba(30,107,155,0.2); color: #60a5fa; border: 1px solid rgba(30,107,155,0.4); }
+  .badge-med { background: rgba(26,61,92,0.4); color: #7a9bbf; border: 1px solid #1e3a5f; }
+  .badge-low { background: transparent; color: #4a6b8a; border: 1px solid #1a2f45; }
+
+  .section-divider { border: none; border-top: 1px solid #1a2f45; margin: 8px 0 20px; }
+
+  .verdict {
+    background: #0d1b2a;
+    border: 1px solid #f97316;
+    border-radius: 3px;
+    padding: 14px 18px;
+    margin-top: 16px;
+  }
+  .verdict-title { color: #f97316; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .verdict-body { color: #7a9bbf; font-size: 11px; line-height: 1.6; }
+  .verdict-body strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 04 — Competitive Moat Analysis</div>
+  <h2>How Deep is Lumentum's Moat?</h2>
+  <div class="sub">Scoring each moat type on strength — rated High / Medium-High / Medium / Low</div>
+
+  <div class="moat-row">
+    <div class="moat-label">Switching Costs</div>
+    <div class="moat-bar-bg">
+      <div class="moat-bar-fill high" style="width:88%">12–18 month qualification cycles</div>
+    </div>
+    <div class="moat-score"><span class="score-badge badge-high">HIGH</span></div>
+  </div>
+
+  <div class="moat-row">
+    <div class="moat-label">Intangible Assets</div>
+    <div class="moat-bar-bg">
+      <div class="moat-bar-fill high" style="width:82%">InP process IP, 200G EML know-how</div>
+    </div>
+    <div class="moat-score"><span class="score-badge badge-high">HIGH</span></div>
+  </div>
+
+  <div class="moat-row">
+    <div class="moat-label">Vertical Integration</div>
+    <div class="moat-bar-bg">
+      <div class="moat-bar-fill med-high" style="width:68%">Chip → Module → System (post CloudLight)</div>
+    </div>
+    <div class="moat-score"><span class="score-badge badge-medh">MED-HIGH</span></div>
+  </div>
+
+  <div class="moat-row">
+    <div class="moat-label">Geopolitical Moat</div>
+    <div class="moat-bar-bg">
+      <div class="moat-bar-fill med-high" style="width:72%">US fab, non-China trusted supply chain</div>
+    </div>
+    <div class="moat-score"><span class="score-badge badge-medh">MED-HIGH</span></div>
+  </div>
+
+  <div class="moat-row">
+    <div class="moat-label">Cost Advantage</div>
+    <div class="moat-bar-bg">
+      <div class="moat-bar-fill medium" style="width:45%">US manufacturing = higher cost vs China</div>
+    </div>
+    <div class="moat-score"><span class="score-badge badge-med">MEDIUM</span></div>
+  </div>
+
+  <div class="moat-row">
+    <div class="moat-label">Network Effects</div>
+    <div class="moat-bar-bg">
+      <div class="moat-bar-fill low" style="width:18%">Not applicable to hardware</div>
+    </div>
+    <div class="moat-score"><span class="score-badge badge-low">LOW</span></div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">Analyst View</div>
+    <div class="verdict-body">Lumentum's moat is <strong>real but narrow</strong> — it's built on technical depth and qualification lock-in, not on scale economics or brand loyalty. The key risk: a motivated, well-funded competitor (Chinese or otherwise) can close the technology gap given 3–4 years. The US manufacturing angle adds a geopolitical durability that the pure technical moat alone doesn't provide.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: CII Analysis based on Morningstar moat framework and Lumentum Holdings public disclosures. Moat ratings are qualitative assessments.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+</body>
+</html>

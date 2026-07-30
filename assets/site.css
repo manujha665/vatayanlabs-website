@@ -140,6 +140,13 @@ a.card:hover { box-shadow: var(--shadow-md); border-color: var(--blue-light); tr
 .article-body th, .article-body td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
 .article-body th { background: var(--card); font-weight: 600; }
 .article-body a { color: var(--blue); }
+.article-body .chart-embed { margin: 28px 0; }
+/* Height is a pre-JS fallback — chart-embed.js measures each chart and sets
+   the real height, since the charts vary from ~670px to ~1220px. */
+.article-body .chart-embed iframe {
+  width: 100%; height: 700px; border: 1px solid var(--border);
+  border-radius: 12px; background: #0d1b2a; display: block;
+}
 .series-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 720px; margin-top: 36px; }
 .article-footnote { max-width: 720px; margin-top: 32px; padding: 16px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; font-size: 13px; color: var(--text-muted); }
 .article-footnote a { color: var(--blue); }

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India vs USA Optical Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    padding: 10px 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #1e3a5f;
+  }
+  thead th:first-child { color: #4a6b8a; }
+  thead th.lite { color: #f97316; background: rgba(249,115,22,0.06); }
+  thead th.stl { color: #60a5fa; }
+  thead th.hfcl { color: #a78bfa; }
+
+  tbody tr { border-bottom: 1px solid #1a2f45; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover td { background: rgba(30,58,95,0.2); }
+  td { padding: 11px 12px; font-size: 10px; vertical-align: top; }
+  td.attr-name { color: #4a6b8a; font-size: 10px; }
+  td.lite-col { background: rgba(249,115,22,0.03); }
+
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 2px; font-size: 9px; font-weight: 600; }
+  .tag-high { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+  .tag-med { background: rgba(249,115,22,0.12); color: #f97316; border: 1px solid rgba(249,115,22,0.2); }
+  .tag-low { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+  .tag-na { background: rgba(74,85,104,0.2); color: #4a6b8a; border: 1px solid #1e3a5f; }
+
+  .verdict-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .verdict-box {
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 14px 14px;
+    text-align: center;
+  }
+  .verdict-box.pick { border-color: #f97316; }
+  .vb-name { font-size: 11px; font-weight: 600; margin-bottom: 6px; }
+  .vb-name.lite { color: #f97316; }
+  .vb-name.stl { color: #60a5fa; }
+  .vb-name.hfcl { color: #a78bfa; }
+  .vb-verdict { font-size: 10px; color: #7a9bbf; line-height: 1.4; }
+  .vb-verdict strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 03 — India vs USA: The Honest Comparison</div>
+  <h2>Should You Buy Lumentum or the Indian Equivalent?</h2>
+  <div class="sub">Lumentum ($LITE) vs Sterlite Technologies (STL) vs HFCL — same AI theme, very different businesses</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th class="lite">🇺🇸 LUMENTUM (LITE)</th>
+        <th class="stl">🇮🇳 STL (Sterlite Tech)</th>
+        <th class="hfcl">🇮🇳 HFCL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="attr-name">What they make</td>
+        <td class="lite-col" style="color:#b0c4d8">Laser chips (EMLs), optical transceivers, circuit switches. The light source inside data center networks.</td>
+        <td style="color:#b0c4d8">Optical fiber cable. The glass pipe that carries the light. Order book ₹17,000cr+.</td>
+        <td style="color:#b0c4d8">Optical fiber cable + telecom equipment + data center interconnects. Order book ₹21,200cr+.</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Value chain position</td>
+        <td class="lite-col" style="color:#f97316; font-weight:600">Component layer<br>← Upstream →</td>
+        <td style="color:#60a5fa">Infrastructure layer<br>(2–3 steps downstream)</td>
+        <td style="color:#a78bfa">Infrastructure layer<br>(2–3 steps downstream)</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Technology moat</td>
+        <td class="lite-col"><span class="tag tag-high">VERY HIGH</span><br><span style="color:#4a6b8a;font-size:9px">InP fab, 200G EML process. Only at-volume supplier globally.</span></td>
+        <td><span class="tag tag-med">MEDIUM</span><br><span style="color:#4a6b8a;font-size:9px">Glass-to-gigabit stack. Good engineering, replicable at scale.</span></td>
+        <td><span class="tag tag-low">LOW-MED</span><br><span style="color:#4a6b8a;font-size:9px">Fiber + equipment. Largely commoditised.</span></td>
+      </tr>
+      <tr>
+        <td class="attr-name">Revenue growth (FY26)</td>
+        <td class="lite-col" style="color:#4ade80; font-weight:600">+90% YoY (Q3 FY26)</td>
+        <td style="color:#60a5fa">+40–50% (hyperscaler order)</td>
+        <td style="color:#a78bfa">+35–45% (record order book)</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Gross margin</td>
+        <td class="lite-col" style="color:#4ade80; font-weight:600">~44% (non-GAAP)</td>
+        <td style="color:#60a5fa">~20–24%</td>
+        <td style="color:#a78bfa">~18–22%</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Pricing power</td>
+        <td class="lite-col"><span class="tag tag-high">HIGH</span> Double-digit ASP increases in 2026. Supply constraint.</td>
+        <td><span class="tag tag-low">LOW</span> Fiber cable is commodity. Price competition from China.</td>
+        <td><span class="tag tag-low">LOW</span> Equipment more defensible, cable commodity.</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Global hyperscaler<br>direct relationship</td>
+        <td class="lite-col"><span class="tag tag-high">YES</span> Google, Microsoft, Meta directly.</td>
+        <td><span class="tag tag-med">GROWING</span> ₹10,000cr hyperscaler order confirmed.</td>
+        <td><span class="tag tag-na">INDIRECT</span> Primarily telcos + domestic clients.</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Currency exposure</td>
+        <td class="lite-col" style="color:#f97316">USD asset — INR depreciation is a tailwind for Indian holder.</td>
+        <td style="color:#60a5fa">INR asset — no currency friction or tailwind.</td>
+        <td style="color:#a78bfa">INR asset — no currency friction or tailwind.</td>
+      </tr>
+      <tr>
+        <td class="attr-name">Stock rally (1 year)</td>
+        <td class="lite-col" style="color:#4ade80; font-weight:600">+1,076%</td>
+        <td style="color:#60a5fa">+544%</td>
+        <td style="color:#a78bfa">+330% YTD 2026</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="verdict-row">
+    <div class="verdict-box pick">
+      <div class="vb-name lite">LUMENTUM</div>
+      <div class="vb-verdict">Buy for <strong>technology depth</strong>. The only play on the laser chip layer. No Indian equivalent. Requires LRS, tax planning, and currency risk management.</div>
+    </div>
+    <div class="verdict-box">
+      <div class="vb-name stl">STL</div>
+      <div class="vb-verdict">Buy for <strong>India-specific AI capex exposure</strong>. Lower technology moat but no currency/tax friction. Better suited for shorter-horizon or tax-sensitive investors.</div>
+    </div>
+    <div class="verdict-box">
+      <div class="vb-name hfcl">HFCL</div>
+      <div class="vb-verdict">Buy for <strong>domestic infrastructure + defence diversification</strong>. Strong order book but lower margin quality. Simpler — same exchange, same rupee, no LRS.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Sources: Company filings, Tradebrains analysis (June 2026), communicationstoday.co.in FY26 results. STL and HFCL data as of May 2026. Stock returns: LITE 52-week, STL 1-year, HFCL YTD 2026. Margin data approximate from investor presentations. All investments involve risk.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+</body>
+</html>

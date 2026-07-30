@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bull Base Bear Scenarios</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .scenario-card {
+    border-radius: 4px;
+    padding: 18px 16px;
+    border: 1px solid;
+  }
+  .bull { background: rgba(74,222,128,0.04); border-color: #4ade80; }
+  .base { background: rgba(249,115,22,0.04); border-color: #f97316; }
+  .bear { background: rgba(239,68,68,0.04); border-color: #ef4444; }
+
+  .sc-label { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .bull .sc-label { color: #4ade80; }
+  .base .sc-label { color: #f97316; }
+  .bear .sc-label { color: #ef4444; }
+
+  .sc-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: #f0f4f8; margin-bottom: 14px; }
+
+  .sc-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1a2f45; }
+  .sc-row:last-of-type { border-bottom: none; }
+  .sc-key { font-size: 10px; color: #4a6b8a; }
+  .sc-val { font-size: 10px; font-weight: 600; }
+  .bull .sc-val { color: #4ade80; }
+  .base .sc-val { color: #f97316; }
+  .bear .sc-val { color: #ef4444; }
+
+  .sc-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid;
+    text-align: center;
+  }
+  .bull .sc-price { color: #4ade80; border-color: rgba(74,222,128,0.2); }
+  .base .sc-price { color: #f97316; border-color: rgba(249,115,22,0.2); }
+  .bear .sc-price { color: #ef4444; border-color: rgba(239,68,68,0.2); }
+  .sc-return { text-align: center; font-size: 11px; margin-top: 4px; }
+  .bull .sc-return { color: #4ade80; }
+  .base .sc-return { color: #7a9bbf; }
+  .bear .sc-return { color: #ef4444; }
+
+  .chart-wrap { position: relative; height: 140px; }
+
+  .current-line-label { text-align: right; font-size: 10px; color: #7a9bbf; margin-top: 4px; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 03 — Bull / Base / Bear Scenarios</div>
+  <h2>Three Futures. One Price. Which Do You Believe?</h2>
+  <div class="sub">FY2027 scenario modelling with implied stock prices at current ~$945 entry · Probability-weighted</div>
+
+  <div class="scenario-grid">
+    <div class="scenario-card bull">
+      <div class="sc-label">▲ Bull Case · 30–35% Prob</div>
+      <div class="sc-title">The Full Acceleration</div>
+      <div class="sc-row"><span class="sc-key">FY2027 Revenue</span><span class="sc-val">$5.5B+</span></div>
+      <div class="sc-row"><span class="sc-key">Non-GAAP OpM</span><span class="sc-val">32–35%</span></div>
+      <div class="sc-row"><span class="sc-key">Non-GAAP EPS</span><span class="sc-val">~$22</span></div>
+      <div class="sc-row"><span class="sc-key">Exit Multiple</span><span class="sc-val">40–50x</span></div>
+      <div class="sc-row"><span class="sc-key">Trigger</span><span class="sc-val">OCS hits $1B ARR, 1.6T demand further beats</span></div>
+      <div class="sc-price">$1,200–1,400</div>
+      <div class="sc-return">+27% to +48% from today</div>
+    </div>
+
+    <div class="scenario-card base">
+      <div class="sc-label">→ Base Case · 40–45% Prob</div>
+      <div class="sc-title">Consensus Plays Out</div>
+      <div class="sc-row"><span class="sc-key">FY2027 Revenue</span><span class="sc-val">$4.2–4.5B</span></div>
+      <div class="sc-row"><span class="sc-key">Non-GAAP OpM</span><span class="sc-val">27–30%</span></div>
+      <div class="sc-row"><span class="sc-key">Non-GAAP EPS</span><span class="sc-val">~$15</span></div>
+      <div class="sc-row"><span class="sc-key">Exit Multiple</span><span class="sc-val">55–65x</span></div>
+      <div class="sc-row"><span class="sc-key">Trigger</span><span class="sc-val">Analyst consensus realised, no surprises</span></div>
+      <div class="sc-price">$960–1,100</div>
+      <div class="sc-return">+2% to +16% from today</div>
+    </div>
+
+    <div class="scenario-card bear">
+      <div class="sc-label">▼ Bear Case · 20–25% Prob</div>
+      <div class="sc-title">The Air Pocket</div>
+      <div class="sc-row"><span class="sc-key">FY2027 Revenue</span><span class="sc-val">$3.0–3.5B</span></div>
+      <div class="sc-row"><span class="sc-key">Non-GAAP OpM</span><span class="sc-val">15–18%</span></div>
+      <div class="sc-row"><span class="sc-key">Non-GAAP EPS</span><span class="sc-val">~$7</span></div>
+      <div class="sc-row"><span class="sc-key">Exit Multiple</span><span class="sc-val">30–40x</span></div>
+      <div class="sc-row"><span class="sc-key">Trigger</span><span class="sc-val">Hyperscaler capex pause + multiple de-rate</span></div>
+      <div class="sc-price">$450–$622</div>
+      <div class="sc-return">-34% to -52% from today</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="c3"></canvas>
+  </div>
+  <div class="current-line-label">← Dashed orange line = current price $945</div>
+
+  <hr class="divider">
+  <div class="footnote">Scenarios are CII analyst estimates, not financial advice. Probability assignments are subjective. Bear case price floor of $622 reflects identified technical support level (TradingKey analysis). Base case aligns with S&P Global analyst consensus average target of $1,105. Bull case at high-end analyst PT of $1,400. All price targets are 12-month forward.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('c3').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Bear Low', 'Bear High', 'Current', 'Base Low', 'Base High', 'Bull Low', 'Bull High'],
+    datasets: [{
+      label: 'Implied Stock Price',
+      data: [450, 622, 945, 960, 1100, 1200, 1400],
+      backgroundColor: [
+        'rgba(239,68,68,0.7)', 'rgba(239,68,68,0.7)',
+        'rgba(249,115,22,0.9)',
+        'rgba(249,115,22,0.6)', 'rgba(249,115,22,0.6)',
+        'rgba(74,222,128,0.7)', 'rgba(74,222,128,0.7)',
+      ],
+      borderColor: [
+        '#ef4444', '#ef4444',
+        '#f97316',
+        '#f97316', '#f97316',
+        '#4ade80', '#4ade80',
+      ],
+      borderWidth: 2,
+      borderRadius: 3,
+      barPercentage: 0.6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0d1b2a', borderColor: '#1e3a5f', borderWidth: 1,
+        titleColor: '#f97316', bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: { label: ctx => ` $${ctx.parsed.y}` }
+      }
+    },
+    scales: {
+      x: { grid: { color: '#1a2f45' }, ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 } } },
+      y: {
+        min: 0, max: 1600,
+        grid: { color: '#1a2f45' },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 }, callback: v => `$${v}` }
+      }
+    },
+    animation: {
+      onComplete: function() {
+        const ch = this; const c2 = ch.ctx;
+        c2.save();
+        c2.setLineDash([5, 4]);
+        c2.strokeStyle = '#f97316';
+        c2.lineWidth = 1.5;
+        const yScale = ch.scales.y;
+        const y = yScale.getPixelForValue(945);
+        c2.beginPath();
+        c2.moveTo(ch.chartArea.left, y);
+        c2.lineTo(ch.chartArea.right, y);
+        c2.stroke();
+        c2.restore();
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

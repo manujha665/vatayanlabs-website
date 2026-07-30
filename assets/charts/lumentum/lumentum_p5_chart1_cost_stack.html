@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian Investor Cost Stack</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  .two-col { display: flex; gap: 20px; align-items: flex-start; }
+  .col-left { flex: 1.4; }
+  .col-right { flex: 1; }
+  .chart-wrap { position: relative; height: 300px; }
+  .col-title { color: #f97316; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+
+  .cost-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cost-item {
+    background: #0d1b2a;
+    border: 1px solid #1a2f45;
+    border-radius: 3px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cost-item.deduct { border-color: rgba(239,68,68,0.25); }
+  .cost-item.add { border-color: rgba(74,222,128,0.2); }
+  .cost-item.result { border-color: #f97316; background: rgba(249,115,22,0.05); }
+  .cost-name { font-size: 10px; color: #7a9bbf; }
+  .cost-val { font-size: 11px; font-weight: 600; }
+  .cost-item.deduct .cost-val { color: #ef4444; }
+  .cost-item.add .cost-val { color: #4ade80; }
+  .cost-item.result .cost-val { color: #f97316; font-size: 13px; }
+  .cost-tag { font-size: 9px; color: #4a6b8a; margin-top: 2px; }
+
+  .scenario-note {
+    background: #0d1b2a;
+    border-left: 3px solid #fbbf24;
+    padding: 12px 14px;
+    border-radius: 0 3px 3px 0;
+    margin-top: 16px;
+  }
+  .sn-title { color: #fbbf24; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .sn-body { color: #7a9bbf; font-size: 10px; line-height: 1.5; }
+  .sn-body strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 01 — The Indian Investor Cost Stack</div>
+  <h2>From Gross USD Return to Net INR in Your Pocket</h2>
+  <div class="sub">Full tax & friction analysis for base case scenario: $945 entry → $1,105 exit (consensus target, +17% USD) · Indian resident investor</div>
+
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-title">Returns in % — LTCG vs STCG (per ₹10 lakh invested)</div>
+      <div class="chart-wrap"><canvas id="c1"></canvas></div>
+    </div>
+    <div class="col-right">
+      <div class="col-title">Cost Layer by Layer (LTCG Scenario)</div>
+      <div class="cost-breakdown">
+        <div class="cost-item add">
+          <div><div class="cost-name">USD Return (Base Case)</div><div class="cost-tag">$945 → $1,105 per share</div></div>
+          <div class="cost-val">+17.0%</div>
+        </div>
+        <div class="cost-item add">
+          <div><div class="cost-name">INR Depreciation Boost</div><div class="cost-tag">₹95.1/$ today · estimate ₹99/$ at exit</div></div>
+          <div class="cost-val">+4.1%</div>
+        </div>
+        <div class="cost-item deduct">
+          <div><div class="cost-name">LRS Remittance Cost</div><div class="cost-tag">Forex spread + bank charges (entry)</div></div>
+          <div class="cost-val">-1.2%</div>
+        </div>
+        <div class="cost-item deduct">
+          <div><div class="cost-name">TCS on Remittance</div><div class="cost-tag">20% on amount above ₹10L — refundable in ITR</div></div>
+          <div class="cost-val">-0.5%</div>
+        </div>
+        <div class="cost-item deduct">
+          <div><div class="cost-name">LTCG Tax (India)</div><div class="cost-tag">12.5% on gains (>24 months holding)</div></div>
+          <div class="cost-val">-2.5%</div>
+        </div>
+        <div class="cost-item deduct">
+          <div><div class="cost-name">US Dividend WHT</div><div class="cost-tag">Lumentum pays no dividend — N/A</div></div>
+          <div class="cost-val">0%</div>
+        </div>
+        <div class="cost-item result">
+          <div><div class="cost-name">NET INR RETURN (LTCG)</div><div class="cost-tag">in hand, 24+ month hold</div></div>
+          <div class="cost-val">~16.9%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-note">
+    <div class="sn-title">⚠ The 24-Month Rule Changes Everything</div>
+    <div class="sn-body">STCG tax at your income slab rate (up to 30%) vs LTCG at 12.5%. On a ₹10 lakh investment with 17% USD gain, the difference is roughly <strong>₹2,400 in additional tax</strong> if you sell before 24 months. For HNIs in the 30% bracket, STCG can consume nearly half the return. <strong>The holding period is the single most important decision variable for Indian investors in this stock.</strong></div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Assumptions: ₹10L invested at ₹95.1/$. USD return = base case +17%. INR depreciation estimated at ~4% over holding period. LRS cost = 1.2% (bank spread). TCS = 20% above ₹10L threshold (claimable in ITR, shown as real cost of capital lock-up). LTCG = 12.5% of net INR gain above ₹1.25L exemption. STCG = 30% slab rate for HNI. Returns are illustrative, not guaranteed.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('c1').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['USD Return\n(Gross)', '+ Currency\nBoost', '− Friction\nCosts', '= Pre-tax\nINR Return', '− LTCG\nTax (12.5%)', 'NET LTCG\nReturn', '− STCG\nTax (30%)', 'NET STCG\nReturn'],
+    datasets: [{
+      label: 'Return Component (%)',
+      data: [17.0, 4.1, -1.7, 19.4, -2.5, 16.9, -5.8, 13.6],
+      backgroundColor: [
+        'rgba(30,107,155,0.75)',
+        'rgba(74,222,128,0.7)',
+        'rgba(239,68,68,0.7)',
+        'rgba(249,115,22,0.75)',
+        'rgba(239,68,68,0.7)',
+        'rgba(74,222,128,0.85)',
+        'rgba(239,68,68,0.7)',
+        'rgba(74,222,128,0.6)',
+      ],
+      borderColor: [
+        '#1e6b9b','#4ade80','#ef4444','#f97316','#ef4444','#4ade80','#ef4444','#4ade80',
+      ],
+      borderWidth: 2,
+      borderRadius: 3,
+      barPercentage: 0.65,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0d1b2a', borderColor: '#1e3a5f', borderWidth: 1,
+        titleColor: '#f97316', bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: { label: ctx => ` ${ctx.parsed.y > 0 ? '+' : ''}${ctx.parsed.y}%` }
+      }
+    },
+    scales: {
+      x: { grid: { color: '#1a2f45' }, ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 9 } } },
+      y: {
+        grid: { color: '#1a2f45' },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 }, callback: v => `${v}%` }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

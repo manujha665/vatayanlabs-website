@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historical Drawdowns</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+
+  .two-col { display: flex; gap: 20px; }
+  .col-left { flex: 1.3; }
+  .col-right { flex: 1; }
+  .chart-wrap { position: relative; height: 270px; }
+
+  .col-title { color: #4a6b8a; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+
+  .warning-card {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .wc-title { color: #ef4444; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .wc-stat { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: #ef4444; }
+  .wc-desc { font-size: 10px; color: #7a9bbf; margin-top: 4px; line-height: 1.4; }
+
+  .recovery-card {
+    background: rgba(74,222,128,0.04);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 4px;
+    padding: 16px;
+  }
+  .rc-title { color: #4ade80; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .rc-stat { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: #4ade80; }
+  .rc-desc { font-size: 10px; color: #7a9bbf; margin-top: 4px; line-height: 1.4; }
+
+  .lesson-box {
+    background: #0d1b2a;
+    border-left: 3px solid #fbbf24;
+    padding: 14px 18px;
+    border-radius: 0 3px 3px 0;
+    margin-top: 20px;
+  }
+  .lb-title { color: #fbbf24; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .lb-body { color: #7a9bbf; font-size: 11px; line-height: 1.6; }
+  .lb-body strong { color: #f0f4f8; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 04 — Historical Drawdowns & Bear Case Math</div>
+  <h2>This Stock Has Fallen 52% Before. It Can Again.</h2>
+  <div class="sub">Historical peak-to-trough drawdowns in prior cycles vs projected bear case at current valuation</div>
+
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-title">Peak-to-Trough Drawdown History</div>
+      <div class="chart-wrap"><canvas id="c4"></canvas></div>
+    </div>
+    <div class="col-right">
+      <div class="col-title">Bear Case at Current Entry</div>
+      <div class="warning-card">
+        <div class="wc-title">Potential Drawdown</div>
+        <div class="wc-stat">-34% to -52%</div>
+        <div class="wc-desc">From $945 → $450–$622 in a hyperscaler capex pause + multiple de-rate scenario. This is not a tail risk — it's the bear analyst target range.</div>
+      </div>
+      <div class="recovery-card">
+        <div class="rc-title">Historical Pattern</div>
+        <div class="rc-stat">+1,076%</div>
+        <div class="rc-desc">From 52-week low of $80 to today's $945. Every major correction in $LITE history has been followed by a violent recovery — for those who held conviction.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lesson-box">
+    <div class="lb-title">The Lesson from Lumentum's History</div>
+    <div class="lb-body">Between 2020 and 2024, $LITE fell <strong>-70%</strong> from its all-time peak. Anyone who bought at the 2022 highs waited over two years just to get back to breakeven. The business was fine — optically, technologically, competitively fine. But the stock price was not. <strong>Valuation entry point matters enormously for this name</strong>, more than almost any other stock in the AI infrastructure complex.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Sources: Historical price data from Yahoo Finance. Drawdown periods: 2020 cycle (COVID-recovery peak ~$120 to trough ~$57), 2022 cycle (FY2022 peak ~$135 to FY2024 trough ~$38), 2025 trough ($80 52-week low). Bear case drawdown calculated from current $945 price. This is historical pattern analysis, not a prediction.</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('c4').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['2020\n(COVID peak-trough)', '2022–24\n(Inventory bust)', 'Bear case\n(Current valuation)'],
+    datasets: [{
+      label: 'Peak-to-Trough Drawdown (%)',
+      data: [-52, -72, -45],
+      backgroundColor: ['rgba(239,68,68,0.6)', 'rgba(239,68,68,0.75)', 'rgba(239,68,68,0.45)'],
+      borderColor: ['#ef4444', '#ef4444', '#ef4444'],
+      borderWidth: 2,
+      borderDash: [0, 0, 5],
+      borderRadius: 3,
+      barPercentage: 0.55,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0d1b2a', borderColor: '#1e3a5f', borderWidth: 1,
+        titleColor: '#ef4444', bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: { label: ctx => ` Drawdown: ${ctx.parsed.y}%` }
+      }
+    },
+    scales: {
+      x: { grid: { color: '#1a2f45' }, ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 } } },
+      y: {
+        max: 0, min: -90,
+        grid: { color: '#1a2f45' },
+        ticks: {
+          color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 10 },
+          callback: v => `${v}%`
+        }
+      }
+    },
+    animation: {
+      onComplete: function() {
+        const ch = this; const c2 = ch.ctx;
+        c2.save();
+        c2.font = '600 11px IBM Plex Mono';
+        c2.textAlign = 'center';
+        ch.data.datasets[0].data.forEach((val, i) => {
+          const bar = ch.getDatasetMeta(0).data[i];
+          c2.fillStyle = '#ef4444';
+          c2.fillText(`${val}%`, bar.x, bar.y - 8);
+        });
+        c2.restore();
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

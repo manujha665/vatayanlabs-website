@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAAP vs Non-GAAP EPS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1b2a; font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px; }
+  .card { background: #111d2e; border: 1px solid #1e3a5f; border-radius: 4px; padding: 40px 44px 36px; width: 820px; box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+  .label-top { color: #f97316; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #f0f4f8; line-height: 1.3; margin-bottom: 4px; }
+  .sub { color: #7a9bbf; font-size: 11px; margin-bottom: 28px; }
+  .chart-wrap { position: relative; height: 300px; }
+
+  .explainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .ex-box {
+    flex: 1;
+    background: #0d1b2a;
+    border: 1px solid #1e3a5f;
+    border-radius: 3px;
+    padding: 12px 14px;
+  }
+  .ex-title { font-size: 10px; color: #f97316; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .ex-body { font-size: 10px; color: #7a9bbf; line-height: 1.5; }
+  .ex-body strong { color: #f0f4f8; }
+  .warn { border-color: #f97316; }
+  .warn .ex-title { color: #fbbf24; }
+
+  .divider { border: none; border-top: 1px solid #1e3a5f; margin: 20px 0 14px; }
+  .footnote { color: #4a6b8a; font-size: 10px; }
+  .brand { color: #f97316; font-size: 10px; letter-spacing: 2px; text-align: right; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="label-top">Chart 03 — GAAP vs Non-GAAP EPS</div>
+  <h2>Two Scorecards, One Business</h2>
+  <div class="sub">Diluted EPS: GAAP (reported) vs Non-GAAP (adjusted) · Q1 FY2025 to Q3 FY2026</div>
+  <div class="chart-wrap">
+    <canvas id="c3"></canvas>
+  </div>
+
+  <div class="explainer">
+    <div class="ex-box">
+      <div class="ex-title">What is GAAP EPS?</div>
+      <div class="ex-body">The legally mandated reported number. Includes <strong>all</strong> costs — including non-cash charges like amortisation of acquired intangibles and stock-based compensation.</div>
+    </div>
+    <div class="ex-box">
+      <div class="ex-title">What is Non-GAAP EPS?</div>
+      <div class="ex-body">Management's preferred view — strips out non-cash charges to show the underlying operating performance. <strong>Not</strong> audited, but widely used in tech hardware analysis.</div>
+    </div>
+    <div class="ex-box warn">
+      <div class="ex-title">⚠ The Gap: Why It Exists Here</div>
+      <div class="ex-body">Lumentum acquired NeoPhotonics (~$918M, 2022) and CloudLight (~$750M, 2023). These generate <strong>~$200M+/year in amortisation charges</strong> that show up in GAAP but not Non-GAAP. The cash is not actually leaving the business every quarter.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="footnote">Source: Lumentum Holdings SEC Filings & Earnings Releases. Non-GAAP EPS excludes: stock-based compensation, amortisation of acquired intangibles, restructuring charges, and certain tax adjustments. Q3 FY26 Non-GAAP EPS = $2.37 (reported).</div>
+  <div class="brand">CURIOUS INVESTING INSIGHTS</div>
+</div>
+
+<script>
+const ctx = document.getElementById('c3').getContext('2d');
+
+const labels = ['Q1 FY25', 'Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26'];
+const gaap = [-1.21, -0.88, -0.64, 2.96, 0.05, 0.89, 1.88];
+const nongaap = [0.18, 0.42, 0.57, 1.24, 1.10, 1.67, 2.37];
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      {
+        label: 'GAAP EPS',
+        data: gaap,
+        backgroundColor: gaap.map(v => v < 0 ? 'rgba(239,68,68,0.75)' : 'rgba(30,107,155,0.75)'),
+        borderColor: gaap.map(v => v < 0 ? '#ef4444' : '#1e6b9b'),
+        borderWidth: 2,
+        borderRadius: 3,
+        barPercentage: 0.42,
+        categoryPercentage: 0.8,
+      },
+      {
+        label: 'Non-GAAP EPS',
+        data: nongaap,
+        backgroundColor: 'rgba(249,115,22,0.75)',
+        borderColor: '#f97316',
+        borderWidth: 2,
+        borderRadius: 3,
+        barPercentage: 0.42,
+        categoryPercentage: 0.8,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        align: 'end',
+        labels: {
+          color: '#b0c4d8',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          boxWidth: 12,
+          padding: 20,
+        }
+      },
+      tooltip: {
+        backgroundColor: '#0d1b2a',
+        borderColor: '#1e3a5f',
+        borderWidth: 1,
+        titleColor: '#f97316',
+        bodyColor: '#b0c4d8',
+        titleFont: { family: 'IBM Plex Mono', size: 11 },
+        bodyFont: { family: 'IBM Plex Mono', size: 11 },
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toFixed(2)}`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#1a2f45' },
+        ticks: { color: '#7a9bbf', font: { family: 'IBM Plex Mono', size: 11 } }
+      },
+      y: {
+        grid: { color: '#1a2f45' },
+        ticks: {
+          color: '#7a9bbf',
+          font: { family: 'IBM Plex Mono', size: 11 },
+          callback: v => `$${v.toFixed(2)}`
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
