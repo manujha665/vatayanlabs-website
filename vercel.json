@@ -1,6 +1,11 @@
 {
   "trailingSlash": true,
   "redirects": [
+    { "source": "/sectors/semiconductors/lumentum-part-1-what-lumentum-does/", "destination": "/sectors/semiconductors/lumentum/part-1-what-lumentum-does/", "permanent": true },
+    { "source": "/sectors/semiconductors/lumentum-part-2-the-financial-story/", "destination": "/sectors/semiconductors/lumentum/part-2-the-financial-story/", "permanent": true },
+    { "source": "/sectors/semiconductors/lumentum-part-3-nvidias-2b-bet/", "destination": "/sectors/semiconductors/lumentum/part-3-nvidias-2b-bet/", "permanent": true },
+    { "source": "/sectors/semiconductors/lumentum-part-4-the-valuation/", "destination": "/sectors/semiconductors/lumentum/part-4-the-valuation/", "permanent": true },
+    { "source": "/sectors/semiconductors/lumentum-part-5-the-india-angle/", "destination": "/sectors/semiconductors/lumentum/part-5-the-india-angle/", "permanent": true },
     { "source": "/about.html", "destination": "/about/", "permanent": true },
     { "source": "/contact.html", "destination": "/about/", "permanent": true },
     { "source": "/research", "destination": "/sectors/", "permanent": true },

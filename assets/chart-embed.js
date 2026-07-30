@@ -1,39 +1,61 @@
 /* Vatayan Labs — size embedded chart iframes to their content.
 
-   The chart files are standalone same-origin HTML, and every one of them is
-   taller than any sensible fixed height (they range ~670-1220px), so a fixed
-   height either clips the short ones or leaves a gap under the tall ones.
-   Measure each one and set the height to match.
+   The chart files are standalone same-origin HTML, and they range from about
+   670px to 1260px tall, so any fixed height either clips the tall ones or
+   leaves a gap under the short ones. Measure each and set the height to match.
 
-   The charts set `min-height: 100vh` on body, so measure from a small base
-   height first — otherwise the iframe's own height becomes the floor and the
-   value can only ever grow. */
+   Measure the content element rather than body.scrollHeight: the charts set
+   `min-height: 100vh` on body, so scrollHeight is floored by the iframe's own
+   height and can only ever grow. Each chart is a single centred `.card` inside
+   a padded body, so card height + body padding is the true content height, and
+   it doesn't depend on how tall we've currently made the frame.
+
+   A ResizeObserver catches the charts that finish drawing after load — without
+   it several settle 2-10px taller than the first measurement and clip. */
 (function () {
-  var BASE = 400;
+  function contentHeight(doc) {
+    var body = doc.body;
+    if (!body) return 0;
+    var card = body.firstElementChild;
+    if (!card) return body.scrollHeight;
+    var cs = doc.defaultView.getComputedStyle(body);
+    var pad = parseFloat(cs.paddingTop || 0) + parseFloat(cs.paddingBottom || 0);
+    return Math.ceil(card.getBoundingClientRect().height + pad);
+  }
 
   function fit(frame) {
     try {
-      frame.style.height = BASE + "px";
       var doc = frame.contentDocument;
       if (!doc || !doc.body) return;
-      var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-      if (h > 0) frame.style.height = h + "px";
+      var h = contentHeight(doc);
+      if (h > 0 && String(h) !== frame.dataset.fittedHeight) {
+        frame.dataset.fittedHeight = String(h);
+        frame.style.height = h + "px";
+      }
     } catch (e) {
       /* cross-origin or not yet loaded — keep the CSS fallback height */
-      frame.style.height = "";
     }
   }
 
+  function watch(frame) {
+    fit(frame);
+    if (typeof ResizeObserver === "undefined") return;
+    try {
+      var card = frame.contentDocument.body.firstElementChild;
+      if (!card || frame.dataset.observed) return;
+      frame.dataset.observed = "1";
+      new ResizeObserver(function () { fit(frame); }).observe(card);
+    } catch (e) { /* nothing to observe */ }
+  }
+
   function frames() {
-    return Array.prototype.slice.call(
-      document.querySelectorAll(".chart-embed iframe")
-    );
+    return Array.prototype.slice.call(document.querySelectorAll(".chart-embed iframe"));
   }
 
   function init() {
     frames().forEach(function (frame) {
-      frame.addEventListener("load", function () { fit(frame); });
-      if (frame.contentDocument && frame.contentDocument.readyState === "complete") fit(frame);
+      frame.addEventListener("load", function () { watch(frame); });
+      if (frame.contentDocument && frame.contentDocument.readyState === "complete") watch(frame);
     });
   }
 
