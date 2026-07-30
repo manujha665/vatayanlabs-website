@@ -65,6 +65,7 @@
     --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.13);
     --accent: #1a56db; --accent2: #0e9f6e; --accent3: #e3a008;
     --danger: #c81e1e; --purple: #7e3af2;
+    --teal: #0891b2; --orange: #ea580c; --pink: #db2777; --slate: #64748b;
     --radius: 12px; --radius-sm: 8px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,11 +76,15 @@
   .page-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
   .page-sub { font-size: 13px; color: var(--text3); margin-bottom: 28px; }
 
-  .nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 32px; }
-  .nav-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border2); background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 500; color: var(--text2); transition: all .15s; font-family: inherit; }
-  .nav-btn:hover, .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .nav-btn.cta { border-color: var(--accent); color: var(--accent); font-weight: 600; text-decoration: none; display: inline-block; }
-  .nav-btn.cta:hover { background: var(--accent); color: #fff; }
+  /* Section tabs — same treatment as the RBI dashboard tab bar */
+  .nav { display: flex; flex-wrap: wrap; gap: 0; background: var(--surface); border-bottom: 1px solid var(--border2); margin-bottom: 28px; }
+  .nav-btn { padding: 14px 20px; border: none; background: none; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text2); border-bottom: 3px solid transparent; white-space: nowrap; transition: all .2s ease; display: flex; align-items: center; gap: 7px; }
+  .nav-btn:hover { color: var(--accent); }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .5; }
+  .nav-btn.active .nav-dot { opacity: 1; }
+  .nav-btn.cta { margin-left: auto; color: var(--accent); font-weight: 600; text-decoration: none; }
+  .nav-btn.cta:hover { text-decoration: underline; }
 
   .section { display: none; }
   .section.visible { display: block; }
@@ -182,15 +187,15 @@
   <p class="page-sub" id="page-sub">Loading RBI ATM &amp; Card statistics…</p>
 
   <nav class="nav" id="mainNav">
-    <button class="nav-btn active" data-sec="overview">Overview</button>
-    <button class="nav-btn" data-sec="signals">Alert Signals</button>
-    <button class="nav-btn" data-sec="digital">Digital vs Cash</button>
-    <button class="nav-btn" data-sec="creditcards">Credit Cards</button>
-    <button class="nav-btn" data-sec="upi">UPI</button>
-    <button class="nav-btn" data-sec="debitcards">Debit Cards</button>
-    <button class="nav-btn" data-sec="atm">ATM Trends</button>
-    <button class="nav-btn" data-sec="banks">Bank Heatmap</button>
-    <button class="nav-btn" data-sec="maturity">Maturity Matrix</button>
+    <button class="nav-btn active" data-sec="overview"><span class="nav-dot" style="background:var(--accent)"></span>Overview</button>
+    <button class="nav-btn" data-sec="signals"><span class="nav-dot" style="background:var(--danger)"></span>Alert Signals</button>
+    <button class="nav-btn" data-sec="digital"><span class="nav-dot" style="background:var(--teal)"></span>Digital vs Cash</button>
+    <button class="nav-btn" data-sec="creditcards"><span class="nav-dot" style="background:var(--purple)"></span>Credit Cards</button>
+    <button class="nav-btn" data-sec="upi"><span class="nav-dot" style="background:var(--accent2)"></span>UPI</button>
+    <button class="nav-btn" data-sec="debitcards"><span class="nav-dot" style="background:var(--accent3)"></span>Debit Cards</button>
+    <button class="nav-btn" data-sec="atm"><span class="nav-dot" style="background:var(--orange)"></span>ATM Trends</button>
+    <button class="nav-btn" data-sec="banks"><span class="nav-dot" style="background:var(--pink)"></span>Bank Heatmap</button>
+    <button class="nav-btn" data-sec="maturity"><span class="nav-dot" style="background:var(--slate)"></span>Maturity Matrix</button>
     <a class="nav-btn cta" href="/dashboards/india-payments/compare/">⚖ Bank vs Bank →</a>
   </nav>
 
