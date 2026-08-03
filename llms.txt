@@ -25,4 +25,4 @@
 - [Newsletter](https://vatayanlabs.com/newsletter/) (also on Substack: https://curiousinvestinginsights.substack.com/)
 - [RSS feed](https://vatayanlabs.com/feed.xml)
 
-Content is free to read and cite with attribution to Vatayan Labs (vatayanlabs.com). Not investment advice.
+Content is free to read and cite with attribution to Vatayan Labs (vatayanlabs.com). The dashboard datasets are published under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Not investment advice.
