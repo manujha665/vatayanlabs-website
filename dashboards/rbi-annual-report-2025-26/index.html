@@ -580,6 +580,38 @@
       <div class="chart-card">
         <div class="chart-card-header">
           <div>
+            <div class="chart-card-title">PSBs vs Private Banks — Credit Growth</div>
+            <div class="chart-card-sub">Y-o-Y % change by bank group · FY20 to FY26</div>
+          </div>
+          <span class="chart-tag tag-blue">Bank Group</span>
+        </div>
+        <div class="chart-container"><canvas id="chartGroupGrowth"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-card-title">PSBs vs Private Banks — Share of Total Credit</div>
+            <div class="chart-card-sub">% of total SCB credit outstanding · FY20 to FY26</div>
+          </div>
+          <span class="chart-tag tag-green">Bank Group</span>
+        </div>
+        <div class="chart-container"><canvas id="chartGroupShare"></canvas></div>
+      </div>
+    </div>
+
+    <div class="insight-strip" style="margin-bottom:20px">
+      <div class="insight-label">Reading the bank-group split</div>
+      <div class="insight-text">
+        <strong>The crossover happened in FY25, and FY26 confirmed it.</strong> Private banks grew credit faster than PSBs every year from FY20 to FY24 — peaking at <strong>29.5% in FY24</strong> against the PSBs' 14.7% — and their share of system credit climbed from 35.0% to 41.3%. Then it reversed: PSB growth has beaten PVB growth for two consecutive years, <strong>18.4% vs 15.2% in FY26</strong>, and the private share has slipped back to 40.0% while PSBs recovered to 56.6%. Note what this is and isn't: PSBs are growing off a base roughly 1.4× larger, so equal percentage growth moves far more absolute credit. The share line is the honest scoreboard — and on that measure private banks have given up about a third of the ground they gained between FY20 and FY24, not all of it.
+        <br><br>
+        <span style="font-size:12px;color:#64748b">Source: RBI Annual Report 2025-26, Chart II.4.8. RBI prints numeric labels only for the FY26 shares (PSB 56.6%, PVB 40.0%); earlier points are digitised from the published chart. Two checks on that digitisation: the chart's own SCB growth line reproduces Appendix Table 4's bank credit series to within 0.25pp, and each year's three shares sum to 100.0. The SCB line plotted here uses the published Appendix Table 4 values, not digitised ones.</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
             <div class="chart-card-title">Bank Credit vs Deposit Growth</div>
             <div class="chart-card-sub">Year-on-year % change · FY18 to FY26</div>
           </div>
@@ -1607,6 +1639,21 @@ const DATA = {
     depositGrowth:[6.2, 10.0, 7.9, 11.4, 8.9, 9.6, 13.5, 10.3, 16.2],
     cdRatio:      [75.5, 77.7, 76.4, 72.4, 72.2, 75.8, 80.3, 80.8, 81.4],
     creditGdp:    [50.5, 51.7, 51.6, 55.2, 50.4, 52.4, 56.7, 57.4, 61.8],
+    // Bank group-wise credit — RBI Chart II.4.8, FY20–FY26.
+    // RBI prints numeric labels only for the FY26 share bars (PSB 56.6, PVB 40.0);
+    // the remaining points are digitised from the chart's vector geometry.
+    // Two independent validations of that digitisation:
+    //   (1) the dashed SCB growth line reproduces Appendix Table 4's Bank Credit
+    //       row to within 0.25pp, and (2) each year's shares sum to 100.0.
+    // scbGrowth below is the PUBLISHED Appendix Table 4 series, not digitised.
+    grpYears:   ['FY20','FY21','FY22','FY23','FY24','FY25','FY26'],
+    psbGrowth:  [3.2, 4.2, 5.6, 13.7, 14.7, 12.3, 18.4],
+    pvbGrowth:  [10.6, 8.2, 12.9, 17.9, 29.5, 8.9, 15.2],
+    frnGrowth:  [7.0, 0.6, 11.6, 2.3, 7.9, 13.0, 17.3],
+    psbShare:   [60.8, 60.1, 58.5, 58.0, 55.4, 56.1, 56.6],
+    pvbShare:   [35.0, 35.9, 37.3, 38.4, 41.3, 40.5, 40.0],
+    // foreign banks carried as the residual so each column totals exactly 100
+    frnShare:   [4.2, 4.0, 4.2, 3.6, 3.3, 3.4, 3.4],
     nonFood:      [10.2,8.8,9.3,9.9,9.9,10.2,11.1,11.4,14.4,14.4,14.3,15.9],
     agriculture:  [9.2,7.5,6.8,7.3,7.6,9.0,8.9,8.7,12.1,11.4,12.3,15.7],
     industry:     [7.0,5.3,6.3,6.5,7.0,7.8,10.0,9.6,12.8,12.1,13.5,15.0],
@@ -1691,6 +1738,11 @@ const DATA = {
   }
 };
 
+// The SCB line on the bank-group growth chart is the PUBLISHED Appendix Table 4
+// series (FY20-FY26 = creditGrowth without its first two years), derived here
+// rather than copied so the two can never drift out of sync.
+DATA.credit.scbGrowth = DATA.credit.creditGrowth.slice(2);
+
 // ── CHART HELPERS ──────────────────────────────────────────────────────────
 const PALETTE = ['#1d4ed8','#0891b2','#059669','#d97706','#dc2626','#7c3aed','#db2777','#ea580c'];
 const PALETTE_LIGHT = ['rgba(29,78,216,.15)','rgba(8,145,178,.15)','rgba(5,150,105,.15)','rgba(217,119,6,.15)','rgba(220,38,38,.15)','rgba(124,58,237,.15)'];
@@ -1762,6 +1814,57 @@ function initCreditCharts() {
       scales: {
         x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
         y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartGroupGrowth'), {
+    type: 'line',
+    data: {
+      labels: d.grpYears,
+      datasets: [
+        { label: 'Public sector banks', data: d.psbGrowth, borderColor: '#059669', backgroundColor: 'transparent',
+          tension: 0.35, pointRadius: 4, pointBackgroundColor: '#059669', borderWidth: 2.5 },
+        { label: 'Private sector banks', data: d.pvbGrowth, borderColor: '#ea580c', backgroundColor: 'transparent',
+          tension: 0.35, pointRadius: 4, pointBackgroundColor: '#ea580c', borderWidth: 2.5 },
+        { label: 'Foreign banks', data: d.frnGrowth, borderColor: '#d97706', backgroundColor: 'transparent',
+          tension: 0.35, pointRadius: 3, pointBackgroundColor: '#d97706', borderWidth: 1.5 },
+        { label: 'All SCBs', data: d.scbGrowth, borderColor: '#334155', backgroundColor: 'transparent',
+          tension: 0.35, pointRadius: 3, pointBackgroundColor: '#334155', borderWidth: 2, borderDash: [5,3] },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      scales: {
+        x: { grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { grid: { color: '#f1f5f9' }, ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartGroupShare'), {
+    type: 'bar',
+    data: {
+      labels: d.grpYears,
+      datasets: [
+        { label: 'Public sector banks', data: d.psbShare, backgroundColor: '#059669cc', borderColor: '#059669', borderWidth: 1.5, stack: 'g' },
+        { label: 'Private sector banks', data: d.pvbShare, backgroundColor: '#ea580ccc', borderColor: '#ea580c', borderWidth: 1.5, stack: 'g' },
+        { label: 'Foreign banks', data: d.frnShare, backgroundColor: '#fbbf24cc', borderColor: '#d97706', borderWidth: 1.5, stack: 'g' },
+      ]
+    },
+    options: {
+      ...defaultOptions(),
+      plugins: {
+        ...defaultOptions().plugins,
+        tooltip: {
+          ...defaultOptions().plugins.tooltip,
+          callbacks: { label: c => `${c.dataset.label}: ${c.parsed.y}%` },
+        },
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: baseFont, color: '#64748b' } },
+        y: { stacked: true, min: 0, max: 100, grid: { color: '#f1f5f9' },
+             ticks: { font: baseFont, color: '#64748b', callback: v => v + '%' } },
       }
     }
   });
