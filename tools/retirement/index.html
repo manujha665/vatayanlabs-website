@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E0WLCFVLDX');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xoi9afzxww");
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/logo-badge.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Retirement &amp; Life Goals Calculator — India (EPF, NPS, SIP) | Vatayan Labs</title>
+<meta name="description" content="Plan retirement around the life goals that actually come first. Inflates every goal to its real future cost, funds them by your own priority rules, adds up EPF, NPS and your SIPs, and tells you whether the money lasts.">
+<link rel="canonical" href="https://vatayanlabs.com/tools/retirement/">
+<meta property="og:title" content="Retirement &amp; Life Goals Calculator — India">
+<meta property="og:description" content="A house, a car, three rounds of school fees and a wedding all land before retirement does. This plans around them — EPF, NPS and SIPs together, every goal at its real future cost.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatayanlabs.com/tools/retirement/">
+<meta property="og:image" content="https://vatayanlabs.com/assets/og/og-retirement.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-retirement.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" type="application/rss+xml" title="Vatayan Labs" href="/feed.xml">
+<style>
+/* ── Buy vs Invest — page-local styles ── */
+.bvi-wrap { max-width: 1240px; }
+.bvi-layout { display: grid; grid-template-columns: 330px minmax(0,1fr); gap: 26px; align-items: start; margin-top: 26px; }
+@media (max-width: 1080px) { .bvi-layout { grid-template-columns: 1fr; } }
+
+/* inputs */
+.bvi-panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto; }
+@media (max-width: 1080px) { .bvi-panel { position: static; max-height: none; } }
+.bvi-panel-head { padding: 16px 18px 12px; border-bottom: 1px solid var(--border); }
+.bvi-panel-head h2 { font-size: 15px; font-weight: 700; letter-spacing: -.2px; }
+.bvi-panel-head p { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+.bvi-group { border-bottom: 1px solid var(--border); }
+.bvi-grp-head { margin: 0; }
+.bvi-grp-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  background: none; border: 0; padding: 13px 18px; cursor: pointer; text-align: left;
+  font: 600 12.5px/1.3 Inter, sans-serif; letter-spacing: .3px; text-transform: uppercase; color: var(--text-mid); }
+.bvi-grp-btn:hover { color: var(--blue); }
+.bvi-grp-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.bvi-caret { width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .15s ease; flex: none; margin-bottom: 3px; }
+.bvi-group.is-open .bvi-caret { transform: rotate(-135deg); margin-bottom: -3px; }
+.bvi-grp-body { display: none; padding: 2px 18px 16px; }
+.bvi-group.is-open .bvi-grp-body { display: block; }
+.bvi-field { margin-bottom: 14px; }
+.bvi-field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-mid); margin-bottom: 5px; }
+.bvi-inwrap { position: relative; }
+.bvi-field input[type=number], .bvi-field select {
+  width: 100%; padding: 8px 11px; font: 500 14px Inter, sans-serif; color: var(--text);
+  border: 1px solid var(--border); border-radius: 9px; background: #fff; }
+.bvi-field.has-unit input { padding-right: 34px; }
+.bvi-field input:focus, .bvi-field select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,78,216,.12); }
+.bvi-unit { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--text-faint); font-weight: 600; }
+.bvi-amt { font-size: 11.5px; font-weight: 600; color: var(--blue); margin-top: 5px; letter-spacing: .1px; font-variant-numeric: tabular-nums; }
+.bvi-amt.is-neg { color: var(--red); }
+.bvi-amt:empty { display: none; }
+.bvi-help { font-size: 11.5px; color: var(--text-faint); line-height: 1.45; margin-top: 4px; }
+.bvi-note { font-size: 11.5px; color: var(--amber); background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.bvi-check { display: grid; grid-template-columns: auto 1fr; gap: 6px 8px; align-items: center; margin-bottom: 14px; }
+.bvi-check input { width: 16px; height: 16px; accent-color: var(--blue); }
+.bvi-check label { font-size: 12.5px; font-weight: 600; color: var(--text-mid); }
+.bvi-check .bvi-help { grid-column: 1 / -1; margin-top: 0; }
+.bvi-presets { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 4px; }
+.bvi-preset-lab { font-size: 11.5px; color: var(--text-faint); font-weight: 600; width: 100%; }
+.bvi-chip { border: 1px solid var(--border); background: #fff; border-radius: 20px; padding: 5px 11px; font: 600 11.5px Inter, sans-serif; color: var(--text-mid); cursor: pointer; }
+.bvi-chip:hover { border-color: var(--blue); color: var(--blue); }
+.bvi-actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; }
+.bvi-actions button { border: 1px solid var(--border); background: #fff; color: var(--text-mid); border-radius: 9px; padding: 8px 12px; font: 600 12.5px Inter, sans-serif; cursor: pointer; }
+.bvi-actions button:hover { border-color: var(--blue); color: var(--blue); }
+
+/* results */
+.bvi-verdict { border-radius: 14px; padding: 20px 22px; border: 1px solid var(--border); background: var(--card); box-shadow: var(--shadow); }
+.bvi-verdict.is-a { border-left: 5px solid var(--blue); }
+.bvi-verdict.is-b { border-left: 5px solid var(--green); }
+.bvi-verdict-main { font-size: 21px; font-weight: 700; letter-spacing: -.4px; line-height: 1.3; }
+.bvi-verdict.is-a .bvi-verdict-main strong { color: var(--blue); }
+.bvi-verdict.is-b .bvi-verdict-main strong { color: var(--green); }
+.bvi-verdict-sub { font-size: 13px; color: var(--text-muted); margin-top: 7px; max-width: 760px; }
+.bvi-toggles { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0 0; }
+.bvi-toggle { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: var(--text-mid); }
+.bvi-toggle input { width: 16px; height: 16px; accent-color: var(--blue); }
+.bvi-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 720px) { .bvi-two { grid-template-columns: 1fr; } }
+.bvi-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); }
+#cardA { border-top: 3px solid var(--blue); } #cardB { border-top: 3px solid var(--green); }
+.bvi-card-tag { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); }
+.bvi-big { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-top: 6px; }
+#cardA .bvi-big { color: var(--blue); } #cardB .bvi-big { color: var(--green); }
+.bvi-card-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.bvi-dl { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 10px; }
+.bvi-dl > div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; font-size: 12.5px; }
+.bvi-dl dt { color: var(--text-muted); } .bvi-dl dd { font-weight: 600; text-align: right; }
+.bvi-dl em { color: var(--text-faint); font-weight: 400; font-style: normal; }
+.bvi-dl-ctx { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
+.bvi-dl-ctx dt, .bvi-dl-ctx dd { color: var(--text-faint); font-weight: 500; }
+.bvi-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 12px; margin-top: 16px; }
+.bvi-kpi { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 13px 15px; }
+.bvi-kpi .k { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: var(--text-faint); line-height: 1.35; }
+.bvi-kpi .v { font-size: 21px; font-weight: 700; letter-spacing: -.5px; margin-top: 5px; }
+.bvi-kpi .s { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+.bvi-warn { margin-top: 16px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 14px 18px; }
+.bvi-warn h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: #92400e; margin-bottom: 8px; }
+.bvi-warn ul { margin: 0; padding-left: 18px; }
+.bvi-warn li { font-size: 12.5px; color: #78350f; margin-bottom: 6px; line-height: 1.5; }
+.bvi-warn li.w-bad { color: var(--red); font-weight: 600; }
+
+/* tabs */
+.bvi-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin: 24px 0 0; border-bottom: 1px solid var(--border); }
+.bvi-tab { background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 14px; font: 600 13px Inter, sans-serif; color: var(--text-muted); cursor: pointer; }
+.bvi-tab:hover { color: var(--blue); }
+.bvi-tab.is-on { color: var(--blue); border-bottom-color: var(--blue); }
+.bvi-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.bvi-tabpanel { padding-top: 18px; }
+.bvi-chartbox { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px; overflow-x: auto; }
+.bvi-svg { display: block; width: 100%; height: auto; min-width: 560px; }
+.bvi-tip { position: absolute; top: 14px; transform: translateX(-50%); background: #0f172a; color: #fff; border-radius: 9px; padding: 8px 11px; font-size: 12px; pointer-events: none; white-space: nowrap; box-shadow: 0 6px 18px rgba(0,0,0,.22); z-index: 5; }
+.bvi-tip strong { display: block; margin-bottom: 4px; font-size: 11.5px; color: #cbd5e1; font-weight: 600; }
+.bvi-tip span { display: flex; align-items: center; gap: 6px; }
+.bvi-tip i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.bvi-tip b { margin-left: auto; padding-left: 12px; }
+.bvi-muted { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; line-height: 1.6; }
+.bvi-tablewrap { overflow-x: auto; background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
+.bvi-table { border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 640px; }
+.bvi-cap { text-align: left; padding: 12px 14px 0; font-size: 12px; color: var(--text-muted); }
+.bvi-table th, .bvi-table td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.bvi-table thead th { text-align: right; font-size: 10.5px; text-transform: uppercase; letter-spacing: .6px; color: var(--text-faint); background: #f8fafc; position: sticky; top: 0; }
+.bvi-table th:first-child, .bvi-table td:first-child, .bvi-table tbody th { text-align: left; }
+.bvi-table tbody th { font-weight: 500; color: var(--text-mid); }
+.bvi-table tbody tr:hover { background: #f8fafc; }
+.bvi-table .lead-a { color: var(--blue); font-weight: 600; }
+.bvi-table .lead-b { color: var(--green); font-weight: 600; }
+.bvi-tr-total th, .bvi-tr-total td { border-top: 2px solid var(--border); font-weight: 700; }
+.bvi-mc-head { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+@media (max-width: 620px) { .bvi-mc-head { grid-template-columns: 1fr; } }
+.bvi-mc-prob { background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--blue); border-radius: 12px; padding: 16px 18px; }
+.bvi-mc-prob.alt { border-top-color: var(--green); }
+.bvi-mc-prob span { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--blue); }
+.bvi-mc-prob.alt span { color: var(--green); }
+.bvi-mc-prob p { font-size: 12.5px; color: var(--text-muted); }
+.bvi-vol { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.bvi-vol label { font-size: 12.5px; font-weight: 600; color: var(--text-mid); display: flex; align-items: center; gap: 7px; }
+.bvi-vol input { width: 72px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 8px; font: 500 13px Inter, sans-serif; }
+#narrative p { font-size: 14px; color: var(--text-mid); margin-bottom: 12px; max-width: 760px; line-height: 1.65; }
+#narrative strong { color: var(--text); }
+.bvi-method { margin-top: 44px; }
+.bvi-method h2 { font-size: 22px; font-weight: 700; letter-spacing: -.5px; margin-bottom: 10px; }
+.bvi-method h3 { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
+.bvi-method p, .bvi-method li { font-size: 14px; color: var(--text-mid); line-height: 1.7; max-width: 760px; }
+.bvi-method p { margin-bottom: 12px; }
+.bvi-method ul { margin: 0 0 14px 22px; }
+.bvi-method li { margin-bottom: 7px; }
+.bvi-disclaim { margin-top: 28px; padding: 16px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; font-size: 12.5px; color: var(--text-muted); line-height: 1.6; max-width: 900px; }
+.bvi-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+<style>
+/* ── retirement-specific ── */
+.bvi-verdict.is-ok { border-left: 5px solid var(--green); }
+.bvi-verdict.is-bad { border-left: 5px solid var(--red); }
+.bvi-verdict.is-ok .bvi-verdict-main strong { color: var(--green); }
+.bvi-verdict.is-bad .bvi-verdict-main strong { color: var(--red); }
+#cardHave { border-top: 3px solid var(--blue); }
+#cardNeed { border-top: 3px solid var(--teal); }
+#cardHave .bvi-big { color: var(--blue); }
+#cardNeed .bvi-big { color: var(--teal); }
+
+.goal-panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); margin-top: 16px; }
+.goal-head { padding: 14px 18px 10px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.goal-head h2 { font-size: 15px; font-weight: 700; letter-spacing: -.2px; }
+.goal-head p { font-size: 12px; color: var(--text-muted); margin-top: 3px; width: 100%; }
+.goal-btns { display: flex; gap: 6px; }
+.goal-btns button { border: 1px solid var(--border); background: #fff; color: var(--text-mid); border-radius: 9px; padding: 6px 11px; font: 600 12px Inter, sans-serif; cursor: pointer; }
+.goal-btns button:hover { border-color: var(--blue); color: var(--blue); }
+.child-age { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; color: var(--text-faint); }
+.child-age input { width: 46px; padding: 5px 6px; border: 1px solid var(--border); border-radius: 8px; font: 600 12.5px Inter, sans-serif; text-align: center; color: var(--text); }
+.child-age input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,78,216,.12); }
+#goalList { padding: 12px 18px 16px; max-height: 460px; overflow-y: auto; }
+.goal-row { border: 1px solid var(--border); border-radius: 11px; padding: 11px 12px; margin-bottom: 10px; background: #fbfcfe; }
+.goal-top { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.goal-name { flex: 1; border: 1px solid transparent; background: transparent; font: 700 13.5px Inter, sans-serif; color: var(--text); padding: 4px 6px; border-radius: 7px; min-width: 0; }
+.goal-name:hover { border-color: var(--border); background: #fff; }
+.goal-name:focus { outline: none; border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(29,78,216,.12); }
+.goal-del { border: 0; background: none; color: var(--text-faint); font-size: 19px; line-height: 1; cursor: pointer; padding: 2px 6px; border-radius: 6px; }
+.goal-del:hover { color: var(--red); background: #fef2f2; }
+.goal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 7px; }
+.goal-grid label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--text-faint); display: block; }
+.goal-grid input, .goal-grid select { width: 100%; margin-top: 3px; padding: 6px 8px; font: 500 13px Inter, sans-serif; border: 1px solid var(--border); border-radius: 8px; background: #fff; color: var(--text); }
+.goal-grid .bvi-inwrap input { padding-right: 26px; }
+.goal-grid .bvi-unit { right: 8px; font-size: 12px; }
+.goal-grid input:focus, .goal-grid select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,78,216,.12); }
+.goal-fv { font-size: 12px; color: var(--text-muted); margin-top: 9px; padding-top: 8px; border-top: 1px dashed var(--border); }
+.goal-fv strong { color: var(--blue); font-size: 13.5px; }
+.goal-fv span { color: var(--text-faint); }
+@media (max-width: 1080px) { #goalList { max-height: none; } }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Retirement & Life Goals Calculator — India",
+      "url": "https://vatayanlabs.com/tools/retirement/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any modern browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "description": "Goal-based retirement planning for India. Inflates each life goal to its future cost at a category-specific rate, funds goals by user-set priority rules, projects EPF, NPS tier-I and equity SIPs into a single corpus, and draws it down against real spending to a stated life expectancy.",
+      "author": { "@type": "Person", "name": "Manu Vatayan Jha", "url": "https://vatayanlabs.com/about/" },
+      "publisher": { "@id": "https://vatayanlabs.com/#org" },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vatayanlabs.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://vatayanlabs.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Retirement & Life Goals", "item": "https://vatayanlabs.com/tools/retirement/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why inflate each goal at a different rate?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Because they do not rise together. Education costs in India have run well above headline inflation for years, while a car rises more slowly. Applying one blended rate to a child's post-graduation eighteen years out can understate it by close to half." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can EPF or NPS pay for a house or a wedding?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not freely. NPS tier-I is locked until 60 and only 60% comes out as a lump sum — the rest must buy an annuity. EPF permits limited partial withdrawals for specified purposes. This tool keeps them in a separate pot from ordinary savings so a retirement balance is never quietly spent on a mid-life goal." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do I need to retire in India?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It depends on what you spend, how long you live and what your pension income covers — not on a round number. State your monthly spending in today's money and the age you are planning to, and the corpus falls out of the arithmetic. A target picked because it sounds large is usually either far too small once inflated, or larger than the plan needs." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is 20 crore in 2050 actually worth?",
+          "acceptedAnswer": { "@type": "Answer", "text": "At 6% inflation, roughly 4.9 crore in today's money. Future rupee targets flatter themselves, which is why this tool shows every large figure in today's money alongside the nominal one." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <img class="site-logo" src="/assets/logo-badge.png" alt="" width="34" height="34">
+      <span>
+        <span class="site-brand-name">Vatayan Labs</span>
+        <span class="site-brand-tag">A window into how India moves money</span>
+      </span>
+    </a>
+    <div class="site-links">
+      <a href="/dashboards/">Dashboards</a>
+      <a href="/sectors/">Sectors</a>
+      <a href="/mutual-funds/">Mutual Funds</a>
+      <a href="/tools/" class="active">Tools</a>
+      <a href="/downloads/">Downloads</a>
+      <a href="/about/">About</a>
+    </div>
+  </div>
+</nav>
+<main class="page bvi-wrap">
+
+  <div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/tools/">Tools</a> &rsaquo; Retirement &amp; Life Goals</div>
+
+  <header class="article-head" style="max-width:840px">
+    <div class="article-kicker">Calculator · Retirement · EPF · NPS · SIP</div>
+    <h1>Retirement is not the first bill that arrives</h1>
+    <p class="article-subtitle">A house, a car, school fees, a post-graduation, a wedding — they all land before retirement does, and every one of them is paid out of the same pot. This plans around them: each goal at its real future cost, funded by rules you set, with EPF, NPS and your own investments added up honestly.</p>
+  </header>
+
+  <div class="bvi-layout">
+
+    <aside class="bvi-panel" aria-label="Assumptions">
+      <div class="bvi-panel-head">
+        <h2>Your numbers</h2>
+        <p>Everything recalculates as you type.</p>
+      </div>
+      <form id="retForm" autocomplete="off" onsubmit="return false"></form>
+      <div class="bvi-actions">
+        <button type="button" id="btnReset">Reset</button>
+        <button type="button" id="btnLink">Copy link to this plan</button>
+        <button type="button" id="btnCsv">Download CSV</button>
+      </div>
+    </aside>
+
+    <div>
+      <div id="verdict" class="bvi-verdict" role="status" aria-live="polite"></div>
+
+      <div class="bvi-two">
+        <section id="cardHave" class="bvi-card" aria-label="Corpus you reach"></section>
+        <section id="cardNeed" class="bvi-card" aria-label="Corpus the plan needs"></section>
+      </div>
+
+      <div id="kpis" class="bvi-kpis"></div>
+
+      <div id="warnBox" class="bvi-warn" hidden>
+        <h3>Things worth checking</h3>
+        <ul id="warnings"></ul>
+      </div>
+
+      <section class="goal-panel">
+        <div class="goal-head">
+          <h2>Your life goals</h2>
+          <div class="goal-btns">
+            <button type="button" id="addGoal">+ Add a goal</button>
+            <label class="child-age" for="childAge">child aged <input type="number" id="childAge" value="2" min="0" max="35" step="1" inputmode="numeric" aria-label="Age of the child to add"></label>
+            <button type="button" id="addChild">+ Add a child</button>
+          </div>
+          <p>Enter what each one costs <strong>today</strong> and the year you need it. The tool inflates it for you. &ldquo;If money is short&rdquo; decides what gives when two goals want the same rupee — and priority 1 is served before priority 9.</p>
+        </div>
+        <div id="goalList"></div>
+      </section>
+
+      <div class="bvi-tabs" role="tablist" aria-label="Results views">
+        <button class="bvi-tab is-on" role="tab" id="tab-wealth" aria-controls="panel-wealth" aria-selected="true" tabindex="0">Building up</button>
+        <button class="bvi-tab" role="tab" id="tab-draw" aria-controls="panel-draw" aria-selected="false" tabindex="-1">Drawing down</button>
+        <button class="bvi-tab" role="tab" id="tab-goals" aria-controls="panel-goals" aria-selected="false" tabindex="-1">Goal by goal</button>
+        <button class="bvi-tab" role="tab" id="tab-flow" aria-controls="panel-flow" aria-selected="false" tabindex="-1">Where the money went</button>
+        <button class="bvi-tab" role="tab" id="tab-read" aria-controls="panel-read" aria-selected="false" tabindex="-1">In words</button>
+      </div>
+
+      <div class="bvi-tabpanel" role="tabpanel" id="panel-wealth" aria-labelledby="tab-wealth">
+        <div id="chartWealth" class="bvi-chartbox"></div>
+        <p class="bvi-muted">The three pots stacked. Red ticks along the bottom mark the years a goal takes money out — notice how the blue band dips each time, and how EPF and NPS never do, because they cannot be touched.</p>
+      </div>
+
+      <div class="bvi-tabpanel" role="tabpanel" id="panel-draw" aria-labelledby="tab-draw" hidden>
+        <div id="chartDraw" class="bvi-chartbox"></div>
+        <p class="bvi-muted">What happens after you stop earning. Spending rises with inflation every year; the annuity and the EPS pension do not, so they cover less of the bill as time passes. If the line reaches zero before your planned age, the plan does not work no matter how large the starting number looked.</p>
+      </div>
+
+      <div class="bvi-tabpanel" role="tabpanel" id="panel-goals" aria-labelledby="tab-goals" hidden>
+        <div class="bvi-tablewrap"><table class="bvi-table" id="goalTable"></table></div>
+        <p class="bvi-muted">&ldquo;Cost then&rdquo; is what the goal actually costs in the year it falls due. A deferred goal shows the year it moved to — and a higher cost, because it kept inflating while it waited.</p>
+      </div>
+
+      <div class="bvi-tabpanel" role="tabpanel" id="panel-flow" aria-labelledby="tab-flow" hidden>
+        <div class="bvi-tablewrap"><table class="bvi-table" id="flowTable"></table></div>
+      </div>
+
+      <div class="bvi-tabpanel" role="tabpanel" id="panel-read" aria-labelledby="tab-read" hidden>
+        <div id="narrative"></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="bvi-method">
+    <h2>How this calculator works</h2>
+
+    <h3>Two pots, because that is what the law does</h3>
+    <p>EPF and NPS sit in a locked pot. NPS tier-I cannot be touched until 60, and even then only 60% emerges as a lump sum — the remaining 40% must be handed over for an annuity, which pays a monthly income but is never again a sum you can spend. EPF is tax-free on maturity and permits limited partial withdrawals for specified purposes. Everything else — your SIPs, your existing equity and debt — sits in a second pot, and that is the only money available for a house, a car or a wedding. Merging the two is the most common way a retirement projection ends up overstating what is really there.</p>
+
+    <h3>Every goal at its own inflation rate</h3>
+    <p>You enter what a goal costs <em>today</em> and the year you need it; the tool inflates it. Crucially, not all at the same rate. Education in India has compounded well above headline inflation for years, marriage costs run ahead of it too, and a car rises more slowly. A child's post-graduation eighteen years out is roughly twice as expensive at 10% as at 6% — which is the difference between a plan that works and one that quietly does not. The category sets a sensible default and you can override it per goal.</p>
+
+    <h3>Rules, not wishes, when the money is short</h3>
+    <p>Each goal carries its own instruction for the year it falls due. <strong>Must fund</strong> takes whatever is available and reports the shortfall — a child's school fees do not wait for a better market. <strong>Can wait</strong> pushes the goal to a later year, up to a limit you set, and re-prices it at the new year, because a deferred goal keeps inflating while it waits. <strong>Can shrink</strong> funds what there is, provided it clears a floor you set; below that it is refused outright, because a wedding at 30% of its budget is not a smaller wedding. Where two goals fall in the same year, priority decides who is served first.</p>
+
+    <h3>Both directions</h3>
+    <p>You can state a corpus — twenty crore in 2050 — and the tool will solve for the monthly investment that reaches it, then set that against what you are actually investing and show the gap. Or you can leave the corpus alone, state what you want to spend each month in retirement and the age you are planning to, and let the arithmetic tell you what the honest target is. The second is usually the more useful question, because a round number picked because it sounds large is rarely the number the plan needs.</p>
+
+    <h3>And then it spends the money</h3>
+    <p>A corpus is not an answer on its own. From the retirement year to the age you nominate, the tool draws real spending out of the corpus each month, rising with inflation, offset by the NPS annuity and the EPS pension — both of which are level in nominal terms and therefore cover steadily less as the years pass. If the balance hits zero before your planned age, it tells you the age it happens at. Every large figure is also shown in today's money, because twenty crore in 2050 is not twenty crore.</p>
+
+    <h3>What it does not do</h3>
+    <ul>
+      <li><strong>It assumes returns are smooth.</strong> They are not. A bad decade early in retirement does far more damage than the same decade later, and no single-line projection can show you that. Treat the corpus as a central estimate, not a promise.</li>
+      <li><strong>It does not model EPF partial withdrawals</strong> for a house or education, though the rules permit them. Keeping the pots separate is the more conservative choice.</li>
+      <li><strong>It does not model insurance, an emergency fund, or health cover</strong> — all of which come before any of this, and none of which are optional.</li>
+      <li><strong>It assumes you keep earning</strong> until the retirement age you set, without a career break, a job loss or a health event.</li>
+      <li><strong>It does not price a home you already own</strong>, rental income, inheritance, or anything you might sell late in life.</li>
+    </ul>
+
+    <div class="bvi-disclaim">
+      <strong>Not investment advice.</strong> This is a modelling tool for thinking, published by an independent researcher. EPF, NPS and tax rules change; the defaults here reflect one point in time and every one of them is an editable input — verify them against the current year before relying on the output. A plan is only as good as the assumptions you feed it, and small changes in the return and inflation figures move the answer by crores. Talk to a qualified adviser about your own circumstances.
+    </div>
+  </section>
+
+  <div class="section" style="max-width:760px;margin-top:36px">
+    <div class="section-label">Related</div>
+    <a class="card" href="/tools/buy-vs-invest/">
+      <span class="card-kicker">Calculator · Property vs Equity</span>
+      <h3>Buy the flat, or rent and invest the difference?</h3>
+      <p>If a house is one of the goals above, this is the question underneath it — and the answer changes what the rest of the plan can afford.</p>
+    </a>
+  </div>
+
+  <noscript><p class="bvi-disclaim">This calculator needs JavaScript to run. The methodology above describes exactly what it computes.</p></noscript>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="subscribe-bar">
+      <div>
+        <div class="footer-brand">Vatayan Labs</div>
+        <p class="subscribe-text">Data-driven research on Indian banking, payments and markets — a window into how India moves money.</p>
+      </div>
+      <a class="btn btn-primary" href="/newsletter/">Subscribe for updates</a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Research</h4>
+        <a href="/sectors/gold/">Gold</a>
+        <a href="/sectors/defence/">Defence</a>
+        <a href="/sectors/microfinance/">Microfinance</a>
+        <a href="/sectors/mutual-funds/">Mutual Funds</a>
+        <a href="/sectors/capital-markets/">Capital Markets</a>
+        <a href="/sectors/semiconductors/">Semiconductors</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="/sectors/">Sector Studies</a>
+        <a href="/dashboards/">Data Dashboards</a>
+        <a href="/mutual-funds/">Mutual Fund Hub</a>
+        <a href="/tools/">Tools</a>
+        <a href="/downloads/">Downloads</a>
+        <a href="https://curiousinvestinginsights.substack.com/" target="_blank" rel="noopener">Substack Archive</a>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <a href="/about/">About</a>
+        <a href="mailto:curiousinvestinginsights@gmail.com">Contact</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/feed.xml">RSS Feed</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Manu Vatayan Jha · Vatayan Labs. Personal research — not investment advice.</span>
+      <span>29 publications and counting</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Bump ?v= whenever either file changes: /assets/* has no explicit cache
+     header, so browsers will happily serve a stale copy otherwise. -->
+<script src="/assets/tools/ret-engine.js?v=2"></script>
+<script src="/assets/tools/ret-ui.js?v=3"></script>
+</body>
+</html>

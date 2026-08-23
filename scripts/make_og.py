@@ -146,6 +146,9 @@ CARDS = [
     ('og-buy-vs-invest.png', 'Free calculator',
      'Buy the flat, or rent and invest the difference?',
      'Both choices held to the identical rupee. Stamp duty, home-loan relief, rental tax and capital gains on both sides.'),
+    ('og-retirement.png', 'Free calculator',
+     'Retirement is not the first bill that arrives',
+     'A house, a car, school fees and a wedding all land first. EPF, NPS and your SIPs, with every goal at its real future cost.'),
 ]
 
 if __name__ == '__main__':
