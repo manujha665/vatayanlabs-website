@@ -1,0 +1,3 @@
+# Build/maintenance scripts. Vercel serves this repo as static files, so
+# anything left here is fetchable — these are source, not site content.
+scripts/

@@ -19,6 +19,11 @@
 - [Lumentum — Business Study](https://vatayanlabs.com/sectors/semiconductors/lumentum/): Five-part study of Lumentum ($LITE) — photonics, the NVIDIA relationship, valuation and the India angle.
 - [Capital Markets](https://vatayanlabs.com/sectors/capital-markets/): 4-part series on India's market infrastructure — depositories (CDSL/NSDL), RTAs and global peers.
 
+## Tools (interactive calculators)
+
+- [Tools shelf](https://vatayanlabs.com/tools/): Calculators for Indian personal finance, built so that every assumption is a visible input and every cost is counted on both sides of a comparison.
+- [Buy a flat, or rent and invest the difference?](https://vatayanlabs.com/tools/buy-vs-invest/): Rent-vs-buy calculator for Indian residential property. Holds both choices to an identical monthly cash budget; models stamp duty and registration, home-loan relief under Sec 24(b) and 80C by tax regime, rental income taxed with the 30% standard deduction and the house-property loss set-off cap, capital gains on both the flat and the fund, fund expense ratio, vacancy, maintenance and periodic repairs, prepayment and EMI step-up. Includes a two-way return sensitivity grid and a Monte Carlo run reporting how often each choice wins. Scenarios are shareable by URL and exportable to CSV.
+
 ## About
 
 - [About Vatayan Labs and the author](https://vatayanlabs.com/about/)
