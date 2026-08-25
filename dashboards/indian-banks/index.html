@@ -178,7 +178,7 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "India Banking Scorecard — Quarterly PAT and Asset Quality for 24 Banks & NBFCs",
-  "description": "Reported profit after tax, gross NPA ratio and net NPA ratio for 24 Indian banks and NBFCs (PSU, private, NBFC and diversified financials), quarterly from Q2FY25 (Sep 2024) to Q1FY27 (Jun 2026). Presented as an interactive heatmap, trend lines, peer comparison and radar views, plus a snapshot of market capitalisation, P/E, P/BV, RoE and RoA.",
+  "description": "Reported profit after tax, gross NPA ratio and net NPA ratio for 24 Indian banks and NBFCs (PSU, private and NBFC), quarterly from Q2FY25 (Sep 2024) to Q1FY27 (Jun 2026). Presented as an interactive heatmap, trend lines, peer comparison and radar views, plus a snapshot of market capitalisation, P/E, P/BV, RoE and RoA.",
   "url": "https://vatayanlabs.com/dashboards/indian-banks/",
   "temporalCoverage": "2024-07/2026-06",
   "spatialCoverage": "India",
@@ -234,7 +234,7 @@
         <div>
           <div class="ibs-kicker">Vatayan Labs</div>
           <h1>India Banking Scorecard</h1>
-          <div class="ibs-hero-sub">24 entities · PSU + Private + NBFC + Diversified · Q2FY25–Q1FY27 · ₹ in Crores · Updated 25 Aug 2026</div>
+          <div class="ibs-hero-sub">24 entities · PSU + Private + NBFC · Q2FY25–Q1FY27 · ₹ in Crores · Updated 25 Aug 2026</div>
         </div>
         <div class="ibs-stats">
           <div class="ibs-stat"><div class="ibs-stat-label">Universe</div><div class="ibs-stat-value">24 Entities</div></div>
@@ -305,7 +305,7 @@
         <div class="ibs-method-title">Methodology &amp; Sources</div>
         <p><strong>What's here:</strong> reported revenue, profit after tax, gross NPA ratio and net NPA ratio for eight quarters, Q2FY25 (Sep 2024) through Q1FY27 (Jun 2026). Revenue YoY is derived from a twelve-quarter revenue series (four quarters deeper than the display window) so it resolves for every displayed quarter, and is suppressed where the year-ago base is missing or non-meaningful. Market cap and RoA are carried in the heatmap for ranking convenience but are single point-in-time values at 30 Jul 2026, marked with an asterisk — they do not move with the quarter slider. Figures are standalone unless a company only publishes consolidated numbers — L&amp;T Finance and Tata Capital are consolidated, and IndusInd's Q1FY27 consolidated PAT was ₹1,037cr against the ₹1,002cr standalone shown here.</p>
         <p><strong>Sources:</strong> company-reported quarterly results as aggregated by screener.in, cross-checked against company press releases and results coverage for Q1FY27. All 24 entities have now reported Q1FY27; the last three (Bajaj Finance 30 Jul, Aditya Birla Capital 31 Jul, SBI 7 Aug 2026) were filled in on 25 Aug 2026. Remaining blanks are genuine non-disclosure at source, not pending results.</p>
-        <p><strong>Known limits:</strong> Yes Bank's NPA ratios are carried at one decimal place at source, so small moves are not resolvable. The GNPA and NNPA columns carry <strong>RBI-norms non-performing asset ratios only</strong>. Gross Stage 3 under Ind AS is a different measure and is never substituted for GNPA, even where it is the figure a lender leads with — Chola, for instance, is shown at its RBI-norms 4.50% rather than its 3.29% Stage 3. Where an NBFC publishes Stage 3 but no RBI-norms GNPA, the cell is left blank: L&amp;T Finance discloses only Gross/Net Stage 3 (2.86% / 0.90% at Q1FY27), so its asset-quality cells are empty by design rather than for want of data. Aditya Birla Capital sits in its own Diversified group because bank asset-quality and margin metrics do not describe a holdco spanning lending, housing finance, asset management and insurance; it stopped disclosing NPA ratios at source after Q1FY26. Jio Financial Services was dropped from the universe in Aug 2026 — its lending book is a small part of a consolidated result driven by asset management and treasury, and it published no NPA ratios at all, so it could not be compared against the rest of the panel on any tracked metric. Three later additions carry their own caveats: <strong>IDBI Bank</strong> is classified by the RBI as a private-sector bank since 2019 but is grouped with the PSUs here pending divestment; <strong>Tata Capital</strong> is on a consolidated basis, began disclosing quarterly NPA only from Q2FY26, and its FY25 revenue step-up reflects the Tata Motors Finance merger rather than organic growth; <strong>HDB Financial</strong> listed in 2025, so its NPA ratios for the most recent one to two quarters are not yet carried at source.</p>
+        <p><strong>Known limits:</strong> Yes Bank's NPA ratios are carried at one decimal place at source, so small moves are not resolvable. The GNPA and NNPA columns carry <strong>RBI-norms non-performing asset ratios only</strong>. Gross Stage 3 under Ind AS is a different measure and is never substituted for GNPA, even where it is the figure a lender leads with — Chola, for instance, is shown at its RBI-norms 4.50% rather than its 3.29% Stage 3. Where an NBFC publishes Stage 3 but no RBI-norms GNPA, the cell is left blank: L&amp;T Finance discloses only Gross/Net Stage 3 (2.86% / 0.90% at Q1FY27), so its asset-quality cells are empty by design rather than for want of data. Aditya Birla Capital is filed under NBFC for filtering, but it is a diversified holdco spanning lending, housing finance, asset management and insurance rather than a pure lender — its consolidated result mixes in insurance and fee businesses, and it stopped disclosing NPA ratios at source after Q1FY26. Read it against its own history rather than against the monoline NBFCs beside it. Jio Financial Services was dropped from the universe in Aug 2026 — its lending book is a small part of a consolidated result driven by asset management and treasury, and it published no NPA ratios at all, so it could not be compared against the rest of the panel on any tracked metric. Three later additions carry their own caveats: <strong>IDBI Bank</strong> is classified by the RBI as a private-sector bank since 2019 but is grouped with the PSUs here pending divestment; <strong>Tata Capital</strong> is on a consolidated basis, began disclosing quarterly NPA only from Q2FY26, and its FY25 revenue step-up reflects the Tata Motors Finance merger rather than organic growth; <strong>HDB Financial</strong> listed in 2025, so its NPA ratios for the most recent one to two quarters are not yet carried at source.</p>
         <p><strong>Snapshot tab:</strong> market capitalisation, P/E, P/BV, RoE and RoA are a market snapshot at 30 Jul 2026, sourced from StockScans peer-comparison exports (Bank of India and Shriram Finance from screener.in, which StockScans does not cover in these peer sets). RoE and RoA there are <em>trailing</em> figures, not quarterly — they are deliberately kept in a separate column group from the Q1FY27 reported figures so the two are not read as the same thing.</p>
         <p><strong>Still not shown:</strong> NIM and CASA have no quarterly time series here. NIM is disclosed on inconsistent bases (domestic vs global, total assets vs interest-earning assets, NIM+fees for some NBFCs) and CASA is rarely given as a ratio in quarterly releases, so both appear only as a Q1FY27 snapshot where the company stated them. CRAR is not tracked. Building real quarterly series for these needs bank-by-bank investor presentations rather than an aggregator.</p>
       </div>
@@ -343,7 +343,7 @@
       { name:"Shriram",     full:"Shriram Finance",            cat:"NBFC" },
       { name:"Tata Cap",    full:"Tata Capital",               cat:"NBFC" },
       { name:"HDB Fin",     full:"HDB Financial Services",     cat:"NBFC" },
-      { name:"AB Capital",  full:"Aditya Birla Capital",       cat:"Diversified" },
+      { name:"AB Capital",  full:"Aditya Birla Capital",       cat:"NBFC" },
     ];
     // Q2FY25 = Sep-24 … Q1FY27 = Jun-26
     const QUARTERS = ["Q2FY25","Q3FY25","Q4FY25","Q1FY26","Q2FY26","Q3FY26","Q4FY26","Q1FY27"];
@@ -445,8 +445,8 @@
       mcap:   { label:"Mkt Cap (₹ Cr)", th:"Mkt Cap*",      unit:"₹Cr", better:"high", domain:null,  fixed:true },
       roa:    { label:"RoA % (TTM)",    th:"RoA%*",         unit:"%",   better:"high", domain:[0,4], fixed:true },
     };
-    const CAT_COLORS = { "PSU":"#2E5DA8","Pvt Big 4":"#27AE60","Mid-Size Pvt":"#E67E22","NBFC":"#8E44AD","Diversified":"#16A085" };
-    const CATS = ["All","PSU","Pvt Big 4","Mid-Size Pvt","NBFC","Diversified"];
+    const CAT_COLORS = { "PSU":"#2E5DA8","Pvt Big 4":"#27AE60","Mid-Size Pvt":"#E67E22","NBFC":"#8E44AD" };
+    const CATS = ["All","PSU","Pvt Big 4","Mid-Size Pvt","NBFC"];
     const CHART_COLORS = ["#3A8DDE","#27AE60","#E67E22","#8E44AD","#E74C3C","#F39C12"];
     const RADAR_METRICS = ["pat","revyoy","gnpa","nnpa","roa"];
 
