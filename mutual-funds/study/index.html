@@ -773,11 +773,6 @@ of future returns. Investors should consult a registered investment adviser befo
 
 function render(){ strip(); drawChart(); drawTable(); }
 render();
-// the host site's theme toggle rewrites data-theme; SVG colours are baked at draw
-// time, so redraw the chart whenever it flips.
-new MutationObserver(()=>setTimeout(drawChart,40))
-  .observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
-matchMedia("(prefers-color-scheme:dark)").addEventListener("change",()=>setTimeout(drawChart,60));
 </script>
 
 
