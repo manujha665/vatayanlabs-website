@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E0WLCFVLDX');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xoi9afzxww");
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/logo-badge.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>What Separates a Good Equity Fund From a Lucky One | Vatayan Labs</title>
+<meta name="description" content="A rules-based scoring study of 43 Indian equity mutual funds, computed from raw AMFI NAV history. Read the same funds through returns, drawdowns, cost or style.">
+<link rel="canonical" href="https://vatayanlabs.com/mutual-funds/study/">
+<meta property="og:title" content="What Separates a Good Equity Fund From a Lucky One">
+<meta property="og:description" content="43 Indian equity funds scored 0-10 within their own segment, computed from raw NAV history.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vatayanlabs.com/mutual-funds/study/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" type="application/rss+xml" title="Vatayan Labs" href="/feed.xml">
+<style>
+/* Vatayan Labs design tokens &mdash; matched to /assets/site.css */
+:root{
+  /* All tokens are --vl- prefixed, so declaring them on :root cannot clash with the
+     host site's own tokens, and it keeps them available to elements (the hover
+     tooltip, the tab strip) that sit outside the .vl-study container. */
+  --vl-navy: var(--ink, var(--ink,#0f172a));
+  --vl-blue: var(--accent, var(--accent,#1d4ed8));
+  --vl-teal: #0891b2;
+  --vl-green: #047857;   /* light mode: the host green is ~3.4:1 on white */
+  --vl-amber: #b45309;   /* light mode: darker than the host amber for legibility on white */
+  --vl-red: var(--red, #dc2626);
+  --vl-card: var(--surface, var(--surface,#ffffff));
+  --vl-sunk: var(--surface-2, #f8fafc);
+  --vl-border: var(--line, var(--line,#e2e8f0));
+  --vl-text: var(--ink, var(--ink,#0f172a));
+  --vl-text-mid: var(--ink-2, var(--ink-2,#334155));
+  --vl-text-muted: var(--ink-3, var(--ink-3,#64748b));
+  --vl-text-faint: var(--ink-3, var(--ink-3,#94a3b8));
+  --vl-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06));
+  --vl-shadow-md: var(--shadow-lift, 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06));
+}
+
+*{box-sizing:border-box}
+body{margin:0; background:var(--bg, #f1f5f9); color:var(--ink, var(--ink,#0f172a));
+  font-family:var(--font-ui, 'Inter', system-ui, sans-serif);
+  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased}
+.page{max-width:1100px; margin:0 auto; padding:40px 24px 64px}
+h1,h2,h3,h4{margin:0; letter-spacing:-.4px}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--vl-blue)}
+:focus-visible{outline:2px solid var(--vl-blue); outline-offset:2px; border-radius:4px}
+
+.article-kicker{font-size:11px; font-weight:700; letter-spacing:1.2px;
+  text-transform:uppercase; color:var(--vl-teal); margin-bottom:10px}
+.article-head h1{font-size:32px; font-weight:800; letter-spacing:-.8px; line-height:1.2}
+.article-head h1 .accent{background:linear-gradient(135deg,var(--accent,#1d4ed8),#0891b2);
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+.article-subtitle{font-size:17px; color:var(--vl-text-mid); margin-top:10px; max-width:720px}
+.article-meta{font-size:12.5px; color:var(--vl-text-faint); margin-top:12px}
+.section-label{font-size:11px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1.2px; color:var(--vl-blue); margin-bottom:6px}
+.sec{margin-top:38px}
+.sec > h2{font-size:22px; font-weight:700; letter-spacing:-.5px}
+.sec > p.lede{font-size:14.5px; color:var(--vl-text-mid); margin:8px 0 0; max-width:760px}
+
+/* notice */
+.notice{background:#fffbeb; border:1px solid #fde68a; border-radius:12px;
+  padding:14px 18px; margin-top:22px; font-size:12.5px; color:#92400e; line-height:1.6}
+.notice b{color:#78350f}
+
+/* controls */
+.controls{display:flex; flex-wrap:wrap; gap:16px 26px; margin:20px 0 22px; align-items:flex-start}
+.ctl{display:flex; flex-direction:column; gap:7px}
+.ctl-l{font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--vl-text-faint)}
+.toggle{display:inline-flex; flex-wrap:wrap; border:1px solid var(--vl-border);
+  border-radius:10px; overflow:hidden; background:var(--vl-card); box-shadow:var(--vl-shadow)}
+.toggle button{padding:8px 14px; font-size:12.5px; font-weight:600; border:0; cursor:pointer;
+  background:transparent; color:var(--vl-text-muted); font-family:inherit; transition:all .15s ease;
+  border-right:1px solid var(--vl-border)}
+.toggle button:last-child{border-right:0}
+.toggle button:hover{color:var(--vl-blue)}
+.toggle button[aria-pressed="true"]{background:var(--vl-blue); color:var(--surface,#fff)}
+.toggle.alt button[aria-pressed="true"]{background:var(--vl-navy); color:var(--surface,#fff)}
+
+/* stat strip */
+.strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:22px}
+.stat{background:var(--vl-card); border:1px solid var(--vl-border); border-radius:14px;
+  padding:14px 16px; box-shadow:var(--vl-shadow)}
+.stat .k{font-size:23px; font-weight:800; letter-spacing:-.6px; font-variant-numeric:tabular-nums; line-height:1.15}
+.stat .l{font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  color:var(--vl-text-faint); margin-top:4px}
+.stat .s{font-size:12px; color:var(--vl-text-muted); margin-top:2px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+/* chart card (legend + axis notes sit inside it); table runs full width below */
+.chartrow{max-width:690px; margin-bottom:24px}
+.card{background:var(--vl-card); border:1px solid var(--vl-border); border-radius:14px;
+  padding:18px; box-shadow:var(--vl-shadow)}
+#chart{width:100%; height:auto; display:block}
+.cap{font-size:12.5px; color:var(--vl-text-muted); margin:12px 2px 0; line-height:1.55}
+.sizekey{display:flex; align-items:center; gap:10px; margin:12px 2px 0; padding-top:11px;
+  border-top:1px solid var(--vl-border); font-size:10px; font-weight:700; letter-spacing:.8px;
+  text-transform:uppercase; color:var(--vl-text-faint); flex-wrap:wrap}
+.sizekey .sk{display:inline-flex; align-items:center; gap:5px; text-transform:none;
+  letter-spacing:0; font-weight:500; font-size:11.5px; color:var(--vl-text-muted)}
+.sizekey .sk i{display:inline-block; border-radius:50%; background:var(--vl-text-faint); opacity:.45}
+/* axis explainers */
+.axes{margin:12px 2px 0; padding-top:11px; border-top:1px solid var(--vl-border);
+  display:flex; flex-direction:column; gap:8px}
+.ax{display:grid; grid-template-columns:18px 1fr; gap:9px; align-items:start}
+.ax .axk{font-size:9.5px; font-weight:800; color:var(--surface,#fff); background:var(--vl-navy);
+  border-radius:4px; text-align:center; line-height:16px; height:16px; margin-top:2px}
+.ax .axt{font-size:12.5px; color:var(--vl-text-muted); line-height:1.5}
+.ax .axt b{color:var(--vl-text-mid); font-weight:700}
+
+.legend{margin:12px 2px 0; padding-top:11px; border-top:1px solid var(--vl-border);
+  display:grid; grid-template-columns:1fr 1fr; gap:10px 14px}
+.lg{display:grid; grid-template-columns:10px 1fr; gap:8px; align-items:start}
+.lg .dot{width:10px; height:10px; border-radius:50%; margin-top:4px}
+.lg h4{font-size:12px; font-weight:700; letter-spacing:-.1px}
+.lg p{margin:1px 0 0; font-size:11.5px; color:var(--vl-text-muted); line-height:1.45}
+@media (max-width:1000px){ .legend{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .legend{grid-template-columns:1fr} }
+
+/* table */
+.tablecard{background:var(--vl-card); border:1px solid var(--vl-border); border-radius:14px;
+  box-shadow:var(--vl-shadow); overflow:hidden}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse; width:100%; min-width:760px}
+thead th{position:sticky; top:0; z-index:2; background:var(--vl-sunk);
+  font-size:10px; letter-spacing:.6px; text-transform:uppercase; color:var(--vl-text-faint);
+  font-weight:700; text-align:right; padding:11px 11px; border-bottom:1px solid var(--vl-border);
+  white-space:nowrap; cursor:pointer; user-select:none}
+thead th.l{text-align:left}
+thead th:hover{color:var(--vl-blue)}
+thead th[data-active="1"]{color:var(--vl-blue)}
+thead th .ar{opacity:0; margin-left:3px}
+thead th[data-active="1"] .ar{opacity:1}
+tbody td{padding:9px 11px; border-bottom:1px solid var(--vl-border); text-align:right;
+  font-variant-numeric:tabular-nums; font-size:13.5px; white-space:nowrap; color:var(--vl-text-mid)}
+tbody td.l{text-align:left; white-space:normal}
+tbody tr.row{cursor:pointer; transition:background .12s}
+tbody tr.row:hover{background:var(--vl-sunk)}
+tbody tr.catrow td{background:#eef2f7; font-size:10px; letter-spacing:1px; text-transform:uppercase;
+  color:var(--vl-text-muted); font-weight:700; padding:8px 12px}
+.rk{color:var(--vl-text-faint); font-size:12px; width:26px}
+.fname{font-weight:700; color:var(--vl-text); font-size:13.5px; display:flex; align-items:center; gap:6px}
+.fmeta{font-size:10.5px; color:var(--vl-text-faint); margin-top:2px; font-weight:500}
+.flag{display:inline-block; font-size:9.5px; padding:1px 6px; border-radius:20px;
+  background:#fef3c7; color:#92400e; margin-right:3px; font-weight:600; white-space:nowrap}
+.scell{display:flex; align-items:center; gap:8px; justify-content:flex-end}
+.sbar{width:44px; height:6px; border-radius:99px; background:#e8edf3; overflow:hidden; flex:none}
+.sbar i{display:block; height:100%; border-radius:99px}
+.snum{font-weight:800; font-size:15px; min-width:28px; text-align:right; letter-spacing:-.3px}
+.g-a{color:var(--vl-green)} .g-b{color:var(--vl-amber)} .g-c{color:var(--vl-red)}
+.b-a{background:var(--vl-green)} .b-b{background:var(--vl-amber)} .b-c{background:var(--vl-red)}
+.pill{display:inline-block; font-size:10px; padding:3px 9px; border-radius:20px; font-weight:700; white-space:nowrap}
+.p-a{background:#e1f5ee; color:#065f46}
+.p-b{background:#fef3c7; color:#92400e}
+.p-c{background:#eef6ff; color:#1e40af}
+.p-d{background:#fee2e2; color:#991b1b}
+.pos{color:var(--vl-green)} .neg{color:var(--vl-red)}
+.capbar{display:inline-flex; width:86px; height:9px; border-radius:3px; overflow:hidden;
+  background:#e8edf3; vertical-align:middle}
+.capbar i{display:block; height:100%}
+.cb-l{background:var(--vl-blue)} .cb-m{background:var(--vl-teal)} .cb-s{background:var(--vl-amber)}
+
+tr.detail td{padding:0; border-bottom:1px solid var(--vl-border)}
+.dwrap{padding:18px 14px 22px; background:var(--vl-sunk);
+  display:grid; grid-template-columns:minmax(210px,1fr) 2fr; gap:24px}
+.pl{display:grid; grid-template-columns:1fr 34px; gap:7px; align-items:center; margin-bottom:10px}
+.pl .pn{font-size:12px; color:var(--vl-text-mid); font-weight:600}
+.pl .pv{font-size:12.5px; font-weight:700; text-align:right; font-variant-numeric:tabular-nums}
+.pl .pbar{grid-column:1/-1; height:5px; background:#e8edf3; border-radius:99px; overflow:hidden}
+.pl .pbar i{display:block; height:100%; background:var(--vl-blue); border-radius:99px}
+.mgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(106px,1fr)); gap:1px 14px; align-self:start}
+.mi{padding:5px 0; border-bottom:1px dotted var(--vl-border)}
+.mi .ml{font-size:9px; letter-spacing:.5px; text-transform:uppercase; color:var(--vl-text-faint); font-weight:700}
+.mi .mv{font-size:13.5px; font-weight:700; font-variant-numeric:tabular-nums; margin-top:1px; color:var(--vl-text-mid)}
+.mi .mv small{font-weight:400; color:var(--vl-text-faint); font-size:10.5px}
+
+.tip{position:fixed; pointer-events:none; opacity:0; transition:opacity .1s;
+  background:var(--vl-navy); color:var(--surface,#fff); padding:9px 12px; border-radius:8px;
+  font-size:12px; line-height:1.45; z-index:60; box-shadow:var(--vl-shadow-md); max-width:250px}
+.tip b{font-size:13px; display:block; margin-bottom:2px}
+.tip span{font-size:11px; opacity:.85}
+
+/* what we measure */
+.dims{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-top:18px}
+.dim{background:var(--vl-card); border:1px solid var(--vl-border); border-radius:14px;
+  padding:18px; box-shadow:var(--vl-shadow)}
+.dim h3{font-size:14.5px; font-weight:700; margin-bottom:4px}
+.dim .dn{font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  color:var(--vl-teal); margin-bottom:7px}
+.dim ul{margin:8px 0 0; padding:0 0 0 16px; color:var(--vl-text-muted); font-size:12.5px; line-height:1.65}
+.dim li{margin-bottom:2px}
+
+.notes{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:18px}
+.nb h3{font-size:13.5px; font-weight:700; margin-bottom:6px}
+.nb p{margin:0; font-size:12.5px; color:var(--vl-text-muted); line-height:1.6}
+.ctable{width:100%; border-collapse:collapse; min-width:660px}
+.ctable th{font-size:10px; letter-spacing:.6px; text-transform:uppercase; color:var(--vl-text-faint);
+  font-weight:700; text-align:right; padding:11px 12px; border-bottom:1px solid var(--vl-border)}
+.ctable th.l{text-align:left}
+.ctable td{padding:13px 12px; border-bottom:1px solid var(--vl-border); text-align:right;
+  font-variant-numeric:tabular-nums; font-size:13.5px; color:var(--vl-text-mid)}
+.ctable td.l{text-align:left}
+.ctable .note{font-size:12.5px; color:var(--vl-text-muted); line-height:1.5; min-width:270px}
+.disc{margin-top:38px; padding-top:22px; border-top:1px solid var(--vl-border);
+  font-size:11.5px; color:var(--vl-text-faint); line-height:1.6; max-width:860px}
+.disc b{color:var(--vl-text-muted)}
+.empty{padding:36px; text-align:center; color:var(--vl-text-muted)}
+
+@media (max-width:860px){
+  .chartrow{grid-template-columns:1fr}
+  .dwrap{grid-template-columns:1fr; gap:18px}
+  .article-head h1{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.mf-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1100px;
+  margin:26px auto 0;padding:0 24px}
+.mf-tab{display:flex;flex-direction:column;gap:2px;padding:14px 18px;border-radius:12px;
+  border:1px solid var(--border,#e2e8f0);background:var(--card,#fff);text-decoration:none;
+  transition:all .15s ease;box-shadow:var(--shadow,0 1px 3px rgba(0,0,0,.08))}
+.mf-tab:hover{border-color:var(--blue,#1d4ed8);transform:translateY(-1px)}
+.mf-tab-k{font-size:14.5px;font-weight:700;color:var(--text,#0f172a);letter-spacing:-.2px}
+.mf-tab-t{font-size:12.5px;color:var(--text-muted,#64748b)}
+.mf-tab[aria-current="page"]{background:var(--navy,#0f172a);border-color:var(--navy,#0f172a)}
+.mf-tab[aria-current="page"] .mf-tab-k{color:#fff}
+.mf-tab[aria-current="page"] .mf-tab-t{color:#94a3b8}
+@media (max-width:640px){.mf-tabs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <img class="site-logo" src="/assets/logo-badge.png" alt="" width="34" height="34">
+      <span>
+        <span class="site-brand-name">Vatayan Labs</span>
+        <span class="site-brand-tag">A window into how India moves money</span>
+      </span>
+    </a>
+    <div class="site-links">
+      <a href="/dashboards/">Dashboards</a>
+      <a href="/sectors/">Sectors</a>
+      <a href="/mutual-funds/" class="active">Mutual Funds</a>
+      <a href="/tools/">Tools</a>
+      <a href="/downloads/">Downloads</a>
+      <a href="/about/">About</a>
+    </div>
+  </div>
+</nav>
+<nav class="mf-tabs" aria-label="Mutual fund sections">
+  <a href="/mutual-funds/study/" class="mf-tab" data-tab="study" aria-current="page">
+    <span class="mf-tab-k">The study</span>
+    <span class="mf-tab-t">43 funds, one set of rules</span>
+  </a>
+  <a href="/mutual-funds/one-pagers/" class="mf-tab" data-tab="one-pagers">
+    <span class="mf-tab-k">One-pagers</span>
+    <span class="mf-tab-t">Deep profiles, fund by fund</span>
+  </a>
+</nav>
+<div class="page vl-study">
+
+<div class="article-head">
+  <div class="article-kicker">Study &middot; Mutual funds &middot; August 2026</div>
+  <h1>What separates a <span class="accent">good equity fund</span> from a lucky one?</h1>
+  <p class="article-subtitle">A rules-based scoring study of 43 Indian equity mutual funds, built entirely from
+    raw AMFI NAV history. Same rules applied to every fund, scored against its own segment. Pick a lens to read
+    the same 43 funds through returns, drawdowns, cost or style.</p>
+  <p class="article-meta">Data as of 21 August 2026 &middot; direct plan, growth option &middot;
+    computed from AMFI daily NAVs and 30 June 2026 portfolio disclosures</p>
+</div>
+
+<div class="notice">
+  <b>This is a study, not a recommendation.</b> Nothing here is investment advice or a suggestion to buy, sell or
+  hold any scheme. It is a transparent, mechanical screen published to show what a consistent set of rules produces
+  when applied to every fund equally &mdash; including where the rules disagree with popular opinion. Scores are
+  relative to each fund&rsquo;s own segment and to a single point in time.
+</div>
+
+<div class="sec">
+  <div class="section-label">The study</div>
+  <h2>Forty-three funds, one set of rules</h2>
+  <p class="lede">Every fund is scored 0&ndash;10 against its own segment across five dimensions. Change the lens to
+    change what the table and chart show; change the segment to narrow the field. In the charts, each bubble is a
+    fund and its size is that fund&rsquo;s assets under management.</p>
+
+  <div class="controls">
+    <div class="ctl"><span class="ctl-l">Lens</span><div class="toggle alt" id="c-lens"></div></div>
+    <div class="ctl"><span class="ctl-l">Segment</span><div class="toggle" id="c-seg"></div></div>
+  </div>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="chartrow">
+    <div class="card">
+      <svg id="chart" viewBox="0 0 600 450" role="img" aria-label="Chart for the selected lens"></svg>
+      <div class="sizekey" id="sizekey"></div>
+      <div class="axes" id="axes"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+
+  <div class="tablecard"><div class="scroll"><table id="tbl">
+    <thead><tr id="thead"></tr></thead><tbody id="tb"></tbody>
+  </table></div></div>
+  <p class="cap">Click any fund to open its full metric detail. Click a column header to sort.</p>
+</div>
+
+<div class="sec">
+  <div class="section-label">Method</div>
+  <h2>What the model measures</h2>
+  <p class="lede">Five dimensions, eighteen variables, computed from raw NAV history rather than taken from any
+    rating provider. The variables are listed below; how they are weighted against each other is proprietary
+    and not published.</p>
+  <div class="dims" id="dims"></div>
+</div>
+
+<div class="sec">
+  <div class="section-label">Context</div>
+  <h2>Where each segment sits in its cycle</h2>
+  <p class="lede">A score says how a fund compares <em>within its own segment</em>. It says nothing about whether
+    that segment is attractively priced today &mdash; often the larger question.</p>
+  <div class="tablecard" style="margin-top:18px"><div class="scroll"><table class="ctable">
+    <thead><tr><th class="l">Benchmark proxy</th><th class="l">Applies to</th><th>1Y&nbsp;%</th>
+      <th>3Y&nbsp;%</th><th>5Y&nbsp;%</th><th>Worst&nbsp;DD</th><th class="l">Cycle note</th></tr></thead>
+    <tbody id="ctxb"></tbody></table></div></div>
+</div>
+
+<div class="sec">
+  <div class="section-label">Notes &amp; limits</div>
+  <h2>How to read this, and where it stops</h2>
+  <div class="notes" id="notes"></div>
+</div>
+
+<div class="disc" id="disc"></div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const DATA = {"funds":[{"fund":"Edelweiss Large Cap","cat":"Large Cap","tier":"Merit","rating":5.9,"p1":4.6,"p2":7.38,"p3":5.35,"p4":6.05,"p5":7.1,"perf":5.71,"resil":6.08,"div":-0.37,"c1":1.86,"c3":12.06,"c5":11.82,"c10":13.37,"bm3":10.48,"bm5":9.81,"e3":1.58,"e5":2.01,"rollx":2.38,"rollmed":15.11,"rollstd":4.86,"beat":100.0,"beatp":36.2,"nwin":47,"sharpe":0.38,"sortino":0.53,"vol":13.76,"mdd":-17.26,"mddr":1.0,"bmmdd":-17.27,"rec":4.6,"recd":"yes","belowpk":-3.3,"up":102.0,"down":93.5,"aum":1443.0,"ter":0.96,"term":0.92,"top10":42.5,"topsec":27.3,"nh":76.0,"tenure":9.3,"style":9.42,"sbasis":"own-cap weight","wl":94.2,"wm":1.4,"ws":4.4,"age":13.6,"flags":[],"rank":3},{"fund":"HDFC Large Cap","cat":"Large Cap","tier":"AUM","rating":5.74,"p1":5.5,"p2":7.18,"p3":4.4,"p4":7.08,"p5":4.7,"perf":6.18,"resil":5.3,"div":0.88,"c1":0.59,"c3":11.24,"c5":13.16,"c10":12.8,"bm3":10.48,"bm5":9.81,"e3":0.76,"e5":3.35,"rollx":3.96,"rollmed":15.01,"rollstd":6.76,"beat":95.7,"beatp":63.8,"nwin":47,"sharpe":0.34,"sortino":0.48,"vol":13.68,"mdd":-16.36,"mddr":0.95,"bmmdd":-17.27,"rec":17.6,"recd":"still-underwater","belowpk":-4.9,"up":99.8,"down":94.0,"aum":40198.0,"ter":1.02,"term":0.92,"top10":51.7,"topsec":38.4,"nh":44.0,"tenure":4.1,"style":9.31,"sbasis":"own-cap weight","wl":93.1,"wm":6.9,"ws":0.0,"age":13.6,"flags":["below peak -4.9%"],"rank":4},{"fund":"ICICI Pru Large Cap","cat":"Large Cap","tier":"AUM","rating":6.74,"p1":6.42,"p2":8.58,"p3":6.41,"p4":6.7,"p5":5.41,"perf":7.28,"resil":6.2,"div":1.08,"c1":-1.47,"c3":13.06,"c5":13.25,"c10":13.9,"bm3":10.48,"bm5":9.81,"e3":2.58,"e5":3.44,"rollx":4.6,"rollmed":16.24,"rollstd":5.68,"beat":100.0,"beatp":95.7,"nwin":47,"sharpe":0.47,"sortino":0.68,"vol":13.1,"mdd":-15.39,"mddr":0.89,"bmmdd":-17.27,"rec":7.5,"recd":"yes","belowpk":-5.9,"up":101.5,"down":85.9,"aum":80960.0,"ter":1.0,"term":0.92,"top10":47.9,"topsec":30.4,"nh":87.0,"tenure":5.6,"style":9.44,"sbasis":"own-cap weight","wl":94.4,"wm":5.6,"ws":0.0,"age":13.6,"flags":[],"rank":2},{"fund":"Mirae Asset Large Cap","cat":"Large Cap","tier":"AUM","rating":4.8,"p1":2.63,"p2":3.4,"p3":5.11,"p4":7.27,"p5":8.1,"perf":2.94,"resil":6.65,"div":-3.71,"c1":0.73,"c3":10.61,"c5":10.02,"c10":13.12,"bm3":10.48,"bm5":9.81,"e3":0.13,"e5":0.22,"rollx":-0.14,"rollmed":15.17,"rollstd":5.13,"beat":40.4,"beatp":0.0,"nwin":47,"sharpe":0.3,"sortino":0.42,"vol":13.85,"mdd":-17.44,"mddr":1.01,"bmmdd":-17.27,"rec":5.5,"recd":"yes","belowpk":-3.7,"up":96.3,"down":92.6,"aum":38729.0,"ter":0.75,"term":0.92,"top10":47.7,"topsec":34.6,"nh":80.0,"tenure":7.6,"style":8.9,"sbasis":"own-cap weight","wl":89.0,"wm":5.3,"ws":5.7,"age":13.6,"flags":[],"rank":6},{"fund":"Nippon India Large Cap","cat":"Large Cap","tier":"AUM","rating":7.28,"p1":7.07,"p2":7.97,"p3":6.47,"p4":7.19,"p5":7.98,"perf":7.43,"resil":7.14,"div":0.29,"c1":-1.11,"c3":13.06,"c5":15.37,"c10":14.6,"bm3":10.48,"bm5":9.81,"e3":2.58,"e5":5.56,"rollx":7.51,"rollmed":16.59,"rollstd":7.69,"beat":100.0,"beatp":100.0,"nwin":47,"sharpe":0.47,"sortino":0.68,"vol":13.7,"mdd":-15.37,"mddr":0.89,"bmmdd":-17.27,"rec":5.7,"recd":"yes","belowpk":-4.3,"up":103.3,"down":87.5,"aum":54225.0,"ter":0.88,"term":0.92,"top10":45.8,"topsec":36.6,"nh":64.0,"tenure":13.6,"style":7.85,"sbasis":"own-cap weight","wl":78.5,"wm":13.4,"ws":8.1,"age":13.6,"flags":[],"rank":1},{"fund":"SBI Large Cap","cat":"Large Cap","tier":"AUM","rating":5.29,"p1":3.6,"p2":5.77,"p3":5.68,"p4":7.18,"p5":5.59,"perf":4.47,"resil":6.1,"div":-1.63,"c1":1.84,"c3":10.98,"c5":11.28,"c10":12.31,"bm3":10.48,"bm5":9.81,"e3":0.5,"e5":1.48,"rollx":1.12,"rollmed":14.74,"rollstd":5.96,"beat":91.5,"beatp":4.3,"nwin":47,"sharpe":0.31,"sortino":0.44,"vol":13.49,"mdd":-16.38,"mddr":0.95,"bmmdd":-17.27,"rec":4.5,"recd":"yes","belowpk":-3.0,"up":92.5,"down":87.1,"aum":55431.0,"ter":0.84,"term":0.92,"top10":48.3,"topsec":35.6,"nh":54.0,"tenure":2.7,"style":8.67,"sbasis":"own-cap weight","wl":86.7,"wm":13.3,"ws":0.0,"age":13.6,"flags":[],"rank":5},{"fund":"Axis Midcap","cat":"Mid Cap","tier":"AUM","rating":4.33,"p1":2.47,"p2":1.29,"p3":5.57,"p4":7.9,"p5":6.89,"perf":2.0,"resil":6.67,"div":-4.67,"c1":8.51,"c3":18.51,"c5":15.08,"c10":17.93,"bm3":18.31,"bm5":18.47,"e3":0.2,"e5":-3.39,"rollx":-4.57,"rollmed":19.09,"rollstd":5.67,"beat":2.1,"beatp":0.0,"nwin":48,"sharpe":0.72,"sortino":1.1,"vol":15.93,"mdd":-20.34,"mddr":0.96,"bmmdd":-21.19,"rec":11.5,"recd":"yes","belowpk":0.0,"up":86.7,"down":79.3,"aum":34404.0,"ter":0.86,"term":0.77,"top10":29.7,"topsec":24.0,"nh":85.0,"tenure":9.8,"style":6.06,"sbasis":"own-cap weight","wl":39.4,"wm":60.6,"ws":0.0,"age":13.6,"flags":[],"rank":7},{"fund":"Edelweiss Mid Cap","cat":"Mid Cap","tier":"Merit","rating":6.96,"p1":7.63,"p2":6.46,"p3":6.35,"p4":8.63,"p5":5.43,"perf":7.16,"resil":6.76,"div":0.4,"c1":9.98,"c3":23.51,"c5":20.75,"c10":null,"bm3":18.31,"bm5":18.47,"e3":5.2,"e5":2.28,"rollx":2.86,"rollmed":26.34,"rollstd":10.01,"beat":95.8,"beatp":66.7,"nwin":48,"sharpe":0.93,"sortino":1.48,"vol":17.43,"mdd":-20.06,"mddr":0.95,"bmmdd":-21.19,"rec":4.0,"recd":"yes","belowpk":-0.1,"up":105.8,"down":85.7,"aum":18694.0,"ter":0.72,"term":0.77,"top10":22.4,"topsec":28.5,"nh":92.0,"tenure":4.9,"style":8.17,"sbasis":"own-cap weight","wl":9.2,"wm":81.7,"ws":9.1,"age":9.7,"flags":[],"rank":2},{"fund":"HDFC Mid Cap","cat":"Mid Cap","tier":"AUM","rating":7.04,"p1":7.28,"p2":6.67,"p3":7.11,"p4":6.09,"p5":7.9,"perf":7.04,"resil":7.04,"div":-0.01,"c1":10.39,"c3":20.02,"c5":21.44,"c10":17.87,"bm3":18.31,"bm5":18.47,"e3":1.71,"e5":2.97,"rollx":2.75,"rollmed":22.02,"rollstd":10.76,"beat":95.8,"beatp":75.0,"nwin":48,"sharpe":0.84,"sortino":1.27,"vol":15.14,"mdd":-16.96,"mddr":0.8,"bmmdd":-21.19,"rec":1.9,"recd":"yes","belowpk":-0.2,"up":90.2,"down":77.7,"aum":105143.0,"ter":0.74,"term":0.77,"top10":32.6,"topsec":26.9,"nh":76.0,"tenure":13.6,"style":8.01,"sbasis":"own-cap weight","wl":15.9,"wm":80.1,"ws":4.0,"age":13.6,"flags":["size risk"],"rank":1},{"fund":"Kotak Midcap","cat":"Mid Cap","tier":"AUM","rating":5.24,"p1":4.83,"p2":2.55,"p3":5.68,"p4":7.32,"p5":6.95,"perf":3.92,"resil":6.55,"div":-2.63,"c1":8.5,"c3":19.84,"c5":18.62,"c10":18.33,"bm3":18.31,"bm5":18.47,"e3":1.53,"e5":0.15,"rollx":-0.17,"rollmed":22.22,"rollstd":9.92,"beat":43.8,"beatp":14.6,"nwin":48,"sharpe":0.76,"sortino":1.17,"vol":17.56,"mdd":-20.87,"mddr":0.98,"bmmdd":-21.19,"rec":4.5,"recd":"yes","belowpk":-0.3,"up":96.7,"down":87.2,"aum":69283.0,"ter":0.51,"term":0.77,"top10":28.2,"topsec":28.0,"nh":68.0,"tenure":2.6,"style":7.67,"sbasis":"own-cap weight","wl":10.3,"wm":76.7,"ws":13.0,"age":13.6,"flags":[],"rank":6},{"fund":"Motilal Oswal Midcap","cat":"Mid Cap","tier":"AUM","rating":5.93,"p1":8.56,"p2":6.67,"p3":3.1,"p4":5.36,"p5":4.01,"perf":7.8,"resil":4.05,"div":3.75,"c1":2.21,"c3":22.52,"c5":24.1,"c10":18.13,"bm3":18.31,"bm5":18.47,"e3":4.21,"e5":5.63,"rollx":6.01,"rollmed":22.09,"rollstd":12.78,"beat":89.6,"beatp":87.5,"nwin":48,"sharpe":0.77,"sortino":1.19,"vol":20.3,"mdd":-28.86,"mddr":1.36,"bmmdd":-21.19,"rec":4.7,"recd":"still-underwater","belowpk":-6.7,"up":105.7,"down":92.1,"aum":40036.0,"ter":0.93,"term":0.77,"top10":53.3,"topsec":31.5,"nh":29.0,"tenure":3.8,"style":6.26,"sbasis":"own-cap weight","wl":11.6,"wm":62.6,"ws":25.8,"age":12.5,"flags":["below peak -6.7%"],"rank":5},{"fund":"Mahindra Manulife Mid Cap","cat":"Mid Cap","tier":"Merit","rating":6.22,"p1":6.97,"p2":6.23,"p3":5.38,"p4":8.29,"p5":3.79,"perf":6.67,"resil":5.78,"div":0.89,"c1":14.48,"c3":21.96,"c5":20.49,"c10":null,"bm3":18.31,"bm5":18.47,"e3":3.65,"e5":2.02,"rollx":2.1,"rollmed":25.46,"rollstd":4.98,"beat":77.1,"beatp":37.5,"nwin":48,"sharpe":0.87,"sortino":1.4,"vol":17.06,"mdd":-20.92,"mddr":0.99,"bmmdd":-21.19,"rec":13.7,"recd":"yes","belowpk":-0.4,"up":101.9,"down":86.9,"aum":5186.0,"ter":0.75,"term":0.77,"top10":26.0,"topsec":30.8,"nh":58.0,"tenure":1.8,"style":6.8,"sbasis":"own-cap weight","wl":16.1,"wm":68.0,"ws":15.9,"age":8.5,"flags":["new lead mgr"],"rank":4},{"fund":"Nippon India Growth Mid Cap","cat":"Mid Cap","tier":"AUM","rating":6.72,"p1":7.0,"p2":6.51,"p3":5.89,"p4":7.37,"p5":6.88,"perf":6.8,"resil":6.63,"div":0.17,"c1":10.22,"c3":21.51,"c5":20.47,"c10":18.77,"bm3":18.31,"bm5":18.47,"e3":3.2,"e5":2.0,"rollx":2.64,"rollmed":22.51,"rollstd":9.61,"beat":97.9,"beatp":64.6,"nwin":48,"sharpe":0.83,"sortino":1.34,"vol":17.57,"mdd":-19.87,"mddr":0.94,"bmmdd":-21.19,"rec":7.7,"recd":"yes","belowpk":-0.5,"up":102.7,"down":89.7,"aum":50751.0,"ter":0.79,"term":0.77,"top10":23.9,"topsec":27.3,"nh":97.0,"tenure":8.3,"style":6.85,"sbasis":"own-cap weight","wl":14.1,"wm":68.5,"ws":17.5,"age":13.6,"flags":[],"rank":3},{"fund":"Quant Mid Cap","cat":"Mid Cap","tier":"Merit","rating":4.28,"p1":5.21,"p2":4.48,"p3":2.22,"p4":4.98,"p5":4.19,"perf":4.92,"resil":3.64,"div":1.28,"c1":6.34,"c3":13.6,"c5":17.9,"c10":18.25,"bm3":18.31,"bm5":18.47,"e3":-4.71,"e5":-0.57,"rollx":5.18,"rollmed":16.63,"rollstd":12.47,"beat":62.5,"beatp":54.2,"nwin":48,"sharpe":0.43,"sortino":0.67,"vol":17.9,"mdd":-25.95,"mddr":1.22,"bmmdd":-21.19,"rec":17.6,"recd":"still-underwater","belowpk":-10.7,"up":79.3,"down":90.5,"aum":8107.0,"ter":1.18,"term":0.77,"top10":63.3,"topsec":16.9,"nh":23.0,"tenure":6.9,"style":2.64,"sbasis":"own-cap weight","wl":40.0,"wm":26.4,"ws":33.6,"age":13.6,"flags":["below peak -10.7%"],"rank":8},{"fund":"Bandhan Small Cap","cat":"Small Cap","tier":"AUM","rating":7.51,"p1":9.38,"p2":7.63,"p3":6.9,"p4":7.14,"p5":4.79,"perf":8.68,"resil":6.34,"div":2.34,"c1":12.53,"c3":26.84,"c5":20.93,"c10":null,"bm3":17.45,"bm5":16.84,"e3":9.39,"e5":4.09,"rollx":6.97,"rollmed":31.33,"rollstd":3.1,"beat":79.1,"beatp":62.8,"nwin":43,"sharpe":0.98,"sortino":1.75,"vol":20.27,"mdd":-24.34,"mddr":0.91,"bmmdd":-26.78,"rec":11.8,"recd":"yes","belowpk":-0.3,"up":111.1,"down":79.2,"aum":31103.0,"ter":0.6,"term":0.72,"top10":19.4,"topsec":23.6,"nh":254.0,"tenure":3.6,"style":5.68,"sbasis":"own-cap weight","wl":20.6,"wm":22.6,"ws":56.8,"age":6.5,"flags":[],"rank":1},{"fund":"HDFC Small Cap","cat":"Small Cap","tier":"AUM","rating":5.57,"p1":4.1,"p2":4.95,"p3":6.34,"p4":6.68,"p5":7.23,"perf":4.44,"resil":6.71,"div":-2.27,"c1":-0.59,"c3":12.62,"c5":16.87,"c10":17.94,"bm3":17.45,"bm5":16.84,"e3":-4.83,"e5":0.03,"rollx":2.31,"rollmed":21.21,"rollstd":11.54,"beat":85.4,"beatp":27.1,"nwin":48,"sharpe":0.4,"sortino":0.6,"vol":17.27,"mdd":-22.61,"mddr":0.84,"bmmdd":-26.78,"rec":6.6,"recd":"yes","belowpk":-2.7,"up":72.0,"down":78.6,"aum":41679.0,"ter":0.75,"term":0.72,"top10":26.1,"topsec":22.2,"nh":83.0,"tenure":12.2,"style":7.09,"sbasis":"own-cap weight","wl":12.4,"wm":16.7,"ws":70.9,"age":12.1,"flags":[],"rank":4},{"fund":"Nippon India Small Cap","cat":"Small Cap","tier":"AUM","rating":6.92,"p1":7.66,"p2":7.24,"p3":5.66,"p4":5.88,"p5":7.75,"perf":7.49,"resil":6.35,"div":1.14,"c1":10.72,"c3":17.75,"c5":21.08,"c10":21.76,"bm3":17.45,"bm5":16.84,"e3":0.3,"e5":4.23,"rollx":6.78,"rollmed":24.54,"rollstd":13.26,"beat":100.0,"beatp":89.6,"nwin":48,"sharpe":0.62,"sortino":1.0,"vol":18.99,"mdd":-24.21,"mddr":0.9,"bmmdd":-26.78,"rec":15.6,"recd":"yes","belowpk":-0.0,"up":85.8,"down":78.9,"aum":78957.0,"ter":0.69,"term":0.72,"top10":14.4,"topsec":24.3,"nh":251.0,"tenure":9.6,"style":6.05,"sbasis":"own-cap weight","wl":0.0,"wm":39.5,"ws":60.5,"age":13.6,"flags":["size risk"],"rank":2},{"fund":"Quant Small Cap","cat":"Small Cap","tier":"AUM","rating":6.86,"p1":8.05,"p2":7.14,"p3":6.05,"p4":7.21,"p5":4.81,"perf":7.69,"resil":6.02,"div":1.66,"c1":14.45,"c3":19.04,"c5":21.37,"c10":20.89,"bm3":17.45,"bm5":16.84,"e3":1.58,"e5":4.53,"rollx":6.35,"rollmed":20.69,"rollstd":19.38,"beat":93.8,"beatp":97.9,"nwin":48,"sharpe":0.66,"sortino":1.15,"vol":19.94,"mdd":-25.17,"mddr":0.94,"bmmdd":-26.78,"rec":5.4,"recd":"yes","belowpk":0.0,"up":92.0,"down":82.4,"aum":34069.0,"ter":0.94,"term":0.72,"top10":35.9,"topsec":20.1,"nh":99.0,"tenure":6.9,"style":9.7,"sbasis":"own-cap weight","wl":3.0,"wm":0.0,"ws":97.0,"age":13.6,"flags":[],"rank":3},{"fund":"SBI Small Cap","cat":"Small Cap","tier":"AUM","rating":4.26,"p1":2.38,"p2":1.15,"p3":6.03,"p4":6.6,"p5":7.47,"perf":1.89,"resil":6.63,"div":-4.75,"c1":7.68,"c3":13.85,"c5":16.28,"c10":19.33,"bm3":17.45,"bm5":16.84,"e3":-3.61,"e5":-0.57,"rollx":-2.07,"rollmed":23.05,"rollstd":9.92,"beat":22.9,"beatp":0.0,"nwin":48,"sharpe":0.45,"sortino":0.72,"vol":17.07,"mdd":-22.42,"mddr":0.84,"bmmdd":-26.78,"rec":17.6,"recd":"yes","belowpk":0.0,"up":71.0,"down":73.3,"aum":39955.0,"ter":0.74,"term":0.72,"top10":29.6,"topsec":25.5,"nh":69.0,"tenure":12.8,"style":4.53,"sbasis":"own-cap weight","wl":20.0,"wm":34.7,"ws":45.3,"age":12.8,"flags":[],"rank":6},{"fund":"Tata Small Cap","cat":"Small Cap","tier":"Merit","rating":5.21,"p1":4.74,"p2":4.11,"p3":3.37,"p4":7.84,"p5":7.41,"perf":4.49,"resil":5.92,"div":-1.44,"c1":-0.41,"c3":13.61,"c5":16.41,"c10":null,"bm3":17.45,"bm5":16.84,"e3":-3.85,"e5":-0.43,"rollx":4.12,"rollmed":29.28,"rollstd":9.31,"beat":72.9,"beatp":18.8,"nwin":48,"sharpe":0.4,"sortino":0.62,"vol":19.67,"mdd":-30.9,"mddr":1.15,"bmmdd":-26.78,"rec":4.7,"recd":"still-underwater","belowpk":-9.4,"up":77.6,"down":85.1,"aum":12696.0,"ter":0.5,"term":0.72,"top10":36.2,"topsec":24.3,"nh":62.0,"tenure":7.8,"style":7.96,"sbasis":"own-cap weight","wl":19.2,"wm":1.2,"ws":79.6,"age":7.8,"flags":["below peak -9.4%"],"rank":5},{"fund":"Bank of India Flexi Cap","cat":"Flexi Cap","tier":"Merit","rating":6.96,"p1":8.75,"p2":9.13,"p3":3.15,"p4":7.71,"p5":4.8,"perf":8.9,"resil":5.01,"div":3.89,"c1":14.88,"c3":22.03,"c5":18.41,"c10":null,"bm3":12.55,"bm5":11.8,"e3":9.49,"e5":6.61,"rollx":7.7,"rollmed":24.25,"rollstd":3.69,"beat":100.0,"beatp":89.5,"nwin":38,"sharpe":0.78,"sortino":1.32,"vol":18.57,"mdd":-23.73,"mddr":1.27,"bmmdd":-18.62,"rec":14.2,"recd":"yes","belowpk":-0.1,"up":138.8,"down":103.0,"aum":2786.0,"ter":0.86,"term":0.87,"top10":31.0,"topsec":23.4,"nh":65.0,"tenure":6.2,"style":5.56,"sbasis":"style consistency","wl":42.9,"wm":7.9,"ws":49.2,"age":6.1,"flags":[],"rank":3},{"fund":"HDFC Flexi Cap","cat":"Flexi Cap","tier":"AUM","rating":7.54,"p1":8.71,"p2":7.16,"p3":8.57,"p4":5.93,"p5":5.93,"perf":8.09,"resil":6.98,"div":1.1,"c1":4.19,"c3":17.7,"c5":19.39,"c10":16.27,"bm3":12.55,"bm5":11.8,"e3":5.16,"e5":7.59,"rollx":7.79,"rollmed":17.61,"rollstd":8.93,"beat":100.0,"beatp":85.4,"nwin":48,"sharpe":0.81,"sortino":1.22,"vol":12.73,"mdd":-13.32,"mddr":0.72,"bmmdd":-18.62,"rec":4.1,"recd":"yes","belowpk":-0.5,"up":100.2,"down":69.7,"aum":110736.0,"ter":0.77,"term":0.87,"top10":46.6,"topsec":36.3,"nh":70.0,"tenure":3.2,"style":6.84,"sbasis":"style consistency","wl":78.2,"wm":13.8,"ws":8.0,"age":13.6,"flags":[],"rank":1},{"fund":"ICICI Pru Flexicap","cat":"Flexi Cap","tier":"AUM","rating":6.84,"p1":8.19,"p2":7.96,"p3":5.65,"p4":7.0,"p5":4.06,"perf":8.1,"resil":5.58,"div":2.52,"c1":12.06,"c3":19.38,"c5":17.13,"c10":null,"bm3":12.55,"bm5":11.8,"e3":6.84,"e5":5.34,"rollx":4.31,"rollmed":20.1,"rollstd":2.33,"beat":100.0,"beatp":23.1,"nwin":26,"sharpe":0.77,"sortino":1.13,"vol":15.26,"mdd":-19.71,"mddr":1.06,"bmmdd":-18.62,"rec":6.6,"recd":"yes","belowpk":-0.1,"up":119.7,"down":91.6,"aum":24100.0,"ter":0.88,"term":0.87,"top10":45.3,"topsec":35.6,"nh":71.0,"tenure":5.2,"style":6.76,"sbasis":"style consistency","wl":68.8,"wm":29.2,"ws":2.0,"age":5.1,"flags":[],"rank":4},{"fund":"JM Flexicap","cat":"Flexi Cap","tier":"Merit","rating":6.18,"p1":7.81,"p2":6.96,"p3":3.72,"p4":7.11,"p5":4.26,"perf":7.47,"resil":4.9,"div":2.57,"c1":4.38,"c3":16.93,"c5":17.73,"c10":16.8,"bm3":12.55,"bm5":11.8,"e3":4.39,"e5":5.93,"rollx":7.58,"rollmed":18.41,"rollstd":7.89,"beat":95.8,"beatp":70.8,"nwin":48,"sharpe":0.62,"sortino":0.93,"vol":16.85,"mdd":-22.58,"mddr":1.21,"bmmdd":-18.62,"rec":4.7,"recd":"still-underwater","belowpk":-5.5,"up":116.1,"down":96.5,"aum":5185.0,"ter":1.07,"term":0.87,"top10":29.5,"topsec":31.0,"nh":85.0,"tenure":5.0,"style":2.03,"sbasis":"style consistency","wl":53.0,"wm":44.1,"ws":2.8,"age":13.6,"flags":["below peak -5.5%"],"rank":5},{"fund":"Kotak Flexicap","cat":"Flexi Cap","tier":"AUM","rating":5.62,"p1":3.84,"p2":3.89,"p3":5.63,"p4":7.82,"p5":9.3,"perf":3.86,"resil":7.39,"div":-3.53,"c1":2.41,"c3":13.76,"c5":12.55,"c10":13.82,"bm3":12.55,"bm5":11.8,"e3":1.22,"e5":0.75,"rollx":0.31,"rollmed":15.99,"rollstd":5.69,"beat":54.2,"beatp":0.0,"nwin":48,"sharpe":0.48,"sortino":0.7,"vol":14.64,"mdd":-17.77,"mddr":0.95,"bmmdd":-18.62,"rec":2.8,"recd":"yes","belowpk":-3.1,"up":99.8,"down":92.3,"aum":56119.0,"ter":0.66,"term":0.87,"top10":42.0,"topsec":31.3,"nh":59.0,"tenure":13.6,"style":9.78,"sbasis":"style consistency","wl":74.1,"wm":25.9,"ws":0.0,"age":13.6,"flags":[],"rank":7},{"fund":"Parag Parikh Flexi Cap","cat":"Flexi Cap","tier":"AUM","rating":7.0,"p1":6.81,"p2":7.22,"p3":6.71,"p4":5.31,"p5":9.14,"perf":6.97,"resil":7.02,"div":-0.05,"c1":-1.56,"c3":14.47,"c5":13.47,"c10":17.27,"bm3":12.55,"bm5":11.8,"e3":1.92,"e5":1.67,"rollx":4.08,"rollmed":19.05,"rollstd":5.84,"beat":100.0,"beatp":43.8,"nwin":48,"sharpe":0.69,"sortino":1.11,"vol":9.84,"mdd":-17.87,"mddr":0.96,"bmmdd":-18.62,"rec":10.3,"recd":"yes","belowpk":-5.1,"up":72.4,"down":46.3,"aum":148429.0,"ter":0.68,"term":0.87,"top10":51.8,"topsec":26.8,"nh":94.0,"tenure":13.3,"style":5.49,"sbasis":"style consistency","wl":79.5,"wm":12.5,"ws":8.0,"age":13.2,"flags":[],"rank":2},{"fund":"Quant Flexi Cap","cat":"Flexi Cap","tier":"Merit","rating":5.67,"p1":7.76,"p2":6.72,"p3":2.69,"p4":4.62,"p5":5.12,"perf":7.34,"resil":4.0,"div":3.35,"c1":16.26,"c3":17.38,"c5":16.94,"c10":19.64,"bm3":12.55,"bm5":11.8,"e3":4.84,"e5":5.14,"rollx":7.63,"rollmed":19.27,"rollstd":11.18,"beat":100.0,"beatp":68.8,"nwin":48,"sharpe":0.58,"sortino":0.98,"vol":19.03,"mdd":-24.71,"mddr":1.33,"bmmdd":-18.62,"rec":17.0,"recd":"yes","belowpk":-0.7,"up":123.5,"down":104.7,"aum":7262.0,"ter":1.05,"term":0.87,"top10":60.7,"topsec":24.3,"nh":34.0,"tenure":6.9,"style":0.0,"sbasis":"style consistency","wl":53.8,"wm":0.0,"ws":46.2,"age":13.6,"flags":[],"rank":6},{"fund":"UTI Flexi Cap","cat":"Flexi Cap","tier":"AUM","rating":2.84,"p1":0.46,"p2":1.49,"p3":2.5,"p4":6.44,"p5":6.27,"perf":0.87,"resil":4.81,"div":-3.94,"c1":2.18,"c3":10.58,"c5":6.93,"c10":12.38,"bm3":12.55,"bm5":11.8,"e3":-1.96,"e5":-4.86,"rollx":-5.0,"rollmed":12.49,"rollstd":5.55,"beat":4.2,"beatp":2.1,"nwin":48,"sharpe":0.3,"sortino":0.44,"vol":14.51,"mdd":-25.55,"mddr":1.37,"bmmdd":-18.62,"rec":17.9,"recd":"yes","belowpk":-0.3,"up":85.8,"down":88.6,"aum":24036.0,"ter":1.05,"term":0.87,"top10":44.4,"topsec":23.1,"nh":60.0,"tenure":10.6,"style":3.68,"sbasis":"style consistency","wl":72.7,"wm":25.3,"ws":2.0,"age":13.6,"flags":[],"rank":8},{"fund":"Baroda BNP Multi Cap","cat":"Multi Cap","tier":"Merit","rating":5.84,"p1":7.08,"p2":6.04,"p3":4.84,"p4":8.24,"p5":2.0,"perf":6.66,"resil":5.01,"div":1.65,"c1":5.47,"c3":16.72,"c5":15.52,"c10":14.85,"bm3":12.55,"bm5":11.8,"e3":4.17,"e5":3.72,"rollx":4.09,"rollmed":16.91,"rollstd":7.99,"beat":100.0,"beatp":27.1,"nwin":48,"sharpe":0.63,"sortino":0.95,"vol":15.49,"mdd":-21.45,"mddr":1.15,"bmmdd":-18.62,"rec":11.5,"recd":"yes","belowpk":-0.6,"up":107.8,"down":86.8,"aum":3432.0,"ter":1.23,"term":0.93,"top10":24.2,"topsec":33.4,"nh":70.0,"tenure":0.2,"style":6.22,"sbasis":"style consistency","wl":55.5,"wm":24.4,"ws":20.1,"age":13.6,"flags":["new lead mgr"],"rank":7},{"fund":"HDFC Multi Cap","cat":"Multi Cap","tier":"AUM","rating":5.93,"p1":6.05,"p2":8.2,"p3":3.71,"p4":8.25,"p5":3.3,"perf":6.91,"resil":4.95,"div":1.96,"c1":1.35,"c3":13.91,"c5":null,"c10":null,"bm3":12.55,"bm5":11.8,"e3":1.36,"e5":null,"rollx":6.34,"rollmed":21.47,"rollstd":4.05,"beat":100.0,"beatp":57.1,"nwin":21,"sharpe":0.49,"sortino":0.73,"vol":15.87,"mdd":-20.2,"mddr":1.08,"bmmdd":-18.62,"rec":17.6,"recd":"still-underwater","belowpk":-3.6,"up":104.8,"down":96.1,"aum":20583.0,"ter":0.93,"term":0.93,"top10":23.9,"topsec":27.6,"nh":121.0,"tenure":3.2,"style":6.24,"sbasis":"style consistency","wl":41.7,"wm":38.8,"ws":19.5,"age":4.7,"flags":["3y basis","below peak -3.6%"],"rank":5},{"fund":"ICICI Pru Multicap","cat":"Multi Cap","tier":"AUM","rating":7.13,"p1":8.42,"p2":6.4,"p3":6.61,"p4":8.59,"p5":4.74,"perf":7.61,"resil":6.64,"div":0.97,"c1":10.18,"c3":18.4,"c5":17.06,"c10":15.35,"bm3":12.55,"bm5":11.8,"e3":5.85,"e5":5.27,"rollx":5.32,"rollmed":17.24,"rollstd":7.57,"beat":100.0,"beatp":35.4,"nwin":48,"sharpe":0.72,"sortino":1.19,"vol":15.47,"mdd":-17.25,"mddr":0.93,"bmmdd":-18.62,"rec":13.7,"recd":"yes","belowpk":-0.7,"up":108.0,"down":78.2,"aum":18769.0,"ter":1.03,"term":0.93,"top10":24.0,"topsec":28.1,"nh":163.0,"tenure":4.2,"style":7.95,"sbasis":"style consistency","wl":59.3,"wm":23.3,"ws":17.5,"age":13.6,"flags":[],"rank":3},{"fund":"ITI Multi Cap","cat":"Multi Cap","tier":"Merit","rating":5.88,"p1":7.87,"p2":5.85,"p3":3.87,"p4":5.85,"p5":4.64,"perf":7.06,"resil":4.69,"div":2.37,"c1":14.34,"c3":19.59,"c5":16.27,"c10":null,"bm3":12.55,"bm5":11.8,"e3":7.04,"e5":4.48,"rollx":4.13,"rollmed":20.92,"rollstd":4.73,"beat":77.1,"beatp":18.8,"nwin":48,"sharpe":0.74,"sortino":1.13,"vol":17.17,"mdd":-23.09,"mddr":1.24,"bmmdd":-18.62,"rec":14.2,"recd":"yes","belowpk":0.0,"up":125.5,"down":95.3,"aum":1468.0,"ter":0.87,"term":0.93,"top10":27.7,"topsec":24.6,"nh":75.0,"tenure":4.0,"style":3.48,"sbasis":"style consistency","wl":46.6,"wm":43.9,"ws":9.5,"age":7.3,"flags":[],"rank":6},{"fund":"Kotak Multicap","cat":"Multi Cap","tier":"AUM","rating":7.38,"p1":8.24,"p2":9.68,"p3":4.37,"p4":8.35,"p5":5.65,"perf":8.81,"resil":5.95,"div":2.86,"c1":7.94,"c3":18.99,"c5":null,"c10":null,"bm3":12.55,"bm5":11.8,"e3":6.45,"e5":null,"rollx":9.15,"rollmed":24.32,"rollstd":2.91,"beat":100.0,"beatp":100.0,"nwin":23,"sharpe":0.71,"sortino":1.07,"vol":17.2,"mdd":-21.0,"mddr":1.13,"bmmdd":-18.62,"rec":7.6,"recd":"yes","belowpk":-1.0,"up":128.9,"down":103.2,"aum":29274.0,"ter":0.72,"term":0.93,"top10":32.6,"topsec":31.0,"nh":74.0,"tenure":5.0,"style":9.31,"sbasis":"style consistency","wl":39.5,"wm":42.6,"ws":17.9,"age":4.9,"flags":["3y basis"],"rank":1},{"fund":"Nippon India Multi Cap","cat":"Multi Cap","tier":"AUM","rating":7.32,"p1":7.74,"p2":7.24,"p3":5.91,"p4":7.66,"p5":8.13,"perf":7.54,"resil":7.1,"div":0.44,"c1":1.58,"c3":15.39,"c5":19.49,"c10":15.89,"bm3":12.55,"bm5":11.8,"e3":2.84,"e5":7.69,"rollx":9.38,"rollmed":16.05,"rollstd":10.86,"beat":100.0,"beatp":89.6,"nwin":48,"sharpe":0.6,"sortino":0.92,"vol":15.1,"mdd":-18.58,"mddr":1.0,"bmmdd":-18.62,"rec":6.5,"recd":"yes","belowpk":-0.9,"up":104.2,"down":86.4,"aum":55587.0,"ter":0.87,"term":0.93,"top10":31.6,"topsec":27.2,"nh":120.0,"tenure":13.6,"style":5.51,"sbasis":"style consistency","wl":31.4,"wm":49.3,"ws":19.3,"age":13.6,"flags":[],"rank":2},{"fund":"SBI Multicap","cat":"Multi Cap","tier":"AUM","rating":6.18,"p1":5.82,"p2":7.45,"p3":7.41,"p4":7.62,"p5":2.12,"perf":6.47,"resil":5.89,"div":0.59,"c1":2.71,"c3":15.27,"c5":null,"c10":null,"bm3":12.55,"bm5":11.8,"e3":2.73,"e5":null,"rollx":2.01,"rollmed":17.32,"rollstd":2.13,"beat":100.0,"beatp":0.0,"nwin":18,"sharpe":0.6,"sortino":0.95,"vol":13.87,"mdd":-15.11,"mddr":0.81,"bmmdd":-18.62,"rec":4.7,"recd":"yes","belowpk":0.0,"up":95.1,"down":75.6,"aum":24147.0,"ter":1.05,"term":0.93,"top10":35.4,"topsec":21.1,"nh":63.0,"tenure":2.7,"style":6.57,"sbasis":"style consistency","wl":57.0,"wm":30.8,"ws":12.2,"age":4.4,"flags":["3y basis"],"rank":4},{"fund":"Axis Value","cat":"Contra/Value","tier":"Merit","rating":7.21,"p1":8.88,"p2":9.51,"p3":5.98,"p4":6.6,"p5":3.04,"perf":9.13,"resil":5.28,"div":3.85,"c1":11.93,"c3":20.51,"c5":null,"c10":null,"bm3":12.55,"bm5":11.8,"e3":7.97,"e5":null,"rollx":7.85,"rollmed":22.81,"rollstd":2.51,"beat":100.0,"beatp":87.5,"nwin":24,"sharpe":0.84,"sortino":1.29,"vol":14.8,"mdd":-20.2,"mddr":1.08,"bmmdd":-18.62,"rec":5.4,"recd":"yes","belowpk":0.0,"up":119.3,"down":85.7,"aum":1767.0,"ter":0.98,"term":0.94,"top10":33.1,"topsec":35.5,"nh":87.0,"tenure":3.2,"style":9.03,"sbasis":"style consistency","wl":52.2,"wm":43.6,"ws":4.2,"age":4.9,"flags":["3y basis"],"rank":3},{"fund":"HSBC Value (ex-L&T)","cat":"Contra/Value","tier":"AUM","rating":7.26,"p1":8.42,"p2":6.41,"p3":5.58,"p4":7.59,"p5":7.98,"perf":7.62,"resil":6.9,"div":0.72,"c1":5.43,"c3":18.62,"c5":18.06,"c10":16.39,"bm3":12.55,"bm5":11.8,"e3":6.07,"e5":6.26,"rollx":7.91,"rollmed":20.16,"rollstd":9.95,"beat":100.0,"beatp":56.2,"nwin":48,"sharpe":0.74,"sortino":1.15,"vol":16.02,"mdd":-20.35,"mddr":1.09,"bmmdd":-18.62,"rec":5.3,"recd":"yes","belowpk":0.0,"up":119.2,"down":90.7,"aum":14988.0,"ter":0.9,"term":0.94,"top10":31.7,"topsec":36.6,"nh":81.0,"tenure":13.6,"style":5.16,"sbasis":"style consistency","wl":52.2,"wm":20.3,"ws":27.5,"age":13.6,"flags":[],"rank":2},{"fund":"ICICI Pru Value (Value Discovery)","cat":"Contra/Value","tier":"AUM","rating":6.61,"p1":7.47,"p2":5.78,"p3":7.55,"p4":6.33,"p5":5.03,"perf":6.79,"resil":6.43,"div":0.37,"c1":-1.79,"c3":13.97,"c5":16.54,"c10":14.78,"bm3":12.55,"bm5":11.8,"e3":1.43,"e5":4.74,"rollx":7.11,"rollmed":19.36,"rollstd":9.55,"beat":100.0,"beatp":31.2,"nwin":48,"sharpe":0.56,"sortino":0.86,"vol":12.6,"mdd":-14.01,"mddr":0.75,"bmmdd":-18.62,"rec":6.5,"recd":"yes","belowpk":-7.3,"up":89.8,"down":74.9,"aum":61102.0,"ter":1.07,"term":0.94,"top10":51.9,"topsec":37.2,"nh":64.0,"tenure":5.6,"style":8.94,"sbasis":"style consistency","wl":90.0,"wm":7.3,"ws":2.7,"age":13.6,"flags":[],"rank":6},{"fund":"Invesco India Contra","cat":"Contra/Value","tier":"AUM","rating":6.73,"p1":6.89,"p2":6.16,"p3":4.53,"p4":7.96,"p5":8.84,"perf":6.6,"resil":6.85,"div":-0.25,"c1":2.07,"c3":17.0,"c5":15.2,"c10":16.34,"bm3":12.55,"bm5":11.8,"e3":4.46,"e5":3.4,"rollx":3.71,"rollmed":19.17,"rollstd":6.04,"beat":97.9,"beatp":8.3,"nwin":48,"sharpe":0.65,"sortino":0.96,"vol":15.68,"mdd":-18.64,"mddr":1.0,"bmmdd":-18.62,"rec":17.7,"recd":"still-underwater","belowpk":-1.9,"up":116.6,"down":97.3,"aum":20100.0,"ter":0.77,"term":0.94,"top10":34.9,"topsec":30.4,"nh":72.0,"tenure":9.6,"style":8.13,"sbasis":"style consistency","wl":63.8,"wm":23.6,"ws":12.6,"age":13.6,"flags":["below peak -1.9%"],"rank":5},{"fund":"JM Value","cat":"Contra/Value","tier":"Merit","rating":5.55,"p1":7.19,"p2":6.3,"p3":2.39,"p4":5.68,"p5":5.33,"perf":6.83,"resil":4.26,"div":2.58,"c1":2.24,"c3":14.76,"c5":16.9,"c10":15.66,"bm3":12.55,"bm5":11.8,"e3":2.21,"e5":5.1,"rollx":8.54,"rollmed":19.34,"rollstd":9.15,"beat":95.8,"beatp":60.4,"nwin":48,"sharpe":0.48,"sortino":0.75,"vol":18.88,"mdd":-26.08,"mddr":1.4,"bmmdd":-18.62,"rec":4.7,"recd":"still-underwater","belowpk":-9.1,"up":116.9,"down":108.0,"aum":807.0,"ter":1.57,"term":0.94,"top10":32.4,"topsec":31.3,"nh":65.0,"tenure":13.6,"style":4.19,"sbasis":"style consistency","wl":41.7,"wm":28.7,"ws":29.6,"age":13.6,"flags":["below peak -9.1%"],"rank":7},{"fund":"Kotak Contra","cat":"Contra/Value","tier":"AUM","rating":7.28,"p1":7.89,"p2":6.91,"p3":5.58,"p4":8.27,"p5":7.83,"perf":7.5,"resil":7.06,"div":0.43,"c1":3.94,"c3":17.64,"c5":16.25,"c10":16.82,"bm3":12.55,"bm5":11.8,"e3":5.09,"e5":4.45,"rollx":5.64,"rollmed":17.73,"rollstd":5.99,"beat":100.0,"beatp":33.3,"nwin":48,"sharpe":0.67,"sortino":1.02,"vol":15.42,"mdd":-18.95,"mddr":1.02,"bmmdd":-18.62,"rec":8.9,"recd":"yes","belowpk":-1.2,"up":115.3,"down":93.8,"aum":5450.0,"ter":0.79,"term":0.94,"top10":32.5,"topsec":34.3,"nh":60.0,"tenure":7.3,"style":8.86,"sbasis":"style consistency","wl":67.5,"wm":19.6,"ws":13.0,"age":13.6,"flags":[],"rank":1},{"fund":"SBI Contra","cat":"Contra/Value","tier":"AUM","rating":6.77,"p1":7.06,"p2":6.77,"p3":5.26,"p4":7.08,"p5":7.89,"perf":6.94,"resil":6.59,"div":0.35,"c1":0.06,"c3":13.32,"c5":17.55,"c10":15.61,"bm3":12.55,"bm5":11.8,"e3":0.78,"e5":5.75,"rollx":10.44,"rollmed":18.36,"rollstd":11.84,"beat":100.0,"beatp":70.8,"nwin":48,"sharpe":0.46,"sortino":0.69,"vol":13.88,"mdd":-15.84,"mddr":0.85,"bmmdd":-18.62,"rec":17.6,"recd":"still-underwater","belowpk":-5.2,"up":93.5,"down":86.2,"aum":48266.0,"ter":0.83,"term":0.94,"top10":38.3,"topsec":31.1,"nh":87.0,"tenure":8.3,"style":4.81,"sbasis":"style consistency","wl":60.7,"wm":18.3,"ws":21.1,"age":13.6,"flags":["below peak -5.2%"],"rank":4},{"fund":"Templeton India Value","cat":"Contra/Value","tier":"Merit","rating":5.49,"p1":6.19,"p2":5.94,"p3":4.11,"p4":6.37,"p5":4.41,"perf":6.09,"resil":4.88,"div":1.21,"c1":-1.76,"c3":11.82,"c5":15.29,"c10":14.19,"bm3":12.55,"bm5":11.8,"e3":-0.73,"e5":3.49,"rollx":7.28,"rollmed":17.91,"rollstd":10.81,"beat":95.8,"beatp":45.8,"nwin":48,"sharpe":0.38,"sortino":0.56,"vol":14.31,"mdd":-17.98,"mddr":0.97,"bmmdd":-18.62,"rec":17.6,"recd":"still-underwater","belowpk":-7.9,"up":92.3,"down":91.9,"aum":2007.0,"ter":1.12,"term":0.94,"top10":43.6,"topsec":33.6,"nh":50.0,"tenure":5.0,"style":3.06,"sbasis":"style consistency","wl":56.4,"wm":40.7,"ws":2.9,"age":13.6,"flags":["below peak -7.9%"],"rank":8}],"ctx":[{"benchmark":"Nifty 100 (proxy)","applies_to":"Large Cap","ret_1y":-0.4,"cagr_3y":10.5,"cagr_5y":9.8,"mdd_since_2019":-37.0},{"benchmark":"Nifty Midcap 150 (proxy)","applies_to":"Mid Cap","ret_1y":9.5,"cagr_3y":18.3,"cagr_5y":18.5,"mdd_since_2019":-37.2},{"benchmark":"Nifty Smallcap 250 (proxy)","applies_to":"Small Cap","ret_1y":8.1,"cagr_3y":17.5,"cagr_5y":16.8,"mdd_since_2019":-42.4},{"benchmark":"Nifty 500 (proxy)","applies_to":"Flexi / Multi / Contra-Value","ret_1y":2.5,"cagr_3y":12.5,"cagr_5y":11.8,"mdd_since_2019":-37.3}]};
+const F = DATA.funds, CTX = DATA.ctx;
+const CATS = ["Large Cap","Mid Cap","Small Cap","Flexi Cap","Multi Cap","Contra/Value"];
+const SCOPE = document.querySelector(".vl-study") || document.documentElement;
+const css = v => getComputedStyle(SCOPE).getPropertyValue(v).trim();
+const nn = (v,d=1) => (v===null||v===undefined) ? "&ndash;" : v.toFixed(d);
+const sg = (v,d=1) => (v===null||v===undefined) ? "&ndash;" : (v>0?"+":"")+v.toFixed(d);
+const grade = r => r>=6.8?"a":r>=5.2?"b":"c";
+const clsNum = v => v===null?"":(v>0?"pos":v<0?"neg":"");
+
+/* Quadrant labels are descriptive of the data pattern only. */
+const profileOf = f => f.perf>=6
+  ? (f.resil>=6 ? ["Consistent","p-a"] : ["Return-led","p-b"])
+  : (f.resil>=6 ? ["Resilience-led","p-c"] : ["Trailing","p-d"]);
+
+function sCell(f){
+  const g=grade(f.rating);
+  return `<div class="scell"><div class="sbar"><i class="b-${g}" style="width:${f.rating*10}%"></i></div>
+    <span class="snum g-${g}">${f.rating.toFixed(1)}</span></div>`;
+}
+function capBar(f){
+  if(f.wl===null) return "&ndash;";
+  return `<span class="capbar"><i class="cb-l" style="width:${f.wl}%"></i>
+    <i class="cb-m" style="width:${f.wm}%"></i><i class="cb-s" style="width:${f.ws}%"></i></span>`;
+}
+
+const LENSES = {
+  score:{ label:"Score",
+    cols:[{k:"rating",h:"Score",render:sCell},
+      {k:"p1",h:"Returns",render:f=>nn(f.p1)},{k:"p2",h:"Consist.",render:f=>nn(f.p2)},
+      {k:"p3",h:"Downside",render:f=>nn(f.p3)},{k:"p4",h:"Quality",render:f=>nn(f.p4)},
+      {k:"p5",h:"Cost",render:f=>nn(f.p5)},
+      {k:"perf",h:"Delivered",render:f=>nn(f.perf)},{k:"resil",h:"Durability",render:f=>nn(f.resil)},
+      {k:"prof",h:"Profile",left:true,sort:f=>f.perf+f.resil,
+       render:f=>{const[l,c]=profileOf(f);return `<span class="pill ${c}">${l}</span>`}}],
+    chart:{type:"scatter",x:f=>f.perf,y:f=>f.resil,xl:"DELIVERED",yl:"DURABILITY",quad:6,
+      qlab:["CONSISTENT","RESILIENCE-LED","RETURN-LED","TRAILING"],
+      fmt:f=>`delivered ${nn(f.perf)} &middot; durability ${nn(f.resil)}`},
+    ax:[["Delivered","Everything the fund actually produced &mdash; its returns and how consistently they arrived &mdash; rolled into one 0&ndash;10 number."],
+        ["Durability","How it behaved when markets fell, how the portfolio is built, and what it charges. The characteristics that tend to decide whether returns repeat."]],
+    legend:[["green","Consistent","Scores well on both axes: the returns came with characteristics that historically travel well."],
+            ["amber","Return-led","Strong output, weaker durability &mdash; deeper drawdowns, heavy downside capture, or an asset base large relative to the strategy."],
+            ["blue","Resilience-led","Modest headline output, sturdier construction. Reads differently over a full cycle than over one bull run."],
+            ["red","Trailing","Below the segment on both axes over the period measured."]] },
+
+  returns:{ label:"Returns",
+    cols:[{k:"rating",h:"Score",render:sCell},
+      {k:"c1",h:"1Y %",render:f=>`<span class="${clsNum(f.c1)}">${nn(f.c1)}</span>`},
+      {k:"c3",h:"3Y %",render:f=>nn(f.c3)},{k:"c5",h:"5Y %",render:f=>nn(f.c5)},
+      {k:"c10",h:"10Y %",render:f=>nn(f.c10)},
+      {k:"e5",h:"vs BM 5Y",render:f=>`<span class="${clsNum(f.e5??f.e3)}">${sg(f.e5??f.e3)}</span>`},
+      {k:"rollx",h:"Roll 3Y exc",render:f=>`<span class="${clsNum(f.rollx)}">${sg(f.rollx)}</span>`},
+      {k:"beat",h:"Beat BM %",render:f=>nn(f.beat,0)},
+      {k:"beatp",h:"Beat peers %",render:f=>nn(f.beatp,0)}],
+    chart:{type:"scatter",x:f=>f.rollx,y:f=>f.beat,xl:"MEDIAN ROLLING 3Y EXCESS (pp)",
+      yl:"% OF WINDOWS BEATING BENCHMARK",ydom:[0,100],quadX:0,quadY:50,
+      fmt:f=>`excess ${sg(f.rollx)}pp &middot; beat ${nn(f.beat,0)}% of ${f.nwin}`},
+    ax:[["Median rolling 3Y excess","Take every possible three-year holding period, measure how far the fund beat its benchmark in each, then take the middle result. Avoids the start-date luck that a single headline CAGR hides."],
+        ["% of windows beating benchmark","Out of those same three-year periods, the share in which the fund finished ahead. 100% means it beat the index in every period tested; 50% means it was a coin toss."]],
+    legend:[["green","Upper right","A sizeable edge that recurred across most windows rather than a few."],
+            ["amber","Lower right","Large average excess, low hit rate: a small number of exceptional stretches carry the average."],
+            ["blue","Upper left","Beats often, by little. Reliable rather than dramatic."],
+            ["red","Left half","Negative median excess &mdash; the benchmark won in most windows."]] },
+
+  risk:{ label:"Drawdowns & risk",
+    cols:[{k:"rating",h:"Score",render:sCell},
+      {k:"mdd",h:"Max DD %",render:f=>`<span class="neg">${nn(f.mdd)}</span>`},
+      {k:"mddr",h:"vs BM",render:f=>nn(f.mddr,2)+"&times;"},
+      {k:"down",h:"Down capt %",render:f=>nn(f.down,0)},
+      {k:"up",h:"Up capt %",render:f=>nn(f.up,0)},
+      {k:"vol",h:"Vol %",render:f=>nn(f.vol)},
+      {k:"sharpe",h:"Sharpe",render:f=>nn(f.sharpe,2)},
+      {k:"rec",h:"Recovery",render:f=>f.rec===null?"&ndash;":nn(f.rec,0)+"mo"+(f.recd!=="yes"?"<small style='color:var(--vl-red)'>&nbsp;ongoing</small>":"")},
+      {k:"belowpk",h:"vs peak",render:f=>f.recd==="yes"?"<span style='color:var(--vl-text-faint)'>at peak</span>":`<span class="neg">${nn(f.belowpk)}%</span>`}],
+    chart:{type:"scatter",x:f=>f.down,y:f=>f.mdd,xl:"DOWNSIDE CAPTURE (%)",yl:"MAX DRAWDOWN (%)",quadX:85,
+      fmt:f=>`down capture ${nn(f.down,0)}% &middot; max DD ${nn(f.mdd)}%`},
+    ax:[["Downside capture","In the months when the benchmark fell, how much of that fall the fund took. Below 100 means it dropped less than the index; above 100 means it dropped more."],
+        ["Maximum drawdown","The worst peak-to-trough loss of the last five years &mdash; the deepest hole an investor would have had to sit through without selling."]],
+    legend:[["green","Upper left","Took less of the falls and drew down less than its benchmark."],
+            ["amber","Right side","Took the full fall or more. Whether that is acceptable depends on the up-capture column."],
+            ["red","Lower band","The deepest holes in the set over this period."],
+            ["blue","'Ongoing' recovery","Still below its prior peak, so the recovery period is not yet finished."]] },
+
+  cost:{ label:"Cost & structure",
+    cols:[{k:"rating",h:"Score",render:sCell},
+      {k:"ter",h:"TER %",render:f=>nn(f.ter,2)},
+      {k:"terd",h:"vs median",sort:f=>f.ter-f.term,
+       render:f=>`<span class="${clsNum(-(f.ter-f.term))}">${sg(f.ter-f.term,2)}</span>`},
+      {k:"aum",h:"AUM cr",render:f=>f.aum===null?"&ndash;":f.aum.toLocaleString("en-IN")},
+      {k:"top10",h:"Top-10 %",render:f=>nn(f.top10)},
+      {k:"nh",h:"Holdings",render:f=>nn(f.nh,0)},
+      {k:"topsec",h:"Top sector %",render:f=>nn(f.topsec)},
+      {k:"tenure",h:"Mgr yrs",render:f=>nn(f.tenure)},
+      {k:"age",h:"Age yrs",render:f=>nn(f.age)}],
+    chart:{type:"scatter",x:f=>f.top10,y:f=>f.nh,xl:"TOP-10 CONCENTRATION (%)",yl:"NUMBER OF HOLDINGS",
+      fmt:f=>`top-10 ${nn(f.top10)}% across ${nn(f.nh,0)} holdings`},
+    ax:[["Top-10 concentration","The share of the whole portfolio sitting in its ten largest positions. The higher it is, the more the result depends on a handful of decisions going right."],
+        ["Number of holdings","How many stocks the fund owns in total. A few dozen is a conviction book; two hundred plus is closer to owning the index."]],
+    legend:[["amber","Lower right","Concentrated. Outcomes spread wider; the manager's individual calls matter more."],
+            ["blue","Upper left","Broadly diversified, closer to the index in construction."],
+            ["green","Lower TER","Cost is the one input known in advance. The 'vs median' column compares each fund with its own segment."],
+            ["red","High top-sector share","One sector decision can dominate the result."]] },
+
+  style:{ label:"Style fit",
+    cols:[{k:"rating",h:"Score",render:sCell},
+      {k:"capmix",h:"Cap mix (L / M / S)",left:true,sort:f=>f.wl,render:capBar},
+      {k:"wl",h:"Large %",render:f=>nn(f.wl)},{k:"wm",h:"Mid %",render:f=>nn(f.wm)},
+      {k:"ws",h:"Small %",render:f=>nn(f.ws)},
+      {k:"style",h:"Style score",render:f=>nn(f.style)},
+      {k:"sbasis",h:"Measured as",left:true,sort:f=>f.sbasis,
+       render:f=>`<span style="font-size:11.5px;color:var(--vl-text-faint)">${f.sbasis}</span>`}],
+    chart:{type:"stack"},
+    ax:[["Each bar is one fund","The bar splits into the share of that fund's return behaviour explained by large, mid and small-cap index movements. Sorted by large-cap share."],
+        ["How it is worked out","Returns-based style analysis: each fund's monthly returns are regressed on the three cap benchmarks. It infers how a fund actually behaved, independently of how it is labelled."]],
+    legend:[["blue","Large cap","Weight on the Nifty 100. SEBI requires large cap funds to hold at least 80% in large caps."],
+            ["teal","Mid cap","Weight on the Nifty Midcap 150. Mid cap funds require at least 65%."],
+            ["amber","Small cap","Weight on the Nifty Smallcap 250."],
+            ["red","Reading far from mandate","Either genuine drift, or a book so concentrated that its returns stop tracking any index. Read beside top-10 concentration."]] }
+};
+
+let lens="score", seg="ALL", sortK="rating", sortDir=-1, open=new Set();
+
+/* Bubble area is proportional to fund size. Scale is global across all 43 funds so a
+   bubble means the same thing whichever segment is selected. */
+const AUMS=F.map(f=>f.aum).filter(v=>v!==null&&v!==undefined);
+const AMIN=Math.min(...AUMS), AMAX=Math.max(...AUMS);
+const R_MIN=4.5, R_MAX=15.5;
+const radOf=a=>{
+  if(a===null||a===undefined) return 6;
+  const t=(Math.sqrt(a)-Math.sqrt(AMIN))/(Math.sqrt(AMAX)-Math.sqrt(AMIN));
+  return R_MIN+t*(R_MAX-R_MIN);
+};
+const fmtCr=a=>{
+  if(a===null||a===undefined) return "&ndash;";
+  if(a<1000) return Math.round(a)+" cr";
+  const k=a/1000;
+  return (k>=10||Number.isInteger(k)?Math.round(k):k.toFixed(1))+"k cr";
+};
+function mkToggle(host, items, get, set){
+  host.innerHTML="";
+  items.forEach(([v,l])=>{
+    const b=document.createElement("button"); b.type="button"; b.innerHTML=l;
+    b.setAttribute("aria-pressed", get()===v?"true":"false");
+    b.onclick=()=>{ set(v); [...host.children].forEach(x=>x.setAttribute("aria-pressed","false"));
+      b.setAttribute("aria-pressed","true"); render(); };
+    host.appendChild(b);
+  });
+}
+mkToggle(document.getElementById("c-lens"), Object.entries(LENSES).map(([k,v])=>[k,v.label]),
+  ()=>lens, v=>{ lens=v; sortK="rating"; sortDir=-1; });
+mkToggle(document.getElementById("c-seg"), [["ALL","All"]].concat(CATS.map(c=>[c,c])), ()=>seg, v=>seg=v);
+
+const rowsNow = () => F.filter(f => seg==="ALL"||f.cat===seg);
+
+function strip(){
+  const r=rowsNow(), el=document.getElementById("strip");
+  if(!r.length){ el.innerHTML=""; return; }
+  const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
+  const top=r.slice().sort((a,b)=>b.rating-a.rating)[0];
+  let extra;
+  if(lens==="returns"){ const b=r.slice().sort((a,b)=>(b.rollx??-99)-(a.rollx??-99))[0];
+    extra=[[sg(avg(r.filter(f=>f.rollx!==null).map(f=>f.rollx)))+"pp","avg rolling excess"],
+           [sg(b.rollx)+"pp","widest edge: "+b.fund]];
+  } else if(lens==="risk"){ const s=r.slice().sort((a,b)=>a.down-b.down)[0];
+    extra=[[nn(avg(r.map(f=>f.mdd)))+"%","avg max drawdown"],
+           [nn(s.down,0)+"%","lowest down-capture: "+s.fund]];
+  } else if(lens==="cost"){ const c=r.slice().sort((a,b)=>a.ter-b.ter)[0];
+    extra=[[nn(avg(r.map(f=>f.ter)),2)+"%","avg TER"],[nn(c.ter,2)+"%","lowest: "+c.fund]];
+  } else if(lens==="style"){ const c=r.filter(f=>f.top10!==null).sort((a,b)=>b.top10-a.top10)[0];
+    extra=[[nn(avg(r.filter(f=>f.style!==null).map(f=>f.style))),"avg style score"],
+           [nn(c.top10)+"%","most concentrated: "+c.fund]];
+  } else {
+    extra=[[r.filter(f=>profileOf(f)[0]==="Consistent").length,"scored consistent"],
+           [r.filter(f=>f.flags.length).length,"carrying flags"]];
+  }
+  const cells=[[r.length,"funds shown"],[nn(avg(r.map(f=>f.rating))),"avg score"],
+    [top.rating.toFixed(1),"highest: "+top.fund]].concat(extra);
+  el.innerHTML=cells.map(([k,l])=>{
+    const p=String(l).includes(": ")?String(l).split(": "):null;
+    return `<div class="stat"><div class="k">${k}</div>`+
+      (p?`<div class="l">${p[0]}</div><div class="s">${p[1]}</div>`:`<div class="l">${l}</div>`)+`</div>`;
+  }).join("");
+}
+
+function detailHTML(f){
+  const P=[["Risk-adjusted returns",f.p1],["Consistency",f.p2],["Downside protection",f.p3],
+           ["Portfolio quality",f.p4],["Cost &amp; stewardship",f.p5]];
+  const pills=P.map(([n,v])=>`<div class="pl"><div class="pn">${n}</div><div class="pv">${nn(v)}</div>
+    <div class="pbar"><i style="width:${v*10}%"></i></div></div>`).join("");
+  const M=[["1Y return",nn(f.c1)+"%"],["3Y CAGR",nn(f.c3)+"%"],["5Y CAGR",nn(f.c5)+"%"],
+    ["10Y CAGR",nn(f.c10)+"%"],["benchmark 5Y",nn(f.bm5)+"%"],["excess 5Y",sg(f.e5)+"pp"],
+    ["roll 3Y excess",sg(f.rollx)+"pp <small>median</small>"],
+    ["beat benchmark",nn(f.beat,0)+"% <small>of "+f.nwin+"</small>"],["beat peers",nn(f.beatp,0)+"%"],
+    ["Sharpe / Sortino",nn(f.sharpe,2)+" / "+nn(f.sortino,2)],["volatility",nn(f.vol)+"%"],
+    ["max drawdown",nn(f.mdd)+"%"],["vs benchmark DD",nn(f.mddr,2)+"&times;"],
+    ["recovery",f.rec===null?"&ndash;":nn(f.rec,0)+"mo"+(f.recd!=="yes"?" <small>ongoing</small>":"")],
+    ["down / up capture",nn(f.down,0)+"% / "+nn(f.up,0)+"%"],
+    ["expense ratio",nn(f.ter,2)+"% <small>vs "+nn(f.term,2)+"</small>"],
+    ["AUM",f.aum===null?"&ndash;":(f.aum/1000).toFixed(1)+"k cr"],
+    ["top-10 / holdings",nn(f.top10)+"% <small>of "+nn(f.nh,0)+"</small>"],
+    ["manager tenure",nn(f.tenure)+"y"],["cap mix L/M/S",nn(f.wl,0)+"/"+nn(f.wm,0)+"/"+nn(f.ws,0)],
+    ["track record",nn(f.age)+"y"]];
+  return `<div class="dwrap"><div>${pills}</div><div class="mgrid">`+
+    M.map(([l,v])=>`<div class="mi"><div class="ml">${l}</div><div class="mv">${v}</div></div>`).join("")+`</div></div>`;
+}
+
+function drawTable(){
+  const L=LENSES[lens], th=document.getElementById("thead"), tb=document.getElementById("tb");
+  th.innerHTML=`<th class="l" style="width:30px"></th><th class="l" data-k="fund">Fund<span class="ar"></span></th>`+
+    L.cols.map(c=>`<th class="${c.left?"l":""}" data-k="${c.k}">${c.h}<span class="ar"></span></th>`).join("");
+  [...th.children].forEach((h,i)=>{ if(i===0) return;
+    h.onclick=()=>{ const k=h.dataset.k; if(sortK===k) sortDir*=-1; else { sortK=k; sortDir=k==="fund"?1:-1; } drawTable(); };
+    if(h.dataset.k===sortK){ h.dataset.active="1"; h.querySelector(".ar").textContent=sortDir<0?"\u25BC":"\u25B2"; }
+  });
+  const rows=rowsNow(); tb.innerHTML="";
+  if(!rows.length){ tb.innerHTML=`<tr><td colspan="${L.cols.length+2}" class="empty">No funds match this combination.</td></tr>`; return; }
+  const grouped = (sortK==="rating" && seg==="ALL");
+  const colFor=k=>L.cols.find(c=>c.k===k);
+  const val=(f,k)=>{ const c=colFor(k); return c&&c.sort?c.sort(f):f[k]; };
+  const cmp=(a,b)=>{
+    if(sortK==="fund") return sortDir*a.fund.localeCompare(b.fund);
+    const va=val(a,sortK), vb=val(b,sortK);
+    if(typeof va==="string") return sortDir*String(va).localeCompare(String(vb));
+    return sortDir*((va??-9999)-(vb??-9999));
+  };
+  const emit=f=>{
+    const tr=document.createElement("tr"); tr.className="row"; tr.tabIndex=0;
+    tr.innerHTML=`<td class="l rk num">${grouped?f.rank:""}</td>
+      <td class="l"><div class="fname">${f.fund}</div>
+        <div class="fmeta">${f.cat}${f.flags.map(x=>` <span class="flag">${x}</span>`).join("")}</div></td>`+
+      L.cols.map(c=>`<td class="${c.left?"l":""} num">${c.render(f)}</td>`).join("");
+    const tog=()=>{ open.has(f.fund)?open.delete(f.fund):open.add(f.fund); drawTable(); };
+    tr.onclick=tog; tr.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); tog(); } };
+    tb.appendChild(tr);
+    if(open.has(f.fund)){ const d=document.createElement("tr"); d.className="detail";
+      d.innerHTML=`<td colspan="${L.cols.length+2}">${detailHTML(f)}</td>`; tb.appendChild(d); }
+  };
+  if(grouped){
+    CATS.forEach(c=>{
+      const g=rows.filter(f=>f.cat===c).sort((a,b)=>a.rank-b.rank);
+      if(!g.length) return;
+      const h=document.createElement("tr"); h.className="catrow";
+      h.innerHTML=`<td colspan="${L.cols.length+2}">${c} &nbsp;&middot;&nbsp; ${g.length} funds</td>`;
+      tb.appendChild(h); g.forEach(emit);
+    });
+  } else rows.sort(cmp).forEach(emit);
+}
+
+const tip=document.getElementById("tip");
+function bindTip(el,f,extra){
+  const show=e=>{
+    const [p]=profileOf(f);
+    tip.innerHTML=`<b>${f.fund}</b><span>${f.cat} &middot; score ${f.rating.toFixed(1)} &middot; ${p}<br>${extra}</span>`;
+    tip.style.opacity="1";
+    const r=tip.getBoundingClientRect();
+    tip.style.left=Math.min(Math.max(e.clientX+14,8), innerWidth-r.width-8)+"px";
+    tip.style.top=Math.max(8, e.clientY-r.height-10)+"px";
+  };
+  el.addEventListener("mouseenter",show); el.addEventListener("mousemove",show);
+  el.addEventListener("mouseleave",()=>{tip.style.opacity="0"});
+}
+
+function drawChart(){
+  const L=LENSES[lens], svg=document.getElementById("chart");
+  const keys = L.chart.type==="stack" ? ["&#9642;","&#9642;"] : ["X","Y"];
+  document.getElementById("axes").innerHTML=L.ax.map(([h,p],i)=>
+    `<div class="ax"><span class="axk">${keys[i]}</span>
+     <span class="axt"><b>${h}.</b> ${p}</span></div>`).join("");
+  document.getElementById("legend").innerHTML=L.legend.map(([c,h,p])=>
+    `<div class="lg"><span class="dot" style="background:var(--vl-${c})"></span>
+     <div><h4>${h}</h4><p>${p}</p></div></div>`).join("");
+  const rows=rowsNow();
+  if(!rows.length){ svg.innerHTML=""; return; }
+  if(L.chart.type==="stack") return drawStack(svg, rows);
+  drawScatter(svg, rows, L.chart);
+}
+
+function drawScatter(svg, rows, C){
+  const W=600,H=450,P={t:20,r:20,b:48,l:60};
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const xs=rows.map(C.x).filter(v=>v!==null&&v!==undefined);
+  const ys=rows.map(C.y).filter(v=>v!==null&&v!==undefined);
+  const pad=a=>{const lo=Math.min(...a),hi=Math.max(...a),s=(hi-lo)||1;return [lo-s*.1,hi+s*.1]};
+  const xd=C.dom||pad(xs), yd=C.ydom||pad(ys);
+  const x=v=>P.l+(v-xd[0])/(xd[1]-xd[0])*(W-P.l-P.r);
+  const y=v=>H-P.b-(v-yd[0])/(yd[1]-yd[0])*(H-P.t-P.b);
+  const bd=css("--vl-border"), fa=css("--vl-text-faint"), tm=css("--vl-text-mid"), sunk=css("--vl-sunk");
+  const col={a:css("--vl-green"),b:css("--vl-amber"),c:css("--vl-red")};
+  const ticks=(d,n=5)=>Array.from({length:n+1},(_,i)=>d[0]+(d[1]-d[0])/n*i);
+  const fm=v=>Math.abs(v)>=10?v.toFixed(0):v.toFixed(1);
+  let s=`<rect x="${P.l}" y="${P.t}" width="${W-P.l-P.r}" height="${H-P.t-P.b}" fill="${sunk}" rx="6"/>`;
+  ticks(xd).forEach(v=>{ s+=`<line x1="${x(v)}" y1="${P.t}" x2="${x(v)}" y2="${H-P.b}" stroke="${bd}"/>`;
+    s+=`<text x="${x(v)}" y="${H-P.b+17}" fill="${fa}" font-size="10.5" font-weight="500" text-anchor="middle">${fm(v)}</text>`; });
+  ticks(yd).forEach(v=>{ s+=`<line x1="${P.l}" y1="${y(v)}" x2="${W-P.r}" y2="${y(v)}" stroke="${bd}"/>`;
+    s+=`<text x="${P.l-8}" y="${y(v)+3.5}" fill="${fa}" font-size="10.5" font-weight="500" text-anchor="end">${fm(v)}</text>`; });
+  const qx=C.quad!==undefined?C.quad:C.quadX, qy=C.quad!==undefined?C.quad:C.quadY;
+  if(qx!=null&&qx>xd[0]&&qx<xd[1]) s+=`<line x1="${x(qx)}" y1="${P.t}" x2="${x(qx)}" y2="${H-P.b}" stroke="${fa}" stroke-dasharray="4 3"/>`;
+  if(qy!=null&&qy>yd[0]&&qy<yd[1]) s+=`<line x1="${P.l}" y1="${y(qy)}" x2="${W-P.r}" y2="${y(qy)}" stroke="${fa}" stroke-dasharray="4 3"/>`;
+  if(C.qlab){
+    const t=(tx,ty,txt,an)=>`<text x="${tx}" y="${ty}" fill="${fa}" font-size="9" font-weight="700" letter-spacing="1" text-anchor="${an}">${txt}</text>`;
+    s+=t(W-P.r-8,P.t+15,C.qlab[0],"end")+t(P.l+8,P.t+15,C.qlab[1],"start")
+      +t(W-P.r-8,H-P.b-8,C.qlab[2],"end")+t(P.l+8,H-P.b-8,C.qlab[3],"start");
+  }
+  s+=`<text x="${P.l+(W-P.l-P.r)/2}" y="${H-8}" fill="${tm}" font-size="10" font-weight="700" letter-spacing=".8" text-anchor="middle">${C.xl}</text>`;
+  s+=`<text transform="translate(16,${P.t+(H-P.t-P.b)/2}) rotate(-90)" fill="${tm}" font-size="10" font-weight="700" letter-spacing=".8" text-anchor="middle">${C.yl}</text>`;
+  // draw largest first so small funds stay clickable on top
+  rows.map((f,i)=>({f,i})).sort((a,b)=>(b.f.aum??0)-(a.f.aum??0)).forEach(({f,i})=>{
+    const vx=C.x(f), vy=C.y(f);
+    if(vx==null||vy==null) return;
+    s+=`<circle cx="${x(vx).toFixed(1)}" cy="${y(vy).toFixed(1)}" r="${radOf(f.aum).toFixed(1)}"
+        fill="${col[grade(f.rating)]}" fill-opacity=".55" stroke="${css('--vl-card')}" stroke-width="1.5"
+        data-i="${i}" style="cursor:pointer"/>`; });
+  svg.innerHTML=s;
+  svg.querySelectorAll("circle[data-i]").forEach(c=>{ const f=rows[+c.dataset.i];
+    const r0=radOf(f.aum);
+    bindTip(c,f,`${C.fmt(f)}<br>fund size ${fmtCr(f.aum)}`);
+    c.addEventListener("mouseenter",()=>{c.setAttribute("r",(r0+2.5).toFixed(1));c.setAttribute("fill-opacity",".92")});
+    c.addEventListener("mouseleave",()=>{c.setAttribute("r",r0.toFixed(1));c.setAttribute("fill-opacity",".55")});
+  });
+  sizeKey(true);
+}
+
+function sizeKey(show){
+  const el=document.getElementById("sizekey");
+  if(!show){ el.innerHTML=""; el.style.display="none"; return; }
+  el.style.display="flex";
+  const marks=[2000,25000,120000];
+  el.innerHTML=`<span>Bubble size = fund AUM</span>`+marks.map(m=>{
+    const d=radOf(m)*2;
+    return `<span class="sk"><i style="width:${d.toFixed(0)}px;height:${d.toFixed(0)}px"></i>${fmtCr(m)}</span>`;
+  }).join("");
+}
+
+function drawStack(svg, rows){
+  const r=rows.filter(f=>f.wl!==null).sort((a,b)=>b.wl-a.wl);
+  const rowH=Math.max(11,Math.min(20,380/r.length));
+  const W=600,H=Math.max(180,r.length*rowH+56),P={t:26,r:16,b:30,l:170};
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const bd=css("--vl-border"), fa=css("--vl-text-faint"), tx=css("--vl-text");
+  const cl=css("--vl-blue"), cm=css("--vl-teal"), cs=css("--vl-amber");
+  const x=v=>P.l+v/100*(W-P.l-P.r);
+  let s="";
+  [0,25,50,75,100].forEach(v=>{
+    s+=`<line x1="${x(v)}" y1="${P.t-6}" x2="${x(v)}" y2="${H-P.b+2}" stroke="${bd}"/>`;
+    s+=`<text x="${x(v)}" y="${H-P.b+16}" fill="${fa}" font-size="9.5" font-weight="500" text-anchor="middle">${v}%</text>`;
+  });
+  s+=`<text x="${P.l}" y="${P.t-13}" fill="${fa}" font-size="9" font-weight="700" letter-spacing="1">LARGE / MID / SMALL EXPOSURE INFERRED FROM RETURNS</text>`;
+  r.forEach((f,i)=>{
+    const yy=P.t+i*rowH, h=Math.max(6,rowH-3.5);
+    let acc=0;
+    [[f.wl,cl],[f.wm,cm],[f.ws,cs]].forEach(([w,c])=>{
+      if(w>0.2) s+=`<rect x="${x(acc).toFixed(1)}" y="${yy}" width="${(x(acc+w)-x(acc)).toFixed(1)}" height="${h}" fill="${c}" fill-opacity=".85"/>`;
+      acc+=w;
+    });
+    s+=`<rect x="${P.l}" y="${yy}" width="${W-P.l-P.r}" height="${h}" fill="transparent" data-i="${i}" style="cursor:pointer"/>`;
+    const nm=f.fund.length>27?f.fund.slice(0,26)+"&hellip;":f.fund;
+    s+=`<text x="${P.l-8}" y="${yy+h/2+3.3}" fill="${tx}" font-size="${Math.min(10.5,h*.85)}" font-weight="500" text-anchor="end">${nm}</text>`;
+  });
+  svg.innerHTML=s;
+  svg.querySelectorAll("rect[data-i]").forEach(el=>{ const f=r[+el.dataset.i];
+    bindTip(el,f,`large ${nn(f.wl,0)}% &middot; mid ${nn(f.wm,0)}% &middot; small ${nn(f.ws,0)}%`); });
+  sizeKey(false);
+}
+
+/* ---- what the model measures (variables only, no weightings) ---- */
+document.getElementById("dims").innerHTML=[
+ ["Dimension one","Risk-adjusted returns",
+  ["Median excess return across rolling 3-year windows","Excess CAGR over 5 years versus benchmark","Sharpe ratio","Sortino ratio"]],
+ ["Dimension two","Consistency",
+  ["Share of rolling windows beating the benchmark","Share of rolling windows beating segment peers","Variability of rolling returns"]],
+ ["Dimension three","Downside protection",
+  ["Maximum drawdown relative to benchmark","Downside capture ratio","Upside capture ratio","Time taken to recover the worst drawdown"]],
+ ["Dimension four","Portfolio quality",
+  ["Asset base relative to what the segment can absorb","Top-10 holdings concentration","Portfolio turnover","Style fit or consistency"]],
+ ["Dimension five","Cost & stewardship",
+  ["Expense ratio versus segment median","Fund manager tenure","Length of the track record"]]
+].map(([dn,h,items])=>`<div class="dim"><div class="dn">${dn}</div><h3>${h}</h3>
+  <ul>${items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("");
+
+const NOTES={
+ "Nifty 100 (proxy)":"Large caps have been roughly flat for a year, so scores in this segment were earned in a soft tape.",
+ "Nifty Midcap 150 (proxy)":"An extended run at 18%+ compounding. Starting valuations mean the next five years are unlikely to resemble the last five.",
+ "Nifty Smallcap 250 (proxy)":"Strong multi-year returns with a 42% drawdown along the way. A high score here still describes a high-beta fund.",
+ "Nifty 500 (proxy)":"The broad market returned about 2.5% over the past year, so flexi, multi cap and value scores reflect stock selection rather than market drift."};
+document.getElementById("ctxb").innerHTML=CTX.map(c=>
+  `<tr><td class="l" style="font-weight:700;color:var(--vl-text)">${c.benchmark.replace(" (proxy)","")}</td>
+   <td class="l" style="color:var(--vl-text-muted);font-size:12.5px">${c.applies_to}</td>
+   <td class="num" style="color:${c.ret_1y>=0?"var(--vl-text-mid)":"var(--vl-red)"}">${c.ret_1y.toFixed(1)}</td>
+   <td class="num">${c.cagr_3y.toFixed(1)}</td><td class="num">${c.cagr_5y.toFixed(1)}</td>
+   <td class="num" style="color:var(--vl-red)">${c.mdd_since_2019.toFixed(0)}%</td>
+   <td class="l note">${NOTES[c.benchmark]||""}</td></tr>`).join("");
+
+document.getElementById("notes").innerHTML=[
+ ["How the 43 were chosen","The study covers the largest funds in each segment by assets, plus every fund whose rolling excess return would place it among the segment leaders but whose smaller size would otherwise have kept it out. Screening on size alone would have excluded several of the strongest records in the set."],
+ ["Computed, not collected","Every return, risk and consistency figure is calculated from raw daily NAV history for the direct plan, growth option. Checked against published one-year returns, the calculations match to the second decimal."],
+ ["Rolling windows, not point-to-point","A headline CAGR depends heavily on its start date. The primary return measure here is the median across roughly 48 three-year windows stepped monthly, together with how often those windows beat the benchmark."],
+ ["Style is inferred, not asserted","Cap exposure comes from regressing fund returns on the three cap benchmarks, so it reflects behaviour rather than labelling. A very concentrated fund can read oddly, because its returns stop tracking any index."],
+ ["What the model cannot see","Portfolio turnover is not published in machine-readable form by most fund houses and is treated neutrally. The model also cannot read a fund's current positioning, its manager's intent, or anything that has happened since the data date."],
+ ["Scores are relative and dated","A score compares a fund with its own segment on 21 August 2026. It is not comparable across segments, and it is not a forecast. Segment context above matters at least as much as the score itself."]
+].map(([h,p])=>`<div class="nb"><h3>${h}</h3><p>${p}</p></div>`).join("");
+
+document.getElementById("disc").innerHTML=`
+<p><b>Disclaimer.</b> This study is published for educational and informational purposes only. It does not
+constitute investment advice, a research recommendation, or an offer or solicitation to buy, sell or hold any
+mutual fund scheme or security. Vatayan Labs is an independent research publication and is not a SEBI-registered
+investment adviser or research analyst.</p>
+<p><b>Disclosure.</b> The author is a SEBI-registered mutual fund distributor and may earn distribution
+commission on regular plans of schemes covered in this study. All figures in this study are computed from
+direct plan NAVs.</p>
+<p><b>Data and limitations.</b> Figures are computed from AMFI daily NAV history as of 21 August 2026 and
+portfolio disclosures dated 30 June 2026, and will go out of date. Benchmark comparisons use index-fund NAVs as
+total-return proxies, which slightly flatters active funds by the amount of index tracking cost. Data may contain
+errors; verify against AMFI and the respective AMC before acting on anything. Past performance is not indicative
+of future returns. Investors should consult a registered investment adviser before making investment decisions.</p>`;
+
+function render(){ strip(); drawChart(); drawTable(); }
+render();
+// the host site's theme toggle rewrites data-theme; SVG colours are baked at draw
+// time, so redraw the chart whenever it flips.
+new MutationObserver(()=>setTimeout(drawChart,40))
+  .observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+matchMedia("(prefers-color-scheme:dark)").addEventListener("change",()=>setTimeout(drawChart,60));
+</script>
+
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="subscribe-bar">
+      <div>
+        <div class="footer-brand">Vatayan Labs</div>
+        <p class="subscribe-text">Data-driven research on Indian banking, payments and markets — a window into how India moves money.</p>
+      </div>
+      <a class="btn btn-primary" href="/newsletter/">Subscribe for updates</a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Research</h4>
+        <a href="/sectors/gold/">Gold</a>
+        <a href="/sectors/defence/">Defence</a>
+        <a href="/sectors/microfinance/">Microfinance</a>
+        <a href="/sectors/mutual-funds/">Mutual Funds</a>
+        <a href="/sectors/capital-markets/">Capital Markets</a>
+        <a href="/sectors/semiconductors/">Semiconductors</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="/sectors/">Sector Studies</a>
+        <a href="/dashboards/">Data Dashboards</a>
+        <a href="/mutual-funds/">Mutual Fund Hub</a>
+        <a href="/tools/">Tools</a>
+        <a href="/downloads/">Downloads</a>
+        <a href="https://curiousinvestinginsights.substack.com/" target="_blank" rel="noopener">Substack Archive</a>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <a href="/about/">About</a>
+        <a href="mailto:curiousinvestinginsights@gmail.com">Contact</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/feed.xml">RSS Feed</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Manu Vatayan Jha · Vatayan Labs. Personal research — not investment advice.</span>
+      <span>29 publications and counting</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
