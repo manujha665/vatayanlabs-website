@@ -8,6 +8,11 @@
 - [India Payments Intelligence](https://vatayanlabs.com/dashboards/india-payments/): UPI QR, credit card, debit card and ATM trends from RBI monthly returns, March 2024 to June 2026 — including the digital-vs-cash crossover and the four consecutive months digital has held the majority.
 - [Bank vs Bank — Payments Comparison](https://vatayanlabs.com/dashboards/india-payments/compare/): Head-to-head comparison of any two Indian banks across 25 RBI payment metrics, plus peer-group league tables for PSUs, private banks, small finance banks, payments banks and foreign banks.
 - [India Banking Scorecard](https://vatayanlabs.com/dashboards/indian-banks/): Quarterly reported PAT, Gross NPA and Net NPA for 24 Indian banks and NBFCs, Q2FY25-Q1FY27, plus market cap, P/E, P/BV, RoE and RoA snapshots.
+- [The Powering AI Universe](https://vatayanlabs.com/dashboards/powering-ai-universe/): All 376 companies from Barclays' March 2026 "Powering AI" report, mapped onto a five-layer infrastructure stack and scored on exposure purity, input scarcity and time to revenue. Global coverage — US, Europe, Japan, Korea, Taiwan, China.
+
+## AI infrastructure (global)
+
+- [AI Infrastructure hub](https://vatayanlabs.com/ai/): The physical build-out behind artificial intelligence — compute, data centres, grid equipment and power generation, and the listed companies that supply them.
 
 ## Sector studies (long-form research)
 
