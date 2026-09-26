@@ -149,6 +149,12 @@ CARDS = [
     ('og-retirement.png', 'Free calculator',
      'Retirement is not the first bill that arrives',
      'A house, a car, school fees and a wedding all land first. EPF, NPS and your SIPs, with every goal at its real future cost.'),
+    ('og-india-payments.png', 'Live dashboard',
+     'Digital payments held the majority, and kept it',
+     'RBI ATM and card data through June 2026 \u2014 the cash crossover, credit card growth and bank-by-bank league tables.'),
+    ('og-india-payments-compare.png', 'Live dashboard',
+     'Bank versus bank, on twenty payment metrics',
+     'Head-to-head and peer-group comparison across ATMs, PoS, UPI QR codes, cards and spending. RBI data through June 2026.'),
 ]
 
 if __name__ == '__main__':
@@ -159,6 +165,11 @@ if __name__ == '__main__':
                     for p in [(2, 2), (600, 315), (1197, 627), (2, 627), (1197, 2)])
         print('max gradient channel drift vs og-default.png: %d/255' % worst)
         sys.exit(0)
+    # names given on the command line build just those cards; with no
+    # arguments the whole set is rebuilt
+    only = [a for a in sys.argv[1:] if not a.startswith('--')]
     for name, kicker, head, sub in CARDS:
+        if only and name not in only:
+            continue
         p = card(os.path.join(OUT, name), kicker, head, sub)
         print('wrote', os.path.relpath(p, ROOT), '%d bytes' % os.path.getsize(p))
