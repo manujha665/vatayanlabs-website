@@ -9,6 +9,7 @@
 - [Bank vs Bank — Payments Comparison](https://vatayanlabs.com/dashboards/india-payments/compare/): Head-to-head comparison of any two Indian banks across 25 RBI payment metrics, plus peer-group league tables for PSUs, private banks, small finance banks, payments banks and foreign banks.
 - [India Banking Scorecard](https://vatayanlabs.com/dashboards/indian-banks/): Quarterly reported PAT, Gross NPA and Net NPA for 24 Indian banks and NBFCs, Q2FY25-Q1FY27, plus market cap, P/E, P/BV, RoE and RoA snapshots.
 - [The Powering AI Universe](https://vatayanlabs.com/dashboards/powering-ai-universe/): All 376 companies from Barclays' March 2026 "Powering AI" report, mapped onto a five-layer infrastructure stack and scored on exposure purity, input scarcity and time to revenue. Global coverage — US, Europe, Japan, Korea, Taiwan, China.
+- [India's AI Enablers](https://vatayanlabs.com/dashboards/india-ai-enablers/): A Vatayan Labs watchlist of 41 listed Indian companies across power generation, grid equipment, data centres and electronics. Valuation, quality, cash conversion and ownership from stockscans.in, analyst expectations, scores and technicals from Trendlyne (both 7 October 2026), and the basket's 3, 6 and 12-month performance against the Nifty 50, Nifty 500, Midcap 150 and Smallcap 250 (Yahoo Finance). Screener, heatmap, scatter lab and company-vs-company comparison. India companion to the Powering AI Universe.
 
 ## AI infrastructure (global)
 

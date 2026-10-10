@@ -158,6 +158,9 @@ CARDS = [
     ('og-india-payments-compare.png', 'Live dashboard',
      'Bank versus bank, on twenty payment metrics',
      'Head-to-head and peer-group comparison across ATMs, PoS, UPI QR codes, cards and spending. RBI data through June 2026.'),
+    ('og-india-ai-enablers.png', 'Interactive dashboard',
+     'Indian AI enablers: what is already priced in',
+     '41 listed companies across power, grid equipment, data centres and electronics: valuation, expectations, cash and momentum.'),
 ]
 
 if __name__ == '__main__':
