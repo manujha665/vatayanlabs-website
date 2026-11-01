@@ -161,6 +161,9 @@ CARDS = [
     ('og-india-ai-enablers.png', 'Interactive dashboard',
      'Indian AI enablers: what is already priced in',
      '41 listed companies across power, grid equipment, data centres and electronics: valuation, expectations, cash and momentum.'),
+    ('og-anthropic-ipo-valuation.png', 'Interactive valuation',
+     'Is Anthropic worth $1.5–2 trillion?',
+     "Pick your story for revenue, margins, compute, risk and governance, and value the IPO yourself on Damodaran's framework."),
 ]
 
 if __name__ == '__main__':

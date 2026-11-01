@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Anthropic Yourself — Build Your Own IPO Valuation | Vatayan Labs</title>
+<meta name="description" content="Is Anthropic worth $1.5–2 trillion? Pick your own story for revenue, margins, reinvestment and risk, and watch the equity value change live. A Vatayan Labs interactive.">
+<link rel="canonical" href="https://vatayanlabs.com/dashboards/anthropic-ipo-valuation/">
+
+<!-- Open Graph. Keep this block at the top of the head, above the
+     analytics scripts and any inline style: link crawlers read only the
+     first few KB, and WhatsApp needs the image dimensions declared. -->
+<meta property="og:site_name" content="Vatayan Labs">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatayanlabs.com/dashboards/anthropic-ipo-valuation/">
+<meta property="og:title" content="Is Anthropic worth $1.5–2 trillion? Value it yourself">
+<meta property="og:description" content="Pick your own story for Anthropic's revenue, margins, reinvestment, risk and governance and watch the equity value change live, against Aswath Damodaran's $1.48T and the $1.5–2T IPO range.">
+<meta property="og:image" content="https://vatayanlabs.com/assets/og/og-anthropic-ipo-valuation.png">
+<meta property="og:image:secure_url" content="https://vatayanlabs.com/assets/og/og-anthropic-ipo-valuation.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Value Anthropic yourself: an interactive IPO valuation built on Aswath Damodaran's framework">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Is Anthropic worth $1.5–2 trillion? Value it yourself">
+<meta name="twitter:description" content="Pick your own story for Anthropic's revenue, margins, reinvestment, risk and governance and watch the equity value change live, against Aswath Damodaran's $1.48T and the $1.5–2T IPO range.">
+<meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-anthropic-ipo-valuation.png">
+<meta name="twitter:image:alt" content="Value Anthropic yourself: an interactive IPO valuation built on Aswath Damodaran's framework">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E0WLCFVLDX');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xoi9afzxww");
+</script>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/logo-badge.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/nav.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f5f7fb; --surface:#ffffff; --surface-2:#eef2f8; --border:#dde3ee;
+  --ink:#0d1726; --ink-2:#47546a; --ink-3:#7a869a;
+  --brand-1:#1d6fd8; --brand-2:#0e9f8f;
+  --s-you:#1d6fd8; --s-base:#0e9f8f; --s-worst:#d97706; --s-best:#7c3aed;
+  --band:rgba(29,111,216,.18); --band-edge:rgba(29,111,216,.6);
+  --grid:#e7ebf2; --good:#0e8a4f; --bad:#c2410c;
+  --shadow:0 1px 2px rgba(13,23,38,.04),0 8px 24px rgba(13,23,38,.06);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+a{color:var(--brand-1)}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#0b2a5b 0%,#0c4f8a 45%,#0a7f86 100%);color:#fff;padding:28px 0 34px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.brand svg{width:34px;height:34px;flex:none}
+.brand b{letter-spacing:.14em;font-size:13px;font-weight:800}
+.brand small{display:block;letter-spacing:.12em;font-size:9.5px;opacity:.75;font-weight:600}
+.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.12;margin:0 0 10px;font-weight:800;letter-spacing:-.02em;max-width:760px}
+.hero p{margin:0;max-width:640px;opacity:.88;font-size:16px}
+.hero .pill{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;margin-bottom:14px}
+
+/* Layout */
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:1220px){.grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}.sticky{position:sticky;top:64px}}
+
+/* Tabs */
+.tabbar{position:sticky;top:0;z-index:15;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.tabbar-in{display:flex;align-items:center;gap:12px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--ink-2);font:600 13.5px Inter,sans-serif;padding:14px 12px 12px;cursor:pointer;white-space:nowrap;min-height:48px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--brand-1);border-bottom-color:var(--brand-1)}
+.tabs button:focus-visible{outline:2px solid var(--brand-1);outline-offset:-4px;border-radius:6px}
+.tabval{flex:none;display:flex;align-items:baseline;gap:8px;font-size:11px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.tabval b{font-size:17px;color:var(--ink);letter-spacing:0;text-transform:none}
+.tabval b.neg{color:var(--bad)}
+@media(max-width:640px){.tabval{display:none}.tabs{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}}
+.panel{margin-top:16px}
+.panel[hidden]{display:none}
+.panel > .card + .card{margin-top:16px}
+.storyctx{font-size:13.5px;color:var(--ink-2);background:var(--surface-2);border-radius:10px;padding:10px 12px;margin:10px 0 4px}
+.storyctx b{color:var(--ink)}
+.jump{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:13px;font-weight:600}
+.jump a{text-decoration:none}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:18px}
+.card h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px;font-weight:700}
+.card h3{font-size:17px;margin:0 0 4px;font-weight:700;letter-spacing:-.01em}
+.muted{color:var(--ink-2)}
+.small{font-size:12.5px;color:var(--ink-3)}
+
+/* Presets */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.preset{border:1px solid var(--border);background:var(--surface-2);color:var(--ink);padding:8px 12px;border-radius:10px;font:600 13px Inter,sans-serif;cursor:pointer;min-height:40px}
+.preset:hover{border-color:var(--brand-1)}
+.preset.on{background:var(--brand-1);border-color:var(--brand-1);color:#fff}
+
+/* Story cards */
+.story{border-top:1px solid var(--border);padding:16px 0 4px}
+.story:first-of-type{border-top:0}
+.story-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.story-head .n{font-size:11px;font-weight:800;color:var(--brand-2);letter-spacing:.1em}
+.val{font:700 20px "JetBrains Mono",monospace;color:var(--ink);white-space:nowrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 8px}
+.chip{border:1px solid var(--border);background:transparent;color:var(--ink-2);padding:6px 10px;border-radius:999px;font:600 12.5px Inter,sans-serif;cursor:pointer;min-height:34px}
+.chip:hover{border-color:var(--brand-1);color:var(--ink)}
+.chip.on{background:var(--surface-2);border-color:var(--brand-1);color:var(--ink)}
+.chip.dam::after{content:"  ● D";font-size:10px;color:var(--s-base)}
+input[type=range]{width:100%;accent-color:var(--brand-1);height:28px;margin:2px 0}
+.explain{font-size:13px;color:var(--ink-2);margin:4px 0 6px;min-height:20px}
+.sub{display:grid;grid-template-columns:1fr;gap:4px;margin-top:6px}
+.sub label{font-size:12.5px;color:var(--ink-2);display:flex;justify-content:space-between}
+
+/* Answer */
+.answer .big{font:800 clamp(38px,7vw,56px)/1 "JetBrains Mono",monospace;letter-spacing:-.03em;margin:8px 0 6px}
+.answer .big.neg{color:var(--bad)}
+.govline{font-size:13.5px;color:var(--ink-2);margin:0 0 2px}
+.govline b{font-family:"JetBrains Mono",monospace;color:var(--ink)}
+.delta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.tag{font-size:12.5px;font-weight:600;padding:5px 9px;border-radius:8px;background:var(--surface-2);color:var(--ink-2)}
+.tag b{color:var(--ink)}
+.verdict{font-size:14.5px;line-height:1.5;padding:12px 14px;border-left:3px solid var(--brand-2);background:var(--surface-2);border-radius:0 10px 10px 0}
+
+/* Football field */
+.ff{position:relative;height:160px;margin:22px 22px 8px}
+.ff .axis{position:absolute;left:0;right:0;top:70px;height:2px;background:var(--grid)}
+.ff .band{position:absolute;top:50px;height:42px;background:var(--band);border-left:1px dashed var(--band-edge);border-right:1px dashed var(--band-edge);border-radius:4px}
+.ff .bandlbl{position:absolute;top:52px;font-size:9.5px;color:var(--brand-1);font-weight:800;letter-spacing:.06em;transform:translateX(-50%);white-space:nowrap}
+.ff .tick{position:absolute;top:136px;font-size:10.5px;color:var(--ink-3);transform:translateX(-50%)}
+.ff .tick::before{content:"";position:absolute;left:50%;top:-64px;height:6px;width:1px;background:var(--ink-3)}
+.mk{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;cursor:default}
+.mk .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--border)}
+.mk .lbl{font-size:11px;font-weight:700;white-space:nowrap;color:var(--ink);margin-bottom:4px;text-align:center;line-height:1.2}
+.mk .lbl span{display:block;font-weight:500;color:var(--ink-2)}
+.mk.top{top:4px}.mk.top .dot{margin-top:2px}
+.mk.bot{top:63px;flex-direction:column-reverse}.mk.bot .lbl{margin:4px 0 0}
+.mk.you{z-index:3;transition:left .25s ease}
+.mk.you .dot{width:20px;height:20px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-top:4px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.legend i.sq{border-radius:2px;background:var(--band);border:1px dashed var(--band-edge)}
+
+/* Charts */
+.charts{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+@media(min-width:760px){.charts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chartbox{position:relative;height:240px;margin-top:10px}
+.tablebtn{margin-top:8px;background:none;border:0;color:var(--brand-1);font:600 12.5px Inter,sans-serif;cursor:pointer;padding:6px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+th,td{padding:6px 6px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--ink-3);font-weight:600}
+.tablewrap{overflow-x:auto}
+
+/* Implied revenue */
+.imp .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
+.imp .row:first-child{border-top:0}
+.imp .row .k{font-size:13.5px;color:var(--ink-2)}
+.imp .row .k b{display:block;color:var(--ink);font-size:14.5px}
+.imp .row .v{font:700 20px "JetBrains Mono",monospace;white-space:nowrap;text-align:right}
+.imp .row .v small{display:block;font:500 11.5px Inter,sans-serif;color:var(--ink-3)}
+.imp .row.you .v{color:var(--s-you)}
+.imp .note{font-size:13.5px;margin-top:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;color:var(--ink-2)}
+
+/* Prospectus scorecard */
+.score{margin-top:8px}
+.srow{display:grid;grid-template-columns:1fr;gap:8px;padding:12px 0;border-top:1px solid var(--border)}
+.srow:first-child{border-top:0}
+@media(min-width:760px){.srow{grid-template-columns:120px 1fr 1fr;gap:14px;align-items:start}}
+.srow .k{font-weight:700;font-size:14.5px}
+.srow .k span{display:block;font-size:11px;font-weight:600;color:var(--ink-3)}
+.half{font-size:13px;line-height:1.5;color:var(--ink-2);padding:9px 11px;border-radius:0 8px 8px 0}
+.half b{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.half.up{background:color-mix(in srgb,var(--good) 8%,transparent);border-left:3px solid var(--good)}
+.half.up b{color:var(--good)}
+.half.dn{background:color-mix(in srgb,var(--bad) 8%,transparent);border-left:3px solid var(--bad)}
+.half.dn b{color:var(--bad)}
+
+/* 3P */
+.p3{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+@media(min-width:640px){.p3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.p3 .q{border:1px solid var(--border);border-radius:12px;padding:12px}
+.p3 .q b{display:block;font-size:15px}
+.p3 .q p{margin:4px 0 8px;font-size:13px;color:var(--ink-2)}
+.yn{display:flex;gap:6px}
+.yn button{flex:1;border:1px solid var(--border);background:transparent;color:var(--ink-2);border-radius:8px;padding:8px;font:600 12.5px Inter,sans-serif;cursor:pointer;min-height:38px}
+.yn button.on.y{background:var(--good);border-color:var(--good);color:#fff}
+.yn button.on.n{background:var(--bad);border-color:var(--bad);color:#fff}
+.p3out{margin-top:12px;font-size:14.5px;font-weight:600}
+
+/* Share + capture */
+.row2{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+@media(min-width:760px){.row2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:11px 16px;font:700 14px Inter,sans-serif;cursor:pointer;min-height:44px;text-decoration:none}
+.btn.primary{background:var(--brand-1);color:#fff}
+.btn.wa{background:#1fa855;color:#fff}
+.btn.ghost{background:var(--surface-2);color:var(--ink);border:1px solid var(--border)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+form.cap{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+form.cap input{flex:1 1 200px;min-height:44px;border:1px solid var(--border);border-radius:10px;padding:0 12px;font:15px Inter,sans-serif;background:var(--surface-2);color:var(--ink)}
+.toast{font-size:13px;margin-top:8px;color:var(--good);min-height:18px}
+
+/* Under the hood */
+details.hood{margin-top:16px}
+details.hood summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.hood summary::after{content:"+";font-size:20px;color:var(--ink-3)}
+details.hood[open] summary::after{content:"–"}
+.src{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.03em}
+.src.d{background:rgba(14,159,143,.14);color:var(--s-base)}
+.src.s{background:rgba(29,111,216,.13);color:var(--brand-1)}
+.src.c{background:rgba(217,119,6,.15);color:var(--s-worst)}
+
+/* Credibility */
+.cred{margin:20px 0 0;padding:20px 0 28px;border-top:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.cred .who{display:flex;gap:12px;align-items:center}
+.cred .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1d6fd8,#0e9f8f);color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+.cred p{margin:0;font-size:13px;color:var(--ink-2);max-width:620px}
+.disclaimer{font-size:11.5px;color:var(--ink-3);padding-bottom:30px;line-height:1.5}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(0,0,0,.08);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center;gap:10px;transform:translateY(110%);transition:transform .2s ease}
+.mbar.show{transform:none}
+.mbar .l{font-size:11px;color:var(--ink-3);font-weight:600;line-height:1.3}
+.mbar .v{font:800 22px "JetBrains Mono",monospace}
+.mbar .v.neg{color:var(--bad)}
+.mbar .d{font-size:12px;color:var(--ink-2);text-align:right}
+@media(min-width:1220px){.mbar{display:none}}
+@media(max-width:1219px){body{padding-bottom:70px}}
+.themebtn{position:absolute;top:0;right:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:6px 10px;font:600 12px Inter,sans-serif;cursor:pointer}
+.hero .wrap{position:relative}
+
+/* Labs site footer */
+.site-footer{border-top:1px solid var(--border);background:var(--surface);padding:32px 24px}
+.site-footer-inner{max-width:1120px;margin:0 auto}
+.site-footer .footer-brand{font-size:15px;font-weight:700;color:var(--ink)}
+.subscribe-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.subscribe-text{font-size:13px;color:var(--ink-2);margin:4px 0 0;max-width:420px;line-height:1.55}
+.site-footer .btn{display:inline-block;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;min-height:0}
+.site-footer .btn-primary{background:var(--brand-1);color:#fff}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;margin-top:28px}
+.footer-grid h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-3);margin:0 0 10px}
+.footer-grid a{display:block;color:var(--ink-2);font-size:13px;padding:3px 0;text-decoration:none}
+.footer-grid a:hover{color:var(--brand-1)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:28px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--ink-3)}
+@media (max-width:720px){.site-footer{padding:26px 14px}}
+/* the fixed sidebar takes 260px, so the bottom value bar starts beside it */
+@media (min-width:901px){.mbar{left:var(--nav-w,0)}}
+</style>
+</head>
+<body>
+
+<!-- Vatayan Labs site nav -->
+<nav class="site-nav vl-sidebar">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <img class="site-logo" src="/assets/logo-badge.png" alt="" width="40" height="40">
+      <span>
+        <span class="site-brand-name">Vatayan Labs</span>
+        <span class="site-brand-tag">A window into how India moves money</span>
+      </span>
+    </a>
+    <div class="site-links">
+      <a href="/dashboards/">Dashboards</a>
+      <a href="/sectors/">Sectors</a>
+      <a href="/ai/" class="active">AI</a>
+      <a href="/mutual-funds/">Mutual Funds</a>
+      <a href="/tools/">Tools</a>
+      <a href="/downloads/">Downloads</a>
+      <a href="/about/">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="pill">Anthropic IPO · Interactive valuation</span>
+    <h1>Is Anthropic worth $1.5–2 trillion? Build your own valuation.</h1>
+    <p>Pick your story for revenue, margins, reinvestment and risk. The equity value updates live, and you can see where you land against Damodaran's base case and the IPO price range.</p>
+  </div>
+</header>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="wrap tabbar-in">
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="val" id="t-val">Your valuation</button>
+      <button role="tab" data-tab="imp" id="t-imp">Price implies</button>
+      <button role="tab" data-tab="sen" id="t-sen">What moves it</button>
+      <button role="tab" data-tab="pro" id="t-pro">Prospectus</button>
+      <button role="tab" data-tab="p3" id="t-p3">3P test</button>
+      <button role="tab" data-tab="how" id="t-how">How it's built</button>
+    </div>
+    <div class="tabval"><span>Your value</span><b class="mono" id="tEq">—</b></div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="panel" id="p-val" role="tabpanel" aria-labelledby="t-val">
+  <div class="grid">
+    <!-- LEFT: inputs -->
+    <section class="card" aria-label="Your assumptions">
+      <h2>Your story</h2>
+      <div class="presets" role="group" aria-label="Load a scenario">
+        <button class="preset" data-preset="base">Damodaran base</button>
+        <button class="preset" data-preset="worst">Worst case</button>
+        <button class="preset" data-preset="best">Best case</button>
+      </div>
+      <p class="small">Chips marked <span style="color:var(--s-base)">● D</span> are Damodaran's choices. Drag any slider to make it yours.</p>
+
+      <div class="story">
+        <div class="story-head"><div><span class="n">01 · SCALE</span><h3>Revenue in 2036</h3></div><div class="val" id="v_rev"></div></div>
+        <div class="chips" data-for="rev">
+          <button class="chip" data-v="200">$200B</button><button class="chip" data-v="500">$500B</button><button class="chip" data-v="750">$750B</button><button class="chip dam" data-v="1000">$1T</button><button class="chip" data-v="1500">$1.5T</button>
+        </div>
+        <input type="range" id="rev" min="100" max="2000" step="25" aria-label="Revenue in 2036, $ billions">
+        <div class="explain" id="x_rev"></div>
+      </div>
+
+      <div class="story">
+        <div class="story-head"><div><span class="n">02 · PROFITABILITY</span><h3>Target operating margin</h3></div><div class="val" id="v_mar"></div></div>
+        <div class="chips" data-for="prem">
+          <button class="chip" data-v="0">All mass market</button><button class="chip" data-v="50">50 / 50</button><button class="chip dam" data-v="75">75% premium</button><button class="chip" data-v="100">All premium</button>
+        </div>
+        <div class="sub"><label><span>Share of revenue from premium (frontier) products</span><b class="mono" id="v_prem"></b></label>
+        <input type="range" id="prem" min="0" max="100" step="5" aria-label="Premium share of revenue, percent"></div>
+        <div class="chips" data-for="reg" style="margin-top:12px">
+          <button class="chip" data-v="0">No regulation drag</button><button class="chip dam" data-v="5">Mild (−5 pts)</button><button class="chip" data-v="7.5">Moderate (−7.5)</button><button class="chip" data-v="10">Drastic (−10)</button>
+        </div>
+        <div class="sub"><label><span>Regulatory hit to margin</span><b class="mono" id="v_reg"></b></label>
+        <input type="range" id="reg" min="0" max="15" step="0.5" aria-label="Regulatory margin drag, points"></div>
+        <div class="explain" id="x_mar"></div>
+      </div>
+
+      <div class="story">
+        <div class="story-head"><div><span class="n">03 · REINVESTMENT</span><h3>Revenue per $1 of compute capital</h3></div><div class="val" id="v_s2c"></div></div>
+        <div class="chips" data-for="s2c">
+          <button class="chip" data-v="1">$1 (scarce)</button><button class="chip" data-v="2">$2</button><button class="chip dam" data-v="3">$3</button><button class="chip" data-v="4">$4 (cheap)</button>
+        </div>
+        <input type="range" id="s2c" min="0.75" max="5" step="0.25" aria-label="Sales to capital ratio">
+        <div class="explain" id="x_s2c"></div>
+      </div>
+
+      <div class="story">
+        <div class="story-head"><div><span class="n">04 · RISK</span><h3>Cost of capital</h3></div><div class="val" id="v_wacc"></div></div>
+        <div class="chips" data-for="wacc">
+          <button class="chip" data-v="7.79">7.79% · Q1 US</button><button class="chip" data-v="9.16">9.16% · median</button><button class="chip dam" data-v="9.74">9.74%</button><button class="chip" data-v="9.88">9.88% · Q3 US</button>
+        </div>
+        <input type="range" id="wacc" min="7" max="12" step="0.01" aria-label="Cost of capital, percent">
+        <div class="explain" id="x_wacc"></div>
+      </div>
+
+      <div class="story">
+        <div class="story-head"><div><span class="n">05 · SURVIVAL</span><h3>Chance it fails</h3></div><div class="val" id="v_pf"></div></div>
+        <div class="chips" data-for="pf">
+          <button class="chip" data-v="0">0%</button><button class="chip" data-v="5">5%</button><button class="chip dam" data-v="10">10%</button><button class="chip" data-v="20">20%</button><button class="chip" data-v="30">30%</button>
+        </div>
+        <input type="range" id="pf" min="0" max="50" step="1" aria-label="Probability of failure, percent">
+        <div class="sub"><label><span>Value lost if it fails</span><b class="mono" id="v_dl"></b></label>
+        <input type="range" id="dl" min="0" max="100" step="5" aria-label="Value lost on failure, percent"></div>
+        <div class="explain" id="x_pf"></div>
+      </div>
+
+      <div class="story">
+        <div class="story-head"><div><span class="n">06 · GOVERNANCE</span><h3>Discount for weak shareholder rights</h3></div><div class="val" id="v_gov"></div></div>
+        <div class="chips" data-for="gov">
+          <button class="chip" data-v="0">None</button><button class="chip" data-v="10">10%</button><button class="chip" data-v="20">20%</button><button class="chip" data-v="30">30%</button>
+        </div>
+        <input type="range" id="gov" min="0" max="40" step="1" aria-label="Governance discount, percent">
+        <div class="explain" id="x_gov"></div>
+        <p class="small" style="margin:2px 0 0">Five share classes, founders holding 50.1% of votes however many shares are issued, a benefit trust picking the board, and a public benefit charter. Damodaran says this needs "a much larger discount" on his value but doesn't put a number on it, so pick yours. It changes the price you'd pay, not the value above.</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: answer -->
+    <div class="sticky">
+      <section class="card answer" aria-live="polite">
+        <h2>Your value of Anthropic's equity</h2>
+        <div class="big" id="eq">—</div>
+        <div class="govline" id="govline" hidden></div>
+        <div class="delta">
+          <span class="tag">vs Damodaran: <b id="d_dam"></b></span>
+          <span class="tag"><span id="d_ipo_l">vs IPO low end $1.5T</span>: <b id="d_ipo"></b></span>
+        </div>
+        <div class="verdict" id="verdict"></div>
+        <div class="jump"><a href="#imp" data-go="imp">What the IPO price implies →</a><a href="#sen" data-go="sen">What moves your number →</a></div>
+
+        <div class="ff" id="ff" aria-label="Valuation football field">
+          <div class="axis"></div>
+          <div class="band" id="band"></div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--s-you)"></i>You</span>
+          <span><i style="background:var(--s-base)"></i>Damodaran base</span>
+          <span><i style="background:var(--s-worst)"></i>Worst</span>
+          <span><i style="background:var(--s-best)"></i>Best</span>
+          <span><i class="sq"></i>IPO price range</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="charts">
+    <section class="card">
+      <h2>The revenue path</h2>
+      <h3>How your story scales, 2027–2036</h3>
+      <p class="small">Revenue in $ billions. Hover a bar for the year's margin.</p>
+      <div class="chartbox"><canvas id="cRev" role="img" aria-label="Revenue by year"></canvas></div>
+      <button class="tablebtn" data-table="tRev">Show as table</button>
+      <div class="tablewrap" id="tRev" hidden></div>
+    </section>
+    <section class="card">
+      <h2>The cash story</h2>
+      <h3>Free cash flow after reinvestment</h3>
+      <p class="small">$ billions. <span style="color:var(--s-worst);font-weight:700">Amber</span> years burn cash on compute and growth; <span style="color:var(--s-you);font-weight:700">blue</span> years throw it off.</p>
+      <div class="chartbox"><canvas id="cFcf" role="img" aria-label="Free cash flow by year"></canvas></div>
+      <button class="tablebtn" data-table="tFcf">Show as table</button>
+      <div class="tablewrap" id="tFcf" hidden></div>
+    </section>
+  </div>
+  </div>
+
+  <div class="panel" id="p-imp" role="tabpanel" aria-labelledby="t-imp" hidden>
+    <section class="card">
+      <h2>What the price implies</h2>
+      <h3>The 2036 revenue each IPO price needs</h3>
+      <p class="small">Turn it around: keep your margin, reinvestment, risk and governance choices, and solve for the revenue that justifies the price. This is pricing, not valuing.</p>
+      <p class="storyctx"></p>
+      <div class="imp" id="imp"></div>
+    </section>
+  </div>
+
+  <div class="panel" id="p-sen" role="tabpanel" aria-labelledby="t-sen" hidden>
+    <section class="card">
+      <h2>What moves the number</h2>
+      <h3>Sensitivity around your story</h3>
+      <p class="small">Each bar swings one input and holds the rest. The line is your current value. Damodaran's point holds: revenue and margins swamp the cost of capital.</p>
+      <p class="storyctx"></p>
+      <div class="chartbox" style="height:280px"><canvas id="cSen" role="img" aria-label="Sensitivity of equity value to each input"></canvas></div>
+      <button class="tablebtn" data-table="tSen">Show as table</button>
+      <div class="tablewrap" id="tSen" hidden></div>
+    </section>
+  </div>
+
+  <div class="panel" id="p-pro" role="tabpanel" aria-labelledby="t-pro" hidden>
+  <section class="card">
+    <h2>What the prospectus says</h2>
+    <h3>Glass half full, glass half empty</h3>
+    <p class="small">The same S-1 numbers, read by a bull and by a bear. Bulls and bears will both find support here, which is why the story you pick above matters more than the filing.</p>
+    <div class="score">
+      <div class="srow"><div class="k">Growth<span>→ input 01</span></div>
+        <div class="half up"><b>Half full</b>First-half 2026 revenue was about 14× the first half of 2025. Around 1,900 enterprises now spend over $1M a year on Claude, up from under 100 a year earlier.</div>
+        <div class="half dn"><b>Half empty</b>Growth slowed in Q3 as OpenAI won share, compute ran short and some clients moved to cheaper open-source models. The top five customers are 25% of revenue.</div></div>
+      <div class="srow"><div class="k">Profitability<span>→ input 02</span></div>
+        <div class="half up"><b>Half full</b>The company says it made an operating profit in the latest quarter. Compute cost fell from over 250% of quarterly revenue to 48%, and every expense line is shrinking as a share of revenue.</div>
+        <div class="half dn"><b>Half empty</b>The first-half operating loss was over $8B once you strip out a $72B non-cash charge (the reported loss was $80B). The cost of committed compute is still to hit future income statements.</div></div>
+      <div class="srow"><div class="k">Reinvestment<span>→ input 03</span></div>
+        <div class="half up"><b>Half full</b>$600B+ of compute commitments lock in the capacity to grow and close the gap with OpenAI. Turning compute into a fixed cost is also why gross margins look high.</div>
+        <div class="half dn"><b>Half empty</b>Little of this shows in capex or on the balance sheet yet. Chips age fast and need replacing, and community pushback is making data centres dearer.</div></div>
+      <div class="srow"><div class="k">Risk<span>→ inputs 04–05</span></div>
+        <div class="half up"><b>Half full</b>$114B of cash, plus about $100B from the IPO, covers commitments for the next few years. Clients who build Claude into their operations may find it hard to rip out.</div>
+        <div class="half dn"><b>Half empty</b>The bonds are rated BB+. Fixed compute costs raise operating leverage, AI budgets may prove cyclical, and the company needs growth to meet its obligations.</div></div>
+      <div class="srow"><div class="k">Governance<span>→ input 06</span></div>
+        <div class="half up"><b>Half full</b>As a public benefit corporation, it can put safety and its stated purpose ahead of short-term profit.</div>
+        <div class="half dn"><b>Half empty</b>Five share classes. Founders keep 50.1% of votes however many shares are issued, and a benefit trust picks the board. Insiders can sell 10% on day one; founders wait 365 days.</div></div>
+    </div>
+  </section>
+  </div>
+
+  <div class="panel" id="p-p3" role="tabpanel" aria-labelledby="t-p3" hidden>
+  <section class="card">
+    <h2>The 3P test</h2>
+    <h3>Be honest about your story</h3>
+    <p class="small" id="p3ctx"></p>
+    <div class="p3">
+      <div class="q"><b>Possible?</b><p>Could this happen at all, without breaking the laws of economics?</p><div class="yn" data-q="0"><button class="y">Yes</button><button class="n">No</button></div></div>
+      <div class="q"><b>Plausible?</b><p>Is there a believable business path from today to your 2036?</p><div class="yn" data-q="1"><button class="y">Yes</button><button class="n">No</button></div></div>
+      <div class="q"><b>Probable?</b><p>Would you bet your own money that it's the most likely outcome?</p><div class="yn" data-q="2"><button class="y">Yes</button><button class="n">No</button></div></div>
+    </div>
+    <div class="p3out" id="p3out">Tap your answers.</div>
+  </section>
+  </div>
+
+  <div class="panel" id="p-how" role="tabpanel" aria-labelledby="t-how" hidden>
+  <section class="card">
+    <div class="hood">
+      <h2>Under the hood</h2>
+      <h3>How the number is built</h3>
+      <p class="muted" style="margin-top:12px">A 10-year discounted cash flow, built the way Damodaran structures his IPO valuations. Revenue grows from today's base to your 2036 target, with growth fading to the risk-free rate in years 6–10. Margins glide from break-even to your target by year 5. Each year's reinvestment is the extra revenue divided by your sales-to-capital ratio. A terminal value captures everything after 2036. The total is then haircut for the chance of failure, debt (including the present value of compute commitments) comes off, and cash (including IPO proceeds) goes on.</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th>Fixed input</th><th>Value</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Base revenue (trailing 12 months to Jun-26)</td><td class="mono">$19.7B</td><td><span class="src s">S-1 quarterly data</span></td></tr>
+          <tr><td>Year-1 revenue growth (2027)</td><td class="mono">100%</td><td><span class="src c">Calibrated</span></td></tr>
+          <tr><td>Starting operating margin</td><td class="mono">0%</td><td><span class="src c">Calibrated</span></td></tr>
+          <tr><td>Years to reach target margin</td><td class="mono">5</td><td><span class="src c">Calibrated</span></td></tr>
+          <tr><td>Tax rate (marginal)</td><td class="mono">25%</td><td><span class="src c">Standard US assumption</span></td></tr>
+          <tr><td>Tax losses carried forward</td><td class="mono">$60B</td><td><span class="src c">Estimate</span></td></tr>
+          <tr><td>Risk-free rate / terminal growth</td><td class="mono">3.8%</td><td><span class="src c">Calibrated</span></td></tr>
+          <tr><td>Mature cost of capital (cap)</td><td class="mono">7.7%</td><td><span class="src c">Calibrated</span></td></tr>
+          <tr><td>Return on capital after 2036</td><td class="mono">12%</td><td><span class="src c">Calibrated</span></td></tr>
+          <tr><td>Debt incl. PV of compute commitments</td><td class="mono">~$500B</td><td><span class="src d">Damodaran post</span></td></tr>
+          <tr><td>Cash ($114B) + IPO proceeds (~$100B)</td><td class="mono">$214B</td><td><span class="src d">Damodaran post</span></td></tr>
+          <tr><td>Premium / mass-market margins</td><td class="mono">40% / 10%</td><td><span class="src d">Damodaran post</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="muted">The governance discount is applied last, to the equity value, as the most you would pay for a share. It is not part of Damodaran's value; it is the extra discount he says Anthropic's structure requires.</p>
+      <p class="small" style="margin-top:10px"><b>Calibration check.</b> With these settings the engine lands close to Damodaran's published outputs: base <span class="mono" id="calB"></span> vs his $1.475T, worst <span class="mono" id="calW"></span> vs −$373B, best <span class="mono" id="calX"></span> vs $4.04T. "Calibrated" inputs were tuned to the base case first because his full spreadsheet isn't reproduced here; treat them as estimates, not his exact numbers. For the real thing, <a href="https://pages.stern.nyu.edu/~adamodar/pc/blog/AnthropicIPO.xlsx" target="_blank" rel="noopener">download his spreadsheet</a>.</p>
+    </div>
+  </section>
+  </div>
+
+  <div class="row2">
+    <section class="card">
+      <h2>Share your story</h2>
+      <h3>Send your exact valuation to someone</h3>
+      <p class="small">The link carries your inputs, so whoever opens it sees your scenario, not the default.</p>
+      <div class="btns">
+        <a class="btn wa" id="waBtn" target="_blank" rel="noopener">Share on WhatsApp</a>
+        <button class="btn ghost" id="copyBtn">Copy link</button>
+      </div>
+      <div class="toast" id="copyToast"></div>
+    </section>
+    <section class="card">
+      <h2>Get the next one</h2>
+      <h3>New Vatayan Labs dashboards in your inbox</h3>
+      <p class="small">IPO valuations, sector studies and data tools. No spam, one email when something new ships.</p>
+      <div class="btns"><a class="btn primary" id="subBtn" href="/newsletter/">Subscribe for updates</a></div>
+    </section>
+  </div>
+
+  <footer class="cred">
+    <div class="who">
+      <div class="av">M</div>
+      <p><b style="color:var(--ink)">Built by Manu · Curious Investing Insights</b><br>Ex-banker, credit risk and analytics background. Vatayan Labs turns long reports and big debates into tools you can play with.</p>
+    </div>
+    <a class="btn ghost" href="/dashboards/">More dashboards →</a>
+  </footer>
+  <p class="disclaimer">Framework and base-case assumptions from Aswath Damodaran's post "The Anthropic Prospectus Arrives: My (but not the) IPO valuation!" (Oct 28, 2026) on <a href="https://aswathdamodaran.blogspot.com/2026/10/the-anthropic-prospectus-arrives-ipo.html" target="_blank" rel="noopener">Musings on Markets</a>, with his <a href="https://pages.stern.nyu.edu/~adamodar/pc/blog/AnthropicIPO.xlsx" target="_blank" rel="noopener">valuation spreadsheet</a> and his <a href="https://docs.google.com/spreadsheets/d/1oux4pQo8bLnx5tvVH25j8yCXrFK0_5qviiAzuXqk-Fg/edit?usp=sharing" target="_blank" rel="noopener">shared sheet of reader valuations</a>. Prospectus figures are from Anthropic's <a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm" target="_blank" rel="noopener">S-1</a> (filed Oct 26, 2026) as summarised in that post. This is an educational tool, not investment advice or a recommendation to buy or sell any security. Outputs are model estimates and will differ from Damodaran's own spreadsheet. Figures in $ billions unless stated.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="subscribe-bar">
+      <div>
+        <div class="footer-brand">Vatayan Labs</div>
+        <p class="subscribe-text">Data-driven research on Indian banking, payments and markets — a window into how India moves money.</p>
+      </div>
+      <a class="btn btn-primary" href="/newsletter/">Subscribe for updates</a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Research</h4>
+        <a href="/sectors/gold/">Gold</a>
+        <a href="/sectors/defence/">Defence</a>
+        <a href="/sectors/microfinance/">Microfinance</a>
+        <a href="/sectors/mutual-funds/">Mutual Funds</a>
+        <a href="/sectors/capital-markets/">Capital Markets</a>
+        <a href="/sectors/semiconductors/">Semiconductors</a>
+        <a href="/ai/">AI Infrastructure</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="/sectors/">Sector Studies</a>
+        <a href="/dashboards/">Data Dashboards</a>
+        <a href="/mutual-funds/">Mutual Fund Hub</a>
+        <a href="/tools/">Tools</a>
+        <a href="/downloads/">Downloads</a>
+        <a href="https://curiousinvestinginsights.substack.com/" target="_blank" rel="noopener">Substack Archive</a>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <a href="/about/">About</a>
+        <a href="mailto:curiousinvestinginsights@gmail.com">Contact</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/feed.xml">RSS Feed</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Manu Vatayan Jha · Vatayan Labs. Personal research — not investment advice.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-hidden="true">
+  <div><div class="l">YOUR VALUE</div><div class="v" id="mEq">—</div></div>
+  <div class="d">vs Damodaran <b id="mDam"></b><br>IPO range $1.5–2T</div>
+</div>
+
+<script id="engine">
+/* ===== Valuation engine (calibrated to Damodaran Oct-28-2026) ===== */
+const FIXED = {R0:19.7, g1:1.0, m0:0.0, conv:5, tax:0.25, nol:60, rf:0.038, matCap:0.077, troc:0.12, debt:500, cash:214};
+const PREM_M = 0.40, MASS_M = 0.10;
+function valueAnthropic(inp, F = FIXED){
+  // inp: rev ($B 2036), prem (0-100), reg (pts), s2c, wacc (%), pf (%), dl (%)
+  const tm = (inp.prem/100*PREM_M + (1-inp.prem/100)*MASS_M) - inp.reg/100;
+  const w0 = inp.wacc/100;
+  const mw = Math.min(w0, F.matCap);
+  const pf = inp.pf/100, keep = 1 - inp.dl/100;
+  const r10 = g => { let R=F.R0*(1+F.g1); for(let t=2;t<=5;t++) R*=1+g; for(let t=6;t<=10;t++){R*=1+(g-(g-F.rf)*(t-5)/5);} return R; };
+  let lo=-0.5, hi=5, g=0;
+  for(let i=0;i<200;i++){ g=(lo+hi)/2; if(r10(g)<inp.rev) lo=g; else hi=g; }
+  let Rp=F.R0, df=1, pv=0, nolb=F.nol; const rows=[];
+  for(let t=1;t<=10;t++){
+    const gt = t===1 ? F.g1 : (t<=5 ? g : g-(g-F.rf)*(t-5)/5);
+    const R = Rp*(1+gt);
+    const m = t<F.conv ? tm-(tm-F.m0)*(F.conv-t)/F.conv : tm;
+    const ebit = R*m; let taxv=0;
+    if(ebit>0){ const sh=Math.min(nolb,ebit); nolb-=sh; taxv=(ebit-sh)*F.tax; } else { nolb+=-ebit; }
+    const nopat = ebit-taxv, reinv=(R-Rp)/inp.s2c, fcff=nopat-reinv;
+    const w = t<=5 ? w0 : w0-(w0-mw)*(t-5)/5;
+    df /= (1+w); pv += fcff*df;
+    rows.push({year:2026+t, rev:R, growth:gt, margin:m, ebit, reinv, fcff, pv:fcff*df});
+    Rp=R;
+  }
+  const ebitT = Rp*(1+F.rf)*tm*(1-F.tax);
+  const tv = ebitT*(1-F.rf/F.troc)/(mw-F.rf);
+  const pvtv = tv*df, op = pv+pvtv;
+  const opAdj = op > 0 ? op*(1-pf) + pf*keep*op : op; // failure haircut only bites on positive value
+  const equity = opAdj - F.debt + F.cash;
+  return {equity, op, opAdj, pvFcf:pv, pvTv:pvtv, targetMargin:tm, g25:g, rows};
+}
+const SCEN = {
+  base:  {rev:1000, prem:75,  reg:5,  s2c:3, wacc:9.74, pf:10, dl:50},
+  worst: {rev:200,  prem:0,   reg:10, s2c:1, wacc:9.88, pf:10, dl:50},
+  best:  {rev:1500, prem:100, reg:0,  s2c:4, wacc:7.79, pf:10, dl:50}
+};
+const DAMO = {base:1475, worst:-373, best:4040};
+if (typeof module !== 'undefined') module.exports = {valueAnthropic, SCEN, DAMO};
+</script>
+
+<script>
+/* ===== UI ===== */
+const $ = id => document.getElementById(id);
+const STORY = ['rev','prem','reg','s2c','wacc','pf','dl'];  // what the presets set
+const KEYS = [...STORY, 'gov'];                              // governance is yours, presets leave it alone
+let state = {...SCEN.base, gov:0};
+
+const fmtB = v => {
+  const s = v<0 ? '−' : '';
+  const a = Math.abs(v);
+  return a>=1000 ? `${s}$${(a/1000).toFixed(a>=10000?1:2)}T` : `${s}$${Math.round(a)}B`;
+};
+const pct = (v,d=1) => { const r=+v.toFixed(d); return `${r>0?'+':r<0?'−':''}${Math.abs(r).toFixed(d)}%`; };
+
+// read share link (clamped to each slider's range so a hand-edited link can't break the model)
+(function(){
+  try{
+    const q = new URLSearchParams(location.search);
+    KEYS.forEach(k=>{ if(q.has(k)){ const v=parseFloat(q.get(k)); if(!isNaN(v)) state[k]=Math.min(+$(k).max, Math.max(+$(k).min, v)); } });
+  }catch(e){}
+})();
+
+function syncInputs(){
+  KEYS.forEach(k=>{ $(k).value = state[k]; });
+  document.querySelectorAll('.chips').forEach(c=>{
+    const k=c.dataset.for;
+    c.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on', parseFloat(b.dataset.v)===state[k]));
+  });
+  document.querySelectorAll('.preset').forEach(b=>{
+    const s=SCEN[b.dataset.preset]; b.classList.toggle('on', STORY.every(k=>s[k]===state[k]));
+  });
+}
+
+KEYS.forEach(k=>$(k).addEventListener('input',e=>{ state[k]=parseFloat(e.target.value); syncInputs(); render(); }));
+document.querySelectorAll('.chips').forEach(c=>c.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  state[c.dataset.for]=parseFloat(b.dataset.v); syncInputs(); render();
+}));
+document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{ state={...SCEN[b.dataset.preset], gov:state.gov}; syncInputs(); render(); }));
+
+// Football field
+const FF_MIN=-600, FF_MAX=4600;
+const xPct = v => (Math.max(FF_MIN,Math.min(FF_MAX,v))-FF_MIN)/(FF_MAX-FF_MIN)*100;
+function buildFF(){
+  const ff=$('ff');
+  $('band').style.left = xPct(1500)+'%'; $('band').style.width = (xPct(2000)-xPct(1500))+'%';
+  const bl=document.createElement('div'); bl.className='bandlbl'; bl.style.left=xPct(1750)+'%'; bl.textContent='IPO'; bl.title='IPO price range $1.5–2T'; ff.appendChild(bl);
+  [0,1000,2000,3000,4000].forEach(v=>{ const t=document.createElement('div'); t.className='tick mono'; t.style.left=xPct(v)+'%'; t.textContent=v===0?'$0':`$${v/1000}T`; ff.appendChild(t); });
+  const mk=(cls,color,label,val,pos)=>{ const d=document.createElement('div'); d.className=`mk ${pos} ${cls}`; d.style.left=xPct(val)+'%';
+    d.innerHTML=`<div class="lbl">${label}<span class="mono">${val===null?'':fmtB(val)}</span></div><div class="dot" style="background:${color}"></div>`; d.title=`${label}: ${fmtB(val)}`; ff.appendChild(d); return d; };
+  mk('', 'var(--s-worst)', 'Worst', DAMO.worst, 'bot');
+  mk('', 'var(--s-base)', 'Damodaran', DAMO.base, 'bot');
+  mk('', 'var(--s-best)', 'Best', DAMO.best, 'bot');
+  window.youMk = mk('you', 'var(--s-you)', 'You', 0, 'top');
+}
+
+// Reverse-engineer: 2036 revenue whose value (after your governance discount) equals the price
+function impliedRev(price){
+  const need = price/(1-state.gov/100);
+  const v = rev => valueAnthropic({...state, rev}).equity;
+  let lo=100, hi=5000;
+  if(v(hi) < need) return null;          // no revenue gets there at your margins
+  if(v(lo) >= need) return lo;
+  for(let i=0;i<50;i++){ const m=(lo+hi)/2; if(v(m)<need) lo=m; else hi=m; }
+  return hi;
+}
+const cagr = rev => (Math.pow(rev/FIXED.R0,1/10)-1)*100;
+function renderImplied(){
+  const row=(cls,k,sub,rev)=>`<div class="row ${cls}"><div class="k"><b>${k}</b>${sub}</div><div class="v">${rev===null?'Out of reach':fmtB(rev)}<small>${rev===null?'at your margins':`${cagr(rev).toFixed(0)}% a year from today`}</small></div></div>`;
+  const r15=impliedRev(1500), r20=impliedRev(2000);
+  let note;
+  if(r15===null) note=`At your margins, no plausible revenue level justifies even $1.5T. The IPO price needs a more profitable story than yours.`;
+  else if(state.rev<r15) note=`To pay even the low end, you have to believe in ${fmtB(r15-state.rev)} more 2036 revenue than your own story has.`;
+  else if(r20===null || state.rev<r20) note=`Your story clears the low end but not the top. You'd want it priced near $1.5T.`;
+  else note=`Your story clears the top of the range with ${fmtB(state.rev-r20)} of revenue to spare.`;
+  $('imp').innerHTML = row('','IPO low end · $1.5T','Revenue needed in 2036',r15)
+    + row('','IPO top end · $2T','Revenue needed in 2036',r20)
+    + row('you','Your story','Your 2036 revenue',state.rev)
+    + `<div class="note">${note}</div>`;
+}
+
+// Sensitivity: swing one input at a time around the current story
+const SWING = [
+  ['rev',  '2036 revenue',      s=>[s.rev*0.75, s.rev*1.25], v=>fmtB(v)],
+  ['prem', 'Premium share',     s=>[s.prem-25, s.prem+25],   v=>`${Math.round(v)}%`],
+  ['reg',  'Regulatory hit',    s=>[s.reg+5, s.reg-5],       v=>`−${v} pts`],
+  ['s2c',  'Revenue per $1 capital', s=>[s.s2c-1, s.s2c+1],  v=>`$${v.toFixed(2)}`],
+  ['wacc', 'Cost of capital',   s=>[s.wacc+1, s.wacc-1],     v=>`${v.toFixed(2)}%`],
+  ['pf',   'Chance of failure', s=>[s.pf+10, s.pf-10],       v=>`${v}%`]
+];
+function sensitivity(){
+  return SWING.map(([k,label,f,fmt])=>{
+    const el=$(k), clamp=v=>Math.min(+el.max,Math.max(+el.min,v));
+    const [a,b]=f(state).map(clamp);
+    const va=valueAnthropic({...state,[k]:a}).equity, vb=valueAnthropic({...state,[k]:b}).equity;
+    return {label, lo:Math.min(va,vb), hi:Math.max(va,vb), range:`${fmt(a)} → ${fmt(b)}`, va, vb, fa:fmt(a), fb:fmt(b)};
+  }).sort((x,y)=>(y.hi-y.lo)-(x.hi-x.lo));
+}
+const baseLine = {id:'baseLine', afterDatasetsDraw(c){ const x=c.scales.x, a=c.chartArea, v=c.options.plugins.baseLine?.value; if(v==null) return;
+  const px=x.getPixelForValue(v); const g=c.ctx; g.save(); g.strokeStyle=css('--ink'); g.lineWidth=1.5; g.setLineDash([4,3]); g.beginPath(); g.moveTo(px,a.top); g.lineTo(px,a.bottom); g.stroke(); g.restore(); }};
+
+// Charts
+let cRev, cFcf, cSen;
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function makeCharts(){
+  if(typeof Chart==='undefined') return;
+  Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+  const common = {responsive:true, maintainAspectRatio:false, animation:{duration:250},
+    plugins:{legend:{display:false}, tooltip:{backgroundColor:css('--surface'), titleColor:css('--ink'), bodyColor:css('--ink-2'), borderColor:css('--border'), borderWidth:1, padding:10, displayColors:false}},
+    scales:{x:{grid:{display:false}, ticks:{color:css('--ink-3'), font:{size:11}}, border:{color:css('--grid')}},
+            y:{grid:{color:css('--grid')}, ticks:{color:css('--ink-3'), font:{size:11}, callback:v=>fmtB(v)}, border:{display:false}}}};
+  cRev = new Chart($('cRev'), {type:'bar', data:{labels:[], datasets:[{data:[], backgroundColor:css('--s-you'), borderRadius:{topLeft:4,topRight:4}, borderSkipped:'bottom', maxBarThickness:28}]},
+    options:{...common, plugins:{...common.plugins, tooltip:{...common.plugins.tooltip, callbacks:{label:c=>`Revenue ${fmtB(c.raw)}`, afterLabel:c=>`Operating margin ${(window._rows[c.dataIndex].margin*100).toFixed(1)}%\nGrowth ${(window._rows[c.dataIndex].growth*100).toFixed(0)}%`}}}}});
+  cFcf = new Chart($('cFcf'), {type:'bar', data:{labels:[], datasets:[{data:[], backgroundColor:[], borderRadius:4, borderSkipped:false, maxBarThickness:28}]},
+    options:{...common, plugins:{...common.plugins, tooltip:{...common.plugins.tooltip, callbacks:{label:c=>`Free cash flow ${fmtB(c.raw)}`, afterLabel:c=>`Reinvestment ${fmtB(window._rows[c.dataIndex].reinv)}`}}}}});
+  cSen = new Chart($('cSen'), {type:'bar', plugins:[baseLine], data:{labels:[], datasets:[{data:[], backgroundColor:css('--s-base'), borderRadius:4, borderSkipped:false, maxBarThickness:22}]},
+    options:{...common, indexAxis:'y',
+      plugins:{...common.plugins, baseLine:{value:null}, tooltip:{...common.plugins.tooltip, callbacks:{title:c=>c[0].label, label:c=>{ const s=window._sen[c.dataIndex]; return [`${s.fa}: ${fmtB(s.va)}`, `${s.fb}: ${fmtB(s.vb)}`]; }}}},
+      scales:{x:{grid:{color:css('--grid')}, ticks:{color:css('--ink-3'), font:{size:11}, callback:v=>fmtB(v), maxTicksLimit:6}, border:{display:false}},
+              y:{grid:{display:false}, ticks:{color:css('--ink-2'), font:{size:11.5}}, border:{color:css('--grid')}}}}});
+}
+function refreshChartTheme(){ if(cRev){ cRev.destroy(); cFcf.destroy(); cSen.destroy(); makeCharts(); render(); } }
+
+function tableHTML(rows, cols){
+  return `<table><thead><tr>${cols.map(c=>`<th>${c[0]}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td class="${c[2]?'mono':''}">${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+
+function explain(r){
+  const tm=r.targetMargin*100;
+  const rev=state.rev;
+  $('x_rev').textContent = rev>=1450 ? "Bigger than Walmart and Amazon combined today. You're betting AI eats a big slice of white-collar wages, globally."
+    : rev>=900 ? "Bigger than Walmart or Amazon today (about $700–750B each). AI replaces high-paid work in many industries, and Anthropic owns the premium end."
+    : rev>=450 ? "A mega-cap business, but AI stays a productivity tool more than a replacement for people."
+    : "AI stays niche or gets commoditised, and Anthropic's lead fades.";
+  $('x_mar').textContent = tm>=35 ? "Enterprise-software economics: frontier models, sticky clients, pricing power."
+    : tm>=22 ? "Mostly premium, with some price competition and a regulatory tax."
+    : tm>=12 ? "A blend. Open-source models pull a big chunk of the market into price wars."
+    : "Business-services margins. AI becomes a commodity utility.";
+  $('x_s2c').textContent = state.s2c<=1.5 ? "Compute stays scarce and expensive. Every dollar of growth needs almost a dollar of chips and data centres."
+    : state.s2c<=2.5 ? "Capital-heavy, like a utility or telecom build-out."
+    : state.s2c<=3.5 ? "Compute crunch eases over time; in line with big tech today."
+    : "Chips get cheap and efficient. Growth becomes capital-light.";
+  $('x_wacc').textContent = state.wacc<8.5 ? "Safer than most US companies. Investors treat AI spend as a utility that never gets cut."
+    : state.wacc<9.5 ? "About as risky as the typical US company."
+    : "Riskier than most: cyclical AI budgets plus heavy fixed compute commitments.";
+  $('x_pf').textContent = state.pf===0 ? "No chance of failure. Cash pile and market access always save the day."
+    : `A ${state.pf}% chance the story breaks, and if it does, ${state.dl}% of the value is gone.`;
+  $('x_gov').textContent = state.gov===0 ? "You pay full value. Governance doesn't bother you, or you trust the founders and the trust to use their power well."
+    : state.gov<=15 ? "A modest haircut, roughly what investors have tolerated at dual-class Alphabet and Meta."
+    : state.gov<=30 ? "A real penalty: public shareholders can't change how the company is run, only sell."
+    : "A heavy penalty. You'd only buy at a deep discount to value, given how little say you get.";
+}
+
+// what you'd pay after the governance discount (only bites on positive value)
+const payOf = eq => eq>0 ? eq*(1-state.gov/100) : eq;
+
+function verdictText(eq){
+  const parts=[], pay=payOf(eq), g=state.gov>0;
+  const who = g ? `your price after the ${state.gov}% governance discount` : 'your value';
+  if(eq<0) parts.push(`<b>Your story leaves nothing for shareholders.</b> The compute bill and debt outrun the cash the business ever generates.`);
+  else if(pay<1500) parts.push(`<b>At ${fmtB(pay)}, you'd sit out the IPO.</b> Even the low end of the price range asks you to pay ${pct((1500/pay-1)*100,0).replace('+','')} more than ${who}.`);
+  else if(pay<=2000) parts.push(`<b>At ${fmtB(pay)}, ${who} sits inside the IPO range.</b> The market and your story roughly agree. The question is which end it prices at.`);
+  else parts.push(`<b>At ${fmtB(pay)}, you think the IPO is cheap.</b> ${g?'Even after the discount, you':'You'} sit ${pct((pay/2000-1)*100,0)} above the top of the range.`);
+  if(state.rev>=1450) parts.push(`Your 2036 revenue (${fmtB(state.rev)}) is more than Walmart and Amazon earn today, combined.`);
+  return parts.join(' ');
+}
+
+function render(){
+  const r = valueAnthropic(state);
+  window._rows = r.rows;
+  // labels
+  $('v_rev').textContent = fmtB(state.rev);
+  $('v_prem').textContent = `${state.prem}%`;
+  $('v_reg').textContent = `−${state.reg} pts`;
+  $('v_mar').textContent = `${(r.targetMargin*100).toFixed(1)}%`;
+  $('v_s2c').textContent = `$${state.s2c.toFixed(2)}`;
+  $('v_wacc').textContent = `${state.wacc.toFixed(2)}%`;
+  $('v_pf').textContent = `${state.pf}%`;
+  $('v_dl').textContent = `${state.dl}%`;
+  $('v_gov').textContent = `${state.gov}%`;
+  explain(r);
+  // answer
+  const eq=r.equity, pay=payOf(eq);
+  $('eq').textContent = fmtB(eq);
+  $('eq').classList.toggle('neg', eq<0);
+  $('govline').hidden = !(state.gov>0 && eq>0);
+  $('govline').innerHTML = `Most you'd pay after a ${state.gov}% governance discount: <b>${fmtB(pay)}</b>`;
+  $('d_dam').textContent = pct((eq/DAMO.base-1)*100,0);
+  $('d_ipo_l').textContent = state.gov>0 && eq>0 ? 'Your price vs IPO low end $1.5T' : 'vs IPO low end $1.5T';
+  $('d_ipo').textContent = eq>0 ? pct((pay/1500-1)*100,0) : 'n/a';
+  $('verdict').innerHTML = verdictText(eq);
+  $('tEq').textContent = fmtB(eq); $('tEq').classList.toggle('neg', eq<0);
+  const ctx = `Your story: <b>${fmtB(state.rev)}</b> of 2036 revenue, <b>${(r.targetMargin*100).toFixed(1)}%</b> margin, $${state.s2c} per $1 of capital, ${state.wacc.toFixed(2)}% cost of capital, ${state.pf}% chance of failure${state.gov?`, ${state.gov}% governance discount`:''}. Value <b>${fmtB(eq)}</b>${state.gov&&eq>0?`, most you'd pay <b>${fmtB(pay)}</b>`:''}. <a href="#" data-go="val">Change it</a>`;
+  document.querySelectorAll('.storyctx').forEach(p=>p.innerHTML=ctx);
+  $('mEq').textContent = fmtB(eq); $('mEq').classList.toggle('neg', eq<0); $('mDam').textContent = pct((eq/DAMO.base-1)*100,0);
+  if(window.youMk){ youMk.style.left = xPct(eq)+'%'; youMk.querySelector('.mono').textContent = fmtB(eq) + (eq>FF_MAX?' →':eq<FF_MIN?' ←':''); }
+  // charts
+  const labels=r.rows.map(x=>x.year);
+  if(cRev){
+    cRev.data.labels=labels; cRev.data.datasets[0].data=r.rows.map(x=>+x.rev.toFixed(1)); cRev.update();
+    cFcf.data.labels=labels; cFcf.data.datasets[0].data=r.rows.map(x=>+x.fcff.toFixed(1));
+    cFcf.data.datasets[0].backgroundColor=r.rows.map(x=>x.fcff<0?css('--s-worst'):css('--s-you')); cFcf.update();
+  }
+  const sen = window._sen = sensitivity();
+  if(cSen){
+    cSen.data.labels=sen.map(s=>s.label); cSen.data.datasets[0].data=sen.map(s=>[+s.lo.toFixed(1), +s.hi.toFixed(1)]);
+    cSen.options.plugins.baseLine.value=eq; cSen.update();
+  }
+  $('tSen').innerHTML = tableHTML(sen,[['Input',x=>x.label],['Swing',x=>x.range],['Low',x=>fmtB(x.va),1],['High',x=>fmtB(x.vb),1]]);
+  renderImplied();
+  $('tRev').innerHTML = tableHTML(r.rows,[['Year',x=>x.year],['Revenue',x=>fmtB(x.rev),1],['Growth',x=>(x.growth*100).toFixed(0)+'%',1],['Op. margin',x=>(x.margin*100).toFixed(1)+'%',1]]);
+  $('tFcf').innerHTML = tableHTML(r.rows,[['Year',x=>x.year],['Op. profit',x=>fmtB(x.ebit),1],['Reinvestment',x=>fmtB(x.reinv),1],['Free cash flow',x=>fmtB(x.fcff),1]]);
+  // 3P context
+  $('p3ctx').textContent = `Your story: ${fmtB(state.rev)} revenue in 2036 at a ${(r.targetMargin*100).toFixed(1)}% margin, $${state.s2c} of revenue per $1 of capital, ${state.wacc.toFixed(2)}% cost of capital and a ${state.pf}% chance of failure. That's a 2026–36 revenue growth rate of about ${((Math.pow(state.rev/19.7,1/10)-1)*100).toFixed(0)}% a year.`;
+  // share link
+  const q=new URLSearchParams(); KEYS.forEach(k=>q.set(k,state[k]));
+  const url = location.origin && location.origin!=='null' ? `${location.origin}${location.pathname}?${q}` : `https://vatayanlabs.com/dashboards/anthropic-ipo-valuation/?${q}`;
+  window._shareUrl=url;
+  $('waBtn').href = 'https://wa.me/?text='+encodeURIComponent(`My valuation of Anthropic: ${fmtB(eq)} (IPO range $1.5–2T). Build yours: ${url}`);
+  try{ history.replaceState(null,'',`?${q}${location.hash}`); }catch(e){}
+}
+
+// 3P
+const p3=[null,null,null];
+document.querySelectorAll('.yn').forEach(g=>g.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const i=+g.dataset.q; p3[i]=b.classList.contains('y');
+  g.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  const out=$('p3out');
+  if(p3.includes(null)){ out.textContent='Keep going.'; return; }
+  if(!p3[0]) out.textContent="If it isn't possible, it's a fantasy, not a valuation. Pull your inputs back.";
+  else if(!p3[1]) out.textContent="Possible but not plausible: you're pricing a lottery ticket. Use this as your upside, not your base case.";
+  else if(!p3[2]) out.textContent="Plausible but not probable: a good bull case. Your base case should sit somewhere more conservative.";
+  else out.textContent="Possible, plausible and probable: this is your base case. Now ask what price gives you a margin of safety on it.";
+}));
+
+// Tabs (the hash keeps the open tab, so #sen etc. can be linked to directly)
+const TABS=['val','imp','sen','pro','p3','how'];
+function showTab(id, scroll){
+  if(!TABS.includes(id)) id='val';
+  document.querySelectorAll('.tabs [role=tab]').forEach(b=>{ const on=b.dataset.tab===id; b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1; if(on) b.scrollIntoView({block:'nearest',inline:'nearest'}); });
+  TABS.forEach(t=>{ $('p-'+t).hidden = t!==id; });
+  [cRev,cFcf,cSen].forEach(c=>c&&c.resize());
+  try{ const u=new URL(location.href); u.hash = id==='val'?'':id; history.replaceState(null,'',u.href); }catch(e){}
+  if(scroll){ const top=$('p-'+id).getBoundingClientRect().top+scrollY-64; if(scrollY>top) scrollTo({top, behavior:'smooth'}); }
+}
+document.querySelector('.tabs').addEventListener('click',e=>{ const b=e.target.closest('[role=tab]'); if(b) showTab(b.dataset.tab,true); });
+document.querySelector('.tabs').addEventListener('keydown',e=>{
+  if(e.key!=='ArrowLeft' && e.key!=='ArrowRight') return;
+  const bs=[...document.querySelectorAll('.tabs [role=tab]')], i=bs.indexOf(document.activeElement);
+  const n=bs[(i+(e.key==='ArrowRight'?1:-1)+bs.length)%bs.length]; n.focus(); showTab(n.dataset.tab);
+});
+document.addEventListener('click',e=>{ const a=e.target.closest('[data-go]'); if(a){ e.preventDefault(); showTab(a.dataset.go,true); } });
+
+// table toggles
+document.querySelectorAll('.tablebtn').forEach(b=>b.addEventListener('click',()=>{ const t=$(b.dataset.table); t.hidden=!t.hidden; b.textContent=t.hidden?'Show as table':'Hide table'; }));
+
+// copy
+$('copyBtn').addEventListener('click',async()=>{
+  try{ await navigator.clipboard.writeText(window._shareUrl); $('copyToast').textContent='Link copied. Paste it anywhere.'; }
+  catch(e){ $('copyToast').textContent=window._shareUrl; }
+});
+
+// calibration readout
+$('calB').textContent=fmtB(valueAnthropic(SCEN.base).equity);
+$('calW').textContent=fmtB(valueAnthropic(SCEN.worst).equity);
+$('calX').textContent=fmtB(valueAnthropic(SCEN.best).equity);
+
+// mobile sticky bar: show while the inputs are on screen and the answer card isn't
+try{
+  const vis={inputs:false,answer:false};
+  const upd=()=>$('mbar').classList.toggle('show', vis.inputs && !vis.answer);
+  const io=new IntersectionObserver(es=>{ es.forEach(e=>{ vis[e.target===document.querySelector('.answer')?'answer':'inputs']=e.isIntersecting; }); upd(); });
+  io.observe(document.querySelector('section[aria-label="Your assumptions"]')); io.observe(document.querySelector('.answer'));
+}catch(e){}
+
+buildFF(); makeCharts(); syncInputs(); render(); showTab(location.hash.slice(1));
+</script>
+</body>
+</html>
