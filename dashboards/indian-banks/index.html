@@ -19,11 +19,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>India Banking Scorecard — Vatayan Labs</title>
-  <meta name="description" content="Quarterly scorecard of 24 Indian banks and NBFCs — reported PAT, Gross and Net NPA from Q2FY25 to Q1FY27, with market cap and valuation snapshots.">
+  <meta name="description" content="Quarterly scorecard of 24 Indian banks and NBFCs — reported PAT, Gross and Net NPA from Q2FY25 to Q2FY27, with market cap and valuation snapshots.">
   <link rel="stylesheet" href="/dashboards/indian-banks/legacy.css">
   <link rel="canonical" href="https://vatayanlabs.com/dashboards/indian-banks/">
   <meta property="og:title" content="India Banking Scorecard — Vatayan Labs">
-  <meta property="og:description" content="Quarterly scorecard of 24 Indian banks and NBFCs — reported PAT, Gross and Net NPA from Q2FY25 to Q1FY27, with market cap and valuation snapshots.">
+  <meta property="og:description" content="Quarterly scorecard of 24 Indian banks and NBFCs — reported PAT, Gross and Net NPA from Q2FY25 to Q2FY27, with market cap and valuation snapshots.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vatayanlabs.com/dashboards/indian-banks/">
 <meta property="og:image" content="https://vatayanlabs.com/assets/og/og-dashboards.png">
@@ -178,9 +178,9 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "India Banking Scorecard — Quarterly PAT and Asset Quality for 24 Banks & NBFCs",
-  "description": "Reported profit after tax, gross NPA ratio and net NPA ratio for 24 Indian banks and NBFCs (PSU, private and NBFC), quarterly from Q2FY25 (Sep 2024) to Q1FY27 (Jun 2026). Presented as an interactive heatmap, trend lines, peer comparison and radar views, plus a snapshot of market capitalisation, P/E, P/BV, RoE and RoA.",
+  "description": "Reported profit after tax, gross NPA ratio and net NPA ratio for 24 Indian banks and NBFCs (PSU, private and NBFC), quarterly from Q2FY25 (Sep 2024) to Q2FY27 (Sep 2026). Presented as an interactive heatmap, trend lines, peer comparison and radar views, plus a snapshot of market capitalisation, P/E, P/BV, RoE and RoA.",
   "url": "https://vatayanlabs.com/dashboards/indian-banks/",
-  "temporalCoverage": "2024-07/2026-06",
+  "temporalCoverage": "2024-07/2026-09",
   "spatialCoverage": "India",
   "keywords": [
     "Indian banks",
@@ -199,7 +199,7 @@
   "isBasedOn": "Company-reported quarterly results as aggregated by screener.in and StockScans peer-comparison exports, cross-checked against company press releases for the most recent quarter",
   "isAccessibleForFree": true,
   "license": "https://creativecommons.org/licenses/by/4.0/",
-  "dateModified": "2026-08-25"
+  "dateModified": "2026-11-14"
 }
 </script>
 <link rel="stylesheet" href="/assets/nav.css">
@@ -235,18 +235,18 @@
         <div>
           <div class="ibs-kicker">Vatayan Labs</div>
           <h1>India Banking Scorecard</h1>
-          <div class="ibs-hero-sub">24 entities · PSU + Private + NBFC · Q2FY25–Q1FY27 · ₹ in Crores · Updated 25 Aug 2026</div>
+          <div class="ibs-hero-sub">24 entities · PSU + Private + NBFC · Q2FY25–Q2FY27 · ₹ in Crores · Updated 14 Nov 2026</div>
         </div>
         <div class="ibs-stats">
           <div class="ibs-stat"><div class="ibs-stat-label">Universe</div><div class="ibs-stat-value">24 Entities</div></div>
-          <div class="ibs-stat"><div class="ibs-stat-label">Quarters</div><div class="ibs-stat-value">8 Q tracked</div></div>
-          <div class="ibs-stat"><div class="ibs-stat-label">Q1FY27 PAT (agg)</div><div class="ibs-stat-value" id="latestPAT">—</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Quarters</div><div class="ibs-stat-value">9 Q tracked</div></div>
+          <div class="ibs-stat"><div class="ibs-stat-label">Q2FY27 PAT (agg)</div><div class="ibs-stat-value" id="latestPAT">—</div></div>
         </div>
       </div>
       <div class="ibs-slider-row">
         <span class="ibs-slider-label">Snapshot quarter:</span>
-        <input type="range" id="qSlider" min="0" max="7" value="7">
-        <span class="ibs-q-label" id="qLabel">Q1FY27</span>
+        <input type="range" id="qSlider" min="0" max="8" value="8">
+        <span class="ibs-q-label" id="qLabel">Q2FY27</span>
       </div>
     </div>
 
@@ -262,9 +262,9 @@
       </div>
 
       <div class="ibs-tab-panel on" id="panel-heatmap">
-        <div class="ibs-heat-info">Color scale: <span style="color:#27AE60">■ Best</span> → <span style="color:#E74C3C">■ Weakest</span> relative to current filtered universe · Snapshot: <strong id="heatQLabel" style="color:#F39C12">Q1FY27</strong></div>
+        <div class="ibs-heat-info">Color scale: <span style="color:#27AE60">■ Best</span> → <span style="color:#E74C3C">■ Weakest</span> relative to current filtered universe · Snapshot: <strong id="heatQLabel" style="color:#F39C12">Q2FY27</strong></div>
         <div class="ibs-table-wrap"><table class="ibs-table" id="heatTable"></table></div>
-        <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ <strong>*</strong> Market cap and RoA are point-in-time values as of 30 Jul 2026 — they do <strong>not</strong> change when you move the snapshot-quarter slider. Every other column does. All 24 entities have now reported Q1FY27. Click any pill or column header to sort ↓↑.</div>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ <strong>*</strong> Market cap and RoA are point-in-time values — they do <strong>not</strong> change when you move the snapshot-quarter slider, while every other column does. Market cap is at 13 Nov 2026; RoA is still at 30 Jul 2026 and is due a refresh. All 24 entities have reported Q2FY27. Click any pill or column header to sort ↓↑.</div>
       </div>
 
       <div class="ibs-tab-panel" id="panel-trend">
@@ -287,7 +287,7 @@
       </div>
 
       <div class="ibs-tab-panel" id="panel-snapshot">
-        <div class="ibs-hint">Two different things, kept apart on purpose. <strong style="color:#F39C12">Q1FY27 as reported</strong> is what companies disclosed for the June 2026 quarter. <strong style="color:#3A8DDE">Market snapshot</strong> is price-based and trailing — RoE and RoA here are TTM, <em>not</em> quarterly. Blanks are genuine gaps, not zeros. Sorted by market cap.</div>
+        <div class="ibs-hint">Two different things, kept apart on purpose. <strong style="color:#F39C12">Q1FY27 as reported</strong> is what companies disclosed for the June 2026 quarter — one quarter behind the panel, since Q2FY27 margin disclosures have not been collected yet. <strong style="color:#3A8DDE">Market snapshot</strong> is price-based and trailing — RoE and RoA here are TTM, <em>not</em> quarterly. Market cap, P/E, P/BV and RoE are at 13 Nov 2026; RoA still carries its 30 Jul 2026 value and is labelled as such. Blanks are genuine gaps, not zeros. Sorted by market cap.</div>
         <div class="ibs-table-wrap"><table class="ibs-snap" id="snapTable"></table></div>
         <div style="margin-top:10px;font-size:10px;color:var(--muted)">ⓘ NIM definitions are not uniform across lenders — Bank of Baroda's is domestic (global 2.77%), HDFC Bank's is on total assets (3.40% on interest-earning assets), and L&amp;T Finance reports NIM + fees. Compare within category, not across. CASA is disclosed as a ratio by very few lenders in their quarterly release. IndusInd's P/E and RoE are distorted by the FY26 loss quarters and should not be read as a valuation signal.</div>
       </div>
@@ -295,19 +295,19 @@
       <div class="ibs-note-strip">
         <div class="ibs-note-title">Dashboard Intelligence Notes</div>
         <div class="ibs-notes-grid">
-          <div class="ibs-note">🔴 PSU asset-quality compression is the cleanest trend in the panel — Bank of India GNPA 4.41% → 1.81% and Canara 3.73% → 1.57% over eight quarters. Indian Bank now runs a 0.15% net NPA, and SBI's 1.47% gross / 0.38% net is its lowest in over two decades.</div>
-          <div class="ibs-note">⚖️ IndusInd is the outlier. Losses of ₹2,236cr (Q4FY25) and ₹445cr (Q2FY26) followed the derivatives accounting episode; GNPA peaked at 3.64% and has since eased to 3.25%, with PAT back to ₹1,002cr.</div>
-          <div class="ibs-note">💰 NBFC gross NPAs sit structurally higher — Shriram 4.64%, Chola 4.50% on RBI norms — because the underlying asset mix is used-vehicle and MSME credit, not because of distress. Read them against their own history.</div>
-          <div class="ibs-note">📐 Two Q1FY27 results need adjusting before comparison: Bank of Baroda's ₹1,278cr PAT is after a ₹5,680cr NMC Health settlement (₹5,528cr ex-item), and IDFC First's ₹1,075cr is a record, up 132% YoY.</div>
+          <div class="ibs-note">🔴 PSU asset-quality compression remains the cleanest trend in the panel — Bank of India GNPA 4.41% → 1.60% and Canara 3.73% → 1.33% across nine quarters. Indian Bank now runs a 0.14% net NPA, and SBI sits at 1.39% gross / 0.36% net on a record ₹23,038cr quarter.</div>
+          <div class="ibs-note">⚖️ IndusInd's repair is now visible in the data. After losses of ₹2,236cr (Q4FY25) and ₹445cr (Q2FY26) from the derivatives episode, GNPA has fallen from a 3.64% peak to 2.73% — a 52bp drop in Q2FY27 alone — with PAT at ₹1,176cr. Revenue has also turned, up 1.6% YoY after four quarters of contraction.</div>
+          <div class="ibs-note">💰 NBFC gross NPAs sit structurally higher — Shriram 4.65%, Chola 4.44% on RBI norms — because the underlying asset mix is used-vehicle and MSME credit, not because of distress. Read them against their own history.</div>
+          <div class="ibs-note">📐 Bajaj Finance is the one asset-quality exception: GNPA rose 1.20% → 1.33% in Q2FY27 even as PAT climbed to ₹5,536cr, continuing a drift that began in FY26. Note also that Bank of Baroda's Q1FY26 base is distorted by a ₹5,680cr NMC Health settlement, so its YoY figures swing sharply.</div>
         </div>
       </div>
 
       <div class="ibs-method">
         <div class="ibs-method-title">Methodology &amp; Sources</div>
-        <p><strong>What's here:</strong> reported revenue, profit after tax, gross NPA ratio and net NPA ratio for eight quarters, Q2FY25 (Sep 2024) through Q1FY27 (Jun 2026). Revenue YoY is derived from a twelve-quarter revenue series (four quarters deeper than the display window) so it resolves for every displayed quarter, and is suppressed where the year-ago base is missing or non-meaningful. Market cap and RoA are carried in the heatmap for ranking convenience but are single point-in-time values at 30 Jul 2026, marked with an asterisk — they do not move with the quarter slider. Figures are standalone unless a company only publishes consolidated numbers — L&amp;T Finance and Tata Capital are consolidated, and IndusInd's Q1FY27 consolidated PAT was ₹1,037cr against the ₹1,002cr standalone shown here.</p>
-        <p><strong>Sources:</strong> company-reported quarterly results as aggregated by screener.in, cross-checked against company press releases and results coverage for Q1FY27. All 24 entities have now reported Q1FY27; the last three (Bajaj Finance 30 Jul, Aditya Birla Capital 31 Jul, SBI 7 Aug 2026) were filled in on 25 Aug 2026. Remaining blanks are genuine non-disclosure at source, not pending results.</p>
-        <p><strong>Known limits:</strong> Yes Bank's NPA ratios are carried at one decimal place at source, so small moves are not resolvable. The GNPA and NNPA columns carry <strong>RBI-norms non-performing asset ratios only</strong>. Gross Stage 3 under Ind AS is a different measure and is never substituted for GNPA, even where it is the figure a lender leads with — Chola, for instance, is shown at its RBI-norms 4.50% rather than its 3.29% Stage 3. Where an NBFC publishes Stage 3 but no RBI-norms GNPA, the cell is left blank: L&amp;T Finance discloses only Gross/Net Stage 3 (2.86% / 0.90% at Q1FY27), so its asset-quality cells are empty by design rather than for want of data. Aditya Birla Capital is filed under NBFC for filtering, but it is a diversified holdco spanning lending, housing finance, asset management and insurance rather than a pure lender — its consolidated result mixes in insurance and fee businesses, and it stopped disclosing NPA ratios at source after Q1FY26. Read it against its own history rather than against the monoline NBFCs beside it. Jio Financial Services was dropped from the universe in Aug 2026 — its lending book is a small part of a consolidated result driven by asset management and treasury, and it published no NPA ratios at all, so it could not be compared against the rest of the panel on any tracked metric. Three later additions carry their own caveats: <strong>IDBI Bank</strong> is classified by the RBI as a private-sector bank since 2019 but is grouped with the PSUs here pending divestment; <strong>Tata Capital</strong> is on a consolidated basis, began disclosing quarterly NPA only from Q2FY26, and its FY25 revenue step-up reflects the Tata Motors Finance merger rather than organic growth; <strong>HDB Financial</strong> listed in 2025, so its NPA ratios for the most recent one to two quarters are not yet carried at source.</p>
-        <p><strong>Snapshot tab:</strong> market capitalisation, P/E, P/BV, RoE and RoA are a market snapshot at 30 Jul 2026, sourced from StockScans peer-comparison exports (Bank of India and Shriram Finance from screener.in, which StockScans does not cover in these peer sets). RoE and RoA there are <em>trailing</em> figures, not quarterly — they are deliberately kept in a separate column group from the Q1FY27 reported figures so the two are not read as the same thing.</p>
+        <p><strong>What's here:</strong> reported revenue, profit after tax, gross NPA ratio and net NPA ratio for nine quarters, Q2FY25 (Sep 2024) through Q2FY27 (Sep 2026). Revenue YoY is derived from a twelve-quarter revenue series (four quarters deeper than the display window) so it resolves for every displayed quarter, and is suppressed where the year-ago base is missing or non-meaningful. Market cap and RoA are carried in the heatmap for ranking convenience but are single point-in-time values at 30 Jul 2026, marked with an asterisk — they do not move with the quarter slider. Figures are standalone unless a company only publishes consolidated numbers — L&amp;T Finance and Tata Capital are consolidated, and IndusInd's Q1FY27 consolidated PAT was ₹1,037cr against the ₹1,002cr standalone shown here.</p>
+        <p><strong>Sources:</strong> company-reported quarterly results as aggregated by screener.in, cross-checked against company press releases and results coverage for the latest quarter. All 24 entities have reported Q2FY27. Remaining blanks are genuine non-disclosure at source, not pending results. Quarterly figures are read directly from the rendered results table rather than from extracted page text: where a company discloses a ratio only intermittently, the blank cells carry meaning, and text extraction silently drops them. Three NBFC asset-quality series (Tata Capital, HDB Financial, Aditya Birla Capital) were found misaligned by one to four quarters for exactly that reason and were corrected on 14 Nov 2026.</p>
+        <p><strong>Known limits:</strong> Yes Bank's NPA ratios are carried at one decimal place at source, so small moves are not resolvable. The GNPA and NNPA columns carry <strong>RBI-norms non-performing asset ratios only</strong>. Gross Stage 3 under Ind AS is a different measure and is never substituted for GNPA, even where it is the figure a lender leads with — Chola, for instance, is shown at its RBI-norms 4.50% rather than its 3.29% Stage 3. Where an NBFC publishes Stage 3 but no RBI-norms GNPA, the cell is left blank: L&amp;T Finance discloses only Gross/Net Stage 3 (2.86% / 0.90% at Q1FY27), so its asset-quality cells are empty by design rather than for want of data. Aditya Birla Capital is filed under NBFC for filtering, but it is a diversified holdco spanning lending, housing finance, asset management and insurance rather than a pure lender — its consolidated result mixes in insurance and fee businesses, and its NPA ratios are carried at source through Q1FY27, with Q2FY27 not yet published. Read it against its own history rather than against the monoline NBFCs beside it. Jio Financial Services was dropped from the universe in Aug 2026 — its lending book is a small part of a consolidated result driven by asset management and treasury, and it published no NPA ratios at all, so it could not be compared against the rest of the panel on any tracked metric. Three later additions carry their own caveats: <strong>IDBI Bank</strong> is classified by the RBI as a private-sector bank since 2019 but is grouped with the PSUs here pending divestment; <strong>Tata Capital</strong> carries consolidated revenue and PAT with standalone NPA ratios, discloses NPA from Q2FY25 onward, and its FY25 revenue step-up reflects the Tata Motors Finance merger rather than organic growth; <strong>HDB Financial</strong> listed in 2025, so its gross NPA is carried at source only through Q4FY26 and its net NPA through Q1FY27.</p>
+        <p><strong>Snapshot tab:</strong> market capitalisation, P/E, RoE and P/BV are a market snapshot at 13 Nov 2026, taken from screener.in (P/BV computed as closing price divided by book value per share, which reproduces the multiples screener states in its own commentary). RoA is the one figure screener does not publish for this universe, so it still carries its 30 Jul 2026 value from the earlier StockScans export and is labelled with that date wherever it appears. RoE and RoA are <em>trailing</em> figures, not quarterly — they are deliberately kept in a separate column group from the Q1FY27 reported figures so the two are not read as the same thing.</p>
         <p><strong>Still not shown:</strong> NIM and CASA have no quarterly time series here. NIM is disclosed on inconsistent bases (domestic vs global, total assets vs interest-earning assets, NIM+fees for some NBFCs) and CASA is rarely given as a ratio in quarterly releases, so both appear only as a Q1FY27 snapshot where the company stated them. CRAR is not tracked. Building real quarterly series for these needs bank-by-bank investor presentations rather than an aggregator.</p>
       </div>
 
@@ -346,95 +346,93 @@
       { name:"HDB Fin",     full:"HDB Financial Services",     cat:"NBFC" },
       { name:"AB Capital",  full:"Aditya Birla Capital",       cat:"NBFC" },
     ];
-    // Q2FY25 = Sep-24 … Q1FY27 = Jun-26
-    const QUARTERS = ["Q2FY25","Q3FY25","Q4FY25","Q1FY26","Q2FY26","Q3FY26","Q4FY26","Q1FY27"];
+    // Q2FY25 = Sep-24 … Q2FY27 = Sep-26
+    const QUARTERS = ["Q2FY25","Q3FY25","Q4FY25","Q1FY26","Q2FY26","Q3FY26","Q4FY26","Q1FY27","Q2FY27"];
     const N = null;
     const SEED = {
-      "SBI":         { pat:[18331,16891,18643,19160,20160,21028,19684,21121], gnpa:[2.13,2.07,1.82,1.83,1.73,1.57,1.49,1.47], nnpa:[0.53,0.53,0.47,0.47,0.42,0.39,0.39,0.38] },
-      "BOB":         { pat:[5238,4837,5048,4541,4809,5055,5616,1278],      gnpa:[2.50,2.43,2.26,2.28,2.16,2.04,1.89,1.99], nnpa:[0.60,0.59,0.58,0.60,0.57,0.57,0.45,0.50] },
-      "PNB":         { pat:[4303,4508,4567,1675,4904,5100,5225,5253],      gnpa:[4.48,4.09,3.95,3.78,3.45,3.19,2.95,2.78], nnpa:[0.46,0.41,0.40,0.38,0.36,0.32,0.29,0.28] },
-      "Canara":      { pat:[4015,4104,5003,4752,4774,5155,4506,4856],      gnpa:[3.73,3.34,2.94,2.69,2.35,2.08,1.84,1.57], nnpa:[0.99,0.89,0.70,0.63,0.54,0.45,0.43,0.36] },
-      "Union":       { pat:[4720,4604,4985,4116,4249,5017,5316,5332],      gnpa:[4.36,3.85,3.60,3.52,3.29,3.06,2.82,2.65], nnpa:[0.98,0.82,0.63,0.62,0.55,0.51,0.48,0.47] },
-      "Indian Bank": { pat:[2706,2852,2956,2973,3018,3061,3103,3273],      gnpa:[3.48,3.26,3.09,3.01,2.60,2.23,1.98,1.86], nnpa:[0.27,0.21,0.19,0.18,0.16,0.15,0.15,0.15] },
-      "BoI":         { pat:[2374,2517,2626,2252,2555,2705,3016,3068],      gnpa:[4.41,3.69,3.27,2.92,2.54,2.26,1.98,1.81], nnpa:[0.94,0.85,0.82,0.75,0.65,0.60,0.56,0.51] },
-      "HDFC Bank":   { pat:[16821,16736,17616,18155,18641,18654,19221,19060], gnpa:[1.36,1.42,1.33,1.40,1.24,1.24,1.15,1.17], nnpa:[0.41,0.46,0.43,0.47,0.42,0.42,0.38,0.41] },
-      "ICICI":       { pat:[11746,11792,12630,12768,12359,11318,13702,14804], gnpa:[1.97,1.96,1.67,1.67,1.58,1.53,1.40,1.38], nnpa:[0.42,0.42,0.39,0.41,0.39,0.37,0.33,0.35] },
-      "Axis":        { pat:[6918,6304,7118,5806,5090,6490,7071,7114],      gnpa:[1.44,1.46,1.28,1.57,1.46,1.40,1.23,1.28], nnpa:[0.34,0.35,0.33,0.45,0.44,0.42,0.37,0.39] },
-      "Kotak":       { pat:[3344,3305,3552,3282,3253,3446,4027,4123],      gnpa:[1.49,1.50,1.42,1.48,1.39,1.30,1.20,1.18], nnpa:[0.43,0.41,0.31,0.34,0.32,0.31,0.25,0.27] },
-      "Federal":     { pat:[1057,955,1030,862,955,1041,1259,1177],         gnpa:[2.09,1.95,1.84,1.91,1.83,1.72,1.62,1.52], nnpa:[0.57,0.49,0.44,0.48,0.48,0.42,0.20,0.18] },
-      "IndusInd":    { pat:[1325,1401,-2236,684,-445,161,533,1002],        gnpa:[2.11,2.25,3.13,3.64,3.60,3.56,3.43,3.25], nnpa:[0.64,0.68,0.95,1.12,1.04,1.04,1.00,0.95] },
-      "Yes Bank":    { pat:[553,612,738,801,654,952,1068,1071],            gnpa:[1.60,1.60,1.60,1.60,1.60,1.50,1.30,1.30], nnpa:[0.50,0.50,0.30,0.30,0.30,0.30,0.20,0.20] },
-      "AUSFB":       { pat:[571,528,504,581,561,668,832,796],              gnpa:[1.98,2.31,2.28,2.47,2.41,2.30,2.03,2.10], nnpa:[0.75,0.91,0.74,0.88,0.88,0.88,0.74,0.76] },
-      "IDFC First":  { pat:[201,339,304,463,352,503,319,1075],             gnpa:[1.92,1.94,1.87,1.97,1.86,1.69,1.61,1.51], nnpa:[0.48,0.52,0.53,0.55,0.52,0.53,0.48,0.44] },
-      "Bajaj Fin":   { pat:[5614,3706,3940,4133,4251,4581,4840,5346],      gnpa:[1.33,1.41,1.18,1.28,1.59,1.56,1.27,1.20], nnpa:[0.58,0.61,0.56,0.63,0.77,0.61,0.52,0.49] },
-      "L&T Fin":     { pat:[689,619,631,694,728,731,947,895],              gnpa:[N,N,N,N,N,N,N,N],                        nnpa:[N,N,N,N,N,N,N,N] },
-      "Chola":       { pat:[963,1087,1267,1136,1155,1288,1641,1654],       gnpa:[3.78,4.00,3.97,4.29,4.57,4.63,4.36,4.50], nnpa:[2.48,2.66,2.63,2.86,3.07,3.13,2.87,2.95] },
-      "Shriram":     { pat:[2071,3570,2139,2156,2307,2522,3014,3445],      gnpa:[5.32,5.38,4.55,4.53,4.57,4.54,4.58,4.64], nnpa:[2.64,2.68,2.64,2.57,2.49,2.38,2.33,2.33] },
-      "IDBI":        { pat:[1836,1908,2051,2007,3627,1935,1943,2115],      gnpa:[3.68,3.57,2.98,2.93,2.65,2.57,2.32,2.30], nnpa:[0.20,0.18,0.15,0.21,0.21,0.18,0.15,0.16] },
-      "Tata Cap":    { pat:[1133,1050,1000,1041,1119,1265,1466,1628],      gnpa:[N,N,N,N,1.89,2.29,2.33,2.89], nnpa:[N,N,N,N,0.52,0.95,0.98,1.40] },
-      "HDB Fin":     { pat:[591,472,531,568,581,644,751,785],              gnpa:[2.25,2.26,2.56,2.81,2.81,2.44,N,N], nnpa:[1.11,1.27,1.25,1.09,1.04,N,N,N] },
-      "AB Capital":  { pat:[1032,613,654,676,916,740,777,893],            gnpa:[1.68,1.51,1.33,1.30,N,N,N,N],             nnpa:[0.95,0.85,0.70,0.68,N,N,N,N] },
+      "SBI":           { pat:[18331,16891,18643,19160,20160,21028,19684,21121,23038], gnpa:[2.13,2.07,1.82,1.83,1.73,1.57,1.49,1.47,1.39], nnpa:[0.53,0.53,0.47,0.47,0.42,0.39,0.39,0.38,0.36] },
+      "BOB":           { pat:[5238,4837,5048,4541,4809,5055,5616,1278,6532], gnpa:[2.5,2.43,2.26,2.28,2.16,2.04,1.89,1.99,1.78], nnpa:[0.6,0.59,0.58,0.6,0.57,0.57,0.45,0.5,0.37] },
+      "PNB":           { pat:[4303,4508,4567,1675,4904,5100,5225,5253,5532], gnpa:[4.48,4.09,3.95,3.78,3.45,3.19,2.95,2.78,2.55], nnpa:[0.46,0.41,0.4,0.38,0.36,0.32,0.29,0.28,0.25] },
+      "Canara":        { pat:[4015,4104,5003,4752,4774,5155,4506,4856,5175], gnpa:[3.73,3.34,2.94,2.69,2.35,2.08,1.84,1.57,1.33], nnpa:[0.99,0.89,0.7,0.63,0.54,0.45,0.43,0.36,0.3] },
+      "Union":         { pat:[4720,4604,4985,4116,4249,5017,5316,5332,5537], gnpa:[4.36,3.85,3.6,3.52,3.29,3.06,2.82,2.65,2.42], nnpa:[0.98,0.82,0.63,0.62,0.55,0.51,0.48,0.47,0.42] },
+      "Indian Bank":   { pat:[2706,2852,2956,2973,3018,3061,3103,3273,3462], gnpa:[3.48,3.26,3.09,3.01,2.6,2.23,1.98,1.86,1.61], nnpa:[0.27,0.21,0.19,0.18,0.16,0.15,0.15,0.15,0.14] },
+      "BoI":           { pat:[2374,2517,2626,2252,2555,2705,3016,3068,3202], gnpa:[4.41,3.69,3.27,2.92,2.54,2.26,1.98,1.81,1.6], nnpa:[0.94,0.85,0.82,0.75,0.65,0.6,0.56,0.51,0.42] },
+      "IDBI":          { pat:[1836,1908,2051,2007,3627,1935,1943,2115,2205], gnpa:[3.68,3.57,2.98,2.93,2.65,2.57,2.32,2.3,2.12], nnpa:[0.2,0.18,0.15,0.21,0.21,0.18,0.15,0.16,0.17] },
+      "HDFC Bank":     { pat:[16821,16736,17616,18155,18641,18654,19221,19060,19510], gnpa:[1.36,1.42,1.33,1.4,1.24,1.24,1.15,1.17,1.11], nnpa:[0.41,0.46,0.43,0.47,0.42,0.42,0.38,0.41,0.37] },
+      "ICICI":         { pat:[11746,11792,12630,12768,12359,11318,13702,14804,14843], gnpa:[1.97,1.96,1.67,1.67,1.58,1.53,1.4,1.38,1.2], nnpa:[0.42,0.42,0.39,0.41,0.39,0.37,0.33,0.35,0.3] },
+      "Axis":          { pat:[6918,6304,7118,5806,5090,6490,7071,7114,7003], gnpa:[1.44,1.46,1.28,1.57,1.46,1.4,1.23,1.28,1.16], nnpa:[0.34,0.35,0.33,0.45,0.44,0.42,0.37,0.39,0.35] },
+      "Kotak":         { pat:[3344,3305,3552,3282,3253,3446,4027,4123,4212], gnpa:[1.49,1.5,1.42,1.48,1.39,1.3,1.2,1.18,1.04], nnpa:[0.43,0.41,0.31,0.34,0.32,0.31,0.25,0.27,0.24] },
+      "Federal":       { pat:[1057,955,1030,862,955,1041,1259,1177,1386], gnpa:[2.09,1.95,1.84,1.91,1.83,1.72,1.62,1.52,1.32], nnpa:[0.57,0.49,0.44,0.48,0.48,0.42,0.2,0.18,0.17] },
+      "IndusInd":      { pat:[1325,1401,-2236,684,-445,161,533,1002,1176], gnpa:[2.11,2.25,3.13,3.64,3.6,3.56,3.43,3.25,2.73], nnpa:[0.64,0.68,0.95,1.12,1.04,1.04,1,0.95,0.83] },
+      "Yes Bank":      { pat:[553,612,738,801,654,952,1068,1071,1080], gnpa:[1.6,1.6,1.6,1.6,1.6,1.5,1.3,1.3,1.2], nnpa:[0.5,0.5,0.3,0.3,0.3,0.3,0.2,0.2,0.2] },
+      "AUSFB":         { pat:[571,528,504,581,561,668,832,796,858], gnpa:[1.98,2.31,2.28,2.47,2.41,2.3,2.03,2.1,1.99], nnpa:[0.75,0.91,0.74,0.88,0.88,0.88,0.74,0.76,0.81] },
+      "IDFC First":    { pat:[201,339,304,463,352,503,319,1075,1045], gnpa:[1.92,1.94,1.87,1.97,1.86,1.69,1.61,1.51,1.32], nnpa:[0.48,0.52,0.53,0.55,0.52,0.53,0.48,0.44,0.4] },
+      "Bajaj Fin":     { pat:[5614,3706,3940,4133,4251,4581,4840,5346,5536], gnpa:[1.33,1.41,1.18,1.28,1.59,1.56,1.27,1.2,1.33], nnpa:[0.58,0.61,0.56,0.63,0.77,0.61,0.52,0.49,0.53] },
+      "L&T Fin":       { pat:[689,619,631,694,728,731,947,895,968], gnpa:[N,N,N,N,N,N,N,N,N], nnpa:[N,N,N,N,N,N,N,N,N] },
+      "Chola":         { pat:[963,1087,1267,1136,1155,1288,1641,1654,1630], gnpa:[3.78,4,3.97,4.29,4.57,4.63,4.36,4.5,4.44], nnpa:[2.48,2.66,2.63,2.86,3.07,3.13,2.87,2.95,2.92] },
+      "Shriram":       { pat:[2071,3570,2139,2156,2307,2522,3014,3445,3677], gnpa:[5.32,5.38,4.55,4.53,4.57,4.54,4.58,4.64,4.65], nnpa:[2.64,2.68,2.64,2.57,2.49,2.38,2.33,2.33,2.31] },
+      "Tata Cap":      { pat:[1133,1050,1000,1041,1119,1265,1466,1628,1832], gnpa:[1.89,2.29,2.33,2.62,2.89,2.9,2.61,2.45,N], nnpa:[0.52,0.95,0.98,1.24,1.4,1.37,1.15,1.07,N] },
+      "HDB Fin":       { pat:[591,472,531,568,581,644,751,785,780], gnpa:[2.1,2.25,2.26,2.56,2.81,2.81,2.44,N,N], nnpa:[N,0.9,0.99,1.11,1.27,1.25,1.09,1.04,N] },
+      "AB Capital":    { pat:[1032,613,654,676,916,740,777,893,1237], gnpa:[2.5,2.27,2.24,2.27,1.68,1.51,1.33,1.3,N], nnpa:[1.36,1.25,1.24,1.35,0.95,0.85,0.7,0.68,N] },
     };
 
-    // Snapshot. nim/casa = as reported for Q1FY27 (blank = not disclosed).
+    // Snapshot. nim/casa = as reported for Q1FY27 — one quarter behind the panel (blank = not disclosed).
     // mcap/pe/pbv/roe/roa = market snapshot at 30 Jul 2026; RoE and RoA are trailing, not quarterly.
     const SNAP = {
-      "SBI":         { nim:"3.00", nimNote:"domestic", mcap:935708, pe:11.15, pbv:1.67, roe:14.5, roa:1.04, note:"GNPA/NNPA lowest in over two decades; NII ₹46,992cr, +14.9%" },
-      "BOB":         { nim:"2.93", nimNote:"domestic", mcap:125845, pe:6.93,  pbv:0.75, roe:10.5, roa:0.84, note:"PAT after ₹5,680cr NMC settlement; ₹5,528cr ex-item" },
-      "PNB":         { mcap:127664, pe:5.79,  pbv:0.87, roe:13.2, roa:1.01, note:"Q1FY27 RoA 1.04% as reported" },
-      "Canara":      { nim:"2.52", mcap:113129, pe:5.70,  pbv:0.97, roe:15.3, roa:0.98 },
-      "Union":       { mcap:130596, pe:6.32,  pbv:0.99, roe:14.3, roa:1.28 },
-      "Indian Bank": { mcap:111488, pe:8.72,  pbv:1.45, roe:14.9, roa:1.24 },
-      "BoI":         { mcap:62699,  pe:5.53,  pbv:0.70, roe:12.4 },
-      "HDFC Bank":   { nim:"3.26", nimNote:"total assets", mcap:1152767, pe:14.56, pbv:1.92, roe:13.7, roa:1.66, note:"3.40% NIM on interest-earning assets" },
-      "ICICI":       { nim:"4.36", mcap:1031572, pe:18.34, pbv:2.76, roe:15.8, roa:1.98 },
-      "Axis":        { nim:"3.46", mcap:384468, pe:13.82, pbv:1.73, roe:12.6, roa:1.40, note:"NIM at cycle low" },
-      "Kotak":       { nim:"4.53", mcap:387251, pe:19.08, pbv:2.14, roe:10.7, roa:1.92 },
-      "Federal":     { nim:"3.33", mcap:88765,  pe:18.90, pbv:2.31, roe:11.7, roa:1.12, note:"Net NPA at decadal low" },
-      "IndusInd":    { nim:"3.57", mcap:78700,  pe:59.52, pbv:1.21, roe:1.4,  roa:0.16, note:"PE and RoE distorted by FY26 loss quarters" },
-      "Yes Bank":    { nim:"2.70", mcap:71658,  pe:19.18, pbv:1.37, roe:7.2,  roa:0.82 },
-      "AUSFB":       { nim:"5.90", mcap:78242,  pe:27.31, pbv:3.96, roe:13.4, roa:1.38, note:"Q1FY27 RoA 1.7%, RoE 15.6% as reported" },
-      "IDFC First":  { nim:"5.96", casa:"50.8", mcap:73270, pe:32.70, pbv:1.51, roe:4.8, roa:0.55, note:"Record quarterly PAT" },
-      "Bajaj Fin":   { mcap:656465, pe:34.45, pbv:5.76, roe:17.0, roa:3.45, note:"Consolidated PAT ₹5,986cr, +27.4%; AUM ₹5.47 lakh cr, +23.9%" },
-      "L&T Fin":     { nim:"10.47", nimNote:"NIM + fees", mcap:77462, pe:24.32, pbv:2.77, roe:10.7, roa:2.10, note:"Loan book ₹1,29,634cr, +27% YoY" },
-      "Chola":       { mcap:153726, pe:26.58, pbv:5.05, roe:17.2, roa:2.13, note:"AUM ₹2.54 lakh cr, +23% YoY" },
-      "Shriram":     { mcap:245872, pe:21.80, pbv:2.99, roe:16.4 },
-      "IDBI":        { mcap:90471,  pe:9.70,  pbv:1.49, roe:13.5, roa:1.98, note:"RBI classifies IDBI as private-sector; grouped with PSU pending divestment" },
-      "Tata Cap":    { mcap:153579, pe:28.07, pbv:3.44, roe:10.9, roa:1.68, note:"Consolidated; NPA disclosed from Q2FY26. Tata Motors Finance merger lifts FY25 revenue base" },
-      "HDB Fin":     { mcap:56459,  pe:20.43, pbv:2.73, roe:12.3, roa:2.06, note:"Listed 2025; Q4FY26/Q1FY27 NPA not yet in source" },
-      "AB Capital":  { mcap:108790, pe:27.61, pbv:2.83, roe:11.2, roa:1.15, note:"NPA ratios not disclosed at source since Q2FY26" },
+      "SBI":           { nim:"3.00", nimNote:"domestic", mcap:998301, pe:12.6, pbv:1.66, roe:16.2, roa:1.04, note:"GNPA/NNPA lowest in over two decades; NII ₹46,992cr, +14.9%" },
+      "BOB":           { nim:"2.93", nimNote:"domestic", mcap:141690, pe:6.3, pbv:0.88, roe:13.8, roa:0.84, note:"PAT after ₹5,680cr NMC settlement; ₹5,528cr ex-item" },
+      "PNB":           { mcap:164177, pe:7.78, pbv:1.08, roe:12.5, roa:1.01, note:"Q1FY27 RoA 1.04% as reported" },
+      "Canara":        { nim:"2.52", mcap:118923, pe:6.04, pbv:0.96, roe:18.1, roa:0.98 },
+      "Union":         { mcap:155114, pe:7.32, pbv:1.12, roe:15.5, roa:1.28 },
+      "Indian Bank":   { mcap:126172, pe:9.78, pbv:1.48, roe:16.5, roa:1.24 },
+      "BoI":           { mcap:70231, pe:5.86, pbv:0.76, roe:12.4 },
+      "IDBI":          { mcap:86009, pe:10.5, pbv:1.2, roe:14.9, roa:1.98, note:"RBI classifies IDBI as private-sector; grouped with PSU pending divestment" },
+      "HDFC Bank":     { nim:"3.26", nimNote:"total assets", mcap:1241454, pe:16.2, pbv:2.14, roe:14, roa:1.66, note:"3.40% NIM on interest-earning assets" },
+      "ICICI":         { nim:"4.36", mcap:1138430, pe:20.8, pbv:3.18, roe:15.8, roa:1.98 },
+      "Axis":          { nim:"3.46", mcap:416055, pe:15, pbv:1.89, roe:12.7, roa:1.4, note:"NIM at cycle low" },
+      "Kotak":         { nim:"4.53", mcap:487717, pe:30.8, pbv:3.33, roe:11.7, roa:1.92 },
+      "Federal":       { nim:"3.33", mcap:89393, pe:18.4, pbv:2.16, roe:11.4, roa:1.12, note:"Net NPA at decadal low" },
+      "IndusInd":      { nim:"3.57", mcap:71348, pe:24.8, pbv:1.06, roe:1.44, roa:0.16, note:"PE and RoE distorted by FY26 loss quarters" },
+      "Yes Bank":      { nim:"2.70", mcap:54807, pe:13.1, pbv:1.02, roe:7.03, roa:0.82 },
+      "AUSFB":         { nim:"5.90", mcap:72648, pe:23, pbv:3.38, roe:14.2, roa:1.38, note:"Q1FY27 RoA 1.7%, RoE 15.6% as reported" },
+      "IDFC First":    { nim:"5.96", casa:"50.8", mcap:68783, pe:23.4, pbv:1.39, roe:3.83, roa:0.55, note:"Record quarterly PAT" },
+      "Bajaj Fin":     { mcap:698131, pe:35.9, pbv:6.28, roe:17.1, roa:3.45, note:"Consolidated PAT ₹5,986cr, +27.4%; AUM ₹5.47 lakh cr, +23.9%" },
+      "L&T Fin":       { nim:"10.47", nimNote:"NIM + fees", mcap:69588, pe:19.5, pbv:2.39, roe:11.8, roa:2.1, note:"Loan book ₹1,29,634cr, +27% YoY" },
+      "Chola":         { mcap:158841, pe:25.6, pbv:4.6, roe:19.3, roa:2.13, note:"AUM ₹2.54 lakh cr, +23% YoY" },
+      "Shriram":       { mcap:228431, pe:18, pbv:2.05, roe:16.4 },
+      "Tata Cap":      { mcap:150926, pe:25.2, pbv:3.09, roe:12.4, roa:1.68, note:"Consolidated; NPA disclosed from Q2FY26. Tata Motors Finance merger lifts FY25 revenue base" },
+      "HDB Fin":       { mcap:47059, pe:15.9, pbv:2.12, roe:13.9, roa:2.06, note:"Listed 2025; GNPA not carried at source since Q4FY26, NNPA since Q1FY27" },
+      "AB Capital":    { mcap:112118, pe:30.7, pbv:3.19, roe:11.6, roa:1.15, note:"NPA ratios carried through Q1FY27; Q2FY27 not yet at source" },
     };
 
     // Revenue runs 4 quarters deeper than the display window so YoY resolves for
     // every displayed quarter. Index 0-3 = Sep23..Jun24 (lookback only),
-    // index 4-11 = Q2FY25..Q1FY27 (the displayed eight).
+    // index 4-12 = Q2FY25..Q2FY27 (the displayed nine).
     const REV = {
-      "SBI":         [101379,106734,111043,111526,113871,117427,119509,117996,119654,122352,123098,127896],
-      "BOB":         [27862,28605,29583,29629,30278,30908,31117,31091,31511,31750,32642,33211],
-      "PNB":         [26355,27288,28113,28556,29875,31340,31989,31964,31872,32231,32157,32897],
-      "Canara":      [26838,28039,28807,28701,29740,30312,31002,31003,31544,31982,31838,32957],
-      "Union":       [24587,25363,26350,26364,26708,26544,27695,26919,26191,26443,26439,27203],
-      "Indian Bank": [13743,14198,14624,15039,15348,15759,15856,16283,16590,17098,17480,18090],
-      "BoI":         [14971,15218,16162,16938,17355,18211,18323,18352,18406,18927,19476,19949],
-      "HDFC Bank":   [67698,70583,71473,73033,74017,76007,77460,77470,76691,76751,76610,79363],
-      "ICICI":       [34920,36695,37948,38996,40537,41300,42431,42947,41758,41966,43275,45671],
-      "Axis":        [14312,15429,16136,16612,16937,17348,17432,17504,17226,17988,18267,19340],
-      "Kotak":       [11193,11799,12307,12746,13216,13428,13530,13837,13649,13903,14175,14477],
-      "Federal":     [5455,5730,5978,6331,6577,6809,6648,6687,6742,6868,7399,7238],
-      "IndusInd":    [11248,11572,12199,12547,12686,12801,10634,12264,11609,11373,11005,11310],
-      "Yes Bank":    [6711,6985,7447,7719,7730,7829,7616,7596,7379,7543,7651,8044],
-      "AUSFB":       [2531,2736,2830,3769,3911,4113,4271,4378,4511,4727,5019,5303],
-      "IDFC First":  [7356,7879,8219,8789,8957,9343,9413,9642,9937,10417,10553,11051],
-      "Bajaj Fin":   [11408,12103,12760,13724,14488,15371,15638,16697,17184,17870,18430,19802],
-      "L&T Fin":     [3214,3533,3670,3782,4015,4095,4020,4257,4333,4578,4921,5213],
-      "Chola":       [4435,4960,5388,5785,6227,6709,7025,7245,7470,7875,8392,8833],
-      "Shriram":     [8556,8922,9484,9592,10090,10698,11454,11536,11908,12166,12509,13394],
-      "IDBI":        [6035,6541,6990,6666,7442,7816,6979,7021,7104,7074,7798,7541],
-      "Tata Cap":    [4319,4883,4998,5372,7185,7104,7478,7665,7737,7976,8160,8822],
-      "HDB Fin":     [3516,3602,3667,3884,4007,4144,4266,4465,4545,4674,4745,4938],
-      // ABCAPITAL standalone revenue before Mar-24 is a holdco artefact (₹9-134cr
-      // against a ₹4,000cr run-rate) — nulled so YoY does not print nonsense.
-      "AB Capital":  [N,N,4139,N,4158,3792,3853,4010,4507,4384,4572,4990],
+      "SBI":           [101379,106734,111043,111526,113871,117427,119509,117996,119654,122352,123098,127896,132019],
+      "BOB":           [27862,28605,29583,29629,30278,30908,31117,31091,31511,31750,32642,33211,35085],
+      "PNB":           [26355,27288,28113,28556,29875,31340,31989,31964,31872,32231,32157,32897,34585],
+      "Canara":        [26838,28039,28807,28701,29740,30312,31002,31003,31544,31982,31838,32957,35159],
+      "Union":         [24587,25363,26350,26364,26708,26544,27695,26919,26191,26443,26439,27203,28158],
+      "Indian Bank":   [13743,14198,14624,15039,15348,15759,15856,16283,16590,17098,17480,18090,19106],
+      "BoI":           [14971,15218,16162,16938,17355,18211,18323,18352,18406,18927,19476,19949,21229],
+      "IDBI":          [6035,6541,6990,6666,7442,7816,6979,7021,7104,7074,7798,7541,8512],
+      "HDFC Bank":     [67698,70583,71473,73033,74017,76007,77460,77470,76691,76751,76610,79363,83427],
+      "ICICI":         [34920,36695,37948,38996,40537,41300,42431,42947,41758,41966,43275,45671,49110],
+      "Axis":          [14312,15429,16136,16612,16937,17348,17432,17504,17226,17988,18267,19340,36419],
+      "Kotak":         [11193,11799,12307,12746,13216,13428,13530,13837,13649,13903,14175,14477,15948],
+      "Federal":       [5455,5730,5978,6331,6577,6809,6648,6687,6742,6868,7399,7238,7721],
+      "IndusInd":      [11248,11572,12199,12547,12686,12801,10634,12264,11609,11373,11005,11310,11796],
+      "Yes Bank":      [6711,6985,7447,7719,7730,7829,7616,7596,7379,7543,7651,8044,8640],
+      "AUSFB":         [2531,2736,2830,3769,3911,4113,4271,4378,4511,4727,5019,5303,5612],
+      "IDFC First":    [7356,7879,8219,8789,8957,9343,9413,9642,9937,10417,10553,11051,11922],
+      "Bajaj Fin":     [11408,12103,12760,13724,14488,15371,15638,16697,17184,17870,18430,19802,20891],
+      "L&T Fin":       [3214,3533,3670,3782,4015,4095,4020,4257,4333,4578,4921,5213,5484],
+      "Chola":         [4435,4960,5388,5785,6227,6709,7025,7245,7470,7875,8392,8833,9244],
+      "Shriram":       [8556,8922,9484,9592,10090,10698,11454,11536,11908,12166,12509,13394,13789],
+      "Tata Cap":      [4319,4883,4998,5372,7185,7104,7478,7665,7737,7976,8160,8822,9342],
+      "HDB Fin":       [3516,3602,3667,3884,4007,4144,4266,4465,4545,4674,4745,4938,5005],
+      "AB Capital":    [N,N,4139,N,4158,3792,3853,4010,4507,4384,4572,4990,5493],
     };
 
     const METRICS = {
@@ -451,7 +449,7 @@
     const CHART_COLORS = ["#3A8DDE","#27AE60","#E67E22","#8E44AD","#E74C3C","#F39C12"];
     const RADAR_METRICS = ["pat","revyoy","gnpa","nnpa","roa"];
 
-    let activeMetric = "gnpa", activeCat = "All", activeQ = 7, activeTab = "heatmap";
+    let activeMetric = "gnpa", activeCat = "All", activeQ = 8, activeTab = "heatmap";
     let sortDir = "desc";
     let selectedBanks = ["HDFC Bank","ICICI","IndusInd","Chola"];
     let trendChartInst = null, barChartInst = null, radarChartInst = null;
@@ -621,7 +619,7 @@
         { key:"pe",   label:"P/E" },
         { key:"pbv",  label:"P/BV" },
         { key:"roe",  label:"RoE %" },
-        { key:"roa",  label:"RoA %" },
+        { key:"roa",  label:"RoA % (30 Jul)" },
       ];
       // heaviest first — market cap reads better than dashboard order here
       const banks = filteredBanks().slice().sort((a,b) =>
@@ -631,7 +629,7 @@
       html += `<tr>`;
       html += `<th rowspan="2" style="text-align:left;vertical-align:bottom">Entity</th>`;
       html += `<th colspan="${repCols.length}" style="color:#F39C12;border-bottom:1px solid #2E5DA8">Q1FY27 as reported</th>`;
-      html += `<th colspan="${mktCols.length}" style="color:#3A8DDE;border-bottom:1px solid #2E5DA8">Market snapshot · 30 Jul 2026</th>`;
+      html += `<th colspan="${mktCols.length}" style="color:#3A8DDE;border-bottom:1px solid #2E5DA8">Market snapshot · 13 Nov 2026</th>`;
       html += `<th rowspan="2" style="text-align:left;vertical-align:bottom">Note</th>`;
       html += `</tr><tr>`;
       repCols.forEach(c => { html += `<th>${c.label}</th>`; });
