@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Overlap X-Ray for 3-4 Funds | Vatayan Labs</title>
+<meta name="description" content="Enter up to four equity funds and what you hold in each. See the stocks and sectors they repeat and how much of your money is the same exposure twice.">
+<link rel="canonical" href="https://vatayanlabs.com/mutual-funds/overlap/portfolio/">
+
+<!-- Open Graph. Keep this block at the top of the head, above the
+     analytics scripts and any inline style: link crawlers read only the
+     first few KB, and WhatsApp needs the image dimensions declared. -->
+<meta property="og:site_name" content="Vatayan Labs">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatayanlabs.com/mutual-funds/overlap/portfolio/">
+<meta property="og:title" content="How many different things do your funds actually own?">
+<meta property="og:description" content="Enter up to four equity funds and what you hold in each. See the stocks and sectors they repeat and how much of your money is the same exposure twice.">
+<meta property="og:image" content="https://vatayanlabs.com/assets/og/og-mf-overlap.png">
+<meta property="og:image:secure_url" content="https://vatayanlabs.com/assets/og/og-mf-overlap.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mutual fund overlap checker: do your funds own the same stocks?">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How many different things do your funds actually own?">
+<meta name="twitter:description" content="Enter up to four equity funds and what you hold in each. See the stocks and sectors they repeat and how much of your money is the same exposure twice.">
+<meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-mf-overlap.png">
+<meta name="twitter:image:alt" content="Mutual fund overlap checker: do your funds own the same stocks?">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E0WLCFVLDX');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xoi9afzxww");
+</script>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/logo-badge.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" type="application/rss+xml" title="Vatayan Labs" href="/feed.xml">
+<style>
+
+/* Scoped under .ovl so it can be pasted into the Mutual Funds hub as a tab body. */
+.ovl{--bg:#F8FAFC;--card:#fff;--line:#E2E8F0;--tx:#1A2E4A;--mut:#64748B;--dup:#d97706;--dup-soft:#fef3c7;--neg:#dc2626;
+ font-family:Inter,system-ui,sans-serif;color:var(--tx);background:var(--bg);padding:0 16px 48px;line-height:1.45}
+.ovl *{box-sizing:border-box}.ovl h1,.ovl h2,.ovl p{margin:0}
+.ovl .wrap{max-width:1040px;margin:0 auto}
+.ovl .top{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}.ovl .top img{height:64px}.ovl .top .t{font-size:12px;letter-spacing:.24em;font-weight:700;color:var(--mut);margin-left:auto;text-align:right}
+.ovl .intro{padding:22px 0 8px}.ovl .intro h1{font-size:28px;font-weight:800;letter-spacing:-.02em}.ovl .intro p{color:var(--mut);font-size:15px;margin-top:6px;max-width:760px}
+.ovl .picks{margin:18px 0}.ovl .prow{display:grid;grid-template-columns:22px minmax(0,1fr) 150px;gap:10px;align-items:center;margin-bottom:10px}
+.ovl .dot{width:14px;height:14px;border-radius:4px;justify-self:center}
+.ovl select,.ovl input[type=number]{width:100%;font:600 15px Inter,sans-serif;color:var(--tx);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+.ovl select:focus,.ovl input:focus{outline:2px solid #93c5fd;border-color:#2563eb}
+.ovl .hint{font-size:12px;color:var(--mut);margin-top:2px}
+.ovl .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.ovl .k{font-size:11px;letter-spacing:.18em;font-weight:700;color:var(--mut);text-transform:uppercase}
+.ovl h2{font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.ovl h2:before{content:"";width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,#2563eb,#0d9488)}
+.ovl .hd2{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 14px;margin-bottom:6px}
+.ovl .ohero{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;margin-bottom:16px}.ovl .ohero .panel{margin:0}
+.ovl .big{font-size:78px;font-weight:800;line-height:1;letter-spacing:-.04em;background:linear-gradient(120deg,#d97706,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:6px}.ovl .big small{font-size:28px}
+.ovl .lead{font-size:16px;margin-top:10px}.ovl .lead b{color:var(--dup)}
+.ovl .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.ovl .stats div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.ovl .stats b{display:block;font-size:22px}
+.ovl .ins{margin:0;padding:0;list-style:none}.ovl .ins li{padding:10px 12px;margin-top:8px;background:var(--dup-soft);border-left:3px solid var(--dup);border-radius:8px;font-size:14px}.ovl .ins b{color:#92400e}
+.ovl .hold{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:12px 0 6px;font-weight:700;font-size:13px}.ovl .hold div{display:grid;place-items:center;color:#fff;min-width:22px}
+.ovl .leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--mut)}.ovl .leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ovl .fcard{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
+.ovl .fc{border:1px solid var(--line);border-top:4px solid var(--c);border-radius:14px;padding:14px}.ovl .fc h3{margin:2px 0 0;font-size:16px;font-weight:800;line-height:1.2}
+.ovl .fc .m{font-size:12px;color:var(--mut);margin-top:6px}.ovl .fc .m b{color:var(--tx)}
+.ovl .stack{display:flex;height:16px;border-radius:6px;overflow:hidden;margin:12px 0 6px;background:#e2e8f0}.ovl .stack i{display:block;height:100%}
+.ovl .fc .adds{font-size:13px;margin-top:6px}.ovl .fc .adds b{color:var(--tx)}
+.ovl table{width:100%;border-collapse:collapse;font-size:13.5px}.ovl th,.ovl td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+.ovl td:first-child,.ovl th:first-child{text-align:left}.ovl th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.ovl .hm td,.ovl .hm th{text-align:center;padding:8px 6px}.ovl .hm td.c{border-radius:8px;font-weight:700;border:2px solid #fff}.ovl .hm small{display:block;font-weight:500;color:#475569;font-size:11px}
+.ovl .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.ovl .two .panel{margin:0}
+.ovl .srow{display:grid;grid-template-columns:minmax(0,1.15fr) 2fr 54px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.ovl .srow .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ovl .srow .nm small{display:block;color:var(--mut);font-size:11px;margin-top:-2px}
+.ovl .bar{display:flex;height:12px;border-radius:5px;overflow:hidden;background:#eef2f7}.ovl .bar i{display:block;height:100%}
+.ovl .srow b{text-align:right;font:500 12px 'JetBrains Mono',monospace}
+.ovl .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:1px 8px;margin-left:6px;background:var(--dup-soft);color:#92400e}
+.ovl .obtn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font:600 13px Inter;color:#2563eb;cursor:pointer;margin-top:12px}.ovl .obtn:hover{border-color:#2563eb}
+.ovl .note{font-size:12px;color:var(--mut);margin-top:10px}.ovl .foot{font-size:11.5px;color:var(--mut);line-height:1.65;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.ovl .msg{padding:40px;text-align:center;color:var(--mut)}.ovl .share{float:right}
+@media(max-width:760px){.ovl .ohero,.ovl .two,.ovl .fcard{grid-template-columns:1fr}.ovl .prow{grid-template-columns:18px minmax(0,1fr) 110px}.ovl .big{font-size:62px}.ovl .intro h1{font-size:23px}.ovl .top .t{display:none}.ovl .top img{height:52px}.ovl .stats{grid-template-columns:1fr 1fr 1fr}.ovl .srow{grid-template-columns:minmax(0,1fr) 1.3fr 50px}.ovl .scroll{overflow-x:auto}}
+
+
+.ovl{background:transparent;padding:0}.ovl .wrap{max-width:none}
+.ovl .okick{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#1d4ed8;margin-bottom:6px}
+.ovl .intro{padding:6px 0 4px}.ovl .intro h1{font-size:clamp(26px,4vw,34px);letter-spacing:-.8px;line-height:1.15}.ovl .intro p{font-size:16.5px;color:#334155}
+.ovl .oswitch{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}.ovl .oswitch a{padding:8px 16px;border-radius:999px;border:1.5px solid #E2E8F0;background:#fff;color:#334155;font-size:13.5px;font-weight:600;text-decoration:none}
+.ovl .oswitch a:hover{border-color:#1d4ed8;color:#1d4ed8}.ovl .oswitch a[aria-current="page"]{background:#0f172a;border-color:#0f172a;color:#fff}
+.ovl .onotice{font-size:13px;color:#475569;background:#fff;border:1px solid #E2E8F0;border-left:3px solid #d97706;border-radius:10px;padding:10px 14px;margin:14px 0 0}
+.mf-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;max-width:1100px;margin:26px auto 0;padding:0 24px}
+.mf-tab{display:flex;flex-direction:column;gap:2px;padding:14px 18px;border-radius:12px;border:1px solid var(--border,#e2e8f0);background:var(--card,#fff);text-decoration:none;transition:all .15s ease;box-shadow:var(--shadow,0 1px 3px rgba(0,0,0,.08))}
+.mf-tab:hover{border-color:var(--blue,#1d4ed8);transform:translateY(-1px)}.mf-tab-k{font-size:14.5px;font-weight:700;color:var(--text,#0f172a);letter-spacing:-.2px}.mf-tab-t{font-size:12.5px;color:var(--text-muted,#64748b)}
+.mf-tab[aria-current="page"]{background:var(--navy,#0f172a);border-color:var(--navy,#0f172a)}.mf-tab[aria-current="page"] .mf-tab-k{color:#fff}.mf-tab[aria-current="page"] .mf-tab-t{color:#94a3b8}
+@media (max-width:640px){.mf-tabs{grid-template-columns:1fr}}
+.ovl-page{max-width:1100px;margin:0 auto;padding:12px 24px 64px}
+
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <img class="site-logo" src="/assets/logo-badge.png" alt="" width="34" height="34">
+      <span>
+        <span class="site-brand-name">Vatayan Labs</span>
+        <span class="site-brand-tag">A window into how India moves money</span>
+      </span>
+    </a>
+    <div class="site-links">
+      <a href="/dashboards/">Dashboards</a>
+      <a href="/sectors/">Sectors</a>
+      <a href="/ai/">AI</a>
+      <a href="/mutual-funds/" class="active">Mutual Funds</a>
+      <a href="/tools/">Tools</a>
+      <a href="/downloads/">Downloads</a>
+      <a href="/about/">About</a>
+    </div>
+  </div>
+</nav>
+<nav class="mf-tabs" aria-label="Mutual fund sections">
+  <a href="/mutual-funds/study/" class="mf-tab" data-tab="study">
+    <span class="mf-tab-k">The study</span>
+    <span class="mf-tab-t">55 funds, one set of rules</span>
+  </a>
+  <a href="/mutual-funds/one-pagers/" class="mf-tab" data-tab="one-pagers">
+    <span class="mf-tab-k">One-pagers</span>
+    <span class="mf-tab-t">Deep profiles, fund by fund</span>
+  </a>
+  <a href="/mutual-funds/overlap/" class="mf-tab" data-tab="overlap" aria-current="page">
+    <span class="mf-tab-k">Overlap</span>
+    <span class="mf-tab-t">Do your funds own the same stocks?</span>
+  </a>
+</nav>
+<div class="ovl-page">
+<div class="ovl" id="ovl"><div class="wrap">
+  <div class="intro"><div class="okick">Mutual funds &middot; Overlap</div>
+ <div class="oswitch" role="tablist" aria-label="Overlap tools"><a href="/mutual-funds/overlap/">Compare two funds</a><a href="/mutual-funds/overlap/portfolio/" aria-current="page">Check 3&ndash;4 funds (your portfolio)</a></div><h1>How many different things do your funds actually own?</h1><p>Pick the two to four equity funds you hold and enter how much is in each. We look through to the stocks and sectors underneath and show how much of your money is the same exposure twice.</p></div>
+ <div class="picks" id="picks"></div>
+ <div id="out"><div class="msg">Loading funds…</div></div>
+</div></div>
+<script></script>
+<script>
+(function(){
+const $=s=>document.querySelector(s),SEGORDER=['Large Cap','Mid Cap','Small Cap','Flexi Cap','Multi Cap','Contra/Value','ELSS'];
+const COL=['#2563eb','#0d9488','#7c3aed','#ea580c'],LAB=['A','B','C','D'];
+const inr=x=>'₹'+Math.round(x).toLocaleString('en-IN'),pc=(x,d=0)=>x.toFixed(d)+'%';
+const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],dfull=s=>{const d=new Date(s);return d.getDate()+' '+MN[d.getMonth()]+' '+d.getFullYear()};
+const load=window.__UNIVERSE__?Promise.resolve(window.__UNIVERSE__):fetch('/assets/data/mf_overlap_universe.json').then(r=>r.json());
+let U,BY={},sel=['120586','122639','118989','118778'],amt=[100000,100000,100000,100000],showAll=false;
+load.then(d=>{U=d;d.funds.forEach(f=>BY[f.id]=f);
+ const h=new URLSearchParams(location.hash.slice(1));if(h.get('f')){const ids=h.get('f').split(',');if(ids.length>=2&&ids.every(i=>BY[i])){sel=ids.slice(0,4);while(sel.length<4)sel.push('');const m=(h.get('m')||'').split(',').map(Number);amt=[0,1,2,3].map(i=>m[i]>0?m[i]:100000)}}
+ const opts=(none)=>(none?'<option value="">— none —</option>':'')+SEGORDER.map(s=>`<optgroup label="${s}">`+d.funds.filter(f=>f.segment===s).sort((x,y)=>x.name.localeCompare(y.name)).map(f=>`<option value="${f.id}">${f.name}</option>`).join('')+'</optgroup>').join('');
+ $('#picks').innerHTML=[0,1,2,3].map(i=>`<div class="prow"><span class="dot" style="background:${COL[i]}"></span><select id="s${i}" aria-label="Fund ${LAB[i]}">${opts(i>=2)}</select><input id="m${i}" type="number" min="0" step="10000" aria-label="Amount in fund ${LAB[i]}" value="${amt[i]}"></div>`).join('')+'<p class="hint">Amounts in ₹ are what you hold in each fund today. Leave Fund C and D as “none” to compare just two.</p>';
+ [0,1,2,3].forEach(i=>{$('#s'+i).value=sel[i];$('#s'+i).onchange=()=>{showAll=false;render()};$('#m'+i).oninput=()=>render()});
+ render()}).catch(e=>{$('#out').innerHTML='<div class="msg">Could not load fund data. '+e+'</div>'});
+
+function analyse(F,M){
+ const n=F.length,S={};
+ F.forEach((f,i)=>f.holdings.forEach(h=>{const s=S[h[0]]||(S[h[0]]={key:h[0],name:h[1],sector:h[2],w:Array(n).fill(0),r:Array(n).fill(0),tot:0,max:0,k:0});s.w[i]=h[3];s.r[i]=M[i]*h[3]/100}));
+ const stocks=Object.values(S);let invested=M.reduce((a,b)=>a+b,0),dup=0,stockMoney=0,byK=Array(n+1).fill(0),cntK=Array(n+1).fill(0);
+ stocks.forEach(s=>{s.k=s.r.filter(x=>x>0).length;s.tot=s.r.reduce((a,b)=>a+b,0);s.max=Math.max(...s.r);s.dup=s.tot-s.max;dup+=s.dup;stockMoney+=s.tot;byK[s.k]+=s.tot;cntK[s.k]++});
+ const sec={};stocks.forEach(s=>{const e=sec[s.sector]||(sec[s.sector]={sector:s.sector,r:Array(n).fill(0),tot:0,dup:0});s.r.forEach((x,i)=>e.r[i]+=x);e.tot+=s.tot;e.dup+=s.dup});
+ const sectors=Object.values(sec).sort((a,b)=>b.tot-a.tot);
+ const pair=F.map((f,i)=>F.map((g,j)=>{if(i===j)return null;let p=0,c=0;f.holdings.forEach(h=>{const o=S[h[0]].w[j];if(o>0){p+=Math.min(h[3],o);c++}});return{p,c}}));
+ for(let i=0;i<n;i++)for(let j=0;j<i;j++)pair[i][j]=pair[j][i];   // mirror so each pair shows one identical number
+ const per=F.map((f,i)=>{let uniq=0,else_=0;stocks.forEach(s=>{if(s.w[i]>0){s.k>1?else_+=s.w[i]:uniq+=s.w[i]}});const tot=uniq+else_;return{uniq,else_,other:Math.max(0,100-tot),nUniq:stocks.filter(s=>s.w[i]>0&&s.k===1).length}});
+ stocks.sort((a,b)=>b.tot-a.tot);
+ return{n,stocks,sectors,pair,per,invested,dup,stockMoney,byK,cntK,distinct:stocks.length,multi:stocks.filter(s=>s.k>1).length}}
+
+function render(){
+ sel=[0,1,2,3].map(i=>$('#s'+i).value);amt=[0,1,2,3].map(i=>Math.max(0,+$('#m'+i).value||0));
+ const idx=[],seen=new Set();sel.forEach((v,i)=>{if(v&&!seen.has(v)){seen.add(v);idx.push(i)}});
+ const out=$('#out');
+ history.replaceState(null,'','#f='+idx.map(i=>sel[i]).join(',')+'&m='+idx.map(i=>amt[i]).join(','));
+ if(idx.length<2){out.innerHTML='<div class="panel msg">Pick at least two different funds.</div>';return}
+ const F=idx.map(i=>BY[sel[i]]),M=idx.map(i=>amt[i]),C=idx.map(i=>COL[i]),L=idx.map(i=>LAB[i]),N=F.length;
+ if(M.reduce((a,b)=>a+b,0)<=0){out.innerHTML='<div class="panel msg">Enter an amount for at least one fund.</div>';return}
+ const A=analyse(F,M),inv=A.invested,dupPct=100*A.dup/inv,topSec=A.sectors[0],stockPct=100*A.stockMoney/inv;
+ const mostDup=[...A.stocks].sort((a,b)=>b.dup-a.dup)[0],redund=A.per.map((p,i)=>({i,r:p.else_/(p.uniq+p.else_||1)*100})).sort((a,b)=>b.r-a.r),secDup=[...A.sectors].sort((a,b)=>b.dup-a.dup)[0];
+ const blendTer=F.reduce((t,f,i)=>t+f.ter*M[i],0)/inv;
+ const insights=[
+  `<b>${A.multi}</b> of your <b>${A.distinct}</b> distinct stocks (${(100*A.multi/A.distinct).toFixed(0)}%) are held by more than one of your funds. Those stocks carry <b>${(100*(A.stockMoney-A.byK[1])/A.stockMoney).toFixed(0)}%</b> of your stock money.`,
+  topSec?`<b>${topSec.sector}</b> is your biggest exposure: <b>${(100*topSec.tot/A.stockMoney).toFixed(0)}%</b> of your stock money, ${inr(topSec.tot)}. ${topSec.dup>0?`<b>${(100*topSec.dup/topSec.tot).toFixed(0)}%</b> of it is the same stocks repeated across funds.`:''}`:'',
+  mostDup&&mostDup.dup>0?`The stock you own most times over is <b>${mostDup.name}</b>: ${inr(mostDup.tot)} across <b>${mostDup.k}</b> funds, of which ${inr(mostDup.dup)} is repetition.`:'',
+  `Of your funds, <b>${F[redund[0].i].name}</b> repeats the most of what the others hold (${redund[0].r.toFixed(0)}% of its stock weight is in names another fund also owns); <b>${F[redund[N-1].i].name}</b> repeats the least (${redund[N-1].r.toFixed(0)}%).`
+ ].filter(Boolean);
+ const nShow=showAll?A.stocks.length:Math.min(15,A.stocks.length),rows=A.stocks.slice(0,nShow),mxs=A.stocks[0].tot;
+ const heat=v=>`rgba(217,119,6,${(Math.min(1,v/60)*.75+.05).toFixed(2)})`;
+ out.innerHTML=`
+<div class="ohero"><div class="panel"><div class="k">Duplicate exposure</div><div class="big">${dupPct.toFixed(0)}<small>%</small></div>
+<p class="lead">Of your <b>${inr(inv)}</b>, <b>${inr(A.dup)}</b> sits in stocks you already own through a bigger position in another fund.</p>
+<div class="stats"><div><b>${A.distinct}</b><span class="k">Distinct stocks</span></div><div><b>${A.multi}</b><span class="k">Held by 2+ funds</span></div><div><b>${blendTer.toFixed(2)}%</b><span class="k">Blended expense</span></div></div>
+<p class="note">Duplicate exposure = for every stock, the rupees held beyond the single biggest fund position, summed over all stocks, as a share of everything you invested. With two funds this equals the pair overlap in rupees.</p></div>
+<div class="panel"><h2>What stands out</h2><ul class="ins">${insights.map(t=>`<li>${t}</li>`).join('')}</ul></div></div>
+<div class="panel"><div class="hd2"><h2>Your funds</h2><span class="k">What each fund adds that the others don't</span></div>
+<div class="fcard" style="--n:${N}">${F.map((f,i)=>{const p=A.per[i];return `<div class="fc" style="--c:${C[i]}"><div class="k" style="color:${C[i]}">Fund ${L[i]} · ${f.segment}</div><h3>${f.name}</h3><div class="m"><b>${inr(M[i])}</b> · ${(100*M[i]/inv).toFixed(0)}% of your money · <b>${f.n}</b> stocks · expense <b>${f.ter.toFixed(2)}%</b></div>
+<div class="stack" title="Own stocks / also in other funds / cash & other"><i style="width:${p.uniq}%;background:${C[i]}"></i><i style="width:${p.else_}%;background:#fcd34d"></i></div>
+<div class="adds"><b>${p.uniq.toFixed(0)}%</b> in stocks only this fund holds (${p.nUniq} stocks)<br><b>${p.else_.toFixed(0)}%</b> in stocks another of your funds also holds</div></div>`}).join('')}</div>
+<div class="leg" style="margin-top:10px"><span><i style="background:linear-gradient(90deg,#2563eb,#0d9488,#7c3aed,#ea580c)"></i>Held only by that fund (fund colour)</span><span><i style="background:#fcd34d"></i>Also held by another fund of yours</span><span><i style="background:#e2e8f0"></i>Cash, debt and other</span></div></div>
+<div class="two"><div class="panel"><div class="hd2"><h2>How many funds hold each stock</h2><span class="k">Share of your stock money</span></div>
+<div class="hold">${A.byK.map((v,k)=>k&&v>0?`<div style="flex:${v};background:${['','#94a3b8','#f59e0b','#ea580c','#b91c1c'][k]}" title="${A.cntK[k]} stocks">${(100*v/A.stockMoney)>=7?(100*v/A.stockMoney).toFixed(0)+'%':''}</div>`:'').join('')}</div>
+<div class="leg">${A.byK.map((v,k)=>k&&A.cntK[k]?`<span><i style="background:${['','#94a3b8','#f59e0b','#ea580c','#b91c1c'][k]}"></i>${k===1?'Only 1 fund':k+' funds'}: ${A.cntK[k]} stocks, ${inr(v)}</span>`:'').join('')}</div>
+<p class="note">${(100*A.byK[1]/A.stockMoney).toFixed(0)}% of your stock money is in stocks that only one of your funds owns. The rest is in names two or more of them hold.</p></div>
+<div class="panel"><div class="hd2"><h2>Pair by pair</h2><span class="k">Weighted overlap, points</span></div><div class="scroll"><table class="hm"><tr><th></th>${F.map((f,j)=>`<th style="color:${C[j]}">${L[j]}</th>`).join('')}</tr>
+${F.map((f,i)=>`<tr><th style="text-align:left;color:${C[i]};font-size:12px;text-transform:none;letter-spacing:0">${L[i]} · ${f.name}</th>${F.map((g,j)=>i===j?'<td style="color:#cbd5e1">—</td>':`<td class="c" style="background:${heat(A.pair[i][j].p)}">${A.pair[i][j].p.toFixed(1)}<small>${A.pair[i][j].c} shared</small></td>`).join('')}</tr>`).join('')}</table></div>
+<p class="note">Each cell is the lower of the two weights in every shared stock, summed (same as the two-fund page). Darker = more of the same stocks.</p></div></div>
+<div class="panel"><div class="hd2"><h2>Stocks you own most, looked through</h2><span class="k">${showAll?'All':'Top'} ${nShow} of ${A.distinct} · your ₹ by fund</span></div>
+<div class="leg" style="margin:8px 0">${F.map((f,i)=>`<span><i style="background:${C[i]}"></i>${L[i]} · ${f.name}</span>`).join('')}</div>
+${rows.map(s=>`<div class="srow"><span class="nm" title="${s.name}">${s.name}${s.k>1?`<span class="tag">${s.k} funds</span>`:''}<small>${s.sector}</small></span><div class="bar" style="width:${s.tot/mxs*100}%">${s.r.map((x,i)=>`<i style="width:${s.tot?100*x/s.tot:0}%;background:${C[i]}" title="${F[i].name}: ${inr(x)}"></i>`).join('')}</div><b>${inr(s.tot).replace('₹','₹')}</b></div>`).join('')}
+${A.distinct>15?`<button class="obtn" id="more">${showAll?'Show fewer':'Show all '+A.distinct}</button>`:''}</div>
+<div class="panel"><div class="hd2"><h2>Sectors, looked through</h2><span class="k">Your ₹ by sector · repeated share</span></div>
+${A.sectors.slice(0,10).map(s=>`<div class="srow" style="grid-template-columns:minmax(0,1fr) 2fr 150px"><span class="nm">${s.sector}<small>${(100*s.tot/A.stockMoney).toFixed(0)}% of stock money</small></span><div class="bar" style="width:${s.tot/A.sectors[0].tot*100}%">${s.r.map((x,i)=>`<i style="width:${s.tot?100*x/s.tot:0}%;background:${C[i]}" title="${F[i].name}: ${inr(x)}"></i>`).join('')}</div><b>${inr(s.tot)} · ${s.tot?(100*s.dup/s.tot).toFixed(0):0}% repeated</b></div>`).join('')}
+<p class="note">“Repeated” = the part of that sector's money that is the same stock held through more than one fund. Sector tags are Groww's.</p></div>
+<button class="obtn share" id="share">Copy link to this comparison</button>
+<p class="foot">Data: Groww public scheme data (holdings, expense ratio) and mfapi.in (Direct-plan NAVs). Holdings as of ${dfull(F[0].holdings_date)}. Long equity positions only; futures and options are excluded. Look-through assumes each ₹ you hold in a fund is spread across its stocks in the fund's own proportions (stock money = ${stockPct.toFixed(0)}% of what you entered; the rest is cash, debt and other holdings). Blended expense = amount-weighted Direct-plan expense ratio. This is analysis of public portfolio data, not investment advice or a recommendation to buy, sell or hold any fund. Past performance does not indicate future returns.</p>`;
+ const m=$('#more');if(m)m.onclick=()=>{showAll=!showAll;render()};
+ $('#share').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText(location.href);e.target.textContent='Link copied'};
+}
+})();
+</script>
+</div>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="subscribe-bar">
+      <div>
+        <div class="footer-brand">Vatayan Labs</div>
+        <p class="subscribe-text">Data-driven research on Indian banking, payments and markets — a window into how India moves money.</p>
+      </div>
+      <a class="btn btn-primary" href="/newsletter/">Subscribe for updates</a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Research</h4>
+        <a href="/sectors/gold/">Gold</a>
+        <a href="/sectors/defence/">Defence</a>
+        <a href="/sectors/microfinance/">Microfinance</a>
+        <a href="/sectors/mutual-funds/">Mutual Funds</a>
+        <a href="/sectors/capital-markets/">Capital Markets</a>
+        <a href="/sectors/semiconductors/">Semiconductors</a>
+        <a href="/ai/">AI Infrastructure</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="/sectors/">Sector Studies</a>
+        <a href="/dashboards/">Data Dashboards</a>
+        <a href="/mutual-funds/">Mutual Fund Hub</a>
+        <a href="/tools/">Tools</a>
+        <a href="/downloads/">Downloads</a>
+        <a href="https://curiousinvestinginsights.substack.com/" target="_blank" rel="noopener">Substack Archive</a>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <a href="/about/">About</a>
+        <a href="mailto:curiousinvestinginsights@gmail.com">Contact</a>
+        <a href="/newsletter/">Newsletter</a>
+        <a href="/feed.xml">RSS Feed</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Manu Vatayan Jha · Vatayan Labs. Personal research — not investment advice.</span>
+      <span>30 publications and counting</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

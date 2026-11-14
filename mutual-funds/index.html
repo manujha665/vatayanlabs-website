@@ -22,7 +22,7 @@
 <link rel="icon" href="/assets/logo-badge.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Mutual Funds — Vatayan Labs</title>
-<meta name="description" content="Two ways into Indian equity mutual funds: a rules-based scoring study of 43 funds, and institutional-depth one-pagers fund by fund.">
+<meta name="description" content="Three ways into Indian equity mutual funds: a rules-based study of 55 funds, one-pagers fund by fund, and an overlap checker for the funds you own.">
 <link rel="canonical" href="https://vatayanlabs.com/mutual-funds/">
 <meta property="og:title" content="Mutual Funds — Vatayan Labs">
 <meta property="og:description" content="A rules-based study of 43 Indian equity funds, plus deep one-pagers fund by fund.">
@@ -54,7 +54,7 @@
     -webkit-background-clip:text;background-clip:text;color:transparent}
   .mf-hero p{font-size:16.5px;color:var(--text-mid,#334155);margin:12px 0 0;max-width:680px}
   .mf-choose{max-width:1100px;margin:0 auto;padding:26px 24px 56px;
-    display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .mf-big{display:flex;flex-direction:column;gap:9px;padding:26px;border-radius:14px;
     border:1px solid var(--border,#e2e8f0);background:var(--card,#fff);text-decoration:none;
     color:inherit;box-shadow:var(--shadow,0 1px 3px rgba(0,0,0,.08));transition:all .15s ease}
@@ -71,7 +71,7 @@
     font-variant-numeric:tabular-nums;letter-spacing:-.4px}
   .mf-note{max-width:1100px;margin:0 auto;padding:0 24px 56px;font-size:12px;
     color:var(--text-muted,#64748b);line-height:1.6}
-  @media (max-width:720px){.mf-choose{grid-template-columns:1fr}}
+  @media (max-width:900px){.mf-choose{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -98,9 +98,9 @@
 
 <div class="mf-hero">
   <div class="mf-kick">Mutual funds</div>
-  <h1>Two ways to look at the <span class="ac">same 55 funds</span>.</h1>
+  <h1>Three ways into the <span class="ac">same 55 funds</span>.</h1>
   <p>One applies an identical set of rules to every fund and lets the numbers rank them.
-     The other goes one fund at a time, in depth. Both are built from the same AMFI NAV history.</p>
+     The second goes one fund at a time, in depth. The third looks inside your own portfolio and shows whether your funds hold the same stocks.</p>
 </div>
 <div class="mf-choose">
   <a class="mf-big" href="/mutual-funds/study/">
@@ -127,8 +127,19 @@
     </div>
     <span class="go">Browse the one-pagers &rarr;</span>
   </a>
+  <a class="mf-big" href="/mutual-funds/overlap/">
+    <span class="bk">Overlap</span>
+    <h2>Do your funds own the same stocks?</h2>
+    <p>Pick any two of the 55 funds, or up to four you hold, and enter what you have in each. See the stocks and
+       sectors they repeat and how much of your money is the same exposure twice.</p>
+    <div class="mf-facts">
+      <span class="mf-fact"><b>1,485</b>fund pairs</span>
+      <span class="mf-fact"><b>2&ndash;4</b>funds at once</span>
+    </div>
+    <span class="go">Check your funds &rarr;</span>
+  </a>
 </div>
-<p class="mf-note">Figures across both sections are computed from AMFI daily NAV history (direct plan,
+<p class="mf-note">Figures across all three sections are computed from AMFI daily NAV history (direct plan,
   growth option) as of 30 September 2026, with portfolio data from the 30 September 2026 disclosure. Nothing here
   is investment advice or a recommendation to buy, sell or hold any scheme.</p>
 
