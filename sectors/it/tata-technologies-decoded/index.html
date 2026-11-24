@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tata Technologies Decoded — Six Investor Day Decks, One Story | Vatayan Labs</title>
+<meta name="description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sheets, with a glossary and a self-test.">
+<link rel="canonical" href="https://vatayanlabs.com/sectors/it/tata-technologies-decoded/">
+
+<!-- Open Graph. Keep this block at the top of the head, above the
+     analytics scripts and any inline style: link crawlers read only the
+     first few KB, and WhatsApp needs the image dimensions declared. -->
+<meta property="og:site_name" content="Vatayan Labs">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://vatayanlabs.com/sectors/it/tata-technologies-decoded/">
+<meta property="og:title" content="Tata Technologies Decoded — six decks, one story">
+<meta property="og:description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sheets, with a glossary and a self-test.">
+<meta property="og:image" content="https://vatayanlabs.com/assets/og/og-tata-technologies.png">
+<meta property="og:image:secure_url" content="https://vatayanlabs.com/assets/og/og-tata-technologies.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tata Technologies Decoded — a study guide to the November 2026 Investor Day and the shift to outcome-based engineering services">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tata Technologies Decoded — six decks, one story">
+<meta name="twitter:description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sheets, with a glossary and a self-test.">
+<meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-tata-technologies.png">
+<meta name="twitter:image:alt" content="Tata Technologies Decoded — a study guide to the November 2026 Investor Day and the shift to outcome-based engineering services">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E0WLCFVLDX');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xoi9afzxww");
+</script>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/logo-badge.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vatayanlabs.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://vatayanlabs.com/sectors/" },
+    { "@type": "ListItem", "position": 3, "name": "IT", "item": "https://vatayanlabs.com/sectors/it/" },
+    { "@type": "ListItem", "position": 4, "name": "Tata Technologies Decoded", "item": "https://vatayanlabs.com/sectors/it/tata-technologies-decoded/" }
+  ]
+}
+</script>
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>
+/* Layout concept: an engineer's drawing sheet. Title block up top, numbered sheets as sections, hairline grid, blue = actual, orange = target/estimate. */
+:root{
+  --page:#f3f5f7; --card:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#6f6d68;
+  --line:#e1e0d9; --axis:#c3c2b7; --s1:#2a78d6; --s1soft:#9ec5f4; --s2:#eb6834;
+  --good:#006300; --warn:#8a5a00; --bad:#b3261e; --wash:#eaf1fb; --onfill:#ffffff;
+  --head:"Space Grotesk",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --page:#0e1115; --card:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#9a9890;
+  --line:#2c2c2a; --axis:#383835; --s1:#3987e5; --s1soft:#1c5cab; --s2:#d95926;
+  --good:#3fc43f; --warn:#e3a62b; --bad:#ff8a80; --wash:#18222f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --page:#0e1115; --card:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#9a9890;
+  --line:#2c2c2a; --axis:#383835; --s1:#3987e5; --s1soft:#1c5cab; --s2:#d95926;
+  --good:#3fc43f; --warn:#e3a62b; --bad:#ff8a80; --wash:#18222f; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;background-attachment:fixed}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--head);text-wrap:balance;line-height:1.15;margin:0}
+h2{font-size:1.7rem;letter-spacing:-.01em}
+h3{font-size:1.05rem}
+p{margin:.5rem 0}
+a{color:var(--s1)}
+.mono{font-family:var(--mono)}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+/* title block */
+header{padding-block:28px 8px}
+.tb{display:grid;grid-template-columns:1fr auto;gap:0;border:1.5px solid var(--ink);background:var(--card)}
+.tb>div{padding:14px 18px}
+.tb .meta{border-left:1.5px solid var(--ink);display:grid;gap:6px;font-family:var(--mono);font-size:.78rem;min-width:230px}
+.tb .meta span{color:var(--muted)}
+h1{font-size:clamp(1.9rem,5vw,3rem);letter-spacing:-.02em}
+.sub{color:var(--ink2);max-width:60ch;margin-top:10px}
+@media(max-width:640px){.tb{grid-template-columns:1fr}.tb .meta{border-left:0;border-top:1.5px solid var(--ink)}}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--page);border-bottom:1px solid var(--axis);margin-top:14px}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:6px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-size:.85rem;padding:6px 10px;border-radius:4px}
+nav a.on{background:var(--ink);color:var(--page)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--page);z-index:30}
+section{padding-block:44px 8px;scroll-margin-top:52px}
+.sheet{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.lead{color:var(--ink2);max-width:68ch}
+.card{background:var(--card);border:1px solid var(--axis);border-radius:6px;padding:18px}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.big{font-family:var(--head);font-size:1.9rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.big small{font-size:.9rem;font-weight:500;color:var(--muted)}
+.callout{border-left:4px solid var(--s2);background:var(--wash);padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0}
+.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:2px 8px;border-radius:99px;border:1px solid currentColor}
+.pill.good{color:var(--good)}.pill.warn{color:var(--warn)}.pill.bad{color:var(--bad)}.pill.na{color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 12px}
+.tabs button{font:inherit;font-size:.88rem;border:1px solid var(--axis);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:4px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--page);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+ul{padding-left:1.15rem;margin:.4rem 0}li{margin:.25rem 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{border:1px solid var(--axis);border-radius:4px;padding:6px 10px;background:var(--page)}
+.chip b{font-family:var(--head);font-size:1.15rem;display:block;line-height:1.2}
+.chip span{font-size:.78rem;color:var(--muted)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+svg text{font-family:var(--mono);font-size:11px;fill:var(--ink2)}
+svg .v{fill:var(--ink);font-weight:500}
+svg .ax{stroke:var(--axis);stroke-width:1}
+svg .gl{stroke:var(--line);stroke-width:1}
+.chart{width:100%;height:auto;display:block}
+.cap{font-size:.82rem;color:var(--muted);margin-top:6px}
+.legend{display:flex;gap:14px;font-size:.8rem;color:var(--ink2);margin:6px 0 0;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin:12px 0}
+.flow div{flex:1 1 140px;border:1px solid var(--axis);background:var(--card);padding:10px 12px;border-radius:4px;font-size:.88rem}
+.flow div b{display:block;font-family:var(--head)}
+.sl{display:grid;grid-template-columns:minmax(120px,190px) 1fr 70px;gap:10px;align-items:center;margin:8px 0;font-size:.9rem}
+.sl input[type=range]{width:100%;accent-color:var(--s1)}
+.sl output{font-family:var(--mono);text-align:right}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.res .card b{font-family:var(--head);font-size:1.5rem;display:block}
+input[type=search]{font:inherit;width:100%;padding:10px 12px;border:1px solid var(--axis);border-radius:4px;background:var(--card);color:var(--ink)}
+.term{padding:10px 0;border-bottom:1px solid var(--line)}.term b{font-family:var(--head)}
+.q{margin:14px 0}.opt{display:block;width:100%;text-align:left;font:inherit;border:1px solid var(--axis);background:var(--card);color:var(--ink);padding:9px 12px;border-radius:4px;margin:6px 0;cursor:pointer}
+.opt.right{border-color:var(--good);background:var(--wash)}.opt.wrong{border-color:var(--bad)}
+.fb{font-size:.88rem;color:var(--ink2);margin:4px 0 0}
+footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.two h3{margin-bottom:4px}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+<link rel="stylesheet" href="/assets/nav.css">
+</head>
+<body>
+
+<!-- Vatayan Labs site nav -->
+<nav class="site-nav vl-sidebar">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <img class="site-logo" src="/assets/logo-badge.png" alt="" width="40" height="40">
+      <span>
+        <span class="site-brand-name">Vatayan Labs</span>
+        <span class="site-brand-tag">A window into how India moves money</span>
+      </span>
+    </a>
+    <div class="site-links">
+      <a href="/dashboards/">Dashboards</a>
+      <a href="/sectors/" class="active">Sectors</a>
+      <a href="/ai/">AI</a>
+      <a href="/mutual-funds/">Mutual Funds</a>
+      <a href="/tools/">Tools</a>
+      <a href="/downloads/">Downloads</a>
+      <a href="/about/">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" style="padding-top:14px">
+  <p class="label" style="margin:0"><a href="/" style="color:inherit">Home</a> / <a href="/sectors/" style="color:inherit">Sectors</a> / <a href="/sectors/it/" style="color:inherit">IT</a></p>
+</div>
+
+
+<header><div class="wrap">
+  <div class="tb">
+    <div>
+      <div class="label">Study guide · Investor Day 19 Nov 2026</div>
+      <h1>Tata Technologies Decoded</h1>
+      <p class="sub">Six presentations, one story. What the company is trying to do, how it connects to Indian IT, and what it means for someone who owns or is thinking of owning the stock.</p>
+    </div>
+    <div class="meta">
+      <div><span>SOURCE</span> 6 TTL decks + public data</div>
+      <div><span>AS OF</span> 22 Nov 2026 (prices: 20 Nov)</div>
+      <div><span>SHEETS</span> 9</div>
+    </div>
+  </div>
+</div>
+<nav aria-label="Sections"><div class="wrap" id="nav"></div></nav></header>
+
+<main class="wrap">
+
+<section id="gist">
+  <div class="sheet"><span class="label">Sheet 1</span></div>
+  <h2>The gist in one minute</h2>
+  <p class="lead">Tata Technologies (TTL) is an engineering services company. Car makers, aircraft suppliers and machinery makers hire it to design, build and test their products. For about 30 years it was paid mostly for engineers' time. The Investor Day was about changing that: take on whole products for a fixed price, use AI to deliver them cheaper than the price, and keep the difference.</p>
+  <div class="callout"><b>Think of it as a shift from subcontractor to general contractor.</b> A subcontractor rents out carpenters by the hour. A general contractor delivers the finished house for an agreed price, and carries the risk. TTL wants to be the second one for vehicles, aircraft and heavy machines.</div>
+  <div class="grid g3">
+    <div class="card"><h3>1. The auto industry is resetting</h3><p>Western carmakers face Chinese rivals that build a new model in 18 to 24 months, against 36 to 60 months for them. They are cutting jobs and want fewer, bigger outsourcing partners who can run an entire vehicle programme.</p></div>
+    <div class="card"><h3>2. Land, expand, replicate</h3><p>Win a Full Vehicle Programme (FVP). Use it to sell more: plant set-up, software, lifecycle services. Then take the same playbook to aerospace and industrial heavy machinery.</p></div>
+    <div class="card"><h3>3. AI as the margin lever</h3><p>Because TTL is paid for outcomes and not hours, time saved by AI becomes profit instead of a discount. Management claims 30 years of programme knowledge is what makes its AI better than a generic tool.</p></div>
+  </div>
+  <h3 style="margin-top:26px">FY30 destination</h3>
+  <div class="grid g4" style="margin-top:10px">
+    <div class="card"><div class="label">Revenue</div><div class="big">$1.1–1.3Bn</div><span class="cap">from $0.62Bn in FY26</span></div>
+    <div class="card"><div class="label">EBITDA margin</div><div class="big">20%+</div><span class="cap">15.5% in FY26</span></div>
+    <div class="card"><div class="label">Aerospace + heavy machinery</div><div class="big">&gt;20%</div><span class="cap">of revenue</span></div>
+    <div class="card"><div class="label">Outcome-based revenue</div><div class="big">&gt;50%</div><span class="cap">of revenue</span></div>
+    <div class="card"><div class="label">Largest customer</div><div class="big">&lt;20%</div><span class="cap">of revenue</span></div>
+  </div>
+</section>
+
+<section id="decks">
+  <div class="sheet"><span class="label">Sheet 2</span></div>
+  <h2>Six decks, one story</h2>
+  <p class="lead">Read them in this order. Each answers one question, and each hands over to the next.</p>
+  <div class="flow" aria-hidden="true">
+    <div><b>1 Keynote</b>Why now, what next</div><div><b>2 Product realisation</b>Proof it works</div><div><b>3 Software</b>The wedge</div><div><b>4 Aerospace</b>Second engine</div><div><b>5 AI</b>The multiplier</div><div><b>6 CFO</b>The numbers</div>
+  </div>
+  <div class="tabs" role="tablist" id="decktabs"></div>
+  <div class="card" id="deckpane" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section id="playbook">
+  <div class="sheet"><span class="label">Sheet 3</span></div>
+  <h2>The playbook: land, expand, replicate</h2>
+  <p class="lead">This is the same idea in the keynote, the software deck and the aerospace deck. Pick a step to see the evidence they offered.</p>
+  <div class="tabs" role="tablist" id="pbtabs"></div>
+  <div class="card" id="pbpane" aria-live="polite"></div>
+  <h3 style="margin-top:28px">Why they think the market is bigger than it looks</h3>
+  <p class="lead">Traditional outsourced engineering is a $100Bn market, of which TTL can serve about $15Bn. By counting the whole product lifecycle (plant, aftermarket, services) the deck redraws it as $230Bn and $33–34Bn.</p>
+  <div class="card"><svg class="chart" id="mkt" viewBox="0 0 640 230" role="img" aria-label="Market sizes in billions of dollars"></svg>
+  <p class="cap">TTL's FY26 revenue of $0.62Bn is about 1.9% of the $33–34Bn serviceable market. The FY30 target of $1.1–1.3Bn would be about 3.5%, assuming that market stays near today's size (my arithmetic). Source: Product Realisation deck, citing BCG, NASSCOM–Everest, Grand View Research.</p></div>
+</section>
+
+<section id="numbers">
+  <div class="sheet"><span class="label">Sheet 4</span></div>
+  <h2>Numbers worth remembering</h2>
+  <p class="lead">Blue is actual. Orange is a target or estimate. Hover a bar for its exact value.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+    <div class="card"><h3>Revenue, US$ Mn</h3><svg class="chart" id="c_rev" viewBox="0 0 440 270"></svg><p class="cap">Three flat years (FY24 to FY26) came before the acceleration. FY27E is guided only as "double-digit growth"; the dashed bar shows a 10% floor (my arithmetic). FY30E is the $1.1–1.3Bn range.</p></div>
+    <div class="card"><h3>EBITDA margin bridge, %</h3><svg class="chart" id="c_bridge" viewBox="0 0 440 270"></svg><p class="cap">Axis starts at 14%. AI delivery productivity is 1.0 point of the 4.5 points of gross gains. Investment in people, business development and infrastructure takes 1.5 back.</p></div>
+    <div class="card"><h3>Full-vehicle-programme wins, US$ Mn TCV</h3><svg class="chart" id="c_fvp" viewBox="0 0 440 270"></svg><p class="cap">H2 FY26 is a half-year; the other two are single quarters. About 80% of Q2 FY27 major-win value came from three FVPs.</p></div>
+    <div class="card"><h3>Growth plan by segment, FY26–30E CAGR %</h3><svg class="chart" id="c_seg" viewBox="0 0 440 270"></svg><p class="cap">Company ranges. Aerospace is the only segment guided above the group's 15–20%.</p></div>
+    <div class="card"><h3>Return on equity, %</h3><svg class="chart" id="c_roe" viewBox="0 0 440 270"></svg><p class="cap">FY26 dipped to 13.9%. The goal is to rebuild it to about 20%.</p></div>
+    <div class="card"><h3>Customers by size, number of accounts</h3><svg class="chart" id="c_cust" viewBox="0 0 440 270"></svg><div class="legend"><span><i style="background:var(--s1soft)"></i>Q3 FY23</span><span><i style="background:var(--s1)"></i>FY27E</span></div><p class="cap">Accounts above $1Mn went from 34 to 52. The three $50Mn+ accounts are still Tata Motors group names (TMPV, TMCV, JLR).</p></div>
+  </div>
+  <h3 style="margin-top:26px">Last five quarters</h3>
+  <div class="card scroll"><table>
+    <tr><th></th><th class="n">Q2 FY26</th><th class="n">Q3 FY26</th><th class="n">Q4 FY26</th><th class="n">Q1 FY27</th><th class="n">Q2 FY27</th></tr>
+    <tr><td>Revenue, ₹ Mn</td><td class="n">13,233</td><td class="n">13,657</td><td class="n">15,722</td><td class="n">16,646</td><td class="n">16,988</td></tr>
+    <tr><td>Operating EBITDA, ₹ Mn</td><td class="n">2,078</td><td class="n">1,929</td><td class="n">2,521</td><td class="n">2,674</td><td class="n">2,733</td></tr>
+    <tr><td>EBITDA margin</td><td class="n">15.7%</td><td class="n">14.1%</td><td class="n">16.0%</td><td class="n">16.1%</td><td class="n">16.1%</td></tr>
+  </table></div>
+  <p class="cap">Q2 FY27: revenue +28% and EBITDA +31.5% year on year in rupees. Constant-currency dollar growth was +22%. Reported EBITDA excludes other income.</p>
+</section>
+
+<section id="sector">
+  <div class="sheet"><span class="label">Sheet 5</span></div>
+  <h2>What this means for Indian IT</h2>
+  <p class="lead">TTL sells to a product company's engineering budget, not its IT budget. That makes it a cousin of TCS and Infosys, not a clone. But the forces in the decks are the same ones reshaping the whole sector.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Hours are becoming outcomes</h3><p>Clients now ask vendors for the same work at 25–30% less (Persistent's description). TCS says about 80% of its finance, HR and business-services contracts are outcome-based. TTL says all 8 of its in-flight programmes are outcome-led.</p></div>
+    <div class="card"><h3>Domain context is the moat</h3><p>Anyone can rent a frontier model. TTL argues its edge is the tacit knowledge from 35+ full-vehicle programmes. The same logic favours specialists in any vertical over generalist coders.</p></div>
+    <div class="card"><h3>Fewer, bigger partners</h3><p>The deck sorts suppliers into 100+ "capacity" partners, 10–15 "competency" partners and a few "full capability" partners. Mandates concentrate at the top. That is bad news for the middle of the pack.</p></div>
+  </div>
+  <h3 style="margin-top:26px">Try it: who keeps the AI savings?</h3>
+  <p class="lead">A piece of work takes 100 hours, billed at 100, with cost of 84 (a 16% margin, close to TTL's today). AI cuts the hours needed. What happens to profit depends on how you are paid.</p>
+  <div class="card" id="sim">
+    <div class="sl"><label for="g">AI productivity gain</label><input id="g" type="range" min="0" max="50" value="20"><output id="go"></output></div>
+    <div class="sl"><label for="d">Price cut the client negotiates</label><input id="d" type="range" min="0" max="50" value="10"><output id="do"></output></div>
+    <div class="res" id="simres"></div>
+    <p class="fb" id="simnote"></p>
+  </div>
+  <p class="cap">Teaching model, not company data. Algebra: outcome pricing beats hourly billing exactly when the client's price cut is smaller than your productivity gain. If you cannot predict the gain, you are exposed on the downside.</p>
+  <h3 style="margin-top:26px">How TTL's quarter compares with listed engineering-services peers</h3>
+  <div class="card scroll"><table>
+    <tr><th>Company</th><th class="n">Q2 FY27 revenue, YoY (₹)</th><th class="n">EBITDA margin</th><th>Context</th></tr>
+    <tr><td>Tata Technologies</td><td class="n">+28.4%</td><td class="n">16.1%</td><td>+22% in constant-currency dollars; ES-Tec acquisition in the base is a question to ask</td></tr>
+    <tr><td>Tata Elxsi</td><td class="n">+15%</td><td class="n">21.9%</td><td>₹1,055.7 Cr revenue; transportation +2% QoQ in constant currency</td></tr>
+    <tr><td>KPIT Technologies</td><td class="n">+6.5%</td><td class="n">17.8%</td><td>US$176.8Mn; −2.2% in dollars, +0.2% constant currency; two largest accounts down about 13%</td></tr>
+  </table></div>
+  <p class="cap">Different definitions and currency bases; use for direction, not precision. ICICI Securities (30 Sep) named TTL and Cyient as top ER&amp;D picks, and flagged AI-led deflation as a particular risk for software-heavy portfolios like KPIT's. Also noted: profit warnings from BMW and Volkswagen, and weak auto demand in Europe and the US.</p>
+  <div class="callout"><b>Sector takeaway.</b> Large IT services firms grew 1–3% in April–June while the Nifty IT index fell about a fifth this year, as clients pushed back on pricing (Reuters, Aug 2026). TTL is betting that engineering with physical products behind it, where programme knowledge is hard to copy, is more defensible than pure code. The test is whether it can hold prices while its customers are cutting costs.</div>
+</section>
+
+<section id="investor">
+  <div class="sheet"><span class="label">Sheet 6</span></div>
+  <h2>What this means for an investor</h2>
+  <div class="grid g4" style="margin-top:12px">
+    <div class="card"><div class="label">Price (20 Nov)</div><div class="big">₹728</div><span class="cap">52-wk ₹507–891</span></div>
+    <div class="card"><div class="label">Market cap</div><div class="big">₹29,557<small> Cr</small></div></div>
+    <div class="card"><div class="label">Trailing P/E</div><div class="big">45×</div><span class="cap">ROE 16.3%</span></div>
+    <div class="card"><div class="label">Dividend yield</div><div class="big">1.15%</div><span class="cap">Promoter 55.2%</span></div>
+  </div>
+  <p class="cap">Screener.in, 20 Nov close. The stock rose 7–9% intraday on 19 Nov (previous close ₹656.30). Street view is split: JPMorgan Neutral, target ₹660 (upgraded from Underweight); Goldman Sachs Sell, target ₹560. Both targets sit below the current price.</p>
+  <div class="two" style="margin-top:14px">
+    <div class="card"><h3>What a bull would point to</h3><ul>
+      <li>FVP wins up about 5× in a quarter ($40Mn to $195Mn), pipeline up about 9×</li>
+      <li>Large-deal TCV of $390Mn+ in H1 FY27 against $84Mn a year earlier; 17 large deals against 10</li>
+      <li>Accounts above $1Mn up from 34 to 52; non-auto share from 13.6% to 19.6%</li>
+      <li>Margin path to ~20% with a history of ~18%</li>
+      <li>Payout above 50% and ROE rebuilding toward 20%</li></ul></div>
+    <div class="card"><h3>What a sceptic would point to</h3><ul>
+      <li>USD revenue was flat for three years ($618Mn, $611Mn, $620Mn), then a jump is being promised</li>
+      <li>FY26 profit fell to ₹547 Cr from ₹677 Cr; Q2 FY27 profit rose only 3.5% on 28% revenue growth</li>
+      <li>Wins are lumpy: the two $100Mn+ deals are about 61% of H1 FY27 large-deal TCV</li>
+      <li>TCV is not revenue. The $138Mn deal runs 24 months, roughly $69Mn a year, about 11% of FY26 revenue</li>
+      <li>Over 95% of revenue is from top global OEMs, the same group cutting jobs and posting losses</li>
+      <li>The FY30 bridge includes M&amp;A; organic growth may be lower than 15–20%</li></ul></div>
+  </div>
+
+  <h3 style="margin-top:28px">What is priced in? A rough calculator</h3>
+  <p class="lead">Move the sliders to your own view of FY30. The output is what today's market cap would have to compound at, before dividends, to match.</p>
+  <div class="card" id="pc">
+    <div class="sl"><label for="p_rev">FY30 revenue, US$ Mn</label><input id="p_rev" type="range" min="800" max="1500" step="50" value="1200"><output id="p_revo"></output></div>
+    <div class="sl"><label for="p_m">EBITDA margin</label><input id="p_m" type="range" min="14" max="24" step="0.5" value="20"><output id="p_mo"></output></div>
+    <div class="sl"><label for="p_fx">₹ per US$</label><input id="p_fx" type="range" min="82" max="105" step="1" value="90"><output id="p_fxo"></output></div>
+    <div class="sl"><label for="p_c">Profit as % of EBITDA</label><input id="p_c" type="range" min="45" max="80" step="1" value="64"><output id="p_co"></output></div>
+    <div class="sl"><label for="p_pe">Exit P/E</label><input id="p_pe" type="range" min="15" max="50" step="1" value="30"><output id="p_peo"></output></div>
+    <div class="res" id="pcres"></div>
+    <div class="scroll" style="margin-top:12px"><table id="grid"></table></div>
+  </div>
+  <p class="cap">Assumptions: no new shares, market cap ₹29,557 Cr on 20 Nov 2026, 3.36 years to 31 Mar 2030. Profit as % of EBITDA is 64% by default (FY26 profit ₹547 Cr over EBITDA of about ₹853 Cr, my arithmetic). The ₹ per US$ default is above the FY26 implied rate of about ₹88.8. Illustrative, not a forecast or a recommendation.</p>
+
+  <h3 style="margin-top:28px">Scorecard to track each quarter</h3>
+  <div class="card scroll"><table id="score"></table></div>
+</section>
+
+<section id="wrong">
+  <div class="sheet"><span class="label">Sheet 6B · Addendum</span></div>
+  <h2>What went wrong so far</h2>
+  <p class="lead">The Investor Day was a recovery story. This is what it is recovering from. The stock listed at ₹1,200 in November 2023 (IPO price ₹500) and sat at ₹728 on 20 Nov 2026, about 39% below the listing price and about 46% above the IPO price (my arithmetic).</p>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>Profit after tax, ₹ Cr</h3><svg class="chart" id="c_pat" viewBox="0 0 440 270"></svg><p class="cap">FY26 profit fell 19.3% on higher employee costs, acquisition integration and temporary programme headwinds, per reports of the results. Source: Screener.in.</p></div>
+    <div class="card"><h3>Five things that slipped</h3><ul>
+      <li><b>Demand.</b> USD revenue was $618Mn, $611Mn and $620Mn across FY24 to FY26. Large-deal ramp-ups were delayed and decision cycles were long.</li>
+      <li><b>Margin.</b> EBITDA margin dipped to 14.1% in Q3 FY26 and was 15.5% for the year, against about 18% in the past.</li>
+      <li><b>Returns.</b> ROE fell from 21.1% (FY24) to 13.9% (FY26).</li>
+      <li><b>People.</b> Attrition rose from 13.8% to 15.1% in one quarter of FY26.</li>
+      <li><b>Customers.</b> JLR IT restoration risk, VinFast rolling off the $50Mn+ tier, and the top three accounts still Tata Motors group names.</li></ul></div>
+  </div>
+  <h3 style="margin-top:22px">Timeline</h3>
+  <div class="card scroll"><table>
+    <tr><th>When</th><th>What happened</th></tr>
+    <tr><td>Nov 2023</td><td>IPO at ₹500, listing at ₹1,200 (+140%)</td></tr>
+    <tr><td>FY24 to FY25</td><td>Revenue peaks at $618Mn, then $611Mn. Profit flat at ₹679 Cr and ₹677 Cr</td></tr>
+    <tr><td>Q2 FY26 (Jul–Sep 2025)</td><td>Management warns of possible impact from JLR IT restoration; attrition up to 15.1%; large-deal ramp-ups delayed</td></tr>
+    <tr><td>Q3 FY26 (Oct–Dec 2025)</td><td>EBITDA margin falls to 14.1%; Kotak Neo reports quarterly profit of just ₹6.6 Cr, with one-off charges not itemised in the article</td></tr>
+    <tr><td>FY26 (to Mar 2026)</td><td>Revenue $620Mn, profit ₹546.6 Cr (−19.3%), ROE 13.9%. 52-week low of ₹507.40 on 30 Mar 2026</td></tr>
+    <tr><td>Aug 2026</td><td>52-week high of ₹891 on 11 Aug 2026</td></tr>
+    <tr><td>Q2 FY27 (Jul–Sep 2026)</td><td>Revenue +28% but profit only +3.5%; brokers still question ES-Tec</td></tr>
+  </table></div>
+  <div class="callout"><b>Fair reading.</b> Management calls FY26 "conscious investment" ahead of demand. The test is whether the FVP wins and the 5× jump in pipeline turn into dollar revenue, and whether profit starts to grow as fast as revenue.</div>
+  <p class="cap">Sources: <a href="https://zeebiz.com/markets/stocks/news-tata-technologies-share-price-nse-bse-ipo-listing-price-281971">Zeebiz, listing price</a> · <a href="https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Tata-Technologies-FY26-Revenue-Rises-65percent-Profit-Drops-193percent-Amid-Investments/6a2017877f2bd0fbfa5699d0">Whalesbook, FY26 results</a> · <a href="https://www.businesstoday.in/markets/stocks/story/tata-tech-q2-fy26-management-on-deal-wins-jlr-it-restoration-attrition-499191-2025-10-22">Business Today, Q2 FY26 commentary</a> · <a href="https://www.kotakneo.com/news/market-news/tata-technologies-q4fy26-results-profit-surges-revenue-growth/">Kotak Neo, Q4 FY26</a>. Revenue, margin and ROE figures are from the company's Investor Day decks.</p>
+</section>
+
+<section id="checks">
+  <div class="sheet"><span class="label">Sheet 7</span></div>
+  <h2>Before you quote the decks</h2>
+  <p class="lead">Things I noticed while cross-reading. None is damning, but each is worth clearing up before it goes into a post or a model.</p>
+  <div class="card"><ul>
+    <li><b>4× or 5×?</b> The keynote says large-deal wins grew "4×" on one slide and "5×" on another. $390Mn+ against $84Mn is 4.6×.</li>
+    <li><b>"Double in three years" needs 26%.</b> The software deck says 20–25% CAGR and "double". From $100Mn in FY27E, 20% gives 1.73× and 25% gives 1.95× by FY30.</li>
+    <li><b>Aerospace growth, three windows.</b> "~40% five-year CAGR", "~8× from FY22 to FY26" (about 68% a year) and "12.5% compound quarterly growth" since Q3 FY24 use different periods. Ask for revenue in dollars.</li>
+    <li><b>Which period are the five big wins?</b> The keynote labels them "H1'27"; the CFO deck says "last four quarters".</li>
+    <li><b>The non-auto target is a low bar.</b> Aerospace + heavy machinery is already 19.6% of services revenue. The FY30 goal is "&gt;20%", though the long-term ambition is about 30%.</li>
+    <li><b>Flagship software share.</b> The $20Mn software part of the $138Mn deal is 14.5%, below the 20–40% the software deck calls typical for an FVP. The US vehicle deal ($6Mn of $17Mn, 35%) is inside the range.</li>
+    <li><b>Redacted charts.</b> The CFO deck states that some chart values are redacted and bars are representative. Do not read exact figures off them.</li>
+    <li><b>Customer concentration is not given.</b> The target is "&lt;20% from any one customer", but the decks never state today's number. Ask.</li>
+    <li><b>ES-Tec.</b> Brokers disagree on Q2 sequential growth (JPMorgan 4.3% constant-currency, 7% excluding ES-Tec; Goldman 1.9%), and ES-Tec's performance remains a worry. Ask how much of the +22% is acquired.</li>
+  </ul></div>
+</section>
+
+<section id="glossary">
+  <div class="sheet"><span class="label">Sheet 8</span></div>
+  <h2>Glossary</h2>
+  <p class="lead">The jargon that makes these decks hard on a first read.</p>
+  <input type="search" id="gs" placeholder="Search terms, e.g. FVP, TCV, MRO" aria-label="Search glossary">
+  <div id="gl" style="margin-top:8px"></div>
+</section>
+
+<section id="quiz">
+  <div class="sheet"><span class="label">Sheet 9</span></div>
+  <h2>Test yourself</h2>
+  <p class="lead">Eight questions. Tap an answer.</p>
+  <div id="qz"></div>
+  <p class="big" id="score2" style="margin-top:12px"></p>
+</section>
+
+<section id="sources">
+  <h2 style="font-size:1.2rem">Sources</h2>
+  <p class="cap">Company figures come from the six Tata Technologies Investor Day 2026 decks (Warren Harris, Anish Raghunandan, Nachiket Paranjpe, Kapil Bakshi, Nithin Thomas, Uttam Gujrati). Third-party data:</p>
+  <ul class="cap">
+    <li><a href="https://www.businesstoday.in/markets/stocks/story/tata-tech-shares-jump-9-as-company-targets-1-3-billion-revenue-568478-2026-11-19">Business Today, share move and broker views, 19 Nov 2026</a></li>
+    <li><a href="https://upstox.com/news/market-news/stocks/tata-technologies-shares-jump-9-as-firm-targets-doubling-software-business-in-three-years-key-takeaways/article-203700/">Upstox, key takeaways and market cap, 19 Nov 2026</a></li>
+    <li><a href="https://www.screener.in/company/TATATECH/consolidated/">Screener.in, price, P/E, holdings, five-year financials</a></li>
+    <li><a href="https://www.businesstoday.in/markets/trending-stocks/story/icici-securities-sees-recovery-in-erd-stocks-in-q2-tata-tech-netweb-iks-cyient-among-top-picks-558802-2026-09-30">Business Today, ICICI Securities on ER&amp;D, 30 Sep 2026</a></li>
+    <li><a href="https://themachinemaker.com/?p=114563">KPIT Q2 FY27 results</a> · <a href="https://themachinemaker.com/news/tata-elxsi-reports-15-annual-revenue-growth-in-q2-fy27">Tata Elxsi Q2 FY27 results</a></li>
+    <li><a href="https://www.thestar.com.my/tech/tech-news/2026/08/21/ai-reshapes-india039s-it-services-sector-contracts-as-clients-demand-more-for-less">Reuters via The Star, AI and Indian IT contracts, 21 Aug 2026</a></li>
+  </ul>
+</section>
+</main>
+<footer><div class="wrap">Educational summary of company presentations plus third-party market data. Management targets are forward-looking and may not be met. Not investment advice; do your own research or speak to a registered adviser.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const NS="http://www.w3.org/2000/svg";
+/* ---------- nav ---------- */
+const secs=[["gist","Gist"],["decks","Six decks"],["playbook","Playbook"],["numbers","Numbers"],["sector","Indian IT"],["investor","Investor"],["wrong","What went wrong"],["checks","Cross-checks"],["glossary","Glossary"],["quiz","Quiz"]];
+$("#nav").innerHTML=secs.map(s=>`<a href="#${s[0]}" data-id="${s[0]}">${s[1]}</a>`).join("");
+try{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.id===e.target.id))}})},{rootMargin:"-30% 0px -60% 0px"});secs.forEach(s=>io.observe(document.getElementById(s[0])))}catch(e){}
+
+/* ---------- tabs helper ---------- */
+function tabs(tabEl,paneEl,items,render){
+  tabEl.innerHTML=items.map((t,i)=>`<button role="tab" aria-selected="${i===0}" data-i="${i}">${t.tab}</button>`).join("");
+  const show=i=>{paneEl.innerHTML=render(items[i]);tabEl.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",b.dataset.i==i))};
+  tabEl.onclick=e=>{const b=e.target.closest("button");if(b)show(+b.dataset.i)};show(0);
+}
+const decks=[
+ {tab:"1 Keynote",who:"Warren Harris, MD & CEO",title:"From Strength to Scale",thesis:"The auto industry's reset is pushing carmakers toward fewer partners who can own whole programmes. TTL says the breakout has started and lays out the FY30 plan.",
+  pts:["Revenue +22% (constant-currency dollars) in Q2 FY27; large-deal wins 4–5× year on year","The reset: global car becomes local, 3–6× more code per vehicle, about $55Bn of EV write-downs in a year","Over 95% of revenue is from top global OEMs; 10+ top R&D spenders added","Product, Plant, Performance: AI-enabled realisation widens the market from ~$100Bn to ~$230Bn","FY30: $1.1–1.3Bn, EBITDA 20%+, aerospace + heavy machinery >20%, outcome-based >50%, top customer <20%"],
+  nums:[["$138Mn","European luxury OEM FVP"],["$390Mn+","H1 FY27 large-deal TCV"],["21×","software revenue FY21–FY27E"],["$1.1–1.3Bn","FY30 aspiration"]],
+  so:"This is the thesis deck. Every other deck is evidence for one slide here."},
+ {tab:"2 Product realisation",who:"Anish Raghunandan, President, Global Delivery",title:"Product Realization Excellence",thesis:"Few companies can engineer a whole vehicle. Once inside an OEM programme, a full-capability partner is hard to replace.",
+  pts:["Heritage since 1989: 35+ full-vehicle and 250+ modular programmes, 15+ battery-electric programmes","VinFast: two global EVs and a new platform in 26 months, with 900 engineers; about 100,000 sold","Western OEM development takes 36–60 months; Chinese OEMs 18–24; TTL FVP 18–25","Three partner types: capacity (100+ firms), competency (10–15), full capability (few)","One FVP lands about $40Mn and can grow into a $50–60Mn annual relationship","AI saves roughly 10% to 20% of effort per phase; 1,600+ AI agents"],
+  nums:[["~9×","FVP pipeline in 3 quarters"],["$195Mn","Q2 FY27 FVP wins"],["13,000+","engineers, 20 centres"],["~$8Bn","FVP pool"]],
+  so:"The proof deck. It also quantifies the playbook: the $40Mn landing to $50–60Mn per year."},
+ {tab:"3 Software",who:"Nachiket Paranjpe, President, Global Industries & ESS",title:"Winning in Software",thesis:"Software is a growing share of product R&D, and buyers now want it delivered in the context of the whole product. That favours TTL.",
+  pts:["Software share of automotive R&D: 20–25% (2021), 30–35% (2026), 45–50% (2030E)","Built a $100Mn organic software business in six years (21×)","BMW TechWorks India JV won against 14 evaluated firms; 2,500+ people planned by 2026","Software deals from an FVP ($6Mn of $17Mn) and from existing work ($7Mn bus controls)","90%+ of FY26 software revenue from relationships of 3+ years; 38% growth from Tier 1, heavy machinery and aerospace customers","Ambition: double in three years at 20–25% CAGR"],
+  nums:[["$100Mn","FY27E software revenue"],["20–40%","software share of a typical FVP"],["38%","YoY growth outside auto OEMs"],["20–25%","CAGR ambition"]],
+  so:"Explains the 'expand' step: software starts as the wedge and drags in bigger mandates."},
+ {tab:"4 Aerospace",who:"Kapil Bakshi, Head of Aerospace",title:"Aerospace: The Next Growth Engine",thesis:"Aerospace runs on a different cycle from auto, is supply-constrained, and is where the automotive playbook gets replicated.",
+  pts:["Four buyer groups: airframers, engine makers, systems and structures, airlines and MRO","~40% five-year CAGR; 15 of 16 quarters of sequential growth","Airbus backlog of 9,310 aircraft; 42,060 new aircraft needed over 20 years; India's fleet to ~2,250 by 2035","Barriers crossed: Airbus strategic supplier since 2021, design authority, DGCA approvals, engine-OEM site access","Tata group tailwinds: Air India's 570 aircraft on order, India MRO market ~$9.5Bn by 2035","Target: $100Mn run-rate by March 2028, then 25–30% CAGR"],
+  nums:[["13%→20%","aerospace + heavy machinery share"],["$100Mn","run-rate by Mar 2028"],["570","Air India aircraft on order"],["~70%","workforce in India"]],
+  so:"The diversification story. A second engine on its own cycle makes auto weakness less painful."},
+ {tab:"5 AI",who:"Nithin Thomas, VP & Head, Enterprise AI",title:"AI: A Force Multiplier",thesis:"AI development is becoming commodity. TTL's edge is engineering context, and it sells programmes, not compute or models.",
+  pts:["Auto programmes could compress from 36–48 to 18–24 months","The value chain: chips, cloud, models, software and implementers sell inputs; TTL delivers the programme","Agentic systems now sit on top of rules-based automation and ML; 20% to 69% effort reduction across applications","Amplaify.X is the AI brand; 'NPI in a Box' is a secure on-premise accelerator","Over 80% of large fixed-bid projects embed AI, worth an estimated +50bps of margin at FY27 exit","AI-enabled programmes went from $7Mn (classical AI) to $138Mn+ (agentic)"],
+  nums:[["1,600+","AI agents in progress"],[">80%","large fixed-bid deals embed AI"],["+50bps","estimated margin impact"],["100%","of 8 in-flight programmes outcome-led"]],
+  so:"The margin deck. Read it with the simulator on Sheet 5: AI only helps if you keep the savings."},
+ {tab:"6 CFO",who:"Uttam Gujrati, CFO",title:"Delivering Profitable Growth and Shareholder Value",thesis:"The 2023 IPO blueprint is converting into results. Growth has re-accelerated, margins are rising, and capital will be allocated with discipline.",
+  pts:["Q2 FY27: revenue ₹16,988Mn (+28%), EBITDA ₹2,733Mn (+31.5%), margin 16.1%","Four IPO goals: non-anchor wins >70% of large deals, non-auto 13%→20%, software+digital 35%→54%, accounts >$1Mn 34→52","Segment CAGR FY26–30E: auto 15–18%, aerospace 25–30%, heavy machinery 15–18%, technology solutions 3–5%","Margin bridge: ~17% at Q4 FY27E, ~20% by FY30E","Capital order: organic growth and AI, then capability-led M&A, then returns; 56–83% payout since FY24","ROE: 13.9% in FY26, rebuilding toward 20%"],
+  nums:[["15.5%→~20%","EBITDA margin"],["15–20%","revenue CAGR"],["52","accounts above $1Mn"],["~19%","5-year average ROE"]],
+  so:"The scorecard deck. These are the numbers the stock will be judged on."}
+];
+tabs($("#decktabs"),$("#deckpane"),decks,d=>`<div class="label">${d.who}</div><h3 style="font-size:1.3rem;margin-top:4px">${d.title}</h3><p class="lead"><b>Thesis.</b> ${d.thesis}</p><div class="chips">${d.nums.map(n=>`<div class="chip"><b>${n[0]}</b><span>${n[1]}</span></div>`).join("")}</div><ul>${d.pts.map(p=>`<li>${p}</li>`).join("")}</ul><div class="callout"><b>Why it matters.</b> ${d.so}</div>`);
+
+const pb=[
+ {tab:"Land",head:"Win the whole programme, not a slice",body:"A Full Vehicle Programme (FVP) puts TTL in the room when the product is defined, with access to architecture and decision-makers.",ev:["$138Mn European luxury OEM turnkey programme, 24 months, concept to industrialisation","$30–40Mn Asian PV OEM and $15–20Mn US bus & commercial-vehicle maker, both won in FY27","FVP wins: $4Mn (H2 FY26) → $40Mn (Q1 FY27) → $195Mn (Q2 FY27)","Named pipeline: robotaxi, small commercial vehicle, low-cost EV, small-car EV family"]},
+ {tab:"Expand",head:"Product, then Plant, then Performance",body:"Each programme opens adjacent work: software, validation, manufacturing set-up, aftersales and digital systems. This is how a $40Mn landing could become $50–60Mn a year.",ev:["Product: FVP, software-defined vehicle, engineering. Plant: industrialisation, digital manufacturing. Performance: aftermarket, service, enterprise systems","Tenneco ($100Mn), the Japanese OEM ($40Mn) all span Product, Plant and Performance","Digital examples: a 10,000-dealer DMS rollout in 50% less time; connected-vehicle escalations down 94%","The $138Mn win produced a $20Mn software mandate and launch support won from a European incumbent"]},
+ {tab:"Replicate",head:"Take the playbook to other industries",body:"Aerospace and industrial heavy machinery (IHM) use the same model: land with outcomes, expand through sponsorship, replicate.",ev:["Aerospace: Airbus strategic supplier, design authority, $100Mn run-rate by March 2028","IHM: a North American access-equipment OEM saw over 10% lower total cost of ownership from value engineering","Software to a US bus maker: 150% more software complexity migrated onto one reusable baseline","Aerospace + IHM are now about 20% of services revenue, from 13%"]}
+];
+tabs($("#pbtabs"),$("#pbpane"),pb,d=>`<h3 style="font-size:1.25rem">${d.head}</h3><p>${d.body}</p><ul>${d.ev.map(p=>`<li>${p}</li>`).join("")}</ul>`);
+
+/* ---------- svg helpers ---------- */
+const TT="title";  /* SVG tooltip tag name, interpolated below: check_og.py allows only one literal title tag per page */
+function mk(svg,html){svg.innerHTML=html}
+function bars(id,o){
+  const W=440,H=270,L=40,R=14,T=22,B=40,pw=W-L-R,ph=H-T-B,min=o.min||0,max=o.max,y=v=>T+ph-(v-min)/(max-min)*ph;
+  let s="";
+  const tk=o.ticks;tk.forEach(t=>{s+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L-6}" y="${y(t)+4}" text-anchor="end">${t}</text>`});
+  s+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(min)}" y2="${y(min)}"/>`;
+  const n=o.d.length,slot=pw/n,bw=Math.min(36,slot*.62);
+  o.d.forEach((r,i)=>{
+    const cx=L+slot*i+slot/2,lo=r.lo!==undefined?r.lo:min,hi=r.hi!==undefined?r.hi:r.v;
+    const y1=y(hi),y2=y(lo),h=Math.max(1,y2-y1);
+    const dash=r.dash?`fill="none" stroke="var(--s2)" stroke-width="1.5" stroke-dasharray="4 3"`:`fill="${r.c||'var(--s1)'}"`;
+    s+=`<path d="M${cx-bw/2},${y2}V${y1+4}Q${cx-bw/2},${y1} ${cx-bw/2+4},${y1}H${cx+bw/2-4}Q${cx+bw/2},${y1} ${cx+bw/2},${y1+4}V${y2}Z" ${dash}><${TT}>${r.t||r.l+": "+r.v}</title></path>`;
+    s+=`<text class="v" x="${cx}" y="${y1-6}" text-anchor="middle">${r.lab}</text>`;
+    s+=`<text x="${cx}" y="${H-T+8}" text-anchor="middle">${r.l}</text>`;
+  });
+  mk($(id),s);
+}
+bars("#c_rev",{max:1400,ticks:[0,400,800,1200],d:[
+ {l:"FY22",v:474,lab:"474"},{l:"FY23",v:547,lab:"547"},{l:"FY24",v:618,lab:"618"},{l:"FY25",v:611,lab:"611"},{l:"FY26",v:620,lab:"620"},
+ {l:"FY27E",v:682,lab:"≥10%",dash:1,t:"FY27E: double-digit growth guided; dashed bar = 10% floor, about 682"},
+ {l:"FY30E",lo:1100,hi:1300,lab:"1.1–1.3k",c:"var(--s2)",t:"FY30 aspiration: $1,100–1,300Mn"}]});
+/* waterfall */
+(function(){
+ const W=440,H=270,L=40,R=14,T=22,B=52,pw=W-L-R,ph=H-T-B,min=14,max=22.5,y=v=>T+ph-(v-min)/(max-min)*ph;
+ let s="";[14,16,18,20,22].forEach(t=>{s+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L-6}" y="${y(t)+4}" text-anchor="end">${t}</text>`});
+ const steps=[["FY26A",15.5,"t"],["Q4 FY27E",17,"t"],["Volume/ mix",1.5],["Delivery levers",1.5],["AI",1],["G&A",.5],["Invest- ment",-1.5],["FY30E",20,"T"]];
+ let run=0;const slot=pw/steps.length,bw=slot*.62;
+ steps.forEach((st,i)=>{
+  const cx=L+slot*i+slot/2;let a,b,c,lab;
+  if(st[2]){a=min;b=st[1];run=st[1];c=st[2]==="T"?"var(--s2)":"var(--s1)";lab=st[1].toFixed(1)}
+  else{a=run;b=run+st[1];run=b;c=st[1]<0?"var(--s2)":"var(--s1soft)";lab=(st[1]>0?"+":"−")+Math.abs(st[1]).toFixed(1)}
+  const top=y(Math.max(a,b)),bot=y(Math.min(a,b));
+  s+=`<rect x="${cx-bw/2}" y="${top}" width="${bw}" height="${Math.max(1,bot-top)}" rx="3" fill="${c}"><${TT}>${st[0].replace("- ","")}: ${lab}</title></rect><text class="v" x="${cx}" y="${top-6}" text-anchor="middle">${lab}</text>`;
+  const parts=st[0].split(" ");s+=parts.map((p,k)=>`<text x="${cx}" y="${H-T+8+k*12}" text-anchor="middle" style="font-size:9.5px">${p.replace("-","")}</text>`).join("");
+ });
+ s+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(min)}" y2="${y(min)}"/>`;mk($("#c_bridge"),s);
+})();
+bars("#c_fvp",{max:240,ticks:[0,60,120,180,240],d:[{l:"H2 FY26",v:4,lab:"4"},{l:"Q1 FY27",v:40,lab:"40"},{l:"Q2 FY27",v:195,lab:"195"}]});
+bars("#c_roe",{max:25,ticks:[0,5,10,15,20,25],d:[{l:"FY22",v:19.2,lab:"19.2"},{l:"FY23",v:20.9,lab:"20.9"},{l:"FY24",v:21.1,lab:"21.1"},{l:"FY25",v:18.9,lab:"18.9"},{l:"FY26",v:13.9,lab:"13.9"},{l:"FY30E",v:20,lab:"~20",c:"var(--s2)"}]});
+(function(){ /* segments as ranges, horizontal */
+ const W=440,H=270,L=118,R=20,T=14,max=35,x=v=>L+(W-L-R)*v/max,rows=[["Automotive",15,18],["Aerospace",25,30],["Heavy machinery",15,18],["Technology solutions",3,5]];
+ let s="";[0,10,20,30].forEach(t=>{s+=`<line class="gl" x1="${x(t)}" x2="${x(t)}" y1="${T}" y2="${H-30}"/><text x="${x(t)}" y="${H-14}" text-anchor="middle">${t}%</text>`});
+ rows.forEach((r,i)=>{const cy=T+28+i*52;s+=`<text x="${L-8}" y="${cy+4}" text-anchor="end">${r[0]}</text><rect x="${x(r[1])}" y="${cy-8}" width="${x(r[2])-x(r[1])}" height="16" rx="4" fill="${r[0]==="Aerospace"?"var(--s2)":"var(--s1)"}"><${TT}>${r[0]}: ${r[1]}–${r[2]}%</title></rect><text class="v" x="${x(r[2])+8}" y="${cy+4}">${r[1]}–${r[2]}%</text>`});
+ mk($("#c_seg"),s);
+})();
+(function(){ /* grouped customers */
+ const W=440,H=270,L=40,R=14,T=22,B=40,pw=W-L-R,ph=H-T-B,max=40,y=v=>T+ph-v/max*ph;
+ const d=[[">$50Mn",3,3],["$20–50Mn",0,3],["$10–20Mn",3,3],["$5–10Mn",4,8],["$1–5Mn",24,35]];let s="";
+ [0,10,20,30,40].forEach(t=>{s+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L-6}" y="${y(t)+4}" text-anchor="end">${t}</text>`});
+ const slot=pw/d.length,bw=slot*.34;
+ d.forEach((r,i)=>{const cx=L+slot*i+slot/2;
+  [[r[1],"var(--s1soft)",-bw-1],[r[2],"var(--s1)",1]].forEach((b,k)=>{const top=y(b[0]);s+=`<rect x="${cx+b[2]}" y="${top}" width="${bw}" height="${Math.max(1,y(0)-top)}" rx="3" fill="${b[1]}"><${TT}>${r[0]} ${k?"FY27E":"Q3 FY23"}: ${b[0]}</title></rect><text class="v" x="${cx+b[2]+bw/2}" y="${top-5}" text-anchor="middle" style="font-size:10px">${b[0]}</text>`});
+  s+=`<text x="${cx}" y="${H-T+8}" text-anchor="middle" style="font-size:10px">${r[0]}</text>`});
+ s+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/>`;mk($("#c_cust"),s);
+})();
+(function(){ /* market bars */
+ const W=640,L=210,R=70,rows=[["Full-value-chain TAM",230,"var(--s2)"],["Traditional ER&D TAM",100,"var(--s1soft)"],["Full-value SAM (mid)",33.5,"var(--s2)"],["Traditional ER&D SAM",15,"var(--s1soft)"],["FVP SAM, 2026E",5.6,"var(--s1)"]];
+ const x=v=>(W-L-R)*v/230;let s="";
+ rows.forEach((r,i)=>{const cy=24+i*40;s+=`<text x="${L-10}" y="${cy+4}" text-anchor="end">${r[0]}</text><rect x="${L}" y="${cy-11}" width="${Math.max(3,x(r[1]))}" height="22" rx="4" fill="${r[2]}"><${TT}>${r[0]}: $${r[1]}Bn</title></rect><text class="v" x="${L+x(r[1])+8}" y="${cy+4}">$${r[1]}Bn</text>`});
+ mk($("#mkt"),s);
+})();
+
+bars("#c_pat",{max:800,ticks:[0,200,400,600,800],d:[{l:"FY22",v:437,lab:"437"},{l:"FY23",v:624,lab:"624"},{l:"FY24",v:679,lab:"679"},{l:"FY25",v:677,lab:"677"},{l:"FY26",v:547,lab:"547",c:"var(--s2)"}]});
+/* ---------- simulator ---------- */
+function sim(){
+ const g=+$("#g").value/100,d=+$("#d").value/100;$("#go").textContent=(g*100)+"%";$("#do").textContent=(d*100)+"%";
+ const cost=84*(1-g),A={r:100*(1-g),c:cost},B={r:100*(1-d),c:cost};
+ const f=o=>{const e=o.r-o.c;return {e:e,m:o.r>0?e/o.r*100:0}};const a=f(A),b=f(B);
+ const card=(t,o,x)=>`<div class="card"><div class="label">${t}</div><b>${x.e.toFixed(1)}</b><span class="cap">profit on revenue of ${o.r.toFixed(0)}; margin ${x.m.toFixed(1)}%</span></div>`;
+ $("#simres").innerHTML=card("Paid by the hour",A,a)+card("Paid for the outcome",B,b)+`<div class="card"><div class="label">Difference</div><b style="color:${b.e>=a.e?"var(--good)":"var(--bad)"}">${(b.e-a.e>=0?"+":"")}${(b.e-a.e).toFixed(1)}</b><span class="cap">in favour of ${b.e>=a.e?"outcome pricing":"hourly billing"}</span></div>`;
+ $("#simnote").textContent=d<g?"The client's discount is smaller than your productivity gain, so you keep the difference.":d>g?"The discount is larger than the gain. Outcome pricing now costs you money.":"The discount equals the gain, so both models give the same profit.";
+}
+["g","d"].forEach(i=>$("#"+i).addEventListener("input",sim));sim();
+
+/* ---------- what is priced in ---------- */
+const MC=29557,YRS=3.36;
+function priced(rev,m,fx,c,pe){const pat=rev*fx/10*(m/100)*(c/100);const v=pat*pe;return {pat,v,cagr:Math.pow(v/MC,1/YRS)-1}}
+const pct=x=>(x*100).toFixed(1)+"%";
+function pc(){
+ const v=id=>+$("#"+id).value;
+ $("#p_revo").textContent="$"+v("p_rev");$("#p_mo").textContent=v("p_m")+"%";$("#p_fxo").textContent="₹"+v("p_fx");$("#p_co").textContent=v("p_c")+"%";$("#p_peo").textContent=v("p_pe")+"×";
+ const r=priced(v("p_rev"),v("p_m"),v("p_fx"),v("p_c"),v("p_pe"));
+ $("#pcres").innerHTML=`<div class="card"><div class="label">Implied FY30 profit</div><b>₹${Math.round(r.pat).toLocaleString("en-IN")} Cr</b><span class="cap">FY26 was ₹547 Cr</span></div><div class="card"><div class="label">Market cap at exit</div><b>₹${Math.round(r.v).toLocaleString("en-IN")} Cr</b><span class="cap">vs ₹29,557 Cr today</span></div><div class="card"><div class="label">Annual price return</div><b style="color:${r.cagr>=0.12?"var(--good)":r.cagr>=0?"var(--warn)":"var(--bad)"}">${pct(r.cagr)}</b><span class="cap">before dividends (~1.15% yield)</span></div>`;
+ const pes=[20,25,30,35,40,45],revs=[1100,1200,1300];
+ $("#grid").innerHTML=`<tr><th>Annual price return</th>${revs.map(x=>`<th class="n">$${x} Mn</th>`).join("")}</tr>`+pes.map(pe=>`<tr><td>Exit P/E ${pe}×</td>${revs.map(x=>{const q=priced(x,v("p_m"),v("p_fx"),v("p_c"),pe);return `<td class="n">${pct(q.cagr)}</td>`}).join("")}</tr>`).join("");
+}
+["p_rev","p_m","p_fx","p_c","p_pe"].forEach(i=>$("#"+i).addEventListener("input",pc));pc();
+
+/* ---------- scorecard ---------- */
+const sc=[["Revenue","$620Mn (FY26)","$1.1–1.3Bn, 15–20% CAGR","watch","Needs a step change from ~0% CAGR over FY24–26"],
+["EBITDA margin","16.1% (Q2 FY27)","~17% by Q4 FY27E, 20%+ by FY30","good","Flat for three quarters; next move is the test"],
+["Aerospace","+38% YoY (H1 FY27)","$100Mn run-rate by Mar 2028","good","Dollar revenue not disclosed in decks"],
+["Software (organic)","$100Mn (FY27E)","Double by FY30, 20–25% CAGR","watch","Doubling needs ~26%"],
+["Non-auto share","19.6% (Q2 FY27)",">20% by FY30; ~30% long term","good","Near-term target already almost met"],
+["Outcome-based revenue","Not disclosed",">50% of revenue","na","Only programme-level claims given"],
+["Largest customer","Not disclosed","<20% of revenue","na","Top three accounts are Tata Motors group names"],
+["ROE","13.9% (FY26); 16.3% TTM","~20%","watch","Profit must grow faster than equity"],
+["Dividend payout","56–83% since FY24",">50%","good","~$50Mn paid in Q2 FY27"]];
+const cls={good:"On track",watch:"Watch",na:"Not disclosed"};
+$("#score").innerHTML=`<tr><th>Metric</th><th>Latest</th><th>Target</th><th>Status</th><th>Note</th></tr>`+sc.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><span class="pill ${r[3]}">${cls[r[3]]}</span></td><td>${r[4]}</td></tr>`).join("");
+
+/* ---------- glossary ---------- */
+const gl=[["FVP (Full Vehicle Programme)","TTL designs, develops and launches a whole vehicle for a customer, concept to start of production."],
+["SDV (Software-Defined Vehicle)","A vehicle whose features and value come mainly from software, updated over the air."],
+["ESP (Engineering Service Provider)","A firm that does outsourced product engineering for OEMs."],
+["OEM","Original equipment manufacturer: the brand that sells the finished product, such as a carmaker or Airbus."],
+["Tier 1","A direct supplier to the OEM, such as Tenneco in the deck."],
+["TCV (Total Contract Value)","The full value of a contract over its life. It is not annual revenue."],
+["TAM / SAM","Total addressable market, and the serviceable slice a company can actually reach."],
+["Product, Plant, Performance","TTL's three pillars: create the product, industrialise it, optimise it through its lifecycle."],
+["NPI (New Product Introduction)","The process of taking a product from definition to launch."],
+["SOP (Start of Production)","The date a vehicle starts rolling off the line."],
+["Anchor client","The Tata Motors group names (TMPV, TMCV, JLR) that historically dominated revenue."],
+["IHM","Industrial heavy machinery: mining trucks, construction and access equipment, buses."],
+["MRO","Maintenance, repair and overhaul of aircraft."],
+["DOA (Design Organisation Approval)","Aviation authority approval to certify design changes."],
+["EMES3","Airbus's engineering and manufacturing supplier programme; TTL has been a strategic supplier since 2021."],
+["Outcome-based pricing","Paid for a delivered result at an agreed price, not for hours worked."],
+["T&M (time and materials)","Paid per hour. Efficiency gains shrink revenue."],
+["Fixed-bid","A fixed price for a defined scope; the vendor carries cost-overrun risk."],
+["KBE (Knowledge-Based Engineering)","Engineers' know-how coded as rules and templates, the base layer under TTL's AI agents."],
+["HIL (Hardware-in-the-loop)","Testing software against real or simulated hardware before the vehicle exists."],
+["E/E architecture","The electrical and electronic backbone of a vehicle."],
+["Digital thread","A connected record of a product's data from design through manufacturing and service."],
+["ES-Tec","German software and validation business acquired in FY26, with access to Volkswagen."],
+["TCO","Total cost of ownership."],["bps","Basis points; 100 bps is one percentage point."]];
+function rg(q){q=(q||"").toLowerCase();$("#gl").innerHTML=gl.filter(t=>(t[0]+t[1]).toLowerCase().includes(q)).map(t=>`<div class="term"><b>${t[0]}</b><br>${t[1]}</div>`).join("")||'<p class="cap">No match.</p>'}
+$("#gs").addEventListener("input",e=>rg(e.target.value));rg();
+
+/* ---------- quiz ---------- */
+const qs=[
+["What is TTL's central strategic shift?","From selling engineer hours to owning product outcomes",["From selling engineer hours to owning product outcomes","From engineering to pure IT consulting","From India to Europe-only delivery","From services to selling cars"],"Outcome-based, whole-programme work is the core idea across all six decks."],
+["How long does a new-model development take at Western OEMs versus TTL's FVP, in months?","36–60 versus 18–25",["60–72 versus 36–48","36–60 versus 18–25","18–24 versus 36–60","24–36 versus 12–18"],"Chinese OEMs take 18–24 months; TTL says its FVP delivers in 18–25."],
+["TTL's FY30 revenue aspiration is…","$1.1–1.3Bn",["$0.8–1.0Bn","$1.1–1.3Bn","$1.5–2.0Bn","$2.3Bn"],"About 15–20% CAGR from $620Mn in FY26."],
+["Which is true about the $138Mn European luxury deal?","It is TCV over 24 months, about $69Mn a year",["It is annual revenue","It is TCV over 24 months, about $69Mn a year","It is entirely software","It is a Tenneco deal"],"TCV is total contract value; $20Mn of it is software."],
+["Outcome-based pricing beats hourly billing when…","The client's price cut is smaller than the productivity gain",["AI gains are zero","The client's price cut is smaller than the productivity gain","Hours rise","The contract is shorter"],"If the discount exceeds the gain, you lose money on fixed price."],
+["How much of the FY27→FY30 margin bridge (gross gains of 4.5 points) is AI delivery productivity?","1.0 point",["0.5 point","1.0 point","3.0 points","4.5 points"],"Volume/mix 1.5, delivery levers 1.5, AI 1.0, G&A 0.5, less 1.5 of investment."],
+["What is unusual about the FY30 non-auto share target of '>20%'?","It is already about 19.6% today",["It is lower than FY24","It is already about 19.6% today","It excludes aerospace","It is above 50%"],"Aerospace + heavy machinery was 19.6% of services revenue in Q2 FY27."],
+["What did revenue do in USD over FY24 to FY26?","Stayed roughly flat at about $610–620Mn",["Doubled","Fell 20%","Stayed roughly flat at about $610–620Mn","Grew 15% a year"],"$618Mn, $611Mn and $620Mn."]];
+let right=0,done=0;
+$("#qz").innerHTML=qs.map((q,i)=>`<div class="q card" data-i="${i}"><b>${i+1}. ${q[0]}</b>${q[2].map(o=>`<button class="opt">${o}</button>`).join("")}<p class="fb" hidden></p></div>`).join("");
+$("#qz").addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)return;const c=b.closest(".q");if(c.dataset.done)return;c.dataset.done=1;const q=qs[+c.dataset.i];
+ c.querySelectorAll(".opt").forEach(o=>{if(o.textContent===q[1])o.classList.add("right")});const ok=b.textContent===q[1];if(!ok)b.classList.add("wrong");
+ const f=c.querySelector(".fb");f.hidden=false;f.textContent=(ok?"Correct. ":"Not quite. ")+q[3];done++;if(ok)right++;
+ $("#score2").textContent=done===qs.length?`Score: ${right} / ${qs.length}`:`${done} of ${qs.length} answered`;});
+</script>
+
+
+<div class="wrap" style="padding-bottom:40px">
+  <p class="label"><a href="/sectors/it/">&larr; More IT studies</a> &nbsp;·&nbsp; <a href="/newsletter/">Get the next one by email</a></p>
+</div>
+
+</body></html>
