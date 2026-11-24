@@ -44,6 +44,14 @@ Add the card to `CARDS` in `scripts/make_og.py` first. Passing a name builds
 only that card — with no arguments it rebuilds all of them, which rewrites
 cards that were fine.
 
+Eleven cards in `assets/og/` predate `CARDS` and have no recipe there
+(`og-ai`, `og-capital-markets`, `og-dashboards`, `og-default`, `og-defence`,
+`og-gold`, `og-microfinance`, `og-mutual-funds`, `og-newsletter`,
+`og-powering-ai`, `og-sectors`). `make_og.py` cannot rebuild them, so a change
+to the shared logo has to be composited onto them separately — the badge sits
+at (80, 72) at 96px, inside a 2px white frame. Worth adding their wording to
+`CARDS` next time one of them needs editing.
+
 ### Testing a preview
 
 WhatsApp Web and WhatsApp on the phone build and cache previews separately.
