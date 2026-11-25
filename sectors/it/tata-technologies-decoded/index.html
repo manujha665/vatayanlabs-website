@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Tata Technologies Decoded — Six Investor Day Decks, One Story | Vatayan Labs</title>
-<meta name="description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sheets, with a glossary and a self-test.">
+<meta name="description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sections, with a glossary and a self-test.">
 <link rel="canonical" href="https://vatayanlabs.com/sectors/it/tata-technologies-decoded/">
 
 <!-- Open Graph. Keep this block at the top of the head, above the
@@ -15,7 +15,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://vatayanlabs.com/sectors/it/tata-technologies-decoded/">
 <meta property="og:title" content="Tata Technologies Decoded — six decks, one story">
-<meta property="og:description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sheets, with a glossary and a self-test.">
+<meta property="og:description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sections, with a glossary and a self-test.">
 <meta property="og:image" content="https://vatayanlabs.com/assets/og/og-tata-technologies.png">
 <meta property="og:image:secure_url" content="https://vatayanlabs.com/assets/og/og-tata-technologies.png">
 <meta property="og:image:type" content="image/png">
@@ -25,7 +25,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tata Technologies Decoded — six decks, one story">
-<meta name="twitter:description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sheets, with a glossary and a self-test.">
+<meta name="twitter:description" content="A study guide to Tata Technologies' 19 November 2026 Investor Day: the shift from billing engineer hours to owning whole product programmes, the land-expand-replicate playbook, the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin) and what the record so far says about them. Nine sections, with a glossary and a self-test.">
 <meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-tata-technologies.png">
 <meta name="twitter:image:alt" content="Tata Technologies Decoded — a study guide to the November 2026 Investor Day and the shift to outcome-based engineering services">
 <!-- Google tag (gtag.js) -->
@@ -63,100 +63,147 @@
 </script>
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <style>
-/* Layout concept: an engineer's drawing sheet. Title block up top, numbered sheets as sections, hairline grid, blue = actual, orange = target/estimate. */
+/* Layout concept: the Vatayan Labs research terminal, as on the other
+   dashboards — masthead, a grouped tab rail, one panel at a time.
+   Blue = actual, teal = target or estimate. */
 :root{
-  --page:#f3f5f7; --card:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#6f6d68;
-  --line:#e1e0d9; --axis:#c3c2b7; --s1:#2a78d6; --s1soft:#9ec5f4; --s2:#eb6834;
-  --good:#006300; --warn:#8a5a00; --bad:#b3261e; --wash:#eaf1fb; --onfill:#ffffff;
-  --head:"Space Grotesk",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --page:#f1f5f9; --card:#ffffff; --card2:#f8fafc; --ink:#0f172a; --ink2:#334155; --muted:#64748b;
+  --line:#e2e8f0; --axis:#cbd5e1; --s1:#1d4ed8; --s1soft:#a9c3f3; --s2:#0891b2;
+  --good:#15803d; --warn:#b45309; --bad:#b91c1c; --wash:#eff6ff; --onfill:#ffffff;
+  --accent:#1d4ed8; --teal:#0891b2;
+  --f:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --head:var(--f); --body:var(--f); --mono:var(--f);
+  --r:12px; --maxw:1240px;
+  --shadow:0 1px 3px rgba(15,23,42,.07),0 1px 2px rgba(15,23,42,.05);
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --page:#0e1115; --card:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#9a9890;
-  --line:#2c2c2a; --axis:#383835; --s1:#3987e5; --s1soft:#1c5cab; --s2:#d95926;
-  --good:#3fc43f; --warn:#e3a62b; --bad:#ff8a80; --wash:#18222f; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --page:#0e1115; --card:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#9a9890;
-  --line:#2c2c2a; --axis:#383835; --s1:#3987e5; --s1soft:#1c5cab; --s2:#d95926;
-  --good:#3fc43f; --warn:#e3a62b; --bad:#ff8a80; --wash:#18222f; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;background-attachment:fixed}
-.wrap{max-width:1040px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--head);text-wrap:balance;line-height:1.15;margin:0}
-h2{font-size:1.7rem;letter-spacing:-.01em}
-h3{font-size:1.05rem}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.55;
+  margin:0;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:20px}
+h1,h2,h3{margin:0;font-weight:700;text-wrap:balance;line-height:1.2}
+h2{font-size:24px;letter-spacing:-.5px}
+h3{font-size:15px}
 p{margin:.5rem 0}
-a{color:var(--s1)}
-.mono{font-family:var(--mono)}
-.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-/* title block */
-header{padding-block:28px 8px}
-.tb{display:grid;grid-template-columns:1fr auto;gap:0;border:1.5px solid var(--ink);background:var(--card)}
-.tb>div{padding:14px 18px}
-.tb .meta{border-left:1.5px solid var(--ink);display:grid;gap:6px;font-family:var(--mono);font-size:.78rem;min-width:230px}
-.tb .meta span{color:var(--muted)}
-h1{font-size:clamp(1.9rem,5vw,3rem);letter-spacing:-.02em}
-.sub{color:var(--ink2);max-width:60ch;margin-top:10px}
-@media(max-width:640px){.tb{grid-template-columns:1fr}.tb .meta{border-left:0;border-top:1.5px solid var(--ink)}}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--page);border-bottom:1px solid var(--axis);margin-top:14px}
-nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:6px}
-nav a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-size:.85rem;padding:6px 10px;border-radius:4px}
-nav a.on{background:var(--ink);color:var(--page)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--page);z-index:30}
-section{padding-block:44px 8px;scroll-margin-top:52px}
-.sheet{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
-.lead{color:var(--ink2);max-width:68ch}
-.card{background:var(--card);border:1px solid var(--axis);border-radius:6px;padding:18px}
-.grid{display:grid;gap:14px}
+a{color:var(--accent)}
+.mono{font-variant-numeric:tabular-nums}
+.label{font-size:10.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)}
+button,select,input{font:inherit;color:inherit}
+
+/* masthead — mirrors the other Labs dashboards */
+.mast{background:var(--card);border-bottom:1px solid var(--line)}
+.mast-in{max-width:var(--maxw);margin:0 auto;padding:22px 20px}
+.crumbs{font-size:12px;color:var(--muted);margin:0 0 15px}
+.crumbs a{color:inherit;text-decoration:none}
+.crumbs a:hover{color:var(--accent);text-decoration:underline}
+.eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--teal)}
+.mast .eyebrow{font-size:13px;letter-spacing:1.4px;margin-bottom:11px}
+.mast h1{font-size:34px;font-weight:800;letter-spacing:-1.1px;line-height:1.14;max-width:24ch}
+.mast h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--teal));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.mast-lede{font-size:15px;color:var(--ink2);max-width:74ch;margin-top:13px}
+.mast-src{font-size:12px;color:var(--muted);margin-top:12px}
+@media(max-width:640px){.mast h1{font-size:26px;letter-spacing:-.6px}.mast-in{padding:18px 16px}}
+
+/* tab rail */
+.rail{background:var(--card);border-bottom:1px solid var(--line);z-index:30}
+@media(min-width:901px) and (min-height:640px){.rail{position:sticky;top:0}}
+.rail-in{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.tabs .grp{display:flex;align-items:center;gap:2px;padding-right:10px;margin-right:10px;border-right:1px solid var(--line)}
+.tabs .grp:last-child{border:0;margin-right:0;padding-right:0}
+.tabs .gl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.1px;
+  color:var(--muted);padding-inline:8px 4px;white-space:nowrap}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:11px 12px;cursor:pointer;
+  color:var(--muted);white-space:nowrap;font-size:13.5px;font-weight:600;transition:color .12s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+@media(max-width:640px){.rail-in{padding-inline:16px}.tab{font-size:13px;padding:10px 9px}}
+
+/* one panel at a time, once the script has run; without it the page is
+   simply the whole study, in order */
+/* scoped to the top-level sections: #deckpane inside the Six decks panel is
+   itself a tabpanel, for the deck switcher, and must not be caught by this */
+.js main>section[role="tabpanel"]{display:none}
+.js main>section[role="tabpanel"].on{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.js main>section[role="tabpanel"].on{animation:none}}
+main{padding-block:26px 48px}
+section{padding-block:0 8px}
+section>h2:first-child{margin-bottom:2px}
+.lead{font-size:15px;color:var(--ink2);max-width:78ch;margin:6px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:16px 18px}
+.grid{display:grid;gap:14px;margin-top:16px}
 .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
 .g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
-.big{font-family:var(--head);font-size:1.9rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
-.big small{font-size:.9rem;font-weight:500;color:var(--muted)}
-.callout{border-left:4px solid var(--s2);background:var(--wash);padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0}
-.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:2px 8px;border-radius:99px;border:1px solid currentColor}
+.big{font-size:27px;font-weight:800;letter-spacing:-.8px;line-height:1.15;margin-top:2px}
+.big small{font-size:.9rem;font-weight:600;color:var(--muted)}
+.callout{border-left:3px solid var(--teal);background:var(--wash);padding:12px 16px;
+  border-radius:0 var(--r) var(--r) 0;margin:16px 0;color:var(--ink2)}
+.callout b{color:var(--ink)}
+.pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
 .pill.good{color:var(--good)}.pill.warn{color:var(--warn)}.pill.bad{color:var(--bad)}.pill.na{color:var(--muted)}
-.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 12px}
-.tabs button{font:inherit;font-size:.88rem;border:1px solid var(--axis);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:4px;cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--ink);color:var(--page);border-color:var(--ink)}
-button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
-ul{padding-left:1.15rem;margin:.4rem 0}li{margin:.25rem 0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.chip{border:1px solid var(--axis);border-radius:4px;padding:6px 10px;background:var(--page)}
-.chip b{font-family:var(--head);font-size:1.15rem;display:block;line-height:1.2}
-.chip span{font-size:.78rem;color:var(--muted)}
+/* in-card widget tabs (decks, playbook) — .tab/.tabs belong to the rail */
+.ctabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 12px}
+.ctabs button{font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--card);
+  color:var(--ink2);padding:7px 12px;border-radius:999px;cursor:pointer;transition:all .12s}
+.ctabs button:hover{border-color:var(--axis);color:var(--ink)}
+.ctabs button[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab:focus-visible,.ctabs button:focus-visible,input:focus-visible,a:focus-visible,.opt:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+ul{padding-left:1.15rem;margin:.4rem 0}li{margin:.3rem 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--card2)}
+.chip b{font-size:17px;font-weight:700;display:block;line-height:1.25;letter-spacing:-.3px}
+.chip span{font-size:11.5px;color:var(--muted)}
 .scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:.9rem}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-svg text{font-family:var(--mono);font-size:11px;fill:var(--ink2)}
-svg .v{fill:var(--ink);font-weight:500}
+svg text{font-size:11px;fill:var(--ink2)}
+svg .v{fill:var(--ink);font-weight:600}
 svg .ax{stroke:var(--axis);stroke-width:1}
 svg .gl{stroke:var(--line);stroke-width:1}
 .chart{width:100%;height:auto;display:block}
-.cap{font-size:.82rem;color:var(--muted);margin-top:6px}
-.legend{display:flex;gap:14px;font-size:.8rem;color:var(--ink2);margin:6px 0 0;flex-wrap:wrap}
+.cap{font-size:12px;color:var(--muted);margin-top:8px;max-width:88ch}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--ink2);margin:8px 0 0;flex-wrap:wrap}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
-.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin:12px 0}
-.flow div{flex:1 1 140px;border:1px solid var(--axis);background:var(--card);padding:10px 12px;border-radius:4px;font-size:.88rem}
-.flow div b{display:block;font-family:var(--head)}
-.sl{display:grid;grid-template-columns:minmax(120px,190px) 1fr 70px;gap:10px;align-items:center;margin:8px 0;font-size:.9rem}
-.sl input[type=range]{width:100%;accent-color:var(--s1)}
-.sl output{font-family:var(--mono);text-align:right}
-.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
-.res .card b{font-family:var(--head);font-size:1.5rem;display:block}
-input[type=search]{font:inherit;width:100%;padding:10px 12px;border:1px solid var(--axis);border-radius:4px;background:var(--card);color:var(--ink)}
-.term{padding:10px 0;border-bottom:1px solid var(--line)}.term b{font-family:var(--head)}
-.q{margin:14px 0}.opt{display:block;width:100%;text-align:left;font:inherit;border:1px solid var(--axis);background:var(--card);color:var(--ink);padding:9px 12px;border-radius:4px;margin:6px 0;cursor:pointer}
-.opt.right{border-color:var(--good);background:var(--wash)}.opt.wrong{border-color:var(--bad)}
-.fb{font-size:.88rem;color:var(--ink2);margin:4px 0 0}
-footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;margin:14px 0}
+.flow div{flex:1 1 140px;border:1px solid var(--line);background:var(--card);border-radius:10px;
+  padding:10px 12px;font-size:12.5px;color:var(--muted);box-shadow:var(--shadow)}
+.flow div b{display:block;color:var(--ink);font-size:13px;margin-bottom:2px}
+.sl{display:grid;grid-template-columns:minmax(120px,210px) 1fr 74px;gap:12px;align-items:center;margin:10px 0;font-size:13px}
+.sl input[type=range]{width:100%;accent-color:var(--accent)}
+.sl output{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.res .card{background:var(--card2);box-shadow:none}
+.res .card b{font-size:22px;font-weight:800;display:block;letter-spacing:-.5px}
+input[type=search]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);color:var(--ink);margin-top:14px}
+.term{padding:11px 0;border-bottom:1px solid var(--line)}
+.term b{font-weight:700}
+.q{margin:14px 0}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--card);
+  color:var(--ink);padding:9px 12px;border-radius:10px;margin:7px 0;cursor:pointer;font-size:13.5px}
+.opt:hover{border-color:var(--axis)}
+.opt.right{border-color:var(--good);background:#f0fdf4}
+.opt.wrong{border-color:var(--bad);background:#fef2f2}
+.fb{font-size:12.5px;color:var(--ink2);margin:6px 0 0}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:14px}
 .two h3{margin-bottom:4px}
+.pagefoot{border-top:1px solid var(--line);margin-top:8px}
+.pagefoot .wrap{padding-block:22px 34px;color:var(--muted);font-size:12px}
+.morelink{padding-block:0 44px}
+.morelink a{font-weight:600;text-decoration:none}
+.morelink a:hover{text-decoration:underline}
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 </style>
 <link rel="stylesheet" href="/assets/nav.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 
@@ -182,31 +229,25 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   </div>
 </nav>
 
-<div class="wrap" style="padding-top:14px">
-  <p class="label" style="margin:0"><a href="/" style="color:inherit">Home</a> / <a href="/sectors/" style="color:inherit">Sectors</a> / <a href="/sectors/it/" style="color:inherit">IT</a></p>
-</div>
+<header class="mast">
+  <div class="mast-in">
+    <p class="crumbs"><a href="/">Home</a> / <a href="/sectors/">Sectors</a> / <a href="/sectors/it/">IT</a></p>
+    <div class="eyebrow">IT · Company study</div>
+    <h1>Tata Technologies, <em>decoded</em></h1>
+    <p class="mast-lede">Six Investor Day presentations, one story. What the company is trying to do, how it connects to Indian IT, and what it means for someone who owns or is thinking of owning the stock.</p>
+    <p class="mast-src">Source: the six Tata Technologies Investor Day decks (19 Nov 2026) plus public data · As of 22 Nov 2026, prices 20 Nov 2026 · Nine sections, plus sources</p>
+  </div>
+</header>
 
-
-<header><div class="wrap">
-  <div class="tb">
-    <div>
-      <div class="label">Study guide · Investor Day 19 Nov 2026</div>
-      <h1>Tata Technologies Decoded</h1>
-      <p class="sub">Six presentations, one story. What the company is trying to do, how it connects to Indian IT, and what it means for someone who owns or is thinking of owning the stock.</p>
-    </div>
-    <div class="meta">
-      <div><span>SOURCE</span> 6 TTL decks + public data</div>
-      <div><span>AS OF</span> 22 Nov 2026 (prices: 20 Nov)</div>
-      <div><span>SHEETS</span> 9</div>
-    </div>
+<div class="rail" id="rail">
+  <div class="rail-in">
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Sections"></nav>
   </div>
 </div>
-<nav aria-label="Sections"><div class="wrap" id="nav"></div></nav></header>
 
 <main class="wrap">
 
-<section id="gist">
-  <div class="sheet"><span class="label">Sheet 1</span></div>
+<section id="gist" role="tabpanel" aria-labelledby="t_gist" tabindex="-1">
   <h2>The gist in one minute</h2>
   <p class="lead">Tata Technologies (TTL) is an engineering services company. Car makers, aircraft suppliers and machinery makers hire it to design, build and test their products. For about 30 years it was paid mostly for engineers' time. The Investor Day was about changing that: take on whole products for a fixed price, use AI to deliver them cheaper than the price, and keep the difference.</p>
   <div class="callout"><b>Think of it as a shift from subcontractor to general contractor.</b> A subcontractor rents out carpenters by the hour. A general contractor delivers the finished house for an agreed price, and carries the risk. TTL wants to be the second one for vehicles, aircraft and heavy machines.</div>
@@ -225,22 +266,20 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   </div>
 </section>
 
-<section id="decks">
-  <div class="sheet"><span class="label">Sheet 2</span></div>
+<section id="decks" role="tabpanel" aria-labelledby="t_decks" tabindex="-1">
   <h2>Six decks, one story</h2>
   <p class="lead">Read them in this order. Each answers one question, and each hands over to the next.</p>
   <div class="flow" aria-hidden="true">
     <div><b>1 Keynote</b>Why now, what next</div><div><b>2 Product realisation</b>Proof it works</div><div><b>3 Software</b>The wedge</div><div><b>4 Aerospace</b>Second engine</div><div><b>5 AI</b>The multiplier</div><div><b>6 CFO</b>The numbers</div>
   </div>
-  <div class="tabs" role="tablist" id="decktabs"></div>
+  <div class="ctabs" role="tablist" id="decktabs"></div>
   <div class="card" id="deckpane" role="tabpanel" aria-live="polite"></div>
 </section>
 
-<section id="playbook">
-  <div class="sheet"><span class="label">Sheet 3</span></div>
+<section id="playbook" role="tabpanel" aria-labelledby="t_playbook" tabindex="-1">
   <h2>The playbook: land, expand, replicate</h2>
   <p class="lead">This is the same idea in the keynote, the software deck and the aerospace deck. Pick a step to see the evidence they offered.</p>
-  <div class="tabs" role="tablist" id="pbtabs"></div>
+  <div class="ctabs" role="tablist" id="pbtabs"></div>
   <div class="card" id="pbpane" aria-live="polite"></div>
   <h3 style="margin-top:28px">Why they think the market is bigger than it looks</h3>
   <p class="lead">Traditional outsourced engineering is a $100Bn market, of which TTL can serve about $15Bn. By counting the whole product lifecycle (plant, aftermarket, services) the deck redraws it as $230Bn and $33–34Bn.</p>
@@ -248,10 +287,9 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   <p class="cap">TTL's FY26 revenue of $0.62Bn is about 1.9% of the $33–34Bn serviceable market. The FY30 target of $1.1–1.3Bn would be about 3.5%, assuming that market stays near today's size (my arithmetic). Source: Product Realisation deck, citing BCG, NASSCOM–Everest, Grand View Research.</p></div>
 </section>
 
-<section id="numbers">
-  <div class="sheet"><span class="label">Sheet 4</span></div>
+<section id="numbers" role="tabpanel" aria-labelledby="t_numbers" tabindex="-1">
   <h2>Numbers worth remembering</h2>
-  <p class="lead">Blue is actual. Orange is a target or estimate. Hover a bar for its exact value.</p>
+  <p class="lead">Blue is actual. Teal is a target or estimate. Hover a bar for its exact value.</p>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
     <div class="card"><h3>Revenue, US$ Mn</h3><svg class="chart" id="c_rev" viewBox="0 0 440 270"></svg><p class="cap">Three flat years (FY24 to FY26) came before the acceleration. FY27E is guided only as "double-digit growth"; the dashed bar shows a 10% floor (my arithmetic). FY30E is the $1.1–1.3Bn range.</p></div>
     <div class="card"><h3>EBITDA margin bridge, %</h3><svg class="chart" id="c_bridge" viewBox="0 0 440 270"></svg><p class="cap">Axis starts at 14%. AI delivery productivity is 1.0 point of the 4.5 points of gross gains. Investment in people, business development and infrastructure takes 1.5 back.</p></div>
@@ -270,8 +308,7 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   <p class="cap">Q2 FY27: revenue +28% and EBITDA +31.5% year on year in rupees. Constant-currency dollar growth was +22%. Reported EBITDA excludes other income.</p>
 </section>
 
-<section id="sector">
-  <div class="sheet"><span class="label">Sheet 5</span></div>
+<section id="sector" role="tabpanel" aria-labelledby="t_sector" tabindex="-1">
   <h2>What this means for Indian IT</h2>
   <p class="lead">TTL sells to a product company's engineering budget, not its IT budget. That makes it a cousin of TCS and Infosys, not a clone. But the forces in the decks are the same ones reshaping the whole sector.</p>
   <div class="grid g3">
@@ -299,8 +336,7 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   <div class="callout"><b>Sector takeaway.</b> Large IT services firms grew 1–3% in April–June while the Nifty IT index fell about a fifth this year, as clients pushed back on pricing (Reuters, Aug 2026). TTL is betting that engineering with physical products behind it, where programme knowledge is hard to copy, is more defensible than pure code. The test is whether it can hold prices while its customers are cutting costs.</div>
 </section>
 
-<section id="investor">
-  <div class="sheet"><span class="label">Sheet 6</span></div>
+<section id="investor" role="tabpanel" aria-labelledby="t_investor" tabindex="-1">
   <h2>What this means for an investor</h2>
   <div class="grid g4" style="margin-top:12px">
     <div class="card"><div class="label">Price (20 Nov)</div><div class="big">₹728</div><span class="cap">52-wk ₹507–891</span></div>
@@ -342,8 +378,7 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   <div class="card scroll"><table id="score"></table></div>
 </section>
 
-<section id="wrong">
-  <div class="sheet"><span class="label">Sheet 6B · Addendum</span></div>
+<section id="wrong" role="tabpanel" aria-labelledby="t_wrong" tabindex="-1">
   <h2>What went wrong so far</h2>
   <p class="lead">The Investor Day was a recovery story. This is what it is recovering from. The stock listed at ₹1,200 in November 2023 (IPO price ₹500) and sat at ₹728 on 20 Nov 2026, about 39% below the listing price and about 46% above the IPO price (my arithmetic).</p>
   <div class="grid g2" style="margin-top:14px">
@@ -370,41 +405,23 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   <p class="cap">Sources: <a href="https://zeebiz.com/markets/stocks/news-tata-technologies-share-price-nse-bse-ipo-listing-price-281971">Zeebiz, listing price</a> · <a href="https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Tata-Technologies-FY26-Revenue-Rises-65percent-Profit-Drops-193percent-Amid-Investments/6a2017877f2bd0fbfa5699d0">Whalesbook, FY26 results</a> · <a href="https://www.businesstoday.in/markets/stocks/story/tata-tech-q2-fy26-management-on-deal-wins-jlr-it-restoration-attrition-499191-2025-10-22">Business Today, Q2 FY26 commentary</a> · <a href="https://www.kotakneo.com/news/market-news/tata-technologies-q4fy26-results-profit-surges-revenue-growth/">Kotak Neo, Q4 FY26</a>. Revenue, margin and ROE figures are from the company's Investor Day decks.</p>
 </section>
 
-<section id="checks">
-  <div class="sheet"><span class="label">Sheet 7</span></div>
-  <h2>Before you quote the decks</h2>
-  <p class="lead">Things I noticed while cross-reading. None is damning, but each is worth clearing up before it goes into a post or a model.</p>
-  <div class="card"><ul>
-    <li><b>4× or 5×?</b> The keynote says large-deal wins grew "4×" on one slide and "5×" on another. $390Mn+ against $84Mn is 4.6×.</li>
-    <li><b>"Double in three years" needs 26%.</b> The software deck says 20–25% CAGR and "double". From $100Mn in FY27E, 20% gives 1.73× and 25% gives 1.95× by FY30.</li>
-    <li><b>Aerospace growth, three windows.</b> "~40% five-year CAGR", "~8× from FY22 to FY26" (about 68% a year) and "12.5% compound quarterly growth" since Q3 FY24 use different periods. Ask for revenue in dollars.</li>
-    <li><b>Which period are the five big wins?</b> The keynote labels them "H1'27"; the CFO deck says "last four quarters".</li>
-    <li><b>The non-auto target is a low bar.</b> Aerospace + heavy machinery is already 19.6% of services revenue. The FY30 goal is "&gt;20%", though the long-term ambition is about 30%.</li>
-    <li><b>Flagship software share.</b> The $20Mn software part of the $138Mn deal is 14.5%, below the 20–40% the software deck calls typical for an FVP. The US vehicle deal ($6Mn of $17Mn, 35%) is inside the range.</li>
-    <li><b>Redacted charts.</b> The CFO deck states that some chart values are redacted and bars are representative. Do not read exact figures off them.</li>
-    <li><b>Customer concentration is not given.</b> The target is "&lt;20% from any one customer", but the decks never state today's number. Ask.</li>
-    <li><b>ES-Tec.</b> Brokers disagree on Q2 sequential growth (JPMorgan 4.3% constant-currency, 7% excluding ES-Tec; Goldman 1.9%), and ES-Tec's performance remains a worry. Ask how much of the +22% is acquired.</li>
-  </ul></div>
-</section>
 
-<section id="glossary">
-  <div class="sheet"><span class="label">Sheet 8</span></div>
+<section id="glossary" role="tabpanel" aria-labelledby="t_glossary" tabindex="-1">
   <h2>Glossary</h2>
   <p class="lead">The jargon that makes these decks hard on a first read.</p>
   <input type="search" id="gs" placeholder="Search terms, e.g. FVP, TCV, MRO" aria-label="Search glossary">
   <div id="gl" style="margin-top:8px"></div>
 </section>
 
-<section id="quiz">
-  <div class="sheet"><span class="label">Sheet 9</span></div>
+<section id="quiz" role="tabpanel" aria-labelledby="t_quiz" tabindex="-1">
   <h2>Test yourself</h2>
   <p class="lead">Eight questions. Tap an answer.</p>
   <div id="qz"></div>
   <p class="big" id="score2" style="margin-top:12px"></p>
 </section>
 
-<section id="sources">
-  <h2 style="font-size:1.2rem">Sources</h2>
+<section id="sources" role="tabpanel" aria-labelledby="t_sources" tabindex="-1">
+  <h2>Sources</h2>
   <p class="cap">Company figures come from the six Tata Technologies Investor Day 2026 decks (Warren Harris, Anish Raghunandan, Nachiket Paranjpe, Kapil Bakshi, Nithin Thomas, Uttam Gujrati). Third-party data:</p>
   <ul class="cap">
     <li><a href="https://www.businesstoday.in/markets/stocks/story/tata-tech-shares-jump-9-as-company-targets-1-3-billion-revenue-568478-2026-11-19">Business Today, share move and broker views, 19 Nov 2026</a></li>
@@ -416,15 +433,37 @@ footer{padding-block:40px 60px;color:var(--muted);font-size:.82rem}
   </ul>
 </section>
 </main>
-<footer><div class="wrap">Educational summary of company presentations plus third-party market data. Management targets are forward-looking and may not be met. Not investment advice; do your own research or speak to a registered adviser.</div></footer>
+<footer class="pagefoot"><div class="wrap">Educational summary of company presentations plus third-party market data. Management targets are forward-looking and may not be met. Not investment advice; do your own research or speak to a registered adviser.</div></footer>
 
 <script>
 const $=s=>document.querySelector(s);
 const NS="http://www.w3.org/2000/svg";
-/* ---------- nav ---------- */
-const secs=[["gist","Gist"],["decks","Six decks"],["playbook","Playbook"],["numbers","Numbers"],["sector","Indian IT"],["investor","Investor"],["wrong","What went wrong"],["checks","Cross-checks"],["glossary","Glossary"],["quiz","Quiz"]];
-$("#nav").innerHTML=secs.map(s=>`<a href="#${s[0]}" data-id="${s[0]}">${s[1]}</a>`).join("");
-try{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.id===e.target.id))}})},{rootMargin:"-30% 0px -60% 0px"});secs.forEach(s=>io.observe(document.getElementById(s[0])))}catch(e){}
+/* ---------- section tabs ---------- */
+const GROUPS=[
+ ["The story",[["gist","Gist"],["decks","Six decks"],["playbook","Playbook"]]],
+ ["The numbers",[["numbers","Numbers"],["investor","Investor"]]],
+ ["Context",[["sector","Indian IT"],["wrong","What went wrong"]]],
+ ["Learn",[["glossary","Glossary"],["quiz","Quiz"]]],
+ ["Notes",[["sources","Sources"]]]];
+const IDS=GROUPS.flatMap(g=>g[1].map(t=>t[0]));
+$("#tabs").innerHTML=GROUPS.map(([g,ts])=>`<div class="grp" role="presentation"><span class="gl">${g}</span>`+
+ ts.map(([id,l])=>`<button class="tab" role="tab" id="t_${id}" data-tab="${id}" aria-controls="${id}" aria-selected="false" tabindex="-1">${l}</button>`).join("")+`</div>`).join("");
+function show(id,focus){
+  if(!IDS.includes(id))id=IDS[0];
+  IDS.forEach(k=>{const p=document.getElementById(k),b=document.getElementById("t_"+k),on=k===id;
+    if(p)p.classList.toggle("on",on);
+    if(b){b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1;if(on&&focus)b.focus()}});
+  if(location.hash.slice(1)!==id)history.replaceState(null,"","#"+id);
+  const r=$("#rail");if(r&&scrollY>r.offsetTop)scrollTo({top:0,behavior:"instant"});
+}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b)show(b.dataset.tab)});
+$("#tabs").addEventListener("keydown",e=>{
+  const i=IDS.indexOf(IDS.find(k=>document.getElementById("t_"+k).getAttribute("aria-selected")==="true"));
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();show(IDS[(i+(e.key==="ArrowRight"?1:IDS.length-1))%IDS.length],true)}
+  else if(e.key==="Home"){e.preventDefault();show(IDS[0],true)}
+  else if(e.key==="End"){e.preventDefault();show(IDS[IDS.length-1],true)}});
+show(decodeURIComponent((location.hash||"").slice(1)));
+addEventListener("hashchange",()=>show(decodeURIComponent((location.hash||"").slice(1))));
 
 /* ---------- tabs helper ---------- */
 function tabs(tabEl,paneEl,items,render){
@@ -452,7 +491,7 @@ const decks=[
  {tab:"5 AI",who:"Nithin Thomas, VP & Head, Enterprise AI",title:"AI: A Force Multiplier",thesis:"AI development is becoming commodity. TTL's edge is engineering context, and it sells programmes, not compute or models.",
   pts:["Auto programmes could compress from 36–48 to 18–24 months","The value chain: chips, cloud, models, software and implementers sell inputs; TTL delivers the programme","Agentic systems now sit on top of rules-based automation and ML; 20% to 69% effort reduction across applications","Amplaify.X is the AI brand; 'NPI in a Box' is a secure on-premise accelerator","Over 80% of large fixed-bid projects embed AI, worth an estimated +50bps of margin at FY27 exit","AI-enabled programmes went from $7Mn (classical AI) to $138Mn+ (agentic)"],
   nums:[["1,600+","AI agents in progress"],[">80%","large fixed-bid deals embed AI"],["+50bps","estimated margin impact"],["100%","of 8 in-flight programmes outcome-led"]],
-  so:"The margin deck. Read it with the simulator on Sheet 5: AI only helps if you keep the savings."},
+  so:"The margin deck. Read it with the simulator on the Indian IT tab: AI only helps if you keep the savings."},
  {tab:"6 CFO",who:"Uttam Gujrati, CFO",title:"Delivering Profitable Growth and Shareholder Value",thesis:"The 2023 IPO blueprint is converting into results. Growth has re-accelerated, margins are rising, and capital will be allocated with discipline.",
   pts:["Q2 FY27: revenue ₹16,988Mn (+28%), EBITDA ₹2,733Mn (+31.5%), margin 16.1%","Four IPO goals: non-anchor wins >70% of large deals, non-auto 13%→20%, software+digital 35%→54%, accounts >$1Mn 34→52","Segment CAGR FY26–30E: auto 15–18%, aerospace 25–30%, heavy machinery 15–18%, technology solutions 3–5%","Margin bridge: ~17% at Q4 FY27E, ~20% by FY30E","Capital order: organic growth and AI, then capability-led M&A, then returns; 56–83% payout since FY24","ROE: 13.9% in FY26, rebuilding toward 20%"],
   nums:[["15.5%→~20%","EBITDA margin"],["15–20%","revenue CAGR"],["52","accounts above $1Mn"],["~19%","5-year average ROE"]],
@@ -617,7 +656,7 @@ $("#qz").addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)ret
 </script>
 
 
-<div class="wrap" style="padding-bottom:40px">
+<div class="wrap morelink">
   <p class="label"><a href="/sectors/it/">&larr; More IT studies</a> &nbsp;·&nbsp; <a href="/newsletter/">Get the next one by email</a></p>
 </div>
 

@@ -26,7 +26,7 @@
 - [Lumentum — Business Study](https://vatayanlabs.com/sectors/semiconductors/lumentum/): Five-part study of Lumentum ($LITE) — photonics, the NVIDIA relationship, valuation and the India angle.
 - [Capital Markets](https://vatayanlabs.com/sectors/capital-markets/): 4-part series on India's market infrastructure — depositories (CDSL/NSDL), RTAs and global peers.
 - [Information Technology](https://vatayanlabs.com/sectors/it/): Indian IT and engineering services — company studies on how the work is priced and what AI does to hourly billing.
-- [Tata Technologies Decoded](https://vatayanlabs.com/sectors/it/tata-technologies-decoded/): Interactive study guide to Tata Technologies' 19 November 2026 Investor Day — the move from billing engineer hours to owning whole vehicle, aerospace and heavy-machinery programmes; the land-expand-replicate playbook; a margin simulator for the FY27→FY30 bridge; the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin, >50% outcome-based, largest customer <20%); the flat FY24–FY26 revenue record behind them; glossary and self-test. Nine sheets, as of 22 November 2026.
+- [Tata Technologies Decoded](https://vatayanlabs.com/sectors/it/tata-technologies-decoded/): Interactive study guide to Tata Technologies' 19 November 2026 Investor Day — the move from billing engineer hours to owning whole vehicle, aerospace and heavy-machinery programmes; the land-expand-replicate playbook; a margin simulator for the FY27→FY30 bridge; the FY30 targets ($1.1–1.3Bn revenue, 20%+ EBITDA margin, >50% outcome-based, largest customer <20%); the flat FY24–FY26 revenue record behind them; glossary and self-test. Nine sections, as of 22 November 2026.
 
 ## Tools (interactive calculators)
 

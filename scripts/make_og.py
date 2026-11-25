@@ -165,7 +165,7 @@ CARDS = [
      'Indian AI enablers: what is already priced in',
      '41 listed companies across power, grid equipment, data centres and electronics: valuation, expectations, cash and momentum.'),
     ('og-tata-technologies.png', 'Company study',
-     'Tata Technologies, decoded in nine sheets',
+     'Tata Technologies, decoded in nine parts',
      'Six Investor Day decks, one story: from billing engineer hours to owning whole product programmes, and what FY30 asks for.'),
     ('og-anthropic-ipo-valuation.png', 'Interactive valuation',
      'Is Anthropic worth $1.5–2 trillion?',
