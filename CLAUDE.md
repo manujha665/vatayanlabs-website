@@ -64,3 +64,24 @@ URL, so add `?v=2` to force a fresh fetch while testing.
 Push to `main`; Vercel publishes in under a minute. Confirm the local tree
 matches live before pushing — other snapshots of this site exist on disk
 and some are stale.
+
+**Check that the push actually deployed.** On 25 Nov 2026 the GitHub
+integration stopped firing mid-session: two pushes went live in about ten
+seconds each, and the third produced no deployment at all — not queued, not
+failed, just absent from `vercel ls`, while the domain stayed aliased to the
+previous build. Nothing in the push or the repo said so. Verify with a fetch
+rather than assuming:
+
+```bash
+curl -sI https://vatayanlabs.com/<path>/ | grep -i last-modified
+```
+
+The fallback is a deploy from this directory, which is linked to the
+`vatayan-labs` project via `.vercel/repo.json` and aliases the domain itself:
+
+```bash
+vercel deploy --prod --yes
+```
+
+That ships the working tree, not the commit, so commit first and check
+`git status` is clean, or live and `main` quietly diverge.
