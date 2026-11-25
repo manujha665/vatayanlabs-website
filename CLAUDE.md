@@ -65,23 +65,44 @@ Push to `main`; Vercel publishes in under a minute. Confirm the local tree
 matches live before pushing — other snapshots of this site exist on disk
 and some are stale.
 
-**Check that the push actually deployed.** On 25 Nov 2026 the GitHub
-integration stopped firing mid-session: two pushes went live in about ten
-seconds each, and the third produced no deployment at all — not queued, not
-failed, just absent from `vercel ls`, while the domain stayed aliased to the
-previous build. Nothing in the push or the repo said so. Verify with a fetch
-rather than assuming:
+**Check that the push actually deployed.** On 25 Nov 2026 one push
+(`8e2ea63`) produced no deployment at all — no Vercel check on the commit, no
+GitHub Deployment, nothing in `vercel ls` — while the pushes before and after
+it deployed normally in about ten seconds. A single webhook event was dropped;
+the integration was not broken and needed no repair. The next push carried the
+missing work with it, since it was a descendant.
+
+**Do not use `last-modified` to check this.** On these static files it tracks
+when the edge cache filled, not when the build ran, so it moves on its own and
+looks like a fresh deploy when nothing has shipped. Ask GitHub what Vercel
+reported for the commit:
 
 ```bash
-curl -sI https://vatayanlabs.com/<path>/ | grep -i last-modified
+curl -s "https://api.github.com/repos/manujha665/vatayanlabs-website/commits/$(git rev-parse HEAD)/status" | python3 -c "import json,sys;d=json.load(sys.stdin);print(d['state'],[x['context'] for x in d['statuses']])"
 ```
 
-The fallback is a deploy from this directory, which is linked to the
-`vatayan-labs` project via `.vercel/repo.json` and aliases the domain itself:
+`success ['Vercel – vatayan-labs', 'Vercel – vatayanlabs']` means it shipped.
+`pending []` means Vercel never saw the push. Re-trigger it with an empty
+commit rather than reaching for the CLI:
+
+```bash
+git commit --allow-empty -m "redeploy" && git push
+```
+
+The CLI fallback is a deploy from this directory, linked to the `vatayan-labs`
+project via `.vercel/repo.json`:
 
 ```bash
 vercel deploy --prod --yes
 ```
 
-That ships the working tree, not the commit, so commit first and check
-`git status` is clean, or live and `main` quietly diverge.
+It ships the working tree rather than the commit, so commit first and check
+`git status` is clean. Note that the next Git deployment takes the production
+alias straight back, so a CLI deploy is a stopgap, not a way to pin anything.
+
+## Two Vercel projects watch this repo
+
+Every push deploys twice: `vatayan-labs`, which serves vatayanlabs.com, and
+`vatayanlabs`, which serves vatayanlabs.vercel.app. That is why each commit
+carries two Vercel checks. `vercel ls` from this directory shows only
+`vatayan-labs`, the one that matters.
