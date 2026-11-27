@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>India Payments Dashboard — RBI ATM, Card &amp; UPI Data</title>
-<meta name="description" content="Interactive dashboard on India's payments from RBI monthly data to June 2026 — digital vs cash crossover, card trends, UPI QR and bank league tables.">
+<meta name="description" content="Interactive dashboard on India's payments from RBI monthly data to October 2026 — digital vs cash crossover, card trends, UPI QR and bank league tables.">
 <link rel="canonical" href="https://vatayanlabs.com/dashboards/india-payments/">
-<meta property="og:title" content="India Payments Intelligence — RBI Data to June 2026">
-<meta property="og:description" content="Interactive dashboard on India's payments from RBI monthly data to June 2026 — digital vs cash crossover, card trends, UPI QR and bank league tables.">
+<meta property="og:title" content="India Payments Intelligence — RBI Data to October 2026">
+<meta property="og:description" content="Interactive dashboard on India's payments from RBI monthly data to October 2026 — digital vs cash crossover, card trends, UPI QR and bank league tables.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vatayanlabs.com/dashboards/india-payments/">
 <meta property="og:site_name" content="Vatayan Labs">
@@ -17,12 +17,12 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="India Payments Intelligence — RBI ATM, card and UPI data through June 2026">
+<meta property="og:image:alt" content="India Payments Intelligence — RBI ATM, card and UPI data through October 2026">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="India Payments Intelligence — RBI Data to June 2026">
-<meta name="twitter:description" content="Digital payments held the majority again in June 2026 at 52.2% of value — and this time it wasn't a seasonal spike. The full RBI dataset, visualised.">
+<meta name="twitter:title" content="India Payments Intelligence — RBI Data to October 2026">
+<meta name="twitter:description" content="Digital payments hit a record 55.0% of value in October 2026, the pre-Diwali peak. Fourteen months of RBI data, visualised.">
 <meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-india-payments.png">
-<meta name="twitter:image:alt" content="India Payments Intelligence — RBI ATM, card and UPI data through June 2026">
+<meta name="twitter:image:alt" content="India Payments Intelligence — RBI ATM, card and UPI data through October 2026">
 <link rel="icon" href="/favicon.ico">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
@@ -45,9 +45,9 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "India Payments Intelligence — RBI ATM, Card and Acceptance Infrastructure Statistics",
-  "description": "Bank-level UPI QR, credit card, debit card and ATM transaction volumes and values from RBI payment system statistics, covering ten monthly reporting periods from March 2024 to June 2026 — including India's digital-majority crossover.",
+  "description": "Bank-level UPI QR, credit card, debit card and ATM transaction volumes and values from RBI payment system statistics, covering fourteen monthly reporting periods from March 2024 to October 2026 — including India's digital-majority crossover and the festive peak.",
   "url": "https://vatayanlabs.com/dashboards/india-payments/",
-  "temporalCoverage": "2024-03/2026-06",
+  "temporalCoverage": "2024-03/2026-10",
   "spatialCoverage": "India",
   "variableMeasured": [
     "ATMs and CRMs deployed", "PoS terminals", "UPI QR codes", "Bharat QR codes",
@@ -549,7 +549,7 @@ const base = {
 const legendBottom = { display:true, position:'bottom',
   labels:{ boxWidth:10, font:{size:11}, color:'#4a5568', usePointStyle:true, pointStyle:'circle', padding:12 } };
 
-let D, F, P, LBL, BANKS, L, Y, Q;
+let D, F, P, LBL, BANKS, L, Y, Q, FL, FLP;
 const CR = 1e4;                       // Rs '000 -> Rs crore
 const g = (v,f) => (v ? v[F[f]] : 0) || 0;
 
@@ -614,28 +614,44 @@ function stories(id, items){
 function renderOverview(){
   const now = T(L), lastY = T(Y), first = T(P[0]);
 
+  const fl = FL ? T(FL) : now, flp = FLP ? T(FLP) : now;
+  const flLabel = D.meta.flash ? D.meta.flash.label : D.meta.latestLabel;
+  const fest = D.meta.festive || null;
+  const peakThen = fest ? T(fest.peaks['2025']) : null;
+  const peakThenLbl = fest ? LBL[P.indexOf(fest.peaks['2025'])] : '';
+
   document.getElementById('hero').innerHTML = `
     <div style="background:linear-gradient(135deg,rgba(26,86,219,.12) 0%,rgba(14,159,110,.10) 100%);border:1px solid rgba(26,86,219,.25);border-left:4px solid #1a56db;border-radius:10px;padding:20px 24px;margin-bottom:20px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a56db;margin-bottom:8px">📊 Latest reading — ${D.meta.latestLabel}</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a56db;margin-bottom:8px">📊 Latest reading — ${flLabel}</div>
       <div style="font-size:22px;font-weight:800;line-height:1.3;margin-bottom:8px">
-        Digital majority is no longer a seasonal spike.<br>
-        <span style="color:#1a56db">${pc(digShare(now))} of payment value bypassed cash — in an ordinary quarter.</span>
+        A record share of India's payment value bypassed cash.<br>
+        <span style="color:#1a56db">${pc(digShare(fl))} digital in ${flLabel} — the pre-Diwali peak.</span>
       </div>
       <div style="font-size:13px;color:var(--text2);line-height:1.6">
-        When digital value first crossed cash in September 2025 it was fair to ask whether a festive quarter had flattered it — and the December and March readings did slip back.
-        ${D.meta.latestLabel} settles the question. Digital value of <strong>${lcr(digital(now)/CR)}</strong> against ATM cash of <strong>${lcr(atmCash(now)/CR)}</strong>,
-        in a quarter with no festive season and no year-end cash rush, is the second-highest digital share in this series.
-        The same month a year earlier read ${pc(digShare(lastY))}.
+        Digital value of <strong>${lcr(digital(fl)/CR)}</strong> against ATM cash of <strong>${lcr(atmCash(fl)/CR)}</strong> is the highest digital share in this series,
+        and the first reading above 55%. It is also a festive month: the pre-Diwali sales peak is the single biggest spending window in the Indian year.
+        ${peakThen ? `Measured peak against peak — ${peakThenLbl}, the equivalent month before Diwali 2025, against ${flLabel} — digital share moved from ${pc(digShare(peakThen))} to <strong>${pc(digShare(fl))}</strong>, a gain of ${pp(digShare(fl)-digShare(peakThen))}.` : ''}
       </div>
       <div style="display:flex;gap:24px;margin-top:14px;flex-wrap:wrap">
-        <div><span style="font-size:18px;font-weight:700;color:#0e9f6e">${lcr(digital(now)/CR)}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">Digital value</span></div>
-        <div><span style="font-size:18px;font-weight:700;color:#f59e0b">${lcr(atmCash(now)/CR)}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">ATM cash</span></div>
-        <div><span style="font-size:18px;font-weight:700;color:#1a56db">${pp(digShare(now)-digShare(lastY))}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">Digital share, year on year</span></div>
+        <div><span style="font-size:18px;font-weight:700;color:#0e9f6e">${lcr(digital(fl)/CR)}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">Digital value</span></div>
+        <div><span style="font-size:18px;font-weight:700;color:#f59e0b">${lcr(atmCash(fl)/CR)}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">ATM cash</span></div>
+        <div><span style="font-size:18px;font-weight:700;color:#1a56db">${pc(digShare(fl))}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">Digital share, a record</span></div>
+        <div><span style="font-size:18px;font-weight:700;color:#7e3af2">${cr(g(fl,'upi_qr'))}</span><span style="font-size:11px;color:var(--text3);margin-left:6px">UPI QR codes</span></div>
       </div>
-    </div>`;
+    </div>
+
+    ${fest ? `<div style="background:#fffbeb;border:1px solid rgba(227,160,8,.35);border-left:3px solid #e3a008;border-radius:8px;padding:14px 18px;margin-bottom:20px;font-size:12.5px;color:var(--text2);line-height:1.6">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#92400e;margin-bottom:6px">⚠︎ Read the year-on-year numbers with this in mind</div>
+      Diwali is lunar, so the shopping peak walks across the calendar — <strong>${fest.diwali['2025']}</strong> last year against <strong>${fest.diwali['2026']}</strong> this year.
+      That moved the pre-festive sales peak out of September and into October. September 2025 was a festive-inflated month; September 2026 was not.
+      So the only true same-month pair available in this dataset, ${LBL[P.indexOf(Y)]} against ${LBL[P.indexOf(L)]}, compares a festive base with an ordinary one and shows
+      card value <em>falling</em> — <strong>${chg(yoy(g(T(L),'cc_onl_r'), g(T(Y),'cc_onl_r')))}</strong> on online credit card value.
+      Transaction <em>volume</em> over the same pair, which barely moves with the festival, is <strong>${chg(yoy(g(T(L),'cc_onl_v'), g(T(Y),'cc_onl_v')))}</strong>.
+      Volume is the honest read this year; the value comparisons below carry a calendar artefact, not an economic decline.
+    </div>` : ''}`;
 
   document.getElementById('ov-banner').innerHTML =
-    `<strong>${D.meta.latestLabel} in one line:</strong> credit cards crossed ${n0(Math.floor(g(now,'cc')/1e7))} crore and are being used far more often for smaller amounts, the debit card base fell for the first time in this series, and ATM cash dropped to its lowest reading in ten reporting months. Every one of those traces back to the same force: UPI.`;
+    `<strong>${D.meta.latestLabel} — the analytical anchor:</strong> the sections below compare ${LBL[P.indexOf(L)]} against ${LBL[P.indexOf(Y)]}, the only same-month pair this dataset holds. Credit cards passed ${n0(Math.floor(g(now,'cc')/1e7))} crore and carried ${chg(yoy(g(now,'cc_onl_v'), g(lastY,'cc_onl_v')))} more online transactions than a year earlier, at an average ticket of ${rs(tick(now,'cc_onl_v','cc_onl_r'))}. The debit card base has resumed growing after its first-ever sequential fall in June. ATM cash keeps drifting down. Every one of those traces back to the same force: UPI.`;
 
   kpis('ov-kpis', [
     { label:'Credit cards',    value:cr(g(now,'cc')),           delta:yoy(g(now,'cc'), g(lastY,'cc')) },
@@ -666,10 +682,10 @@ function renderOverview(){
   for (let i = P.length - 1; i >= 0 && digShare(T(P[i])) >= 50; i--) streak++;
   const weakest = P.slice(P.length - streak).map(p => ({ p, s:digShare(T(p)) })).sort((a,b) => a.s - b.s)[0];
   hl('hl-stack', [
-    ['📈', `Digital value grew <strong>${chg(yoy(digNow, digY))} year on year</strong> to ${lcr(digNow)} while ATM cash fell ${chg(yoy(atmNow, atmY))} to ${lcr(atmNow)}. The two lines are diverging, not converging.`],
+    ['📈', `Digital value is <strong>${chg(yoy(digNow, digY))} year on year</strong> at ${lcr(digNow)}, against ATM cash ${chg(yoy(atmNow, atmY))} at ${lcr(atmNow)}. Both are depressed by the festival shift described above — ${LBL[P.indexOf(Y)]} was a pre-Diwali peak and ${LBL[P.indexOf(L)]} was not. Card <em>volumes</em> over the same pair rose ${chg(yoy(g(now,'cc_pos_v')+g(now,'cc_onl_v'), g(lastY,'cc_pos_v')+g(lastY,'cc_onl_v')))}.`],
     ['🏆', `Digital now leads cash by <strong>${lcr(Math.abs(digNow-atmNow))}</strong>. In ${LBL[0]} cash led digital by ${lcr(Math.abs(atmCash(first)/CR - digital(first)/CR))} — the gap has not just closed, it has reversed.`],
-    ['📅', `Digital share has now held above 50% for <strong>${streak} consecutive readings</strong>, covering a full year including the seasonally cash-heavy December and March quarters. Its softest month in that run was ${LBL[P.indexOf(weakest.p)]} at ${pc(weakest.s)} — still a majority.`],
-    ['🔮', `Share has added <strong>${pp(digShare(now)-digShare(first))}</strong> across ${P.length} reporting months. Hold that pace and 55% arrives inside two years — the direction is settled, only the slope is open.`]
+    ['📅', `Digital share has now held above 50% for <strong>${streak} consecutive readings</strong>, from ${LBL[P.length-streak]} onward, through the seasonally cash-heavy December and March months. Its softest in that run was ${LBL[P.indexOf(weakest.p)]} at ${pc(weakest.s)} — still a majority.`],
+    ['🔮', `Share has added <strong>${pp(digShare(now)-digShare(first))}</strong> across ${P.length} reporting months, and ${FL ? `the ${D.meta.flash.label} peak has already touched ${pc(digShare(T(FL)))}` : 'the peaks keep climbing'}. The open question is no longer direction but whether an ordinary, non-festive month can hold above 55%.`]
   ]);
 
   const chans = [
@@ -768,12 +784,14 @@ function renderSignals(){
     { c:C.amber, tag:'💰 The cash paradox persists',
       num:lcr(atmCash(now)/CR),
       desc:`India still pulled <strong>${lcr(atmCash(now)/CR)}</strong> out of ATMs this month — more than the ${lcr(ccSpend(now)/CR)} spent on every credit card in the country combined. Digital India and cash India run on parallel tracks. The ATM is not dead; it has retreated into the branch.` },
-    { c:C.red, tag:'📉 Debit cards fall for the first time',
-      num:nd((dcNow-dcQ)/1e7, 2) + ' Cr',
-      desc:`The debit card base <strong>shrank sequentially for the first time in this series</strong>, ${cr(dcQ)} down to ${cr(dcNow)}. This is not customers leaving — it is banks purging dormant plastic, led by ${dcFallers.slice(0,2).map(f => f.full).join(' and ')}.` },
+    { c:(dcNow < dcQ ? C.red : C.green), tag:(dcNow < dcQ ? '📉 Debit card base still shrinking' : '📈 Debit card base back to growth'),
+      num:(dcNow >= dcQ ? '+' : '') + nd((dcNow-dcQ)/1e7, 2) + ' Cr',
+      desc:(dcNow < dcQ
+        ? `The debit card base <strong>shrank again</strong>, ${cr(dcQ)} down to ${cr(dcNow)}${dcFallers.length ? ', led by ' + dcFallers.slice(0,2).map(f => f.full).join(' and ') : ''}. Banks are still purging dormant plastic rather than losing customers.`
+        : `After the first sequential fall in this series, the base has <strong>turned back up</strong>, ${cr(dcQ)} to ${cr(dcNow)}. The dormant-card purge that drove the drop looks like a one-off clean-up, not the start of a decline${dcFallers.length ? ` — though ${dcFallers.length} issuer${dcFallers.length===1?'':'s'} are still shrinking` : ''}.`) },
     { c:C.amber, tag:'🏦 Two banks own the QR rails',
       num:pc(qrTop2),
-      desc:`<strong>${qr[0].n} (${pc(100*qr[0].v/qrTot)}) and ${qr[1].n} (${pc(100*qr[1].v/qrTot)})</strong> together sponsor ${pc(qrTop2)} of India's ${cr(qrTot)} UPI QR codes. Almost every QR you scan at a shop counter settles through one of the two. Concentration this tight is a systemic question, not a market-share statistic.` },
+      desc:`<strong>${qr[0].n} (${pc(100*qr[0].v/qrTot)}) and ${qr[1].n} (${pc(100*qr[1].v/qrTot)})</strong> together sponsor ${pc(qrTop2)} of India's ${cr(qrTot)} UPI QR codes. Almost every QR you scan at a shop counter settles through one of the two. Concentration this tight is a systemic question, not a market-share statistic — though part of the second bank's recent gain is a reporting change rather than new deployment, flagged in the UPI tab.` },
     { c:C.purple, tag:'💎 The spend-per-card spread',
       num:rs(spend[0].v),
       desc:`${spend[0].n} cardholders spend <strong>${rs(spend[0].v)} a month</strong>, ${nd(spend[0].v/industry,1)}× the industry average of ${rs(industry)}, on just ${lakh(spend[0].cards)} cards. ${spend[1].n} is next at ${rs(spend[1].v)}. The distance between a premium book and a mass-market one is the entire business model.` },
@@ -909,10 +927,12 @@ function renderDigital(){
   for (let i = P.length - 1; i >= 0 && digShare(T(P[i])) >= 50; i--) streak++;
   const ccContribution = 100*(ccSpend(now)-ccSpend(lastY))/(digital(now)-digital(lastY));
   hl('hl-drift', [
-    ['🏆', `Digital share has stayed above 50% for <strong>${streak} consecutive readings</strong> — a full year on the wrong side of the line for cash. The green marker on this chart took fifteen years to reach and has not been given back since.`],
-    ['📅', `The December and March dips are seasonal, not directional — advance tax, year-end settlements and cash salary cycles lift ATM withdrawals every Q3 and Q4. On a like-for-like June basis the trend has not turned down once.`],
+    ['🏆', `Digital share has stayed above 50% for <strong>${streak} consecutive readings</strong>, from ${LBL[P.length-streak]} onward — cash has not taken a month back since. The green marker on this chart took fifteen years to reach.`],
+    ['📅', `The December and March dips are seasonal, not directional — advance tax, year-end settlements and cash salary cycles lift ATM withdrawals every Q3 and Q4. On a like-for-like same-month basis, outside the festival distortion, the trend has not turned down once.`],
     ['📐', `Year on year the share moved <strong>${pp(shareNow - shareY)}</strong>, from ${pc(shareY)} to ${pc(shareNow)}. Across all ${P.length} periods it is ${pp(shareNow - digShare(first))}.`],
-    ['💡', `Credit cards did <strong>more than all</strong> of the work. Credit card value added ${rcr((ccSpend(now)-ccSpend(lastY))/CR)} over the year while debit card spending fell ${rcr(Math.abs(dcSpend(now)-dcSpend(lastY))/CR)}, leaving a net digital gain of ${rcr((digital(now)-digital(lastY))/CR)}. Credit cards are not just leading the shift — they are carrying it against a drag.`]
+    ['💡', (digital(now) >= digital(lastY))
+      ? `Credit cards did <strong>more than all</strong> of the work. Credit card value added ${rcr((ccSpend(now)-ccSpend(lastY))/CR)} over the year while debit card spending moved ${rcr((dcSpend(now)-dcSpend(lastY))/CR)}, for a net digital gain of ${rcr((digital(now)-digital(lastY))/CR)}.`
+      : `On value this pair goes backwards — credit card value down ${rcr(Math.abs(ccSpend(now)-ccSpend(lastY))/CR)} and debit down ${rcr(Math.abs(dcSpend(now)-dcSpend(lastY))/CR)} — but that is the festival shift, not demand. Credit card <strong>transactions</strong> rose ${chg(yoy(g(now,'cc_pos_v')+g(now,'cc_onl_v'), g(lastY,'cc_pos_v')+g(lastY,'cc_onl_v')))} over the same pair and the card base grew ${chg(yoy(g(now,'cc'), g(lastY,'cc')))}. Volume is what is actually compounding.`]
   ]);
 
   const parts = [
@@ -1069,7 +1089,7 @@ function renderCC(){
     </div>`).join('');
   hl('hl-spc', [
     ['💎', `<strong>${spc[0][0]} at ${rs(spc[0][1])} a month is ${nd(spc[0][1]/ind,1)}× the industry average</strong> — a small, premium book generating outsized spend per card.`],
-    ['📉', `The industry average moved ${chg(yoy(ind, spendY*1000/g(lastY,'cc')))} year on year. Card issuance is outrunning card usage: the base grew ${chg(yoy(total, g(lastY,'cc')))} while spend grew ${chg(yoy(spendNow, spendY))}.`],
+    ['📉', `The industry average moved ${chg(yoy(ind, spendY*1000/g(lastY,'cc')))} year on year. Card issuance keeps outrunning card usage: the base is ${chg(yoy(total, g(lastY,'cc')))} against spend ${chg(yoy(spendNow, spendY))} — and on this pair the spend side also carries the festival shift, so transactions are the fairer read at ${chg(yoy(g(now,'cc_pos_v')+g(now,'cc_onl_v'), g(lastY,'cc_pos_v')+g(lastY,'cc_onl_v')))}.`],
     ['💡', `Spend per card is the cleanest proxy for card economics in this dataset. An issuer below the average line is carrying interchange and rewards cost on cards that are not being used enough to pay for themselves.`]
   ]);
 }
@@ -1116,11 +1136,21 @@ function renderUPI(){
     <div class="kpi"><div class="kpi-label">Total UPI QR</div><div class="kpi-value">${cr(qrTot)}</div><div class="kpi-delta ${dirC(yoy(qrTot,g(lastY,'upi_qr')))}">${arrow(yoy(qrTot,g(lastY,'upi_qr')))}${chg(yoy(qrTot, g(lastY,'upi_qr')))} YoY</div></div>
     <div class="kpi"><div class="kpi-label">HDFC + SBI + ICICI</div><div class="kpi-value">${pc(bigShare)}</div><div class="kpi-delta neutral">combined QR share</div></div>`;
 
+  const qrFlag = (D.meta.flags || []).find(f => f.fields.includes('upi_qr'));
+  const qb = qrFlag ? bank(qrFlag.bank) : null;
+  // The sponsor bank had a legitimate base before the break, so correct only the
+  // excess over its last clean reading rather than removing the bank entirely.
+  const qrBaseP = qrFlag ? P[P.indexOf(qrFlag.from) - 1] : null;
+  const qrBase = (qb && qrBaseP && qb.s[qrBaseP]) ? g(qb.s[qrBaseP],'upi_qr') : 0;
+  const qrExcess = p => (qb && qb.s[p] && p >= qrFlag.from) ? Math.max(0, g(qb.s[p],'upi_qr') - qrBase) : 0;
+  const qrEx = p => g(T(p),'upi_qr') - qrExcess(p);
+
   hl('hl-upi', [
     ['🏦', `<strong>${qr[0].full} sponsors ${pc(100*qr[0].v/qrTot)} of every UPI QR code in India</strong> — ${cr(qr[0].v)} of ${cr(qrTot)}. It sits almost invisibly beneath the country's retail payment layer as the banking partner to the largest UPI apps.`],
     ['⚡', `<strong>${qr[1].full} is second at ${pc(100*qr[1].v/qrTot)}.</strong> Between them the two hold ${pc(top2)} of the installed base. That is not a competitive market; it is a duopoly on the plumbing.`],
     ['💡', `India's three largest banks by assets — HDFC, SBI and ICICI — hold <strong>${pc(bigShare)} of UPI QR infrastructure between them</strong>. The acceptance layer was captured by specialists while the incumbents were busy defending cards.`],
-    ['⚠️', `Concentration this tight is an operational risk as much as a commercial one. A prolonged outage at a single sponsor bank would be felt at millions of merchant counters at once.`]
+    ['⚠️', `Concentration this tight is an operational risk as much as a commercial one. A prolonged outage at a single sponsor bank would be felt at millions of merchant counters at once.`],
+    qb ? ['⚠︎', `<strong>${qb.full}'s count breaks from its own trend.</strong> It sat at ${cr(qrBase)} in ${LBL[P.indexOf(qrBaseP)]} after adding roughly a tenth of a crore a month, then jumped to ${cr(g(qb.s[L],'upi_qr'))}${FL && qb.s[FL] ? ` and again to ${cr(g(qb.s[FL],'upi_qr'))} by ${D.meta.flash.label}` : ''}. No other sponsor's count fell to match. Netting off just that excess, the national total is ${cr(qrEx(L))} in ${LBL[P.indexOf(L)]}${FL ? ` and ${cr(qrEx(FL))} in ${D.meta.flash.label} — short of the headline ${cr(g(T(FL),'upi_qr'))} and of the 100 crore mark` : ''}. Read as a sponsorship or counting change, not new deployment.`] : null
   ]);
 
   new Chart(document.getElementById('c-accept'), {
@@ -1140,7 +1170,7 @@ function renderUPI(){
   const fb = flagRec ? bank(flagRec.bank) : null;
   const posEx = p => (g(T(p),'pos') - (fb && fb.s[p] ? g(fb.s[p],'pos') : 0))/1e5;
   hl('hl-accept', [
-    ['📈', `UPI QR codes grew from ${cr(g(first,'upi_qr'))} to ${cr(qrTot)} across these ten months — ${cr(qrTot - g(first,'upi_qr'))} new acceptance points, created with printed stickers rather than hardware.`],
+    ['📈', `UPI QR codes grew from ${cr(g(first,'upi_qr'))} to ${cr(qrTot)} across these ${P.length} reporting months — ${cr(qrTot - g(first,'upi_qr'))} more acceptance points, created with printed stickers rather than hardware. Part of the recent step up is a sponsor-bank reporting change; see the note below.`],
     fb ? ['⚠️', `<strong>The headline PoS figure this month is misleading.</strong> Reported terminals fell ${chg(yoy(g(now,'pos'), g(lastY,'pos')))} to ${lakh(g(now,'pos'))}, but that is almost entirely ${fb.full} restating its own count. Excluding it, PoS terminals actually <em>rose</em> from ${nd(posEx(Y),1)} lakh to ${nd(posEx(L),1)} lakh over the year. See the reporting note at the foot of this page.`] : null,
     ['📉', `Bharat QR is the genuine casualty, down from ${lakh(g(first,'bharat_qr'))} to ${lakh(g(now,'bharat_qr'))}. The card networks' QR standard lost to UPI's outright and is now being decommissioned.`],
     ['💡', `The economics settled this. A PoS terminal costs a merchant rent plus a percentage of every sale; a UPI QR costs nothing. For a kirana doing small tickets, it was never a close call.`]
@@ -1262,7 +1292,7 @@ function renderATM(){
                y:{ ...base.scales.y, stacked:true, ticks:{ ...base.scales.y.ticks, callback:v => n0(v/1000) + 'k' } } } }
   });
   hl('hl-atmsplit', [
-    ['🏦', `On-site machines rose from ${n0(g(first,'atm_on'))} to <strong>${n0(g(now,'atm_on'))}</strong> across these ten months while off-site fell from ${n0(g(first,'atm_off'))} to <strong>${n0(g(now,'atm_off'))}</strong>. The total barely moved — the mix changed completely.`],
+    ['🏦', `On-site machines rose from ${n0(g(first,'atm_on'))} to <strong>${n0(g(now,'atm_on'))}</strong> across these ${P.length} reporting months while off-site fell from ${n0(g(first,'atm_off'))} to <strong>${n0(g(now,'atm_off'))}</strong>. The total barely moved — the mix changed completely.`],
     ['📐', `Off-site is down to ${pc(100*g(now,'atm_off')/atmCount(now))} of the network from ${pc(100*g(first,'atm_off')/atmCount(first))}. Every off-site machine carries site rent, cash logistics and security with no branch to absorb the cost.`],
     ['💡', `This is rationalisation, not retreat. Total ATMs are ${chg(yoy(atmCount(now), atmCount(lastY)))} year on year — essentially flat. Banks are relocating capacity rather than withdrawing it.`]
   ]);
@@ -1482,10 +1512,14 @@ function init(data){
   F = Object.fromEntries(D.fields.map((f,i) => [f,i]));
   P = D.periods; LBL = D.labels; BANKS = D.banks;
   L = D.meta.latest; Y = D.meta.prevYear; Q = D.meta.prevQuarter;
+  // FL is the newest month on file. It leads the page, but it has no
+  // same-month counterpart a year back, so the analysis still anchors on L.
+  FL = D.meta.flash ? D.meta.flash.period : null;
+  FLP = D.meta.flash ? D.meta.flash.prev : null;
 
   document.getElementById('boot').style.display = 'none';
   document.getElementById('page-sub').textContent =
-    `RBI ATM & Card Statistics — ${LBL[0]} to ${LBL[LBL.length-1]}, ${BANKS.length} institutions. Year-on-year comparisons use the same month a year earlier, so seasonality cancels out.`;
+    `RBI ATM & Card Statistics — ${LBL[0]} to ${LBL[LBL.length-1]}, ${BANKS.length} institutions. Year-on-year figures compare the same calendar month a year apart; where the festival calendar has shifted between them, that is called out in place.`;
 
   document.querySelectorAll('.nav-btn[data-sec]').forEach(b => {
     b.onclick = () => showSection(b.dataset.sec, b);
@@ -1498,7 +1532,10 @@ function init(data){
   showSection(target.dataset.sec, target);
 
   document.getElementById('footnote').innerHTML =
-    `<strong>Source:</strong> ${D.meta.source}. Latest reporting month: ${D.meta.latestLabel}; ${P.length} periods from ${LBL[0]}. ${D.meta.notes.join(' ')} ` +
+    `<strong>Source:</strong> ${D.meta.source}. ${P.length} reporting months from ${LBL[0]} to ${LBL[LBL.length-1]}. `
+    + `${FL ? `The newest month, ${D.meta.flash.label}, leads the page but has no ${D.meta.flash.label.split(' ')[0]}-2025 counterpart in this dataset, so the year-on-year sections anchor on ${D.meta.latestLabel} against ${LBL[P.indexOf(Y)]} — the most recent pair of matching calendar months. ` : ''}`
+    + `${D.meta.festive ? D.meta.festive.note + ' ' : ''}`
+    + `${D.meta.notes.join(' ')} ` +
     `Banks that merged or exited during the window appear only in the months they actually reported. ` +
     (D.meta.flags || []).map(f => `<br><br><strong>⚠︎ Reporting note:</strong> ${f.note} Figures affected by this are excluded from the rankings and growth callouts on this page.`).join('') +
     `<br><br><a href="/dashboards/india-payments/payments-data.json">Download the underlying dataset (JSON)</a> · <a href="/dashboards/india-payments/compare/">Compare two banks head to head →</a>`;

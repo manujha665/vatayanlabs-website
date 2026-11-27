@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bank vs Bank — India Payments Comparison | Vatayan Labs</title>
-<meta name="description" content="Compare any two Indian banks head-to-head on ATMs, PoS, UPI QR, cards and digital mix — or benchmark full peer groups. RBI data to June 2026.">
+<meta name="description" content="Compare any two Indian banks head-to-head on ATMs, PoS, UPI QR, cards and digital mix — or benchmark full peer groups. RBI data to October 2026.">
 <link rel="canonical" href="https://vatayanlabs.com/dashboards/india-payments/compare/">
 <meta property="og:title" content="Bank vs Bank — India Payments Comparison">
-<meta property="og:description" content="Compare any two Indian banks head-to-head on ATMs, PoS, UPI QR, cards and digital mix — or benchmark full peer groups. RBI data to June 2026.">
+<meta property="og:description" content="Compare any two Indian banks head-to-head on ATMs, PoS, UPI QR, cards and digital mix — or benchmark full peer groups. RBI data to October 2026.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vatayanlabs.com/dashboards/india-payments/compare/">
 <meta property="og:site_name" content="Vatayan Labs">
@@ -17,12 +17,12 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Bank versus bank comparison across twenty payment metrics, on RBI data through June 2026">
+<meta property="og:image:alt" content="Bank versus bank comparison across twenty payment metrics, on RBI data through October 2026">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bank vs Bank — India Payments Comparison">
-<meta name="twitter:description" content="Head-to-head and peer-group comparison of Indian banks across 20+ payment metrics, on RBI data through June 2026.">
+<meta name="twitter:description" content="Head-to-head and peer-group comparison of Indian banks across 20+ payment metrics, on RBI data through October 2026.">
 <meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-india-payments-compare.png">
-<meta name="twitter:image:alt" content="Bank versus bank comparison across twenty payment metrics, on RBI data through June 2026">
+<meta name="twitter:image:alt" content="Bank versus bank comparison across twenty payment metrics, on RBI data through October 2026">
 <link rel="icon" href="/favicon.ico">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0WLCFVLDX"></script>
@@ -233,7 +233,7 @@
   <!-- ══════════════════════════════ HEAD TO HEAD ══════════════════════════════ -->
   <section class="section" id="tab-h2h">
     <div class="insight-banner">
-      <strong>Pick any two banks.</strong> Every metric below is straight from the RBI's monthly ATM &amp; Card statistics — no estimates. The winner on each line is highlighted, and the bar shows how the two split the combined total. Change either bank and the whole page recomputes.
+      <strong>Pick any two banks.</strong> Figures are for <span id="anchor-note"></span>. Every metric below is straight from the RBI's monthly ATM &amp; Card statistics — no estimates. The winner on each line is highlighted, and the bar shows how the two split the combined total. Change either bank and the whole page recomputes.
     </div>
 
     <div class="picker-bar">
@@ -375,7 +375,7 @@
 
     <div class="full-card">
       <div class="chart-title" id="cohort-title">Cohort trend</div>
-      <div class="chart-sub">Five bank cohorts across ten RBI reporting months, March 2024 to June 2026</div>
+      <div class="chart-sub">Five bank cohorts across ten RBI reporting months, March 2024 to October 2026</div>
       <div class="chart-wrap" style="height:340px"><canvas id="c-cohort"></canvas></div>
       <div class="highlights">
         <div class="highlights-label">Cohort read</div>
@@ -1006,7 +1006,12 @@ function init(data){
   selM.onchange = () => { PMETRIC = selM.value; renderPeers(); };
 
   const selBasis = document.getElementById('sel-basis');
-  selBasis.innerHTML = [[PREV_Y,'Same month last year (YoY)'], [PREV_Q,'Previous quarter (QoQ)'], [P[1],'Two years ago']]
+  const twoBack = (() => {
+    const [y, m] = LATEST.split('-').map(Number);
+    const want = `${y - 2}-${String(m).padStart(2, '0')}`;
+    return P.includes(want) ? want : P[1];
+  })();
+  selBasis.innerHTML = [[PREV_Y,'Same month last year (YoY)'], [PREV_Q,'Previous quarter (QoQ)'], [twoBack, LBL[P.indexOf(twoBack)] + ' (two years back)']]
     .map(([v,t]) => opt(v, t, BASIS)).join('');
   selBasis.onchange = () => { BASIS = selBasis.value; renderPeers(); };
 
@@ -1029,8 +1034,14 @@ function init(data){
     b.onclick = () => switchTab(b.dataset.tab);
   });
 
+  const an = document.getElementById('anchor-note');
+  if (an) an.innerHTML = D.meta.flash
+    ? `<strong>${D.meta.latestLabel}</strong>, the most recent month with a matching month a year earlier to compare against. ${D.meta.flash.label} is newer and appears in the trend charts, but has no ${D.meta.flash.label.split(' ')[0]}-2025 counterpart in this dataset`
+    : `<strong>${D.meta.latestLabel}</strong>`;
+
   document.getElementById('footnote').innerHTML =
     `<strong>Source:</strong> ${D.meta.source}. Latest month: ${D.meta.latestLabel}. ` +
+    (D.meta.festive ? D.meta.festive.note + ' ' : '') +
     D.meta.notes.join(' ') +
     ` Bank names follow the RBI's reporting list; institutions that merged or exited during the period appear only in the months they reported.` +
     (D.meta.flags || []).map(f => `<br><strong>⚠︎ Reporting note:</strong> ${f.note}`).join('');
