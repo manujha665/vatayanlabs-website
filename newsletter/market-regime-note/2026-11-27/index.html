@@ -59,7 +59,7 @@
 .mrn-verdict { margin-top: 18px; padding: 14px 18px; border-left: 4px solid var(--teal); background: #fff; border-radius: 0 12px 12px 0; font-weight: 600; }
 .mrn-note-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 40px 0 14px; }
 .mrn-note-bar h2 { font-size: 24px; }
-.mrn-frame { background: #cbd5e1; border-radius: 14px; padding: 14px; overflow: hidden; }
+.mrn-frame { overflow: hidden; }
 .mrn-frame-inner { position: relative; overflow: hidden; margin: 0 auto; }
 .mrn-frame iframe { border: 0; display: block; transform-origin: top left; background: transparent; }
 .mrn-small { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
@@ -67,7 +67,6 @@
 @media (max-width: 640px) {
   .mrn-head h1 { font-size: 28px; }
   .mrn-dek { font-size: 15.5px; }
-  .mrn-frame { padding: 6px; border-radius: 10px; }
   .mrn-actions .btn { flex: 1 1 auto; text-align: center; }
 }
 </style>
@@ -127,7 +126,7 @@
     <div class="mrn-frame"><div class="mrn-frame-inner">
       <iframe id="note" src="note.html" title="Market Regime Note, 27 November 2026" loading="lazy" scrolling="no"></iframe>
     </div></div>
-    <p class="mrn-small">Small on your phone? <a href="note.html" target="_blank" rel="noopener">Open the note on its own</a> and pinch to zoom, or download the PDF.</p>
+    <p class="mrn-small"><a href="note.html" target="_blank" rel="noopener">Open the note on its own page</a>, or download the PDF.</p>
   </section>
 
   <p class="mrn-disclaimer">Data: StockScans for breadth, strength, valuations, returns and scans; NSE provisional data for FII/DII flows; press sources for KOSPI, SOXX and macro, named in the note. Personal research and educational commentary — not investment advice.</p>
@@ -181,31 +180,36 @@
 
 <script>
 (function () {
-  var A4 = 794;                       // 210mm at 96dpi
+  var MAX = 1.5;                      // never blow the pages up past 150%
   var frame = document.getElementById('note');
   var box = frame.parentElement;
+  function contentHeight(doc) { return Math.ceil(doc.body.getBoundingClientRect().height); }
   function fit() {
     var doc = frame.contentDocument;
     if (!doc || !doc.body) return;
-    var s = Math.min(1, box.parentElement.clientWidth / A4);
-    var h = doc.documentElement.scrollHeight;
-    frame.style.width = A4 + 'px';
-    frame.style.height = h + 'px';
+    var cw = box.parentElement.clientWidth;
+    if (cw < 720) {                   // phone: the note reflows to the column width
+      frame.style.transform = 'none';
+      frame.style.width = cw + 'px';
+      var h = contentHeight(doc);
+      frame.style.height = h + 'px';
+      box.style.width = cw + 'px'; box.style.height = h + 'px';
+      return;
+    }
+    var pw = 726;                     // 192mm screen page width (see NOTE_SCREEN_CSS)
+    frame.style.width = pw + 'px';
+    var s = Math.min(MAX, cw / pw), hh = contentHeight(doc);
+    frame.style.height = hh + 'px';
     frame.style.transform = 'scale(' + s + ')';
-    box.style.width = (A4 * s) + 'px';
-    box.style.height = (h * s) + 'px';
+    box.style.width = (pw * s) + 'px'; box.style.height = (hh * s) + 'px';
   }
   frame.addEventListener('load', function () {
     var doc = frame.contentDocument;
-    var st = doc.createElement('style');
-    st.textContent = '@media screen{html,body{background:transparent!important}' +
-      '.page{margin:0 auto 14px;box-shadow:0 2px 12px rgba(15,23,42,.18)}.page:last-child{margin-bottom:0}}';
-    doc.head.appendChild(st);
     fit();
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(fit);
-    setTimeout(fit, 600);
+    setTimeout(fit, 800);
   });
-  window.addEventListener('resize', fit);
+  var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fit, 120); });
 })();
 </script>
 </body>
