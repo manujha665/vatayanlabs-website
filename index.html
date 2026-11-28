@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://vatayanlabs.com/assets/og/og-default.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20261128">
 <link rel="alternate" type="application/rss+xml" title="Vatayan Labs" href="/feed.xml">
 <script type="application/ld+json">
 {
@@ -143,9 +143,11 @@
       </a>
     </div>
     <p style="margin-top: 20px;">Get each issue by email:</p>
-    <iframe src="https://curiousinvestinginsights.substack.com/embed" width="480" height="150"
-            style="border:1px solid var(--border); background:white; border-radius:12px; max-width:100%; margin-top:8px;"
-            title="Subscribe to the Vatayan Labs newsletter" frameborder="0" scrolling="no"></iframe>
+    <form class="signup" action="https://curiousinvestinginsights.substack.com/api/v1/free?nojs=true" method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+    <p class="signup-note">Free. Sent through Substack; unsubscribe any time.</p>
   </section>
 
   <section class="section">
