@@ -27,7 +27,8 @@ SITE = "https://vatayanlabs.com"
 
 # Fragments and error pages are never shared on their own.
 SKIP_DIRS = ("assets/charts", ".git", "node_modules")
-SKIP_FILES = ("404.html",)
+# note.html is the Market Regime Note shown inside its issue page; the issue page is what gets shared.
+SKIP_FILES = ("404.html", "note.html")
 
 REQUIRED = [
     "og:title", "og:description", "og:type", "og:url", "og:image",
